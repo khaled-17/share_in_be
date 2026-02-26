@@ -1,0 +1,11 @@
+# DATABASE_URL FOR PRODUCTION (NAMECHEAP)
+# انسخ السطر ده وحطه في ملف .env على السيرفر بدلاً من القديم:
+
+DATABASE_URL="mysql://sharhjua_knew:z%29q*ctJHbBTB@localhost:3306/sharhjua_DBnew"
+
+# خطوات الرفع:
+1. ارفع مجلد dist وملف package.json وملف .env ومجلد prisma.
+2. من cPanel ادخل على Setup Node.js App.
+3. الـ Startup File يكون: dist/server.js
+4. اعمل Run npm install.
+5. شغل npx prisma generate من الـ Terminal.

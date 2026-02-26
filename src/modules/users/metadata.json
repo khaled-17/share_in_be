@@ -1,0 +1,6 @@
+[
+    "src/modules/users/user.repository.js",
+    "src/modules/users/user.service.js",
+    "src/modules/users/user.controller.js",
+    "src/modules/users/user.routes.js"
+]

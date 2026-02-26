@@ -1,11 +1,13 @@
-require('dotenv').config();
-const express = require('express');
-const { PrismaClient } = require('@prisma/client');
-const cors = require('cors');
+import dotenv from 'dotenv';
+import express, { Request, Response, NextFunction } from 'express';
+import { PrismaClient } from '@prisma/client';
+import cors from 'cors';
+
+dotenv.config();
 
 const app = express();
 const prisma = new PrismaClient();
-const PORT = process.env.PORT || 3000;
+const PORT: string | number = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
@@ -16,7 +18,7 @@ app.use(express.json());
     try {
         await prisma.$connect();
         console.log('✅ تم الاتصال بقاعدة البيانات بنجاح باستخدام Prisma!');
-    } catch (error) {
+    } catch (error: any) {
         console.error('❌ فشل الاتصال بقاعدة البيانات:', error.message);
         process.exit(1);
     }
@@ -25,22 +27,22 @@ app.use(express.json());
 // -- Routes (API Endpoints) --
 
 // GET: فحص عمل الخادم
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
     res.json({ message: 'Welcome to the Node.js REST API with Prisma', status: 'Running' });
 });
 
 // GET: الحصول على جميع المستخدمين
-app.get('/api/users', async (req, res) => {
+app.get('/api/users', async (req: Request, res: Response) => {
     try {
         const users = await prisma.user.findMany();
         res.json(users);
-    } catch (error) {
+    } catch (error: any) {
         res.status(500).json({ error: error.message });
     }
 });
 
 // POST: إضافة مستخدم جديد
-app.post('/api/users', async (req, res) => {
+app.post('/api/users', async (req: Request, res: Response) => {
     const { name, email } = req.body;
 
     if (!email) {
@@ -55,7 +57,7 @@ app.post('/api/users', async (req, res) => {
             }
         });
         res.status(201).json(newUser);
-    } catch (error) {
+    } catch (error: any) {
         // التحقق من خطأ التكرار (Unique Constraint)
         if (error.code === 'P2002') {
             return res.status(409).json({ error: 'A user with this email already exists' });
@@ -65,7 +67,7 @@ app.post('/api/users', async (req, res) => {
 });
 
 // التعامل مع الأخطاء العامة
-app.use((err, req, res, next) => {
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
 });
