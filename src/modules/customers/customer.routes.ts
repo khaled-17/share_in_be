@@ -73,6 +73,12 @@ router.get('/:id', customerController.getCustomerById);
  *             required:
  *               - customer_id
  *               - name
+ *               - contact_person
+ *               - company_email
+ *               - contact_email
+ *               - phone
+ *               - secondary_phone
+ *               - address
  *             properties:
  *               customer_id:
  *                 type: string

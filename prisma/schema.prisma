@@ -283,12 +283,12 @@ model ExpenseType {
 model Customer {
   customer_id      String           @id
   name             String
-  contact_person   String?
-  company_email    String?
-  contact_email    String?
-  phone            String?
-  secondary_phone  String?
-  address          String?
+  contact_person   String
+  company_email    String
+  contact_email    String
+  phone            String
+  secondary_phone  String
+  address          String
   created_at       DateTime         @default(now())
   revenues         Revenue[]
   quotations       Quotation[]

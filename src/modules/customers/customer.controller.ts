@@ -25,8 +25,23 @@ export const getCustomerById = async (req: Request, res: Response, next: NextFun
 
 export const createCustomer = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        const {
+            customer_id,
+            name,
+            contact_person,
+            company_email,
+            contact_email,
+            phone,
+            secondary_phone,
+            address
+        } = req.body;
+
+        if (!customer_id || !name || !contact_person || !company_email || !contact_email || !phone || !secondary_phone || !address) {
+            return errorResponse(res, 'All fields are mandatory: customer_id, name, contact_person, company_email, contact_email, phone, secondary_phone, address', 400);
+        }
+
         const customer = await customerService.createCustomer(req.body);
-        return successResponse(res, customer, 'Customer created successfully', 21);
+        return successResponse(res, customer, 'Customer created successfully', 201);
     } catch (error: any) {
         if (error.message === 'Customer ID already exists') {
             return errorResponse(res, error.message, 400);
