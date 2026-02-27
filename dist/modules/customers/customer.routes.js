@@ -1,18 +1,15 @@
 import { Router } from 'express';
 import * as customerController from './customer.controller.js';
-
 const router = Router();
-
 /**
  * @swagger
  * tags:
  *   name: Customers
  *   description: Customer management endpoints
  */
-
 /**
  * @swagger
- * /api/v1/customers:
+ * /customers:
  *   get:
  *     summary: Get all customers
  *     tags: [Customers]
@@ -37,10 +34,9 @@ const router = Router();
  *         description: List of customers
  */
 router.get('/', customerController.getAllCustomers);
-
 /**
  * @swagger
- * /api/v1/customers/{id}:
+ * /customers/{id}:
  *   get:
  *     summary: Get customer by ID
  *     tags: [Customers]
@@ -57,10 +53,9 @@ router.get('/', customerController.getAllCustomers);
  *         description: Customer not found
  */
 router.get('/:id', customerController.getCustomerById);
-
 /**
  * @swagger
- * /api/v1/customers:
+ * /customers:
  *   post:
  *     summary: Create a new customer
  *     tags: [Customers]
@@ -101,10 +96,9 @@ router.get('/:id', customerController.getCustomerById);
  *         description: Customer created
  */
 router.post('/', customerController.createCustomer);
-
 /**
  * @swagger
- * /api/v1/customers/{id}:
+ * /customers/{id}:
  *   put:
  *     summary: Update customer
  *     tags: [Customers]
@@ -124,10 +118,9 @@ router.post('/', customerController.createCustomer);
  *         description: Customer updated
  */
 router.put('/:id', customerController.updateCustomer);
-
 /**
  * @swagger
- * /api/v1/customers/{id}:
+ * /customers/{id}:
  *   delete:
  *     summary: Delete customer
  *     tags: [Customers]
@@ -142,5 +135,4 @@ router.put('/:id', customerController.updateCustomer);
  *         description: Customer deleted
  */
 router.delete('/:id', customerController.deleteCustomer);
-
 export default router;

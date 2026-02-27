@@ -5,6 +5,8 @@ import swaggerUi from 'swagger-ui-express';
 // Import modules
 import userRoutes from './modules/users/user.routes.js';
 import authRoutes from './modules/auth/auth.routes.js';
+import customerRoutes from './modules/customers/customer.routes.js';
+import supplierRoutes from './modules/suppliers/supplier.routes.js';
 // Import middlewares
 import { errorHandler } from './middlewares/error.middleware.js';
 // Import swagger
@@ -19,6 +21,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Routes
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/customers', customerRoutes);
+app.use('/api/v1/suppliers', supplierRoutes);
 /**
  * @swagger
  * /:
