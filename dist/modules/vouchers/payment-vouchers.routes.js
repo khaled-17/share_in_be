@@ -1,15 +1,12 @@
 import { Router } from 'express';
 import * as voucherController from './voucher.controller.js';
-
 const router = Router();
-
 /**
  * @swagger
  * tags:
  *   name: Payment Vouchers
  *   description: Payment voucher management endpoints
  */
-
 /**
  * @swagger
  * /api/v1/payment-vouchers:
@@ -30,7 +27,6 @@ const router = Router();
  *         description: List of items
  */
 router.get('/', voucherController.getAllPaymentVouchers);
-
 /**
  * @swagger
  * /api/v1/payment-vouchers/stats/summary:
@@ -42,7 +38,6 @@ router.get('/', voucherController.getAllPaymentVouchers);
  *         description: Stats
  */
 router.get('/stats/summary', voucherController.getPaymentVoucherStats);
-
 /**
  * @swagger
  * /api/v1/payment-vouchers/{id}:
@@ -58,7 +53,6 @@ router.get('/stats/summary', voucherController.getPaymentVoucherStats);
  *         description: Detail
  */
 router.get('/:id', voucherController.getPaymentVoucherById);
-
 /**
  * @swagger
  * /api/v1/payment-vouchers:
@@ -83,7 +77,6 @@ router.get('/:id', voucherController.getPaymentVoucherById);
  *         description: Created
  */
 router.post('/', voucherController.createPaymentVoucher);
-
 /**
  * @swagger
  * /api/v1/payment-vouchers/{id}:
@@ -99,7 +92,6 @@ router.post('/', voucherController.createPaymentVoucher);
  *         description: Updated
  */
 router.put('/:id', voucherController.updatePaymentVoucher);
-
 /**
  * @swagger
  * /api/v1/payment-vouchers/{id}:
@@ -115,5 +107,4 @@ router.put('/:id', voucherController.updatePaymentVoucher);
  *         description: Deleted
  */
 router.delete('/:id', voucherController.deletePaymentVoucher);
-
 export default router;

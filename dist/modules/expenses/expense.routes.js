@@ -1,15 +1,12 @@
 import { Router } from 'express';
 import * as expenseController from './expense.controller.js';
-
 const router = Router();
-
 /**
  * @swagger
  * tags:
  *   name: Expenses
  *   description: Expense management endpoints
  */
-
 /**
  * @swagger
  * /api/v1/expenses:
@@ -21,7 +18,6 @@ const router = Router();
  *         description: List of items
  */
 router.get('/', expenseController.getAllExpenses);
-
 /**
  * @swagger
  * /api/v1/expenses/{id}:
@@ -37,7 +33,6 @@ router.get('/', expenseController.getAllExpenses);
  *         description: OK
  */
 router.get('/:id', expenseController.getExpenseById);
-
 /**
  * @swagger
  * /api/v1/expenses:
@@ -60,7 +55,6 @@ router.get('/:id', expenseController.getExpenseById);
 + *         description: Created
 + */
 router.post('/', expenseController.createExpense);
-
 /**
  * @swagger
  * /api/v1/expenses/{id}:
@@ -76,7 +70,6 @@ router.post('/', expenseController.createExpense);
 + *         description: Updated
 + */
 router.put('/:id', expenseController.updateExpense);
-
 /**
  * @swagger
  * /api/v1/expenses/{id}:
@@ -92,5 +85,4 @@ router.put('/:id', expenseController.updateExpense);
 + *         description: Deleted
 + */
 router.delete('/:id', expenseController.deleteExpense);
-
 export default router;

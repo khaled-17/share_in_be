@@ -1,15 +1,12 @@
 import { Router } from 'express';
 import * as quotationController from './quotation.controller.js';
-
 const router = Router();
-
 /**
  * @swagger
  * tags:
  *   name: Quotations
  *   description: Quotation management endpoints
  */
-
 /**
  * @swagger
  * /api/v1/quotations:
@@ -21,7 +18,6 @@ const router = Router();
  *         description: List of quotations
  */
 router.get('/', quotationController.getAllQuotations);
-
 /**
  * @swagger
  * /api/v1/quotations/{id}:
@@ -41,7 +37,6 @@ router.get('/', quotationController.getAllQuotations);
  *         description: Quotation not found
  */
 router.get('/:id', quotationController.getQuotationById);
-
 /**
  * @swagger
  * /api/v1/quotations:
@@ -99,7 +94,6 @@ router.get('/:id', quotationController.getQuotationById);
  *         description: Quotation created
  */
 router.post('/', quotationController.createQuotation);
-
 /**
  * @swagger
  * /api/v1/quotations/{id}:
@@ -123,7 +117,6 @@ router.post('/', quotationController.createQuotation);
  *         description: Quotation updated
  */
 router.put('/:id', quotationController.updateQuotation);
-
 /**
  * @swagger
  * /api/v1/quotations/{id}:
@@ -141,5 +134,4 @@ router.put('/:id', quotationController.updateQuotation);
  *         description: Quotation deleted
  */
 router.delete('/:id', quotationController.deleteQuotation);
-
 export default router;

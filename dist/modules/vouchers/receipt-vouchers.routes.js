@@ -1,21 +1,18 @@
 import { Router } from 'express';
 import * as voucherController from './voucher.controller.js';
-
 const router = Router();
-
 /**
  * @swagger
  * tags:
- *   name: Payment Vouchers
- *   description: Payment voucher management endpoints
+ *   name: Receipt Vouchers
+ *   description: Receipt voucher management endpoints
  */
-
 /**
  * @swagger
- * /api/v1/payment-vouchers:
+ * /api/v1/receipt-vouchers:
  *   get:
- *     summary: Get all payment vouchers
- *     tags: [Payment Vouchers]
+ *     summary: Get all receipt vouchers
+ *     tags: [Receipt Vouchers]
  *     parameters:
  *       - in: query
  *         name: start_date
@@ -29,26 +26,24 @@ const router = Router();
  *       200:
  *         description: List of items
  */
-router.get('/', voucherController.getAllPaymentVouchers);
-
+router.get('/', voucherController.getAllReceiptVouchers);
 /**
  * @swagger
- * /api/v1/payment-vouchers/stats/summary:
+ * /api/v1/receipt-vouchers/stats/summary:
  *   get:
- *     summary: Get payment voucher summary stats
- *     tags: [Payment Vouchers]
+ *     summary: Get receipt voucher summary stats
+ *     tags: [Receipt Vouchers]
  *     responses:
  *       200:
  *         description: Stats
  */
-router.get('/stats/summary', voucherController.getPaymentVoucherStats);
-
+router.get('/stats/summary', voucherController.getReceiptVoucherStats);
 /**
  * @swagger
- * /api/v1/payment-vouchers/{id}:
+ * /api/v1/receipt-vouchers/{id}:
  *   get:
- *     summary: Get payment voucher by ID
- *     tags: [Payment Vouchers]
+ *     summary: Get receipt voucher by ID
+ *     tags: [Receipt Vouchers]
  *     parameters:
  *       - in: path
  *         name: id
@@ -57,14 +52,13 @@ router.get('/stats/summary', voucherController.getPaymentVoucherStats);
  *       200:
  *         description: Detail
  */
-router.get('/:id', voucherController.getPaymentVoucherById);
-
+router.get('/:id', voucherController.getReceiptVoucherById);
 /**
  * @swagger
- * /api/v1/payment-vouchers:
+ * /api/v1/receipt-vouchers:
  *   post:
- *     summary: Create payment voucher
- *     tags: [Payment Vouchers]
+ *     summary: Create receipt voucher
+ *     tags: [Receipt Vouchers]
  *     requestBody:
  *       required: true
  *       content:
@@ -75,21 +69,20 @@ router.get('/:id', voucherController.getPaymentVoucherById);
  *               - voucher_number
  *               - voucher_date
  *               - amount
- *               - beneficiary_type
+ *               - source_type
  *               - payment_method
- *               - paid_to
+ *               - received_from
  *     responses:
  *       201:
  *         description: Created
  */
-router.post('/', voucherController.createPaymentVoucher);
-
+router.post('/', voucherController.createReceiptVoucher);
 /**
  * @swagger
- * /api/v1/payment-vouchers/{id}:
+ * /api/v1/receipt-vouchers/{id}:
  *   put:
- *     summary: Update payment voucher
- *     tags: [Payment Vouchers]
+ *     summary: Update receipt voucher
+ *     tags: [Receipt Vouchers]
  *     parameters:
  *       - in: path
  *         name: id
@@ -98,14 +91,13 @@ router.post('/', voucherController.createPaymentVoucher);
  *       200:
  *         description: Updated
  */
-router.put('/:id', voucherController.updatePaymentVoucher);
-
+router.put('/:id', voucherController.updateReceiptVoucher);
 /**
  * @swagger
- * /api/v1/payment-vouchers/{id}:
+ * /api/v1/receipt-vouchers/{id}:
  *   delete:
- *     summary: Delete payment voucher
- *     tags: [Payment Vouchers]
+ *     summary: Delete receipt voucher
+ *     tags: [Receipt Vouchers]
  *     parameters:
  *       - in: path
  *         name: id
@@ -114,6 +106,5 @@ router.put('/:id', voucherController.updatePaymentVoucher);
  *       200:
  *         description: Deleted
  */
-router.delete('/:id', voucherController.deletePaymentVoucher);
-
+router.delete('/:id', voucherController.deleteReceiptVoucher);
 export default router;

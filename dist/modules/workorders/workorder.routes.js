@@ -1,15 +1,12 @@
 import { Router } from 'express';
 import * as workOrderController from './workorder.controller.js';
-
 const router = Router();
-
 /**
  * @swagger
  * tags:
  *   name: WorkOrders
  *   description: Work order management endpoints
  */
-
 /**
  * @swagger
  * /api/v1/work-orders:
@@ -21,7 +18,6 @@ const router = Router();
 + *         description: List of items
 + */
 router.get('/', workOrderController.getAllWorkOrders);
-
 /**
  * @swagger
  * /api/v1/work-orders:
@@ -33,7 +29,6 @@ router.get('/', workOrderController.getAllWorkOrders);
 + *         description: Created
 + */
 router.post('/', workOrderController.createWorkOrder);
-
 /**
  * @swagger
  * /api/v1/work-orders/{id}:
@@ -49,5 +44,4 @@ router.post('/', workOrderController.createWorkOrder);
 + *         description: Deleted
 + */
 router.delete('/:id', workOrderController.deleteWorkOrder);
-
 export default router;

@@ -1,15 +1,12 @@
 import { Router } from 'express';
 import * as revenueController from './revenue.controller.js';
-
 const router = Router();
-
 /**
  * @swagger
  * tags:
  *   name: Revenue
  *   description: Revenue management endpoints
  */
-
 /**
  * @swagger
  * /api/v1/revenue:
@@ -21,7 +18,6 @@ const router = Router();
  *         description: List of revenue items
  */
 router.get('/', revenueController.getAllRevenue);
-
 /**
  * @swagger
  * /api/v1/revenue/{id}:
@@ -37,7 +33,6 @@ router.get('/', revenueController.getAllRevenue);
  *         description: Detail
  */
 router.get('/:id', revenueController.getRevenueById);
-
 /**
  * @swagger
  * /api/v1/revenue:
@@ -60,7 +55,6 @@ router.get('/:id', revenueController.getRevenueById);
  *         description: Created
  */
 router.post('/', revenueController.createRevenue);
-
 /**
  * @swagger
  * /api/v1/revenue/{id}:
@@ -76,7 +70,6 @@ router.post('/', revenueController.createRevenue);
  *         description: Updated
  */
 router.put('/:id', revenueController.updateRevenue);
-
 /**
  * @swagger
  * /api/v1/revenue/{id}:
@@ -92,5 +85,4 @@ router.put('/:id', revenueController.updateRevenue);
  *         description: Deleted
  */
 router.delete('/:id', revenueController.deleteRevenue);
-
 export default router;

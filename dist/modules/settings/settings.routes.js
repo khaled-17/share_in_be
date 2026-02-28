@@ -1,17 +1,13 @@
 import { Router } from 'express';
 import * as settingsController from './settings.controller.js';
-
 const router = Router();
-
 /**
  * @swagger
  * tags:
  *   name: Settings
  *   description: Global settings and type management
  */
-
 // Revenue Types
-
 /**
  * @swagger
  * /api/v1/settings/revenue-types:
@@ -23,7 +19,6 @@ const router = Router();
  *         description: List of revenue types
  */
 router.get('/revenue-types', settingsController.getAllRevenueTypes);
-
 /**
  * @swagger
  * /api/v1/settings/revenue-types:
@@ -44,7 +39,6 @@ router.get('/revenue-types', settingsController.getAllRevenueTypes);
 + *         description: Revenue type created
 + */
 router.post('/revenue-types', settingsController.createRevenueType);
-
 /**
  * @swagger
  * /api/v1/settings/revenue-types/{id}:
@@ -60,7 +54,6 @@ router.post('/revenue-types', settingsController.createRevenueType);
  *         description: Updated
  */
 router.put('/revenue-types/:id', settingsController.updateRevenueType);
-
 /**
  * @swagger
  * /api/v1/settings/revenue-types/{id}:
@@ -76,9 +69,7 @@ router.put('/revenue-types/:id', settingsController.updateRevenueType);
  *         description: Deleted
  */
 router.delete('/revenue-types/:id', settingsController.deleteRevenueType);
-
 // Expense Types
-
 /**
  * @swagger
  * /api/v1/settings/expense-types:
@@ -90,7 +81,6 @@ router.delete('/revenue-types/:id', settingsController.deleteRevenueType);
  *         description: List of expense types
  */
 router.get('/expense-types', settingsController.getAllExpenseTypes);
-
 /**
  * @swagger
  * /api/v1/settings/expense-types:
@@ -111,7 +101,6 @@ router.get('/expense-types', settingsController.getAllExpenseTypes);
  *         description: Created
  */
 router.post('/expense-types', settingsController.createExpenseType);
-
 /**
  * @swagger
  * /api/v1/settings/expense-types/{id}:
@@ -127,7 +116,6 @@ router.post('/expense-types', settingsController.createExpenseType);
  *         description: Updated
  */
 router.put('/expense-types/:id', settingsController.updateExpenseType);
-
 /**
  * @swagger
  * /api/v1/settings/expense-types/{id}:
@@ -143,9 +131,7 @@ router.put('/expense-types/:id', settingsController.updateExpenseType);
  *         description: Deleted
  */
 router.delete('/expense-types/:id', settingsController.deleteExpenseType);
-
 // Project Types
-
 /**
  * @swagger
  * /api/v1/settings/project-types:
@@ -157,7 +143,6 @@ router.delete('/expense-types/:id', settingsController.deleteExpenseType);
  *         description: List
  */
 router.get('/project-types', settingsController.getAllProjectTypes);
-
 /**
  * @swagger
  * /api/v1/settings/project-types:
@@ -178,7 +163,6 @@ router.get('/project-types', settingsController.getAllProjectTypes);
  *         description: Created
  */
 router.post('/project-types', settingsController.createProjectType);
-
 /**
  * @swagger
  * /api/v1/settings/project-types/{id}:
@@ -194,7 +178,6 @@ router.post('/project-types', settingsController.createProjectType);
  *         description: Updated
  */
 router.put('/project-types/:id', settingsController.updateProjectType);
-
 /**
  * @swagger
  * /api/v1/settings/project-types/{id}:
@@ -210,5 +193,4 @@ router.put('/project-types/:id', settingsController.updateProjectType);
  *         description: Deleted
  */
 router.delete('/project-types/:id', settingsController.deleteProjectType);
-
 export default router;

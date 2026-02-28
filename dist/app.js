@@ -9,6 +9,18 @@ import customerRoutes from './modules/customers/customer.routes.js';
 import supplierRoutes from './modules/suppliers/supplier.routes.js';
 import employeeRoutes from './modules/employees/employee.routes.js';
 import partnerRoutes from './modules/partners/partner.routes.js';
+import settingsRoutes from './modules/settings/settings.routes.js';
+import revenueRoutes from './modules/revenue/revenue.routes.js';
+import expenseRoutes from './modules/expenses/expense.routes.js';
+import quotationRoutes from './modules/quotations/quotation.routes.js';
+import workOrderRoutes from './modules/workorders/workorder.routes.js';
+import checkRoutes from './modules/checks/check.routes.js';
+import receiptVoucherRoutes from './modules/vouchers/receipt-vouchers.routes.js';
+import paymentVoucherRoutes from './modules/vouchers/payment-vouchers.routes.js';
+import shareenRoutes from './modules/shareen/shareen.routes.js';
+import reviewRoutes from './modules/reviews/review.routes.js';
+import companyRoutes from './modules/company/company.routes.js';
+import reportsRoutes from './modules/reports/reports.routes.js';
 // Import middlewares
 import { errorHandler } from './middlewares/error.middleware.js';
 // Import swagger
@@ -27,6 +39,18 @@ app.use('/api/v1/customers', customerRoutes);
 app.use('/api/v1/suppliers', supplierRoutes);
 app.use('/api/v1/employees', employeeRoutes);
 app.use('/api/v1/partners', partnerRoutes);
+app.use('/api/v1/settings', settingsRoutes);
+app.use('/api/v1/revenue', revenueRoutes);
+app.use('/api/v1/expenses', expenseRoutes);
+app.use('/api/v1/quotations', quotationRoutes);
+app.use('/api/v1/work-orders', workOrderRoutes);
+app.use('/api/v1/checks', checkRoutes);
+app.use('/api/v1/receipt-vouchers', receiptVoucherRoutes);
+app.use('/api/v1/payment-vouchers', paymentVoucherRoutes);
+app.use('/api/v1/shareen', shareenRoutes);
+app.use('/api/v1/reviews', reviewRoutes);
+app.use('/api/v1/company', companyRoutes);
+app.use('/api/v1/reports', reportsRoutes);
 /**
  * @swagger
  * /:

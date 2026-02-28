@@ -1,15 +1,12 @@
 import { Router } from 'express';
 import * as checkController from './check.controller.js';
-
 const router = Router();
-
 /**
  * @swagger
  * tags:
  *   name: Checks
  *   description: Check / Cheque management endpoints
  */
-
 /**
  * @swagger
  * /api/v1/checks:
@@ -21,7 +18,6 @@ const router = Router();
  *         description: List of items
  */
 router.get('/', checkController.getAllChecks);
-
 /**
  * @swagger
  * /api/v1/checks/pending/due-soon:
@@ -33,7 +29,6 @@ router.get('/', checkController.getAllChecks);
  *         description: List
  */
 router.get('/pending/due-soon', checkController.getDueSoonChecks);
-
 /**
  * @swagger
  * /api/v1/checks/stats/summary:
@@ -45,7 +40,6 @@ router.get('/pending/due-soon', checkController.getDueSoonChecks);
  *         description: Stats
  */
 router.get('/stats/summary', checkController.getCheckStatsSummary);
-
 /**
  * @swagger
  * /api/v1/checks/{id}:
@@ -61,7 +55,6 @@ router.get('/stats/summary', checkController.getCheckStatsSummary);
  *         description: OK
  */
 router.get('/:id', checkController.getCheckById);
-
 /**
  * @swagger
  * /api/v1/checks/{id}/status:
@@ -85,5 +78,4 @@ router.get('/:id', checkController.getCheckById);
  *         description: Updated
  */
 router.put('/:id/status', checkController.updateCheckStatus);
-
 export default router;

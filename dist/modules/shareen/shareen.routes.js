@@ -1,14 +1,11 @@
 import { Router } from 'express';
 import * as shareenController from './shareen.controller.js';
-
 const router = Router();
-
 /**
  * @swagger
  * tags:
  *   name: Shareen
  */
-
 /**
  * @swagger
  * /api/v1/shareen:
@@ -20,7 +17,6 @@ const router = Router();
  *         description: OK
  */
 router.get('/', shareenController.getAllShareen);
-
 /**
  * @swagger
  * /api/v1/shareen:
@@ -32,5 +28,4 @@ router.get('/', shareenController.getAllShareen);
  *         description: Created
  */
 router.post('/', shareenController.createShareen);
-
 export default router;
