@@ -22,8 +22,18 @@ export const getAllSuppliers = async (query: any) => {
     };
 };
 
-export const getSupplierById = async (id: string) => {
-    const supplier = await supplierRepository.findById(id);
+export const getSupplierById = async (idOrCode: string | number) => {
+    let supplier = null;
+
+    const idInt = typeof idOrCode === 'string' ? parseInt(idOrCode) : idOrCode;
+    if (!isNaN(idInt as number)) {
+        supplier = await supplierRepository.findById(idInt as number);
+    }
+
+    if (!supplier) {
+        supplier = await supplierRepository.findBySupplierCode(idOrCode.toString());
+    }
+
     if (!supplier) {
         throw new Error('Supplier not found');
     }
@@ -32,7 +42,7 @@ export const getSupplierById = async (id: string) => {
 
 export const createSupplier = async (data: any) => {
     if (data.supplier_id) {
-        const existing = await supplierRepository.findById(data.supplier_id);
+        const existing = await supplierRepository.findBySupplierCode(data.supplier_id);
         if (existing) {
             throw new Error('Supplier ID already exists');
         }
@@ -40,12 +50,12 @@ export const createSupplier = async (data: any) => {
     return await supplierRepository.create(data);
 };
 
-export const updateSupplier = async (id: string, data: any) => {
+export const updateSupplier = async (id: string | number, data: any) => {
     await getSupplierById(id);
     return await supplierRepository.update(id, data);
 };
 
-export const deleteSupplier = async (id: string) => {
+export const deleteSupplier = async (id: string | number) => {
     await getSupplierById(id);
     return await supplierRepository.remove(id);
 };
