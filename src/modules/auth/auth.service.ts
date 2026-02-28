@@ -1,8 +1,10 @@
 import bcrypt from 'bcryptjs';
 import * as userRepository from '../users/user.repository.js';
-import { generateToken } from '../../utils/jwt.js';
+import { generateToken, generateRefreshToken, verifyRefreshToken } from '../../utils/jwt.js';
 
-export const register = async (userData: any): Promise<{ user: any; token: string }> => {
+export const register = async (
+    userData: any,
+): Promise<{ user: any; accessToken: string; refreshToken: string }> => {
     const { email, password, name } = userData;
 
     // Check if user already exists
@@ -21,16 +23,17 @@ export const register = async (userData: any): Promise<{ user: any; token: strin
         name,
     });
 
-    // Generate token
-    const token = generateToken({ userId: user.id, email: user.email });
+    // Generate tokens
+    const accessToken = generateToken({ userId: user.id, email: user.email });
+    const refreshToken = generateRefreshToken({ userId: user.id, email: user.email });
 
-    return { user, token };
+    return { user, accessToken, refreshToken };
 };
 
 export const login = async (
     email: string,
     password: string,
-): Promise<{ user: any; token: string }> => {
+): Promise<{ user: any; accessToken: string; refreshToken: string }> => {
     // Find user
     const user = await userRepository.findUserByEmail(email);
     if (!user) {
@@ -43,8 +46,29 @@ export const login = async (
         throw new Error('Invalid credentials');
     }
 
-    // Generate token
-    const token = generateToken({ userId: user.id, email: user.email });
+    // Generate tokens
+    const accessToken = generateToken({ userId: user.id, email: user.email });
+    const refreshToken = generateRefreshToken({ userId: user.id, email: user.email });
 
-    return { user, token };
+    return { user, accessToken, refreshToken };
+};
+
+export const refreshToken = async (
+    token: string,
+): Promise<{ accessToken: string; refreshToken: string }> => {
+    try {
+        const decoded = verifyRefreshToken(token);
+        const user = await userRepository.findById(decoded.userId);
+
+        if (!user) {
+            throw new Error('User not found');
+        }
+
+        const accessToken = generateToken({ userId: user.id, email: user.email });
+        const newRefreshToken = generateRefreshToken({ userId: user.id, email: user.email });
+
+        return { accessToken, refreshToken: newRefreshToken };
+    } catch (error) {
+        throw new Error('Invalid refresh token');
+    }
 };

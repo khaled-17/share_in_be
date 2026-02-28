@@ -129,5 +129,6 @@ router.post('/register', authController.register);
  *               $ref: '#/components/schemas/Error'
  */
 router.post('/login', authController.login);
+router.post('/refresh', authController.refreshToken);
 
 export default router;
