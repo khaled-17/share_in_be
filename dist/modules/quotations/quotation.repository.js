@@ -4,7 +4,8 @@ export const getAllQuotations = async () => {
     return prisma.quotation.findMany({
         include: {
             customer: { select: { name: true } },
-            project_type: { select: { type_name: true } },
+            project_type: true,
+            items: true,
         },
         orderBy: { quote_date: 'desc' },
     });
@@ -21,35 +22,59 @@ export const getQuotationById = async (id) => {
 };
 export const createQuotation = async (data) => {
     const { items, ...quoteData } = data;
+    // Parse numeric fields
+    if (quoteData.totalamount !== undefined)
+        quoteData.totalamount = parseFloat(quoteData.totalamount);
+    if (quoteData.paid_adv !== undefined)
+        quoteData.paid_adv = quoteData.paid_adv ? parseFloat(quoteData.paid_adv) : null;
+    const itemsData = (items || []).map((item) => ({
+        description: item.description,
+        unit_price: parseFloat(item.unit_price),
+        quantity: parseFloat(item.quantity),
+        total: parseFloat(item.total),
+    }));
     return prisma.quotation.create({
         data: {
             ...quoteData,
             items: {
-                create: items || [],
+                create: itemsData,
             },
         },
         include: {
+            customer: true,
+            project_type: true,
             items: true,
         },
     });
 };
 export const updateQuotation = async (id, data) => {
     const { items, ...quoteData } = data;
-    // For update, it's safer to delete existing items and recreate them or update individually
-    // Here we'll delete and recreate if items are provided
+    // Parse numeric fields
+    if (quoteData.totalamount !== undefined)
+        quoteData.totalamount = parseFloat(quoteData.totalamount);
+    if (quoteData.paid_adv !== undefined)
+        quoteData.paid_adv = quoteData.paid_adv ? parseFloat(quoteData.paid_adv) : null;
     if (items) {
         await prisma.quotationItem.deleteMany({
             where: { quotation_id: id },
         });
+        const itemsData = items.map((item) => ({
+            description: item.description,
+            unit_price: parseFloat(item.unit_price),
+            quantity: parseFloat(item.quantity),
+            total: parseFloat(item.total),
+        }));
         return prisma.quotation.update({
             where: { id },
             data: {
                 ...quoteData,
                 items: {
-                    create: items,
+                    create: itemsData,
                 },
             },
             include: {
+                customer: true,
+                project_type: true,
                 items: true,
             },
         });
@@ -58,6 +83,8 @@ export const updateQuotation = async (id, data) => {
         where: { id },
         data: quoteData,
         include: {
+            customer: true,
+            project_type: true,
             items: true,
         },
     });

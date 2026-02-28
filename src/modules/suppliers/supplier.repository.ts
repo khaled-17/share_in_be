@@ -31,7 +31,10 @@ export const findById = async (supplier_id: string) => {
     return await prisma.supplier.findUnique({
         where: { supplier_id },
         include: {
-            expenses: true,
+            expenses: {
+                include: { type: true },
+                orderBy: { exp_date: 'desc' },
+            },
             payment_vouchers: true,
         },
     });
@@ -43,15 +46,29 @@ export const create = async (data: any) => {
     });
 };
 
-export const update = async (supplier_id: string, data: any) => {
+export const update = async (id: string | number, data: any) => {
+    const idInt = typeof id === 'string' ? parseInt(id) : id;
+    if (isNaN(idInt)) {
+        // Fallback to supplier_id if parsing fails (though UI sends Int)
+        return await prisma.supplier.update({
+            where: { supplier_id: id as string },
+            data,
+        });
+    }
     return await prisma.supplier.update({
-        where: { supplier_id },
+        where: { id: idInt },
         data,
     });
 };
 
-export const remove = async (supplier_id: string) => {
+export const remove = async (id: string | number) => {
+    const idInt = typeof id === 'string' ? parseInt(id) : id;
+    if (isNaN(idInt)) {
+        return await prisma.supplier.delete({
+            where: { supplier_id: id as string },
+        });
+    }
     return await prisma.supplier.delete({
-        where: { supplier_id },
+        where: { id: idInt },
     });
 };

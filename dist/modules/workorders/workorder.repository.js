@@ -3,15 +3,23 @@ const prisma = new PrismaClient();
 export const getAllWorkOrders = async () => {
     return prisma.workOrder.findMany({
         include: {
-            customer: { select: { name: true } },
-            quotation: { select: { project_name: true } },
+            customer: true,
+            quotation: true,
         },
         orderBy: { created_at: 'desc' },
     });
 };
 export const createWorkOrder = async (data) => {
+    const { quotation_id, ...orderData } = data;
     return prisma.workOrder.create({
-        data,
+        data: {
+            ...orderData,
+            quotation_id: parseInt(quotation_id),
+        },
+        include: {
+            customer: true,
+            quotation: true,
+        },
     });
 };
 export const deleteWorkOrder = async (id) => {
