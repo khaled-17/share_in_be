@@ -4,9 +4,6 @@
   "type": "module",
   "description": "Node.js REST API with Prisma ORM and MySQL",
   "main": "src/server.ts",
-  "prisma": {
-    "seed": "tsx prisma/seed.ts"
-  },
   "scripts": {
     "start": "node dist/server.js",
     "dev": "tsx watch src/server.ts",
