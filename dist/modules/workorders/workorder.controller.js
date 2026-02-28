@@ -15,6 +15,9 @@ export const createWorkOrder = async (req, res, next) => {
         return successResponse(res, result, 'Work order created successfully', 201);
     }
     catch (error) {
+        if (error.message.includes('already exists')) {
+            return errorResponse(res, error.message, 400);
+        }
         next(error);
     }
 };
