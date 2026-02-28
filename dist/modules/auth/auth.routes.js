@@ -126,5 +126,50 @@ router.post('/register', authController.register);
  *               $ref: '#/components/schemas/Error'
  */
 router.post('/login', authController.login);
+/**
+ * @swagger
+ * /api/v1/auth/refresh:
+ *   post:
+ *     summary: Refresh access token
+ *     description: Generates a new access token and refresh token using a valid refresh token.
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - refreshToken
+ *             properties:
+ *               refreshToken:
+ *                 type: string
+ *                 description: Valid refresh token
+ *     responses:
+ *       200:
+ *         description: Token refreshed successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                 message:
+ *                   type: string
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     accessToken:
+ *                       type: string
+ *                     refreshToken:
+ *                       type: string
+ *       400:
+ *         description: Refresh token is required
+ *       401:
+ *         description: Invalid refresh token
+ *       500:
+ *         description: Internal server error
+ */
 router.post('/refresh', authController.refreshToken);
 export default router;
