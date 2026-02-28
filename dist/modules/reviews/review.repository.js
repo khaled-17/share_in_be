@@ -6,7 +6,11 @@ export const getAllReviews = async () => {
     });
 };
 export const createReview = async (data) => {
+    const { rating, ...reviewData } = data;
     return prisma.customerReview.create({
-        data,
+        data: {
+            ...reviewData,
+            rating: typeof rating === 'string' ? parseInt(rating) : rating,
+        },
     });
 };
