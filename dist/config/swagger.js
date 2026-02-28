@@ -147,6 +147,10 @@ const options = {
                 name: 'Health',
                 description: 'System health check endpoints',
             },
+            {
+                name: 'Employees',
+                description: 'Employee management endpoints',
+            },
         ],
     },
     apis: ['./src/modules/**/*.ts', './src/app.ts'],
