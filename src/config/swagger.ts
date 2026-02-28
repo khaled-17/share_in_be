@@ -18,7 +18,7 @@ const options = {
                 description: 'Development server',
             },
             {
-                url: 'https://api.share-in.com',
+                url: 'https://cohub.share-in-agency.com',
                 description: 'Production server',
             },
         ],

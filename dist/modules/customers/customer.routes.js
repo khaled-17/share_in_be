@@ -9,7 +9,7 @@ const router = Router();
  */
 /**
  * @swagger
- * /customers:
+ * /api/v1/customers:
  *   get:
  *     summary: Get all customers
  *     tags: [Customers]
@@ -36,7 +36,7 @@ const router = Router();
 router.get('/', customerController.getAllCustomers);
 /**
  * @swagger
- * /customers/{id}:
+ * /api/v1/customers/{id}:
  *   get:
  *     summary: Get customer by ID
  *     tags: [Customers]
@@ -55,7 +55,7 @@ router.get('/', customerController.getAllCustomers);
 router.get('/:id', customerController.getCustomerById);
 /**
  * @swagger
- * /customers:
+ * /api/v1/customers:
  *   post:
  *     summary: Create a new customer
  *     tags: [Customers]
@@ -98,7 +98,7 @@ router.get('/:id', customerController.getCustomerById);
 router.post('/', customerController.createCustomer);
 /**
  * @swagger
- * /customers/{id}:
+ * /api/v1/customers/{id}:
  *   put:
  *     summary: Update customer
  *     tags: [Customers]
@@ -120,7 +120,7 @@ router.post('/', customerController.createCustomer);
 router.put('/:id', customerController.updateCustomer);
 /**
  * @swagger
- * /customers/{id}:
+ * /api/v1/customers/{id}:
  *   delete:
  *     summary: Delete customer
  *     tags: [Customers]
