@@ -23,8 +23,15 @@ export const getCustomerById = async (req, res, next) => {
 };
 export const createCustomer = async (req, res, next) => {
     try {
-        const { customer_id, name, contact_person, company_email, contact_email, phone, secondary_phone, address } = req.body;
-        if (!customer_id || !name || !contact_person || !company_email || !contact_email || !phone || !secondary_phone || !address) {
+        const { customer_id, name, contact_person, company_email, contact_email, phone, secondary_phone, address, } = req.body;
+        if (!customer_id ||
+            !name ||
+            !contact_person ||
+            !company_email ||
+            !contact_email ||
+            !phone ||
+            !secondary_phone ||
+            !address) {
             return errorResponse(res, 'All fields are mandatory: customer_id, name, contact_person, company_email, contact_email, phone, secondary_phone, address', 400);
         }
         const customer = await customerService.createCustomer(req.body);

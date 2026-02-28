@@ -2,7 +2,7 @@ import * as employeeService from './employee.service.js';
 export const getAllEmployees = async (req, res, next) => {
     try {
         const result = await employeeService.getAllEmployees();
-        // Frontend expects an array directly: api.get<Employee[]>('/employees') 
+        // Frontend expects an array directly: api.get<Employee[]>('/employees')
         res.json(result);
     }
     catch (error) {

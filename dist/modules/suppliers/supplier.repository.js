@@ -1,22 +1,24 @@
 import prisma from '../../config/prisma.js';
 export const findAll = async (params) => {
     const { skip, take, search } = params;
-    const where = search ? {
-        OR: [
-            { name: { contains: search } },
-            { supplier_id: { contains: search } },
-            { phone: { contains: search } },
-            { speciality: { contains: search } },
-        ]
-    } : {};
+    const where = search
+        ? {
+            OR: [
+                { name: { contains: search } },
+                { supplier_id: { contains: search } },
+                { phone: { contains: search } },
+                { speciality: { contains: search } },
+            ],
+        }
+        : {};
     const [suppliers, total] = await Promise.all([
         prisma.supplier.findMany({
             where,
             skip,
             take,
-            orderBy: { created_at: 'desc' }
+            orderBy: { created_at: 'desc' },
         }),
-        prisma.supplier.count({ where })
+        prisma.supplier.count({ where }),
     ]);
     return { suppliers, total };
 };
@@ -25,23 +27,23 @@ export const findById = async (supplier_id) => {
         where: { supplier_id },
         include: {
             expenses: true,
-            payment_vouchers: true
-        }
+            payment_vouchers: true,
+        },
     });
 };
 export const create = async (data) => {
     return await prisma.supplier.create({
-        data
+        data,
     });
 };
 export const update = async (supplier_id, data) => {
     return await prisma.supplier.update({
         where: { supplier_id },
-        data
+        data,
     });
 };
 export const remove = async (supplier_id) => {
     return await prisma.supplier.delete({
-        where: { supplier_id }
+        where: { supplier_id },
     });
 };

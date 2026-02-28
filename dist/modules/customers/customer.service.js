@@ -7,15 +7,15 @@ export const getAllCustomers = async (query) => {
     const { customers, total } = await customerRepository.findAll({
         skip,
         take: limit,
-        search
+        search,
     });
     return {
         customers,
         pagination: {
             page,
             limit,
-            total
-        }
+            total,
+        },
     };
 };
 export const getCustomerById = async (id) => {

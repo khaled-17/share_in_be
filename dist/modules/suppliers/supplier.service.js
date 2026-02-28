@@ -7,15 +7,15 @@ export const getAllSuppliers = async (query) => {
     const { suppliers, total } = await supplierRepository.findAll({
         skip,
         take: limit,
-        search
+        search,
     });
     return {
         suppliers,
         pagination: {
             page,
             limit,
-            total
-        }
+            total,
+        },
     };
 };
 export const getSupplierById = async (id) => {
