@@ -1,5 +1,5 @@
 import * as settingsService from './settings.service.js';
-import { successResponse } from '../../utils/response.js';
+import { successResponse, errorResponse } from '../../utils/response.js';
 // Revenue Types
 export const getAllRevenueTypes = async (req, res, next) => {
     try {
@@ -16,6 +16,8 @@ export const createRevenueType = async (req, res, next) => {
         return successResponse(res, result, 'Revenue type created successfully', 201);
     }
     catch (error) {
+        if (error.message.includes('already exists'))
+            return errorResponse(res, error.message, 400);
         next(error);
     }
 };
@@ -55,6 +57,8 @@ export const createExpenseType = async (req, res, next) => {
         return successResponse(res, result, 'Expense type created successfully', 201);
     }
     catch (error) {
+        if (error.message.includes('already exists'))
+            return errorResponse(res, error.message, 400);
         next(error);
     }
 };
@@ -94,6 +98,8 @@ export const createProjectType = async (req, res, next) => {
         return successResponse(res, result, 'Project type created successfully', 201);
     }
     catch (error) {
+        if (error.message.includes('already exists'))
+            return errorResponse(res, error.message, 400);
         next(error);
     }
 };
