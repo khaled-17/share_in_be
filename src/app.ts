@@ -21,6 +21,7 @@ import paymentVoucherRoutes from './modules/vouchers/payment-vouchers.routes.js'
 import shareenRoutes from './modules/shareen/shareen.routes.js';
 import reviewRoutes from './modules/reviews/review.routes.js';
 import companyRoutes from './modules/company/company.routes.js';
+import reportsRoutes from './modules/reports/reports.routes.js';
 
 // Import middlewares
 import { errorHandler } from './middlewares/error.middleware.js';
@@ -57,6 +58,7 @@ app.use('/api/v1/payment-vouchers', paymentVoucherRoutes);
 app.use('/api/v1/shareen', shareenRoutes);
 app.use('/api/v1/reviews', reviewRoutes);
 app.use('/api/v1/company', companyRoutes);
+app.use('/api/v1/reports', reportsRoutes);
 
 /**
  * @swagger
