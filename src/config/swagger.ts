@@ -1,11 +1,15 @@
 import swaggerJsdoc from 'swagger-jsdoc';
+import fs from 'fs';
+import path from 'path';
+
+const packageJson = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf-8'));
 
 const options = {
     definition: {
         openapi: '3.0.0',
         info: {
             title: 'Share In API Documentation',
-            version: '1.0.0',
+            version: packageJson.version,
             description: 'Complete REST API documentation for Share In Backend',
             contact: {
                 name: 'API Support',
