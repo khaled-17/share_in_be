@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import * as userRepository from '../users/user.repository.js';
-import { generateToken } from '../../utils/jwt.js';
+import { generateToken, generateRefreshToken, verifyRefreshToken } from '../../utils/jwt.js';
 export const register = async (userData) => {
     const { email, password, name } = userData;
     // Check if user already exists
@@ -16,9 +16,10 @@ export const register = async (userData) => {
         password: hashedPassword,
         name,
     });
-    // Generate token
-    const token = generateToken({ userId: user.id, email: user.email });
-    return { user, token };
+    // Generate tokens
+    const accessToken = generateToken({ userId: user.id, email: user.email });
+    const refreshToken = generateRefreshToken({ userId: user.id, email: user.email });
+    return { user, accessToken, refreshToken };
 };
 export const login = async (email, password) => {
     // Find user
@@ -31,7 +32,23 @@ export const login = async (email, password) => {
     if (!isPasswordValid) {
         throw new Error('Invalid credentials');
     }
-    // Generate token
-    const token = generateToken({ userId: user.id, email: user.email });
-    return { user, token };
+    // Generate tokens
+    const accessToken = generateToken({ userId: user.id, email: user.email });
+    const refreshToken = generateRefreshToken({ userId: user.id, email: user.email });
+    return { user, accessToken, refreshToken };
+};
+export const refreshToken = async (token) => {
+    try {
+        const decoded = verifyRefreshToken(token);
+        const user = await userRepository.findById(decoded.userId);
+        if (!user) {
+            throw new Error('User not found');
+        }
+        const accessToken = generateToken({ userId: user.id, email: user.email });
+        const newRefreshToken = generateRefreshToken({ userId: user.id, email: user.email });
+        return { accessToken, refreshToken: newRefreshToken };
+    }
+    catch (error) {
+        throw new Error('Invalid refresh token');
+    }
 };

@@ -23,6 +23,7 @@ import companyRoutes from './modules/company/company.routes.js';
 import reportsRoutes from './modules/reports/reports.routes.js';
 // Import middlewares
 import { errorHandler } from './middlewares/error.middleware.js';
+import { authenticate } from './middlewares/auth.middleware.js';
 // Import swagger
 import swaggerSpec from './config/swagger.js';
 dotenv.config();
@@ -32,25 +33,26 @@ app.use(cors());
 app.use(express.json());
 // Swagger Documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-// Routes
+// Public Routes
 app.use('/api/v1/auth', authRoutes);
-app.use('/api/v1/users', userRoutes);
-app.use('/api/v1/customers', customerRoutes);
-app.use('/api/v1/suppliers', supplierRoutes);
-app.use('/api/v1/employees', employeeRoutes);
-app.use('/api/v1/partners', partnerRoutes);
-app.use('/api/v1/settings', settingsRoutes);
-app.use('/api/v1/revenue', revenueRoutes);
-app.use('/api/v1/expenses', expenseRoutes);
-app.use('/api/v1/quotations', quotationRoutes);
-app.use('/api/v1/work-orders', workOrderRoutes);
-app.use('/api/v1/checks', checkRoutes);
-app.use('/api/v1/receipt-vouchers', receiptVoucherRoutes);
-app.use('/api/v1/payment-vouchers', paymentVoucherRoutes);
-app.use('/api/v1/shareen', shareenRoutes);
-app.use('/api/v1/reviews', reviewRoutes);
-app.use('/api/v1/company', companyRoutes);
-app.use('/api/v1/reports', reportsRoutes);
+// Protected Routes
+app.use('/api/v1/users', authenticate, userRoutes);
+app.use('/api/v1/customers', authenticate, customerRoutes);
+app.use('/api/v1/suppliers', authenticate, supplierRoutes);
+app.use('/api/v1/employees', authenticate, employeeRoutes);
+app.use('/api/v1/partners', authenticate, partnerRoutes);
+app.use('/api/v1/settings', authenticate, settingsRoutes);
+app.use('/api/v1/revenue', authenticate, revenueRoutes);
+app.use('/api/v1/expenses', authenticate, expenseRoutes);
+app.use('/api/v1/quotations', authenticate, quotationRoutes);
+app.use('/api/v1/work-orders', authenticate, workOrderRoutes);
+app.use('/api/v1/checks', authenticate, checkRoutes);
+app.use('/api/v1/receipt-vouchers', authenticate, receiptVoucherRoutes);
+app.use('/api/v1/payment-vouchers', authenticate, paymentVoucherRoutes);
+app.use('/api/v1/shareen', authenticate, shareenRoutes);
+app.use('/api/v1/reviews', authenticate, reviewRoutes);
+app.use('/api/v1/company', authenticate, companyRoutes);
+app.use('/api/v1/reports', authenticate, reportsRoutes);
 /**
  * @swagger
  * /:
