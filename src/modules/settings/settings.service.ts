@@ -1,4 +1,7 @@
 import * as settingsRepository from './settings.repository.js';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
 
 // Revenue Types
 export const getAllRevenueTypes = async () => {
@@ -6,6 +9,11 @@ export const getAllRevenueTypes = async () => {
 };
 
 export const createRevenueType = async (data: any) => {
+    const existing = await prisma.revenueType.findUnique({
+        where: { revtype_id: data.revtype_id },
+    });
+    if (existing) throw new Error('Revenue Type ID already exists');
+
     return settingsRepository.createRevenueType(data);
 };
 
@@ -23,6 +31,11 @@ export const getAllExpenseTypes = async () => {
 };
 
 export const createExpenseType = async (data: any) => {
+    const existing = await prisma.expenseType.findUnique({
+        where: { exptype_id: data.exptype_id },
+    });
+    if (existing) throw new Error('Expense Type ID already exists');
+
     return settingsRepository.createExpenseType(data);
 };
 
@@ -40,6 +53,11 @@ export const getAllProjectTypes = async () => {
 };
 
 export const createProjectType = async (data: any) => {
+    const existing = await prisma.projectType.findUnique({
+        where: { type_id: data.type_id },
+    });
+    if (existing) throw new Error('Project Type ID already exists');
+
     return settingsRepository.createProjectType(data);
 };
 

@@ -16,7 +16,8 @@ export const createRevenueType = async (req: Request, res: Response, next: NextF
     try {
         const result = await settingsService.createRevenueType(req.body);
         return successResponse(res, result, 'Revenue type created successfully', 201);
-    } catch (error) {
+    } catch (error: any) {
+        if (error.message.includes('already exists')) return errorResponse(res, error.message, 400);
         next(error);
     }
 };
@@ -55,7 +56,8 @@ export const createExpenseType = async (req: Request, res: Response, next: NextF
     try {
         const result = await settingsService.createExpenseType(req.body);
         return successResponse(res, result, 'Expense type created successfully', 201);
-    } catch (error) {
+    } catch (error: any) {
+        if (error.message.includes('already exists')) return errorResponse(res, error.message, 400);
         next(error);
     }
 };
@@ -94,7 +96,8 @@ export const createProjectType = async (req: Request, res: Response, next: NextF
     try {
         const result = await settingsService.createProjectType(req.body);
         return successResponse(res, result, 'Project type created successfully', 201);
-    } catch (error) {
+    } catch (error: any) {
+        if (error.message.includes('already exists')) return errorResponse(res, error.message, 400);
         next(error);
     }
 };
