@@ -18,8 +18,15 @@ export const getAllSuppliers = async (query) => {
         },
     };
 };
-export const getSupplierById = async (id) => {
-    const supplier = await supplierRepository.findById(id);
+export const getSupplierById = async (idOrCode) => {
+    let supplier = null;
+    const idInt = typeof idOrCode === 'string' ? parseInt(idOrCode) : idOrCode;
+    if (!isNaN(idInt)) {
+        supplier = await supplierRepository.findById(idInt);
+    }
+    if (!supplier) {
+        supplier = await supplierRepository.findBySupplierCode(idOrCode.toString());
+    }
     if (!supplier) {
         throw new Error('Supplier not found');
     }
@@ -27,7 +34,7 @@ export const getSupplierById = async (id) => {
 };
 export const createSupplier = async (data) => {
     if (data.supplier_id) {
-        const existing = await supplierRepository.findById(data.supplier_id);
+        const existing = await supplierRepository.findBySupplierCode(data.supplier_id);
         if (existing) {
             throw new Error('Supplier ID already exists');
         }

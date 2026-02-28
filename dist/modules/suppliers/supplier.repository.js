@@ -22,7 +22,19 @@ export const findAll = async (params) => {
     ]);
     return { suppliers, total };
 };
-export const findById = async (supplier_id) => {
+export const findById = async (id) => {
+    return await prisma.supplier.findUnique({
+        where: { id },
+        include: {
+            expenses: {
+                include: { type: true },
+                orderBy: { exp_date: 'desc' },
+            },
+            payment_vouchers: true,
+        },
+    });
+};
+export const findBySupplierCode = async (supplier_id) => {
     return await prisma.supplier.findUnique({
         where: { supplier_id },
         include: {
