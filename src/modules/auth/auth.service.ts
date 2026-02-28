@@ -27,7 +27,10 @@ export const register = async (userData: any): Promise<{ user: any; token: strin
     return { user, token };
 };
 
-export const login = async (email: string, password: string): Promise<{ user: any; token: string }> => {
+export const login = async (
+    email: string,
+    password: string,
+): Promise<{ user: any; token: string }> => {
     // Find user
     const user = await userRepository.findUserByEmail(email);
     if (!user) {

@@ -5,7 +5,12 @@ import { successResponse, paginatedResponse, errorResponse } from '../../utils/r
 export const getAllSuppliers = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const result = await supplierService.getAllSuppliers(req.query);
-        return paginatedResponse(res, result.suppliers, result.pagination, 'Suppliers retrieved successfully');
+        return paginatedResponse(
+            res,
+            result.suppliers,
+            result.pagination,
+            'Suppliers retrieved successfully',
+        );
     } catch (error) {
         next(error);
     }

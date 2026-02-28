@@ -9,7 +9,7 @@ export const getAllSuppliers = async (query: any) => {
     const { suppliers, total } = await supplierRepository.findAll({
         skip,
         take: limit,
-        search
+        search,
     });
 
     return {
@@ -17,8 +17,8 @@ export const getAllSuppliers = async (query: any) => {
         pagination: {
             page,
             limit,
-            total
-        }
+            total,
+        },
     };
 };
 

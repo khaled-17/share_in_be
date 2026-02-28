@@ -5,7 +5,12 @@ import { successResponse, paginatedResponse, errorResponse } from '../../utils/r
 export const getAllCustomers = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const result = await customerService.getAllCustomers(req.query);
-        return paginatedResponse(res, result.customers, result.pagination, 'Customers retrieved successfully');
+        return paginatedResponse(
+            res,
+            result.customers,
+            result.pagination,
+            'Customers retrieved successfully',
+        );
     } catch (error) {
         next(error);
     }
@@ -33,11 +38,24 @@ export const createCustomer = async (req: Request, res: Response, next: NextFunc
             contact_email,
             phone,
             secondary_phone,
-            address
+            address,
         } = req.body;
 
-        if (!customer_id || !name || !contact_person || !company_email || !contact_email || !phone || !secondary_phone || !address) {
-            return errorResponse(res, 'All fields are mandatory: customer_id, name, contact_person, company_email, contact_email, phone, secondary_phone, address', 400);
+        if (
+            !customer_id ||
+            !name ||
+            !contact_person ||
+            !company_email ||
+            !contact_email ||
+            !phone ||
+            !secondary_phone ||
+            !address
+        ) {
+            return errorResponse(
+                res,
+                'All fields are mandatory: customer_id, name, contact_person, company_email, contact_email, phone, secondary_phone, address',
+                400,
+            );
         }
 
         const customer = await customerService.createCustomer(req.body);
