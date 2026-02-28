@@ -25,6 +25,16 @@ export const getAllReceiptVouchers = async (filters) => {
         orderBy: { voucher_date: 'desc' },
     });
 };
+export const getReceiptVoucherById = async (id) => {
+    return prisma.receiptVoucher.findUnique({
+        where: { id },
+        include: {
+            customer: true,
+            partner: true,
+            check: true,
+        },
+    });
+};
 export const createReceiptVoucher = async (data) => {
     const { check, ...voucherData } = data;
     return prisma.$transaction(async (tx) => {
@@ -63,6 +73,55 @@ export const createReceiptVoucher = async (data) => {
         return voucher;
     });
 };
+export const updateReceiptVoucher = async (id, data) => {
+    return prisma.$transaction(async (tx) => {
+        const oldVoucher = await tx.receiptVoucher.findUnique({ where: { id } });
+        if (!oldVoucher)
+            throw new Error('Voucher not found');
+        const { check, ...voucherData } = data;
+        const amountDiff = (voucherData.amount || oldVoucher.amount) - oldVoucher.amount;
+        const updatedVoucher = await tx.receiptVoucher.update({
+            where: { id },
+            data: {
+                ...voucherData,
+                amount: voucherData.amount ? parseFloat(voucherData.amount) : undefined,
+                partner_id: voucherData.partner_id ? parseInt(voucherData.partner_id) : undefined,
+            },
+            include: { check: true },
+        });
+        // If it's partner capital, update partner current_capital
+        if (updatedVoucher.source_type === 'partner_capital' &&
+            updatedVoucher.partner_id &&
+            amountDiff !== 0) {
+            await tx.partner.update({
+                where: { id: updatedVoucher.partner_id },
+                data: { current_capital: { increment: amountDiff } },
+            });
+        }
+        return updatedVoucher;
+    });
+};
+export const deleteReceiptVoucher = async (id) => {
+    return prisma.$transaction(async (tx) => {
+        const voucher = await tx.receiptVoucher.findUnique({ where: { id } });
+        if (!voucher)
+            throw new Error('Voucher not found');
+        // If it was partner capital, decrement it
+        if (voucher.source_type === 'partner_capital' && voucher.partner_id) {
+            await tx.partner.update({
+                where: { id: voucher.partner_id },
+                data: {
+                    current_capital: { decrement: voucher.amount },
+                },
+            });
+        }
+        // Delete check if exists
+        if (voucher.check_id) {
+            await tx.checkDetail.delete({ where: { id: voucher.check_id } });
+        }
+        return tx.receiptVoucher.delete({ where: { id } });
+    });
+};
 // Payment Vouchers
 export const getAllPaymentVouchers = async (filters) => {
     const { start_date, end_date, beneficiary_type, payment_method } = filters;
@@ -88,6 +147,18 @@ export const getAllPaymentVouchers = async (filters) => {
             check: true,
         },
         orderBy: { voucher_date: 'desc' },
+    });
+};
+export const getPaymentVoucherById = async (id) => {
+    return prisma.paymentVoucher.findUnique({
+        where: { id },
+        include: {
+            supplier: true,
+            employee: true,
+            partner: true,
+            expense_type: true,
+            check: true,
+        },
     });
 };
 export const createPaymentVoucher = async (data) => {
@@ -130,7 +201,56 @@ export const createPaymentVoucher = async (data) => {
         return voucher;
     });
 };
-// Stats
+export const updatePaymentVoucher = async (id, data) => {
+    return prisma.$transaction(async (tx) => {
+        const oldVoucher = await tx.paymentVoucher.findUnique({ where: { id } });
+        if (!oldVoucher)
+            throw new Error('Voucher not found');
+        const { check, ...voucherData } = data;
+        const amountDiff = (voucherData.amount || oldVoucher.amount) - oldVoucher.amount;
+        const updatedVoucher = await tx.paymentVoucher.update({
+            where: { id },
+            data: {
+                ...voucherData,
+                amount: voucherData.amount ? parseFloat(voucherData.amount) : undefined,
+                partner_id: voucherData.partner_id ? parseInt(voucherData.partner_id) : undefined,
+            },
+            include: { check: true },
+        });
+        // If it's partner withdrawal, update partner current_capital (negative increment for more withdrawal)
+        if (updatedVoucher.beneficiary_type === 'partner_withdrawal' &&
+            updatedVoucher.partner_id &&
+            amountDiff !== 0) {
+            await tx.partner.update({
+                where: { id: updatedVoucher.partner_id },
+                data: { current_capital: { decrement: amountDiff } },
+            });
+        }
+        return updatedVoucher;
+    });
+};
+export const deletePaymentVoucher = async (id) => {
+    return prisma.$transaction(async (tx) => {
+        const voucher = await tx.paymentVoucher.findUnique({ where: { id } });
+        if (!voucher)
+            throw new Error('Voucher not found');
+        // If it was partner withdrawal, increment it back
+        if (voucher.beneficiary_type === 'partner_withdrawal' && voucher.partner_id) {
+            await tx.partner.update({
+                where: { id: voucher.partner_id },
+                data: {
+                    current_capital: { increment: voucher.amount },
+                },
+            });
+        }
+        // Delete check if exists
+        if (voucher.check_id) {
+            await tx.checkDetail.delete({ where: { id: voucher.check_id } });
+        }
+        return tx.paymentVoucher.delete({ where: { id } });
+    });
+};
+// Summary Stats
 export const getVoucherStats = async (type, filters) => {
     const { start_date, end_date } = filters;
     const where = {};
@@ -179,52 +299,4 @@ export const getVoucherStats = async (type, filters) => {
             pending_checks: pendingChecks,
         };
     }
-};
-export const updateReceiptVoucher = async (id, data) => {
-    return prisma.$transaction(async (tx) => {
-        const oldVoucher = await tx.receiptVoucher.findUnique({ where: { id } });
-        if (!oldVoucher)
-            throw new Error('Voucher not found');
-        const { check, ...voucherData } = data;
-        const amountDiff = (voucherData.amount || oldVoucher.amount) - oldVoucher.amount;
-        const updatedVoucher = await tx.receiptVoucher.update({
-            where: { id },
-            data: voucherData,
-            include: { check: true },
-        });
-        // If it's partner capital, update partner current_capital
-        if (updatedVoucher.source_type === 'partner_capital' &&
-            updatedVoucher.partner_id &&
-            amountDiff !== 0) {
-            await tx.partner.update({
-                where: { id: updatedVoucher.partner_id },
-                data: { current_capital: { increment: amountDiff } },
-            });
-        }
-        return updatedVoucher;
-    });
-};
-export const updatePaymentVoucher = async (id, data) => {
-    return prisma.$transaction(async (tx) => {
-        const oldVoucher = await tx.paymentVoucher.findUnique({ where: { id } });
-        if (!oldVoucher)
-            throw new Error('Voucher not found');
-        const { check, ...voucherData } = data;
-        const amountDiff = (voucherData.amount || oldVoucher.amount) - oldVoucher.amount;
-        const updatedVoucher = await tx.paymentVoucher.update({
-            where: { id },
-            data: voucherData,
-            include: { check: true },
-        });
-        // If it's partner withdrawal, update partner current_capital (negative increment for more withdrawal)
-        if (updatedVoucher.beneficiary_type === 'partner_withdrawal' &&
-            updatedVoucher.partner_id &&
-            amountDiff !== 0) {
-            await tx.partner.update({
-                where: { id: updatedVoucher.partner_id },
-                data: { current_capital: { decrement: amountDiff } },
-            });
-        }
-        return updatedVoucher;
-    });
 };
