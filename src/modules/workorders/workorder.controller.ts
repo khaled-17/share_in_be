@@ -15,7 +15,10 @@ export const createWorkOrder = async (req: Request, res: Response, next: NextFun
     try {
         const result = await workOrderService.createWorkOrder(req.body);
         return successResponse(res, result, 'Work order created successfully', 201);
-    } catch (error) {
+    } catch (error: any) {
+        if (error.message.includes('already exists')) {
+            return errorResponse(res, error.message, 400);
+        }
         next(error);
     }
 };
