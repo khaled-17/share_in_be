@@ -17,8 +17,14 @@ export const getSummaryById = async (id) => {
     return await prisma.partner.findUnique({
         where: { id },
         include: {
-            receipt_vouchers: { select: { amount: true } },
-            payment_vouchers: { select: { amount: true } },
+            receipt_vouchers: {
+                where: { source_type: 'partner_capital' },
+                select: { amount: true },
+            },
+            payment_vouchers: {
+                where: { beneficiary_type: 'partner_withdrawal' },
+                select: { amount: true },
+            },
         },
     });
 };

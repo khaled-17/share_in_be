@@ -45,6 +45,10 @@ export const updatePartner = async (id, data) => {
     return await partnerRepository.update(id, data);
 };
 export const deletePartner = async (id) => {
-    await getPartnerById(id);
+    const partner = await getPartnerById(id);
+    if ((partner.receipt_vouchers && partner.receipt_vouchers.length > 0) ||
+        (partner.payment_vouchers && partner.payment_vouchers.length > 0)) {
+        throw new Error('لا يمكن حذف شريك له سندات مسجلة');
+    }
     return await partnerRepository.remove(id);
 };
