@@ -8,6 +8,7 @@ import authRoutes from './modules/auth/auth.routes.js';
 import customerRoutes from './modules/customers/customer.routes.js';
 import supplierRoutes from './modules/suppliers/supplier.routes.js';
 import employeeRoutes from './modules/employees/employee.routes.js';
+import partnerRoutes from './modules/partners/partner.routes.js';
 // Import middlewares
 import { errorHandler } from './middlewares/error.middleware.js';
 // Import swagger
@@ -25,6 +26,7 @@ app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/customers', customerRoutes);
 app.use('/api/v1/suppliers', supplierRoutes);
 app.use('/api/v1/employees', employeeRoutes);
+app.use('/api/v1/partners', partnerRoutes);
 /**
  * @swagger
  * /:

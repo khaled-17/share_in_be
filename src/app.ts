@@ -9,6 +9,15 @@ import authRoutes from './modules/auth/auth.routes.js';
 import customerRoutes from './modules/customers/customer.routes.js';
 import supplierRoutes from './modules/suppliers/supplier.routes.js';
 import employeeRoutes from './modules/employees/employee.routes.js';
+import partnerRoutes from './modules/partners/partner.routes.js';
+import settingsRoutes from './modules/settings/settings.routes.js';
+import revenueRoutes from './modules/revenue/revenue.routes.js';
+import expenseRoutes from './modules/expenses/expense.routes.js';
+import quotationRoutes from './modules/quotations/quotation.routes.js';
+import workOrderRoutes from './modules/workorders/workorder.routes.js';
+import checkRoutes from './modules/checks/check.routes.js';
+import receiptVoucherRoutes from './modules/vouchers/receipt-vouchers.routes.js';
+import paymentVoucherRoutes from './modules/vouchers/payment-vouchers.routes.js';
 
 // Import middlewares
 import { errorHandler } from './middlewares/error.middleware.js';
@@ -33,6 +42,15 @@ app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/customers', customerRoutes);
 app.use('/api/v1/suppliers', supplierRoutes);
 app.use('/api/v1/employees', employeeRoutes);
+app.use('/api/v1/partners', partnerRoutes);
+app.use('/api/v1/settings', settingsRoutes);
+app.use('/api/v1/revenue', revenueRoutes);
+app.use('/api/v1/expenses', expenseRoutes);
+app.use('/api/v1/quotations', quotationRoutes);
+app.use('/api/v1/work-orders', workOrderRoutes);
+app.use('/api/v1/checks', checkRoutes);
+app.use('/api/v1/receipt-vouchers', receiptVoucherRoutes);
+app.use('/api/v1/payment-vouchers', paymentVoucherRoutes);
 
 /**
  * @swagger
