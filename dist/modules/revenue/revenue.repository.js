@@ -3,12 +3,8 @@ const prisma = new PrismaClient();
 export const getAllRevenue = async () => {
     return prisma.revenue.findMany({
         include: {
-            customer: {
-                select: { name: true },
-            },
-            type: {
-                select: { revtype_name: true },
-            },
+            customer: true,
+            type: true,
         },
         orderBy: { rev_date: 'desc' },
     });
@@ -23,21 +19,31 @@ export const getRevenueById = async (id) => {
     });
 };
 export const createRevenue = async (data) => {
+    const { amount, quote_id, ...revenueData } = data;
     return prisma.revenue.create({
-        data,
+        data: {
+            ...revenueData,
+            amount: parseFloat(amount),
+            quote_id: quote_id ? parseInt(quote_id) : null,
+        },
         include: {
-            customer: { select: { name: true } },
-            type: { select: { revtype_name: true } },
+            customer: true,
+            type: true,
         },
     });
 };
 export const updateRevenue = async (id, data) => {
+    const { amount, quote_id, ...revenueData } = data;
     return prisma.revenue.update({
         where: { id },
-        data,
+        data: {
+            ...revenueData,
+            amount: amount !== undefined ? parseFloat(amount) : undefined,
+            quote_id: quote_id !== undefined ? (quote_id ? parseInt(quote_id) : null) : undefined,
+        },
         include: {
-            customer: { select: { name: true } },
-            type: { select: { revtype_name: true } },
+            customer: true,
+            type: true,
         },
     });
 };
