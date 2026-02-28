@@ -237,13 +237,15 @@ export const updateReceiptVoucher = async (id, data) => {
         const updatedVoucher = await tx.receiptVoucher.update({
             where: { id },
             data: voucherData,
-            include: { check: true }
+            include: { check: true },
         });
         // If it's partner capital, update partner current_capital
-        if (updatedVoucher.source_type === 'partner_capital' && updatedVoucher.partner_id && amountDiff !== 0) {
+        if (updatedVoucher.source_type === 'partner_capital' &&
+            updatedVoucher.partner_id &&
+            amountDiff !== 0) {
             await tx.partner.update({
                 where: { id: updatedVoucher.partner_id },
-                data: { current_capital: { increment: amountDiff } }
+                data: { current_capital: { increment: amountDiff } },
             });
         }
         return updatedVoucher;
@@ -259,13 +261,15 @@ export const updatePaymentVoucher = async (id, data) => {
         const updatedVoucher = await tx.paymentVoucher.update({
             where: { id },
             data: voucherData,
-            include: { check: true }
+            include: { check: true },
         });
         // If it's partner withdrawal, update partner current_capital (negative increment for more withdrawal)
-        if (updatedVoucher.beneficiary_type === 'partner_withdrawal' && updatedVoucher.partner_id && amountDiff !== 0) {
+        if (updatedVoucher.beneficiary_type === 'partner_withdrawal' &&
+            updatedVoucher.partner_id &&
+            amountDiff !== 0) {
             await tx.partner.update({
                 where: { id: updatedVoucher.partner_id },
-                data: { current_capital: { decrement: amountDiff } }
+                data: { current_capital: { decrement: amountDiff } },
             });
         }
         return updatedVoucher;
