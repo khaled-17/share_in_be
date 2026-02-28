@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import swaggerUi from 'swagger-ui-express';
-
+const version = '1.0.14';
 // Import modules
 import userRoutes from './modules/users/user.routes.js';
 import authRoutes from './modules/auth/auth.routes.js';
@@ -95,7 +95,7 @@ app.get('/', (req: Request, res: Response) => {
     res.json({
         success: true,
         message: 'Welcome to the Share In Backend API',
-        version: '1.0.0',
+        version: version,
         status: 'Running',
         documentation: '/api-docs',
     });
