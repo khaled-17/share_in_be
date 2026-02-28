@@ -1,6 +1,6 @@
 {
   "name": "share_in_be",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "type": "module",
   "description": "Node.js REST API with Prisma ORM and MySQL",
   "main": "src/server.ts",
