@@ -87,6 +87,23 @@ Check out a few resources that may come in handy when working with NestJS:
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
+## Future Recommendations & Proposals
+
+To further enhance the performance and developer experience of this project, the following improvements are suggested:
+
+### 1. Enable SWC (Speedy Web Compiler)
+SWC is a super-fast TypeScript/JavaScript compiler that can significantly speed up your build and development cycle.
+- **Action**: Install `@swc/cli` and `@swc/core`, then update `nest-cli.json` to use `"builder": "swc"`.
+
+### 2. API Versioning
+Consider implementing URI or Header versioning for the API to ensure backward compatibility as the project grows.
+
+### 3. Automated Deployment (CI/CD)
+Integrate GitHub Actions or a similar tool to automatically run tests and deploy the `dist` folder to your server upon pushing to the `main` branch.
+
+### 4. Database Migrations
+Always use `npx prisma migrate dev` during development to keep your database schema and Prisma Client in sync across different environments.
+
 ## Stay in touch
 
 - Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
