@@ -13,6 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WorkOrdersController = void 0;
+const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const workorders_service_1 = require("./workorders.service");
@@ -68,6 +69,7 @@ __decorate([
     (0, common_1.Get)(),
     (0, swagger_1.ApiOperation)({ summary: 'Retrieve all work orders' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'List of work orders retrieved' }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -78,6 +80,7 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Get a work order by ID' }),
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Work Order ID', example: 1 }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Work Order found' }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
@@ -88,6 +91,7 @@ __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
     (0, swagger_1.ApiOperation)({ summary: 'Create a new work order' }),
     (0, swagger_1.ApiResponse)({ status: 201, description: 'Work Order created successfully' }),
+    openapi.ApiResponse({ status: common_1.HttpStatus.CREATED }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [workorder_dto_1.CreateWorkOrderDto]),
@@ -98,6 +102,7 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Update a work order' }),
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Work Order ID', example: 1 }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Work Order updated successfully' }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -109,6 +114,7 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Delete a work order' }),
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Work Order ID', example: 1 }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Work Order deleted successfully' }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),

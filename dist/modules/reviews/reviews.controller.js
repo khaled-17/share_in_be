@@ -13,6 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReviewsController = void 0;
+const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const reviews_service_1 = require("./reviews.service");
@@ -68,6 +69,7 @@ __decorate([
     (0, common_1.Get)(),
     (0, swagger_1.ApiOperation)({ summary: 'Retrieve all reviews' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'List of reviews retrieved' }),
+    openapi.ApiResponse({ status: 200 }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
@@ -77,6 +79,7 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Get a review by ID' }),
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Review UUID', example: 'uuid-string' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Review found' }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -87,6 +90,7 @@ __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
     (0, swagger_1.ApiOperation)({ summary: 'Create a new review' }),
     (0, swagger_1.ApiResponse)({ status: 201, description: 'Review created successfully' }),
+    openapi.ApiResponse({ status: common_1.HttpStatus.CREATED }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [review_dto_1.CreateReviewDto]),
@@ -97,6 +101,7 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Update a review' }),
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Review UUID', example: 'uuid-string' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Review updated successfully' }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -108,6 +113,7 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Delete a review' }),
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Review UUID', example: 'uuid-string' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Review deleted successfully' }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

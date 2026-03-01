@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateCheckDto = exports.CreateCheckDto = exports.CheckStatus = void 0;
+const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 var CheckStatus;
@@ -25,6 +26,9 @@ class CreateCheckDto {
     due_date;
     amount;
     status;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { check_no: { required: true, type: () => String }, bank_name: { required: true, type: () => String }, due_date: { required: true, type: () => String }, amount: { required: true, type: () => Number }, status: { required: false, enum: require("./check.dto").CheckStatus } };
+    }
 }
 exports.CreateCheckDto = CreateCheckDto;
 __decorate([
@@ -62,6 +66,9 @@ class UpdateCheckDto {
     bank_name;
     due_date;
     amount;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { status: { required: false, enum: require("./check.dto").CheckStatus }, bank_name: { required: false, type: () => String }, due_date: { required: false, type: () => String }, amount: { required: false, type: () => Number } };
+    }
 }
 exports.UpdateCheckDto = UpdateCheckDto;
 __decorate([

@@ -13,6 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VouchersController = void 0;
+const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const vouchers_service_1 = require("./vouchers.service");
@@ -75,6 +76,7 @@ __decorate([
     (0, common_1.Get)('receipts'),
     (0, swagger_1.ApiOperation)({ summary: 'Retrieve all receipt vouchers' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'List of receipt vouchers' }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -84,6 +86,7 @@ __decorate([
     (0, common_1.Get)('payments'),
     (0, swagger_1.ApiOperation)({ summary: 'Retrieve all payment vouchers' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'List of payment vouchers' }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -94,6 +97,7 @@ __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
     (0, swagger_1.ApiOperation)({ summary: 'Create a new receipt voucher' }),
     (0, swagger_1.ApiResponse)({ status: 201, description: 'Receipt voucher created' }),
+    openapi.ApiResponse({ status: common_1.HttpStatus.CREATED }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [voucher_dto_1.CreateReceiptVoucherDto]),
@@ -104,6 +108,7 @@ __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
     (0, swagger_1.ApiOperation)({ summary: 'Create a new payment voucher' }),
     (0, swagger_1.ApiResponse)({ status: 201, description: 'Payment voucher created' }),
+    openapi.ApiResponse({ status: common_1.HttpStatus.CREATED }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [voucher_dto_1.CreatePaymentVoucherDto]),
@@ -113,6 +118,7 @@ __decorate([
     (0, common_1.Delete)('receipts/:id'),
     (0, swagger_1.ApiOperation)({ summary: 'Delete a receipt voucher' }),
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Voucher ID', example: 1 }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
@@ -122,6 +128,7 @@ __decorate([
     (0, common_1.Delete)('payments/:id'),
     (0, swagger_1.ApiOperation)({ summary: 'Delete a payment voucher' }),
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Voucher ID', example: 1 }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),

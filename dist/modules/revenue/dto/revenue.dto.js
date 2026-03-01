@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateRevenueDto = exports.CreateRevenueDto = void 0;
+const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateRevenueDto {
@@ -19,6 +20,9 @@ class CreateRevenueDto {
     source;
     payment_method;
     reference;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { quotation_id: { required: true, type: () => Number }, date: { required: true, type: () => String }, amount: { required: true, type: () => Number }, source: { required: true, type: () => String }, payment_method: { required: false, type: () => String }, reference: { required: false, type: () => String } };
+    }
 }
 exports.CreateRevenueDto = CreateRevenueDto;
 __decorate([
@@ -63,6 +67,9 @@ class UpdateRevenueDto {
     source;
     payment_method;
     reference;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { date: { required: false, type: () => String }, amount: { required: false, type: () => Number }, source: { required: false, type: () => String }, payment_method: { required: false, type: () => String }, reference: { required: false, type: () => String } };
+    }
 }
 exports.UpdateRevenueDto = UpdateRevenueDto;
 __decorate([

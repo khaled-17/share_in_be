@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateEmployeeDto = exports.CreateEmployeeDto = void 0;
+const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateEmployeeDto {
@@ -19,6 +20,9 @@ class CreateEmployeeDto {
     position;
     salary;
     start_date;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { emp_code: { required: true, type: () => String }, name: { required: true, type: () => String }, phone: { required: false, type: () => String }, position: { required: false, type: () => String }, salary: { required: false, type: () => Number }, start_date: { required: false, type: () => String } };
+    }
 }
 exports.CreateEmployeeDto = CreateEmployeeDto;
 __decorate([
@@ -63,6 +67,9 @@ class UpdateEmployeeDto {
     position;
     salary;
     start_date;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { name: { required: false, type: () => String }, phone: { required: false, type: () => String }, position: { required: false, type: () => String }, salary: { required: false, type: () => Number }, start_date: { required: false, type: () => String } };
+    }
 }
 exports.UpdateEmployeeDto = UpdateEmployeeDto;
 __decorate([
