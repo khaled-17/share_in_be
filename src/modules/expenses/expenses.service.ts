@@ -6,8 +6,9 @@ import { Prisma } from '@prisma/client';
 export class ExpensesService {
     constructor(private prisma: PrismaService) { }
 
-    async findAll() {
+    async findAll(query: any = {}) {
         return this.prisma.expense.findMany({
+            where: query,
             include: {
                 supplier: true,
                 type: true,

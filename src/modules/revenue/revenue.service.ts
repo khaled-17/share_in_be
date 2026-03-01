@@ -6,8 +6,18 @@ import { Prisma } from '@prisma/client';
 export class RevenueService {
     constructor(private prisma: PrismaService) { }
 
-    async findAll() {
+    async findAll(filters: any = {}) {
+        const { start_date, end_date, quotation_id } = filters;
+        const where: any = {};
+        if (start_date || end_date) {
+            where.rev_date = {};
+            if (start_date) where.rev_date.gte = start_date;
+            if (end_date) where.rev_date.lte = end_date;
+        }
+        if (quotation_id) where.quote_id = quotation_id;
+
         return this.prisma.revenue.findMany({
+            where,
             include: {
                 customer: true,
                 type: true,

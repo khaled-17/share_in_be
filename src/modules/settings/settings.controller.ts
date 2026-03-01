@@ -11,140 +11,68 @@ import {
     HttpStatus,
     ParseIntPipe,
 } from '@nestjs/common';
+import {
+    ApiTags,
+    ApiOperation,
+    ApiResponse,
+    ApiBearerAuth,
+    ApiParam,
+} from '@nestjs/swagger';
 import { SettingsService } from './settings.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { CreateProjectTypeDto, UpdateProjectTypeDto } from './dto/settings.dto';
 
+@ApiTags('Settings')
+@ApiBearerAuth()
 @Controller('settings')
 @UseGuards(JwtAuthGuard)
 export class SettingsController {
     constructor(private settingsService: SettingsService) { }
 
-    // Revenue Types
-    @Get('revenue-types')
-    async getAllRevenueTypes() {
-        const result = await this.settingsService.getAllRevenueTypes();
-        return {
-            success: true,
-            message: 'Revenue types retrieved successfully',
-            data: result,
-        };
-    }
-
-    @Post('revenue-types')
-    @HttpCode(HttpStatus.CREATED)
-    async createRevenueType(@Body() data: any) {
-        const result = await this.settingsService.createRevenueType(data);
-        return {
-            success: true,
-            message: 'Revenue type created successfully',
-            data: result,
-        };
-    }
-
-    @Put('revenue-types/:id')
-    async updateRevenueType(
-        @Param('id', ParseIntPipe) id: number,
-        @Body() data: any,
-    ) {
-        const result = await this.settingsService.updateRevenueType(id, data);
-        return {
-            success: true,
-            message: 'Revenue type updated successfully',
-            data: result,
-        };
-    }
-
-    @Delete('revenue-types/:id')
-    async deleteRevenueType(@Param('id', ParseIntPipe) id: number) {
-        await this.settingsService.deleteRevenueType(id);
-        return {
-            success: true,
-            message: 'Revenue type deleted successfully',
-        };
-    }
-
-    // Expense Types
-    @Get('expense-types')
-    async getAllExpenseTypes() {
-        const result = await this.settingsService.getAllExpenseTypes();
-        return {
-            success: true,
-            message: 'Expense types retrieved successfully',
-            data: result,
-        };
-    }
-
-    @Post('expense-types')
-    @HttpCode(HttpStatus.CREATED)
-    async createExpenseType(@Body() data: any) {
-        const result = await this.settingsService.createExpenseType(data);
-        return {
-            success: true,
-            message: 'Expense type created successfully',
-            data: result,
-        };
-    }
-
-    @Put('expense-types/:id')
-    async updateExpenseType(
-        @Param('id', ParseIntPipe) id: number,
-        @Body() data: any,
-    ) {
-        const result = await this.settingsService.updateExpenseType(id, data);
-        return {
-            success: true,
-            message: 'Expense type updated successfully',
-            data: result,
-        };
-    }
-
-    @Delete('expense-types/:id')
-    async deleteExpenseType(@Param('id', ParseIntPipe) id: number) {
-        await this.settingsService.deleteExpenseType(id);
-        return {
-            success: true,
-            message: 'Expense type deleted successfully',
-        };
-    }
-
-    // Project Types
     @Get('project-types')
-    async getAllProjectTypes() {
-        const result = await this.settingsService.getAllProjectTypes();
+    @ApiOperation({ summary: 'Retrieve all project types' })
+    @ApiResponse({ status: 200, description: 'List of project types' })
+    async findAllProjectTypes() {
+        const types = await this.settingsService.findAllProjectTypes();
         return {
             success: true,
-            message: 'Project types retrieved successfully',
-            data: result,
+            data: types,
         };
     }
 
     @Post('project-types')
     @HttpCode(HttpStatus.CREATED)
-    async createProjectType(@Body() data: any) {
-        const result = await this.settingsService.createProjectType(data);
+    @ApiOperation({ summary: 'Create a new project type' })
+    @ApiResponse({ status: 201, description: 'Created successfully' })
+    async createProjectType(@Body() data: CreateProjectTypeDto) {
+        const type = await this.settingsService.createProjectType(data);
         return {
             success: true,
             message: 'Project type created successfully',
-            data: result,
+            data: type,
         };
     }
 
     @Put('project-types/:id')
+    @ApiOperation({ summary: 'Update an existing project type' })
+    @ApiParam({ name: 'id', description: 'Type ID', example: 1 })
     async updateProjectType(
         @Param('id', ParseIntPipe) id: number,
-        @Body() data: any,
+        @Body() data: UpdateProjectTypeDto,
     ) {
-        const result = await this.settingsService.updateProjectType(id, data);
+        const type = await this.settingsService.updateProjectType(id, data);
         return {
             success: true,
             message: 'Project type updated successfully',
-            data: result,
+            data: type,
         };
     }
 
     @Delete('project-types/:id')
-    async deleteProjectType(@Param('id', ParseIntPipe) id: number) {
-        await this.settingsService.deleteProjectType(id);
+    @ApiOperation({ summary: 'Delete a project type' })
+    @ApiParam({ name: 'id', description: 'Type ID', example: 1 })
+    async removeProjectType(@Param('id', ParseIntPipe) id: number) {
+        await this.settingsService.removeProjectType(id);
         return {
             success: true,
             message: 'Project type deleted successfully',

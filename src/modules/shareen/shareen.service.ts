@@ -5,8 +5,9 @@ import { PrismaService } from '../../prisma/prisma.service';
 export class ShareenService {
     constructor(private prisma: PrismaService) { }
 
-    async findAll() {
+    async findAll(query: any = {}) {
         return this.prisma.shareen.findMany({
+            where: query,
             orderBy: { created_at: 'desc' },
         });
     }
@@ -14,6 +15,12 @@ export class ShareenService {
     async create(data: any) {
         return this.prisma.shareen.create({
             data,
+        });
+    }
+
+    async remove(id: number) {
+        return this.prisma.shareen.delete({
+            where: { id },
         });
     }
 }

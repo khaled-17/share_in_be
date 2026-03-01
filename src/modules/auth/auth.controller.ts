@@ -1,14 +1,26 @@
-import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import {
+    Controller,
+    Post,
+    Body,
+    HttpCode,
+    HttpStatus,
+} from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
+import { LoginDto, RegisterDto, RefreshTokenDto } from './dto/auth.dto';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
     constructor(private authService: AuthService) { }
 
     @Post('register')
     @HttpCode(HttpStatus.CREATED)
-    async register(@Body() userData: any) {
-        const result = await this.authService.register(userData);
+    @ApiOperation({ summary: 'User registration' })
+    @ApiResponse({ status: 201, description: 'User registered successfully' })
+    @ApiResponse({ status: 400, description: 'Bad request' })
+    async register(@Body() registerDto: RegisterDto) {
+        const result = await this.authService.register(registerDto);
         return {
             success: true,
             message: 'User registered successfully',
@@ -18,11 +30,11 @@ export class AuthController {
 
     @Post('login')
     @HttpCode(HttpStatus.OK)
-    async login(@Body() credentials: any) {
-        const result = await this.authService.login(
-            credentials.email,
-            credentials.password,
-        );
+    @ApiOperation({ summary: 'User login' })
+    @ApiResponse({ status: 200, description: 'Login successful' })
+    @ApiResponse({ status: 401, description: 'Invalid credentials' })
+    async login(@Body() loginDto: LoginDto) {
+        const result = await this.authService.login(loginDto);
         return {
             success: true,
             message: 'Login successful',
@@ -32,8 +44,13 @@ export class AuthController {
 
     @Post('refresh-token')
     @HttpCode(HttpStatus.OK)
-    async refreshToken(@Body('refreshToken') token: string) {
-        const result = await this.authService.refreshToken(token);
+    @ApiOperation({ summary: 'Refresh access token' })
+    @ApiResponse({ status: 200, description: 'Token refreshed successfully' })
+    @ApiResponse({ status: 401, description: 'Invalid refresh token' })
+    async refreshToken(@Body() refreshTokenDto: RefreshTokenDto) {
+        const result = await this.authService.refreshToken(
+            refreshTokenDto.refreshToken,
+        );
         return {
             success: true,
             message: 'Token refreshed successfully',

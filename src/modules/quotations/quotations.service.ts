@@ -5,8 +5,9 @@ import { PrismaService } from '../../prisma/prisma.service';
 export class QuotationsService {
     constructor(private prisma: PrismaService) { }
 
-    async findAll() {
+    async findAll(query: any = {}) {
         return this.prisma.quotation.findMany({
+            where: query,
             include: {
                 customer: { select: { name: true } },
                 project_type: true,

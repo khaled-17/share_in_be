@@ -85,34 +85,46 @@ export class SettingsService {
     }
 
     // Project Types
-    async getAllProjectTypes() {
+    async findAllProjectTypes() {
         return this.prisma.projectType.findMany({
             orderBy: { type_name: 'asc' },
         });
     }
 
-    async createProjectType(data: Prisma.ProjectTypeCreateInput) {
-        const existing = await this.prisma.projectType.findUnique({
-            where: { type_id: data.type_id },
-        });
-        if (existing) throw new ConflictException('Project Type ID already exists');
+    async createProjectType(data: any) {
+        const { type } = data;
+        // Generate a simple ID or handle as needed
+        const type_id = type.toLowerCase().replace(/\s+/g, '-');
 
-        return this.prisma.projectType.create({ data });
+        const existing = await this.prisma.projectType.findUnique({
+            where: { type_id },
+        });
+        if (existing) throw new ConflictException('Project Type already exists');
+
+        return this.prisma.projectType.create({
+            data: {
+                type_id,
+                type_name: type,
+            },
+        });
     }
 
-    async updateProjectType(id: number, data: Prisma.ProjectTypeUpdateInput) {
+    async updateProjectType(id: number, data: any) {
         const existing = await this.prisma.projectType.findUnique({
             where: { id },
         });
         if (!existing) throw new NotFoundException('Project Type not found');
 
+        const { type } = data;
         return this.prisma.projectType.update({
             where: { id },
-            data,
+            data: {
+                type_name: type,
+            },
         });
     }
 
-    async deleteProjectType(id: number) {
+    async removeProjectType(id: number) {
         const existing = await this.prisma.projectType.findUnique({
             where: { id },
         });

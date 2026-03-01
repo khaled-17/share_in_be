@@ -11,15 +11,27 @@ import {
     HttpCode,
     HttpStatus,
 } from '@nestjs/common';
+import {
+    ApiTags,
+    ApiOperation,
+    ApiResponse,
+    ApiBearerAuth,
+    ApiParam,
+} from '@nestjs/swagger';
 import { SuppliersService } from './suppliers.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { CreateSupplierDto, UpdateSupplierDto } from './dto/supplier.dto';
 
+@ApiTags('Suppliers')
+@ApiBearerAuth()
 @Controller('suppliers')
 @UseGuards(JwtAuthGuard)
 export class SuppliersController {
     constructor(private suppliersService: SuppliersService) { }
 
     @Get()
+    @ApiOperation({ summary: 'Retrieve all suppliers' })
+    @ApiResponse({ status: 200, description: 'List of suppliers retrieved' })
     async findAll(@Query() query: any) {
         const page = parseInt(query.page) || 1;
         const limit = parseInt(query.limit) || 10;
@@ -45,6 +57,10 @@ export class SuppliersController {
     }
 
     @Get(':id')
+    @ApiOperation({ summary: 'Get a single supplier by ID' })
+    @ApiParam({ name: 'id', description: 'Supplier ID', example: 'SUP-001' })
+    @ApiResponse({ status: 200, description: 'Supplier found' })
+    @ApiResponse({ status: 404, description: 'Supplier not found' })
     async findOne(@Param('id') id: string) {
         const supplier = await this.suppliersService.findOne(id);
         return {
@@ -56,8 +72,10 @@ export class SuppliersController {
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    async create(@Body() data: any) {
-        const supplier = await this.suppliersService.create(data);
+    @ApiOperation({ summary: 'Create a new supplier' })
+    @ApiResponse({ status: 201, description: 'Supplier created successfully' })
+    async create(@Body() createSupplierDto: CreateSupplierDto) {
+        const supplier = await this.suppliersService.create(createSupplierDto);
         return {
             success: true,
             message: 'Supplier created successfully',
@@ -66,8 +84,14 @@ export class SuppliersController {
     }
 
     @Put(':id')
-    async update(@Param('id') id: string, @Body() data: any) {
-        const supplier = await this.suppliersService.update(id, data);
+    @ApiOperation({ summary: 'Update an existing supplier' })
+    @ApiParam({ name: 'id', description: 'Supplier ID', example: 'SUP-001' })
+    @ApiResponse({ status: 200, description: 'Supplier updated successfully' })
+    async update(
+        @Param('id') id: string,
+        @Body() updateSupplierDto: UpdateSupplierDto,
+    ) {
+        const supplier = await this.suppliersService.update(id, updateSupplierDto);
         return {
             success: true,
             message: 'Supplier updated successfully',
@@ -76,6 +100,9 @@ export class SuppliersController {
     }
 
     @Delete(':id')
+    @ApiOperation({ summary: 'Delete a supplier' })
+    @ApiParam({ name: 'id', description: 'Supplier ID', example: 'SUP-001' })
+    @ApiResponse({ status: 200, description: 'Supplier deleted successfully' })
     async remove(@Param('id') id: string) {
         await this.suppliersService.remove(id);
         return {

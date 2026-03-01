@@ -6,8 +6,9 @@ import { Prisma } from '@prisma/client';
 export class WorkOrdersService {
     constructor(private prisma: PrismaService) { }
 
-    async findAll() {
+    async findAll(query: any = {}) {
         return this.prisma.workOrder.findMany({
+            where: query,
             include: {
                 customer: true,
                 quotation: true,
@@ -44,7 +45,23 @@ export class WorkOrdersService {
         return this.prisma.workOrder.create({
             data: {
                 ...orderData,
-                quotation_id: parseInt(quotation_id as string),
+                quotation_id: parseInt(quotation_id as any),
+            },
+            include: {
+                customer: true,
+                quotation: true,
+            },
+        });
+    }
+
+    async update(id: number, data: any) {
+        await this.findOne(id);
+        const { quotation_id, ...orderData } = data;
+        return this.prisma.workOrder.update({
+            where: { id },
+            data: {
+                ...orderData,
+                quotation_id: quotation_id ? parseInt(quotation_id as any) : undefined,
             },
             include: {
                 customer: true,

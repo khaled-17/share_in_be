@@ -33,11 +33,28 @@ export class ChecksService {
         return check;
     }
 
+    async create(data: any) {
+        return this.prisma.checkDetail.create({
+            data,
+        });
+    }
+
+    async update(id: number, data: any) {
+        return this.updateStatus(id, data);
+    }
+
     async updateStatus(id: number, data: { status: string; notes?: string }) {
         await this.findOne(id);
         return this.prisma.checkDetail.update({
             where: { id },
             data,
+        });
+    }
+
+    async remove(id: number) {
+        await this.findOne(id);
+        return this.prisma.checkDetail.delete({
+            where: { id },
         });
     }
 

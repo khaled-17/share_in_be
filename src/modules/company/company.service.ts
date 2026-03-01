@@ -5,11 +5,11 @@ import { PrismaService } from '../../prisma/prisma.service';
 export class CompanyService {
     constructor(private prisma: PrismaService) { }
 
-    async getSettings() {
+    async getCompany() {
         return this.prisma.companySettings.findFirst();
     }
 
-    async updateSettings(data: any) {
+    async update(data: any) {
         return this.prisma.companySettings.upsert({
             where: { id: 1 },
             update: data,

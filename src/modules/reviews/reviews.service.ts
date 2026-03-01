@@ -12,12 +12,27 @@ export class ReviewsService {
     }
 
     async create(data: any) {
-        const { rating, ...reviewData } = data;
         return this.prisma.customerReview.create({
-            data: {
-                ...reviewData,
-                rating: typeof rating === 'string' ? parseInt(rating) : rating,
-            },
+            data,
+        });
+    }
+
+    async findOne(id: string) {
+        return this.prisma.customerReview.findUnique({
+            where: { id },
+        });
+    }
+
+    async update(id: string, data: any) {
+        return this.prisma.customerReview.update({
+            where: { id },
+            data,
+        });
+    }
+
+    async remove(id: string) {
+        return this.prisma.customerReview.delete({
+            where: { id },
         });
     }
 }

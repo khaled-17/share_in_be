@@ -10,7 +10,6 @@ export class ReportsService {
             throw new BadRequestException('Both startDate and endDate are required');
         }
 
-        // 1. Calculate Opening Balance
         const prevRevenue = await this.prisma.revenue.aggregate({
             where: { rev_date: { lt: startDate } },
             _sum: { amount: true },
@@ -37,7 +36,6 @@ export class ReportsService {
             (Number(prevExpenses._sum.amount || 0) +
                 Number(prevPayments._sum.amount || 0));
 
-        // 2. Fetch Current Period Data
         const revenues = await this.prisma.revenue.findMany({
             where: { rev_date: { gte: startDate, lte: endDate } },
             include: { customer: { select: { name: true } } },
@@ -64,7 +62,6 @@ export class ReportsService {
             },
         });
 
-        // 3. Transform and Sort
         const ledgerItems: any[] = [];
 
         revenues.forEach((r) => {
@@ -80,8 +77,7 @@ export class ReportsService {
         receipts.forEach((r) => {
             ledgerItems.push({
                 date: r.voucher_date,
-                description: `سند قبض ${r.voucher_number}: ${r.received_from} - ${r.description || ''
-                    }`,
+                description: `سند قبض ${r.voucher_number}: ${r.received_from} - ${r.description || ''}`,
                 debit: Number(r.amount),
                 credit: 0,
                 type: 'receipt',
@@ -93,8 +89,7 @@ export class ReportsService {
         expenses.forEach((e) => {
             ledgerItems.push({
                 date: e.exp_date,
-                description: `مصروف: ${e.supplier?.name || 'غير محدد'} - ${e.notes || ''
-                    }`,
+                description: `مصروف: ${e.supplier?.name || 'غير محدد'} - ${e.notes || ''}`,
                 debit: 0,
                 credit: Number(e.amount),
                 type: 'expense',
@@ -104,8 +99,7 @@ export class ReportsService {
         payments.forEach((p) => {
             ledgerItems.push({
                 date: p.voucher_date,
-                description: `سند صرف ${p.voucher_number}: ${p.paid_to} - ${p.description || ''
-                    }`,
+                description: `سند صرف ${p.voucher_number}: ${p.paid_to} - ${p.description || ''}`,
                 debit: 0,
                 credit: Number(p.amount),
                 type: 'payment',
@@ -118,7 +112,6 @@ export class ReportsService {
             (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
         );
 
-        // 4. Calculate Running Balances and Stats
         let runningBalance = openingBalance;
         const finalLedger = [
             {
@@ -141,9 +134,7 @@ export class ReportsService {
                 .filter((r) => r.source_type === 'partner_capital' || r.partner_id)
                 .reduce((sum, r) => sum + Number(r.amount), 0),
             capitalWithdrawn: payments
-                .filter(
-                    (p) => p.beneficiary_type === 'partner_withdrawal' || p.partner_id,
-                )
+                .filter((p) => p.beneficiary_type === 'partner_withdrawal' || p.partner_id)
                 .reduce((sum, p) => sum + Number(p.amount), 0),
             netProfit: 0,
         };
@@ -160,6 +151,49 @@ export class ReportsService {
             ledgerData: finalLedger,
             totals,
             budgetStats,
+        };
+    }
+
+    async getDashboardStats() {
+        const [customers, suppliers, quotations, revenue] = await Promise.all([
+            this.prisma.customer.count(),
+            this.prisma.supplier.count(),
+            this.prisma.quotation.count(),
+            this.prisma.revenue.aggregate({ _sum: { amount: true } }),
+        ]);
+
+        return {
+            total_customers: customers,
+            total_suppliers: suppliers,
+            total_quotations: quotations,
+            total_revenue: revenue?._sum?.amount || 0,
+        };
+    }
+
+    async getFinancialReport(startDate?: string, endDate?: string) {
+        const start = startDate || new Date(new Date().getFullYear(), 0, 1).toISOString();
+        const end = endDate || new Date().toISOString();
+        return this.getLedgerReport(start, end);
+    }
+
+    async getOperationalReport(startDate?: string, endDate?: string) {
+        const start = startDate || new Date(new Date().getFullYear(), 0, 1).toISOString();
+        const end = endDate || new Date().toISOString();
+
+        const [quotations, workOrders] = await Promise.all([
+            this.prisma.quotation.findMany({
+                where: { quote_date: { gte: start, lte: end } },
+            }),
+            this.prisma.workOrder.findMany({
+                where: { created_at: { gte: new Date(start), lte: new Date(end) } },
+            }),
+        ]);
+
+        return {
+            quotations_count: quotations.length,
+            work_orders_count: workOrders.length,
+            quotations,
+            workOrders,
         };
     }
 }

@@ -12,16 +12,30 @@ import {
     HttpStatus,
     ParseIntPipe,
 } from '@nestjs/common';
+import {
+    ApiTags,
+    ApiOperation,
+    ApiResponse,
+    ApiBearerAuth,
+    ApiParam,
+} from '@nestjs/swagger';
 import { VouchersService } from './vouchers.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import {
+    CreateReceiptVoucherDto,
+    CreatePaymentVoucherDto,
+} from './dto/voucher.dto';
 
+@ApiTags('Vouchers')
+@ApiBearerAuth()
 @Controller('vouchers')
 @UseGuards(JwtAuthGuard)
 export class VouchersController {
     constructor(private vouchersService: VouchersService) { }
 
-    // Receipt Vouchers
-    @Get('receipt')
+    @Get('receipts')
+    @ApiOperation({ summary: 'Retrieve all receipt vouchers' })
+    @ApiResponse({ status: 200, description: 'List of receipt vouchers' })
     async findAllReceipt(@Query() query: any) {
         const result = await this.vouchersService.findAllReceipt(query);
         return {
@@ -31,58 +45,9 @@ export class VouchersController {
         };
     }
 
-    @Get('receipt/stats')
-    async getReceiptStats(@Query() query: any) {
-        const result = await this.vouchersService.getStats('receipt', query);
-        return {
-            success: true,
-            message: 'Receipt voucher stats retrieved successfully',
-            data: result,
-        };
-    }
-
-    @Get('receipt/:id')
-    async findOneReceipt(@Param('id', ParseIntPipe) id: number) {
-        const result = await this.vouchersService.findOneReceipt(id);
-        return {
-            success: true,
-            message: 'Receipt voucher retrieved successfully',
-            data: result,
-        };
-    }
-
-    @Post('receipt')
-    @HttpCode(HttpStatus.CREATED)
-    async createReceipt(@Body() data: any) {
-        const result = await this.vouchersService.createReceipt(data);
-        return {
-            success: true,
-            message: 'Receipt voucher created successfully',
-            data: result,
-        };
-    }
-
-    @Put('receipt/:id')
-    async updateReceipt(@Param('id', ParseIntPipe) id: number, @Body() data: any) {
-        const result = await this.vouchersService.updateReceipt(id, data);
-        return {
-            success: true,
-            message: 'Receipt voucher updated successfully',
-            data: result,
-        };
-    }
-
-    @Delete('receipt/:id')
-    async removeReceipt(@Param('id', ParseIntPipe) id: number) {
-        await this.vouchersService.removeReceipt(id);
-        return {
-            success: true,
-            message: 'Receipt voucher deleted successfully',
-        };
-    }
-
-    // Payment Vouchers
-    @Get('payment')
+    @Get('payments')
+    @ApiOperation({ summary: 'Retrieve all payment vouchers' })
+    @ApiResponse({ status: 200, description: 'List of payment vouchers' })
     async findAllPayment(@Query() query: any) {
         const result = await this.vouchersService.findAllPayment(query);
         return {
@@ -92,29 +57,24 @@ export class VouchersController {
         };
     }
 
-    @Get('payment/stats')
-    async getPaymentStats(@Query() query: any) {
-        const result = await this.vouchersService.getStats('payment', query);
-        return {
-            success: true,
-            message: 'Payment voucher stats retrieved successfully',
-            data: result,
-        };
-    }
-
-    @Get('payment/:id')
-    async findOnePayment(@Param('id', ParseIntPipe) id: number) {
-        const result = await this.vouchersService.findOnePayment(id);
-        return {
-            success: true,
-            message: 'Payment voucher retrieved successfully',
-            data: result,
-        };
-    }
-
-    @Post('payment')
+    @Post('receipts')
     @HttpCode(HttpStatus.CREATED)
-    async createPayment(@Body() data: any) {
+    @ApiOperation({ summary: 'Create a new receipt voucher' })
+    @ApiResponse({ status: 201, description: 'Receipt voucher created' })
+    async createReceipt(@Body() data: CreateReceiptVoucherDto) {
+        const result = await this.vouchersService.createReceipt(data);
+        return {
+            success: true,
+            message: 'Receipt voucher created successfully',
+            data: result,
+        };
+    }
+
+    @Post('payments')
+    @HttpCode(HttpStatus.CREATED)
+    @ApiOperation({ summary: 'Create a new payment voucher' })
+    @ApiResponse({ status: 201, description: 'Payment voucher created' })
+    async createPayment(@Body() data: CreatePaymentVoucherDto) {
         const result = await this.vouchersService.createPayment(data);
         return {
             success: true,
@@ -123,17 +83,20 @@ export class VouchersController {
         };
     }
 
-    @Put('payment/:id')
-    async updatePayment(@Param('id', ParseIntPipe) id: number, @Body() data: any) {
-        const result = await this.vouchersService.updatePayment(id, data);
+    @Delete('receipts/:id')
+    @ApiOperation({ summary: 'Delete a receipt voucher' })
+    @ApiParam({ name: 'id', description: 'Voucher ID', example: 1 })
+    async removeReceipt(@Param('id', ParseIntPipe) id: number) {
+        await this.vouchersService.removeReceipt(id);
         return {
             success: true,
-            message: 'Payment voucher updated successfully',
-            data: result,
+            message: 'Receipt voucher deleted successfully',
         };
     }
 
-    @Delete('payment/:id')
+    @Delete('payments/:id')
+    @ApiOperation({ summary: 'Delete a payment voucher' })
+    @ApiParam({ name: 'id', description: 'Voucher ID', example: 1 })
     async removePayment(@Param('id', ParseIntPipe) id: number) {
         await this.vouchersService.removePayment(id);
         return {
