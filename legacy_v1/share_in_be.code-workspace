@@ -1,10 +1,10 @@
 {
 	"folders": [
 		{
-			"path": "."
+			"path": "../../share_in_dashbord"
 		},
 		{
-			"path": "../share_in_dashbord"
+			"path": ".."
 		}
 	],
 	"settings": {}
