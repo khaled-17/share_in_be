@@ -1,0 +1,116 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ChecksService = void 0;
+const common_1 = require("@nestjs/common");
+const prisma_service_1 = require("../../prisma/prisma.service");
+let ChecksService = class ChecksService {
+    prisma;
+    constructor(prisma) {
+        this.prisma = prisma;
+    }
+    async findAll(filters) {
+        const { status, start_date, end_date } = filters;
+        const where = {};
+        if (status)
+            where.status = status;
+        if (start_date || end_date) {
+            where.check_date = {};
+            if (start_date)
+                where.check_date.gte = start_date;
+            if (end_date)
+                where.check_date.lte = end_date;
+        }
+        return this.prisma.checkDetail.findMany({
+            where,
+            orderBy: { check_date: 'asc' },
+        });
+    }
+    async findOne(id) {
+        const check = await this.prisma.checkDetail.findUnique({
+            where: { id },
+            include: {
+                receipt_voucher: true,
+                payment_voucher: true,
+            },
+        });
+        if (!check)
+            throw new common_1.NotFoundException('Check not found');
+        return check;
+    }
+    async create(data) {
+        return this.prisma.checkDetail.create({
+            data,
+        });
+    }
+    async update(id, data) {
+        return this.updateStatus(id, data);
+    }
+    async updateStatus(id, data) {
+        await this.findOne(id);
+        return this.prisma.checkDetail.update({
+            where: { id },
+            data,
+        });
+    }
+    async remove(id) {
+        await this.findOne(id);
+        return this.prisma.checkDetail.delete({
+            where: { id },
+        });
+    }
+    async getStats(filters) {
+        const { start_date, end_date } = filters;
+        const where = {};
+        if (start_date || end_date) {
+            where.check_date = {};
+            if (start_date)
+                where.check_date.gte = start_date;
+            if (end_date)
+                where.check_date.lte = end_date;
+        }
+        const checks = await this.prisma.checkDetail.findMany({
+            where,
+        });
+        const stats = {
+            total_count: checks.length,
+            total_amount: checks.reduce((sum, c) => sum + c.amount, 0),
+            by_status: {
+                pending: checks.filter((c) => c.status === 'pending').length,
+                cleared: checks.filter((c) => c.status === 'cleared').length,
+                bounced: checks.filter((c) => c.status === 'bounced').length,
+                cancelled: checks.filter((c) => c.status === 'cancelled').length,
+            },
+            by_type: {
+                receipt: checks.filter((c) => c.receipt_voucher_id !== null).length,
+                payment: checks.filter((c) => c.payment_voucher_id !== null).length,
+            },
+        };
+        return stats;
+    }
+    async getDueSoon() {
+        const today = new Date().toISOString().split('T')[0];
+        return this.prisma.checkDetail.findMany({
+            where: {
+                status: 'pending',
+                check_date: { gte: today },
+            },
+            orderBy: { check_date: 'asc' },
+            take: 5,
+        });
+    }
+};
+exports.ChecksService = ChecksService;
+exports.ChecksService = ChecksService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+], ChecksService);
+//# sourceMappingURL=checks.service.js.map

@@ -1,0 +1,92 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.WorkOrdersService = void 0;
+const common_1 = require("@nestjs/common");
+const prisma_service_1 = require("../../prisma/prisma.service");
+let WorkOrdersService = class WorkOrdersService {
+    prisma;
+    constructor(prisma) {
+        this.prisma = prisma;
+    }
+    async findAll(query = {}) {
+        return this.prisma.workOrder.findMany({
+            where: query,
+            include: {
+                customer: true,
+                quotation: true,
+            },
+            orderBy: { created_at: 'desc' },
+        });
+    }
+    async findOne(id) {
+        const workOrder = await this.prisma.workOrder.findUnique({
+            where: { id },
+            include: {
+                customer: true,
+                quotation: true,
+            },
+        });
+        if (!workOrder)
+            throw new common_1.NotFoundException('Work order not found');
+        return workOrder;
+    }
+    async findByOrderCode(order_code) {
+        return this.prisma.workOrder.findUnique({
+            where: { order_code },
+        });
+    }
+    async create(data) {
+        const { quotation_id, ...orderData } = data;
+        if (orderData.order_code) {
+            const existing = await this.findByOrderCode(orderData.order_code);
+            if (existing)
+                throw new common_1.ConflictException('Work order code already exists');
+        }
+        return this.prisma.workOrder.create({
+            data: {
+                ...orderData,
+                quotation_id: parseInt(quotation_id),
+            },
+            include: {
+                customer: true,
+                quotation: true,
+            },
+        });
+    }
+    async update(id, data) {
+        await this.findOne(id);
+        const { quotation_id, ...orderData } = data;
+        return this.prisma.workOrder.update({
+            where: { id },
+            data: {
+                ...orderData,
+                quotation_id: quotation_id ? parseInt(quotation_id) : undefined,
+            },
+            include: {
+                customer: true,
+                quotation: true,
+            },
+        });
+    }
+    async remove(id) {
+        await this.findOne(id);
+        return this.prisma.workOrder.delete({
+            where: { id },
+        });
+    }
+};
+exports.WorkOrdersService = WorkOrdersService;
+exports.WorkOrdersService = WorkOrdersService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+], WorkOrdersService);
+//# sourceMappingURL=workorders.service.js.map

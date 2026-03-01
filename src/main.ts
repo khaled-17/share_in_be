@@ -2,16 +2,22 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import * as fs from 'fs';
+import * as path from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
+  // Read package.json version
+  const packageJsonPath = path.join(process.cwd(), 'package.json');
+  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+
   const config = new DocumentBuilder()
     .setTitle('ShareIn API')
     .setDescription('The ShareIn Backend API description')
-    .setVersion('1.0')
+    .setVersion(packageJson.version)
     .addTag('share-in')
     .addBearerAuth()
     .build();

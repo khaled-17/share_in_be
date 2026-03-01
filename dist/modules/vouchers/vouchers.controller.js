@@ -1,0 +1,137 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.VouchersController = void 0;
+const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
+const vouchers_service_1 = require("./vouchers.service");
+const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const voucher_dto_1 = require("./dto/voucher.dto");
+let VouchersController = class VouchersController {
+    vouchersService;
+    constructor(vouchersService) {
+        this.vouchersService = vouchersService;
+    }
+    async findAllReceipt(query) {
+        const result = await this.vouchersService.findAllReceipt(query);
+        return {
+            success: true,
+            message: 'Receipt vouchers retrieved successfully',
+            data: result,
+        };
+    }
+    async findAllPayment(query) {
+        const result = await this.vouchersService.findAllPayment(query);
+        return {
+            success: true,
+            message: 'Payment vouchers retrieved successfully',
+            data: result,
+        };
+    }
+    async createReceipt(data) {
+        const result = await this.vouchersService.createReceipt(data);
+        return {
+            success: true,
+            message: 'Receipt voucher created successfully',
+            data: result,
+        };
+    }
+    async createPayment(data) {
+        const result = await this.vouchersService.createPayment(data);
+        return {
+            success: true,
+            message: 'Payment voucher created successfully',
+            data: result,
+        };
+    }
+    async removeReceipt(id) {
+        await this.vouchersService.removeReceipt(id);
+        return {
+            success: true,
+            message: 'Receipt voucher deleted successfully',
+        };
+    }
+    async removePayment(id) {
+        await this.vouchersService.removePayment(id);
+        return {
+            success: true,
+            message: 'Payment voucher deleted successfully',
+        };
+    }
+};
+exports.VouchersController = VouchersController;
+__decorate([
+    (0, common_1.Get)('receipts'),
+    (0, swagger_1.ApiOperation)({ summary: 'Retrieve all receipt vouchers' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of receipt vouchers' }),
+    __param(0, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], VouchersController.prototype, "findAllReceipt", null);
+__decorate([
+    (0, common_1.Get)('payments'),
+    (0, swagger_1.ApiOperation)({ summary: 'Retrieve all payment vouchers' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of payment vouchers' }),
+    __param(0, (0, common_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], VouchersController.prototype, "findAllPayment", null);
+__decorate([
+    (0, common_1.Post)('receipts'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
+    (0, swagger_1.ApiOperation)({ summary: 'Create a new receipt voucher' }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Receipt voucher created' }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [voucher_dto_1.CreateReceiptVoucherDto]),
+    __metadata("design:returntype", Promise)
+], VouchersController.prototype, "createReceipt", null);
+__decorate([
+    (0, common_1.Post)('payments'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
+    (0, swagger_1.ApiOperation)({ summary: 'Create a new payment voucher' }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Payment voucher created' }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [voucher_dto_1.CreatePaymentVoucherDto]),
+    __metadata("design:returntype", Promise)
+], VouchersController.prototype, "createPayment", null);
+__decorate([
+    (0, common_1.Delete)('receipts/:id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Delete a receipt voucher' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Voucher ID', example: 1 }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], VouchersController.prototype, "removeReceipt", null);
+__decorate([
+    (0, common_1.Delete)('payments/:id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Delete a payment voucher' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Voucher ID', example: 1 }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], VouchersController.prototype, "removePayment", null);
+exports.VouchersController = VouchersController = __decorate([
+    (0, swagger_1.ApiTags)('Vouchers'),
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.Controller)('vouchers'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    __metadata("design:paramtypes", [vouchers_service_1.VouchersService])
+], VouchersController);
+//# sourceMappingURL=vouchers.controller.js.map
