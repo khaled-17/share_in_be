@@ -3,7 +3,7 @@ import { ShareenService } from './shareen.service';
 import { ShareenController } from './shareen.controller';
 
 @Module({
-    providers: [ShareenService],
-    controllers: [ShareenController],
+  providers: [ShareenService],
+  controllers: [ShareenController],
 })
-export class ShareenModule { }
+export class ShareenModule {}

@@ -13,7 +13,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CustomersController = void 0;
-const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const customers_service_1 = require("./customers.service");
@@ -82,7 +81,6 @@ __decorate([
     (0, common_1.Get)(),
     (0, swagger_1.ApiOperation)({ summary: 'Retrieve all customers with pagination' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'List of customers retrieved' }),
-    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [customer_dto_1.CustomerQueryDto]),
@@ -94,7 +92,6 @@ __decorate([
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Customer ID', example: 'CUST-001' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Customer found' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Customer not found' }),
-    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -106,7 +103,6 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Create a new customer' }),
     (0, swagger_1.ApiResponse)({ status: 201, description: 'Customer created successfully' }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Bad request' }),
-    openapi.ApiResponse({ status: common_1.HttpStatus.CREATED }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [customer_dto_1.CreateCustomerDto]),
@@ -118,7 +114,6 @@ __decorate([
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Customer ID', example: 'CUST-001' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Customer updated successfully' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Customer not found' }),
-    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -131,7 +126,6 @@ __decorate([
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Customer ID', example: 'CUST-001' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Customer deleted successfully' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Customer not found' }),
-    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

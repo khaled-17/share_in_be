@@ -3,7 +3,7 @@ import { ChecksService } from './checks.service';
 import { ChecksController } from './checks.controller';
 
 @Module({
-    providers: [ChecksService],
-    controllers: [ChecksController],
+  providers: [ChecksService],
+  controllers: [ChecksController],
 })
-export class ChecksModule { }
+export class ChecksModule {}

@@ -100,13 +100,16 @@ let VouchersService = class VouchersService {
             if (!oldVoucher)
                 throw new common_1.NotFoundException('Voucher not found');
             const { check, ...voucherData } = data;
-            const amountDiff = (voucherData.amount ? parseFloat(voucherData.amount) : oldVoucher.amount) -
-                oldVoucher.amount;
+            const amountDiff = (voucherData.amount
+                ? parseFloat(voucherData.amount)
+                : oldVoucher.amount) - oldVoucher.amount;
             const updatedVoucher = await tx.receiptVoucher.update({
                 where: { id },
                 data: {
                     ...voucherData,
-                    amount: voucherData.amount ? parseFloat(voucherData.amount) : undefined,
+                    amount: voucherData.amount
+                        ? parseFloat(voucherData.amount)
+                        : undefined,
                     partner_id: voucherData.partner_id
                         ? parseInt(voucherData.partner_id)
                         : undefined,
@@ -233,13 +236,16 @@ let VouchersService = class VouchersService {
             if (!oldVoucher)
                 throw new common_1.NotFoundException('Voucher not found');
             const { check, ...voucherData } = data;
-            const amountDiff = (voucherData.amount ? parseFloat(voucherData.amount) : oldVoucher.amount) -
-                oldVoucher.amount;
+            const amountDiff = (voucherData.amount
+                ? parseFloat(voucherData.amount)
+                : oldVoucher.amount) - oldVoucher.amount;
             const updatedVoucher = await tx.paymentVoucher.update({
                 where: { id },
                 data: {
                     ...voucherData,
-                    amount: voucherData.amount ? parseFloat(voucherData.amount) : undefined,
+                    amount: voucherData.amount
+                        ? parseFloat(voucherData.amount)
+                        : undefined,
                     partner_id: voucherData.partner_id
                         ? parseInt(voucherData.partner_id)
                         : undefined,
@@ -262,7 +268,8 @@ let VouchersService = class VouchersService {
             const voucher = await tx.paymentVoucher.findUnique({ where: { id } });
             if (!voucher)
                 throw new common_1.NotFoundException('Voucher not found');
-            if (voucher.beneficiary_type === 'partner_withdrawal' && voucher.partner_id) {
+            if (voucher.beneficiary_type === 'partner_withdrawal' &&
+                voucher.partner_id) {
                 await tx.partner.update({
                     where: { id: voucher.partner_id },
                     data: {
@@ -295,11 +302,13 @@ let VouchersService = class VouchersService {
                 total_amount: vouchers.reduce((sum, v) => sum + v.amount, 0),
                 total_count: vouchers.length,
                 by_source_type: vouchers.reduce((acc, v) => {
-                    acc[v.source_type] = (acc[v.source_type] || 0) + v.amount;
+                    const type = String(v.source_type);
+                    acc[type] = (acc[type] || 0) + v.amount;
                     return acc;
                 }, {}),
                 by_payment_method: vouchers.reduce((acc, v) => {
-                    acc[v.payment_method] = (acc[v.payment_method] || 0) + v.amount;
+                    const method = String(v.payment_method);
+                    acc[method] = (acc[method] || 0) + v.amount;
                     return acc;
                 }, {}),
                 pending_checks: pendingChecks,

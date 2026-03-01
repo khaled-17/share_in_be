@@ -17,8 +17,8 @@ export declare class SuppliersService {
             secondary_phone: string | null;
             address: string | null;
             created_at: Date;
-            speciality: string | null;
             supplier_id: string;
+            speciality: string | null;
         }[];
         total: number;
     }>;
@@ -32,8 +32,8 @@ export declare class SuppliersService {
         secondary_phone: string | null;
         address: string | null;
         created_at: Date;
-        speciality: string | null;
         supplier_id: string;
+        speciality: string | null;
     }>;
     update(idOrCode: string | number, data: Prisma.SupplierUpdateInput): Promise<{
         name: string;
@@ -44,8 +44,8 @@ export declare class SuppliersService {
         secondary_phone: string | null;
         address: string | null;
         created_at: Date;
-        speciality: string | null;
         supplier_id: string;
+        speciality: string | null;
     }>;
     remove(idOrCode: string | number): Promise<{
         name: string;
@@ -56,7 +56,7 @@ export declare class SuppliersService {
         secondary_phone: string | null;
         address: string | null;
         created_at: Date;
-        speciality: string | null;
         supplier_id: string;
+        speciality: string | null;
     }>;
 }

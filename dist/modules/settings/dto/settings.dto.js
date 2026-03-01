@@ -10,31 +10,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateProjectTypeDto = exports.CreateProjectTypeDto = void 0;
-const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateProjectTypeDto {
     type;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { type: { required: true, type: () => String } };
-    }
 }
 exports.CreateProjectTypeDto = CreateProjectTypeDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'The type of the project', example: 'Social Media' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'The type of the project',
+        example: 'Social Media',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateProjectTypeDto.prototype, "type", void 0);
 class UpdateProjectTypeDto {
     type;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { type: { required: false, type: () => String } };
-    }
 }
 exports.UpdateProjectTypeDto = UpdateProjectTypeDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'The type of the project', example: 'Social Media Management', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'The type of the project',
+        example: 'Social Media Management',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)

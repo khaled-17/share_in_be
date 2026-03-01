@@ -3,7 +3,7 @@ import { SettingsService } from './settings.service';
 import { SettingsController } from './settings.controller';
 
 @Module({
-    providers: [SettingsService],
-    controllers: [SettingsController],
+  providers: [SettingsService],
+  controllers: [SettingsController],
 })
-export class SettingsModule { }
+export class SettingsModule {}

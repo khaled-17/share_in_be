@@ -76,7 +76,8 @@ let PartnersService = class PartnersService {
                 throw new common_1.ConflictException('Partner Code already exists');
             }
         }
-        if (data.initial_capital !== undefined && data.current_capital === undefined) {
+        if (data.initial_capital !== undefined &&
+            data.current_capital === undefined) {
             data.current_capital = data.initial_capital;
         }
         return this.prisma.partner.create({ data });

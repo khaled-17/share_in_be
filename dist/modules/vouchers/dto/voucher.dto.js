@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreatePaymentVoucherDto = exports.CreateReceiptVoucherDto = exports.VoucherSourceType = void 0;
-const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 var VoucherSourceType;
@@ -28,9 +27,6 @@ class CreateReceiptVoucherDto {
     payment_method;
     description;
     check_id;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { voucher_number: { required: true, type: () => String }, voucher_date: { required: true, type: () => String }, amount: { required: true, type: () => Number }, partner_id: { required: false, type: () => Number }, source_type: { required: true, enum: require("./voucher.dto").VoucherSourceType }, name: { required: false, type: () => String }, payment_method: { required: true, type: () => String }, description: { required: false, type: () => String }, check_id: { required: false, type: () => Number } };
-    }
 }
 exports.CreateReceiptVoucherDto = CreateReceiptVoucherDto;
 __decorate([
@@ -58,13 +54,20 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateReceiptVoucherDto.prototype, "partner_id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Source type', example: VoucherSourceType.PARTNER, enum: VoucherSourceType }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Source type',
+        example: VoucherSourceType.PARTNER,
+        enum: VoucherSourceType,
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsEnum)(VoucherSourceType),
     __metadata("design:type", String)
 ], CreateReceiptVoucherDto.prototype, "source_type", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Name (if source is Others)', example: 'John Smith' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Name (if source is Others)',
+        example: 'John Smith',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -82,15 +85,15 @@ __decorate([
     __metadata("design:type", String)
 ], CreateReceiptVoucherDto.prototype, "description", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Check ID (if payment method is Check)', example: 1 }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Check ID (if payment method is Check)',
+        example: 1,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateReceiptVoucherDto.prototype, "check_id", void 0);
 class CreatePaymentVoucherDto extends CreateReceiptVoucherDto {
-    static _OPENAPI_METADATA_FACTORY() {
-        return {};
-    }
 }
 exports.CreatePaymentVoucherDto = CreatePaymentVoucherDto;
 //# sourceMappingURL=voucher.dto.js.map

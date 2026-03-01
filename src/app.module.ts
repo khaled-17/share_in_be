@@ -46,4 +46,4 @@ import { ReportsModule } from './modules/reports/reports.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

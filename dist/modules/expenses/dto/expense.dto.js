@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateExpenseDto = exports.CreateExpenseDto = void 0;
-const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateExpenseDto {
@@ -22,9 +21,6 @@ class CreateExpenseDto {
     category;
     payment_method;
     reference;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { employee_id: { required: false, type: () => Number }, supplier_id: { required: false, type: () => Number }, partner_id: { required: false, type: () => Number }, date: { required: true, type: () => String }, amount: { required: true, type: () => Number }, category: { required: true, type: () => String }, payment_method: { required: false, type: () => String }, reference: { required: false, type: () => String } };
-    }
 }
 exports.CreateExpenseDto = CreateExpenseDto;
 __decorate([
@@ -58,7 +54,10 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateExpenseDto.prototype, "amount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Expense category or description', example: 'Office Supplies' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Expense category or description',
+        example: 'Office Supplies',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -81,37 +80,54 @@ class UpdateExpenseDto {
     category;
     payment_method;
     reference;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { date: { required: false, type: () => String }, amount: { required: false, type: () => Number }, category: { required: false, type: () => String }, payment_method: { required: false, type: () => String }, reference: { required: false, type: () => String } };
-    }
 }
 exports.UpdateExpenseDto = UpdateExpenseDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Transaction date', example: '2023-10-01', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Transaction date',
+        example: '2023-10-01',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
 ], UpdateExpenseDto.prototype, "date", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Expense amount', example: 250.75, required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Expense amount',
+        example: 250.75,
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], UpdateExpenseDto.prototype, "amount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Expense category', example: 'Office Supplies', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Expense category',
+        example: 'Office Supplies',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateExpenseDto.prototype, "category", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Payment method', example: 'Cash', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Payment method',
+        example: 'Cash',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateExpenseDto.prototype, "payment_method", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Reference number', example: 'INV-101', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Reference number',
+        example: 'INV-101',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)

@@ -10,11 +10,11 @@ export declare class CustomersService {
     }): Promise<{
         customers: {
             name: string;
-            contact_person: string;
-            phone: string;
             customer_id: string;
+            contact_person: string;
             company_email: string;
             contact_email: string;
+            phone: string;
             secondary_phone: string;
             address: string;
             created_at: Date;
@@ -23,44 +23,44 @@ export declare class CustomersService {
     }>;
     findOne(id: string): Promise<{
         name: string;
-        contact_person: string;
-        phone: string;
         customer_id: string;
+        contact_person: string;
         company_email: string;
         contact_email: string;
+        phone: string;
         secondary_phone: string;
         address: string;
         created_at: Date;
     }>;
     create(data: Prisma.CustomerCreateInput): Promise<{
         name: string;
-        contact_person: string;
-        phone: string;
         customer_id: string;
+        contact_person: string;
         company_email: string;
         contact_email: string;
+        phone: string;
         secondary_phone: string;
         address: string;
         created_at: Date;
     }>;
     update(id: string, data: Prisma.CustomerUpdateInput): Promise<{
         name: string;
-        contact_person: string;
-        phone: string;
         customer_id: string;
+        contact_person: string;
         company_email: string;
         contact_email: string;
+        phone: string;
         secondary_phone: string;
         address: string;
         created_at: Date;
     }>;
     remove(id: string): Promise<{
         name: string;
-        contact_person: string;
-        phone: string;
         customer_id: string;
+        contact_person: string;
         company_email: string;
         contact_email: string;
+        phone: string;
         secondary_phone: string;
         address: string;
         created_at: Date;

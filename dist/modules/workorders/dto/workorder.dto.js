@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateWorkOrderDto = exports.CreateWorkOrderDto = void 0;
-const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateWorkOrderDto {
@@ -20,9 +19,6 @@ class CreateWorkOrderDto {
     start_date;
     end_date;
     employee_id;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { quotation_id: { required: true, type: () => Number }, title: { required: true, type: () => String }, description: { required: false, type: () => String }, start_date: { required: true, type: () => String }, end_date: { required: false, type: () => String }, employee_id: { required: false, type: () => Number } };
-    }
 }
 exports.CreateWorkOrderDto = CreateWorkOrderDto;
 __decorate([
@@ -32,13 +28,19 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateWorkOrderDto.prototype, "quotation_id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Work order title/summary', example: 'SEO Optimization' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Work order title/summary',
+        example: 'SEO Optimization',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateWorkOrderDto.prototype, "title", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Detailed instructions', example: 'Perform full site audit...' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Detailed instructions',
+        example: 'Perform full site audit...',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -65,27 +67,80 @@ class UpdateWorkOrderDto {
     status;
     description;
     employee_id;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { status: { required: false, type: () => String }, description: { required: false, type: () => String }, employee_id: { required: false, type: () => Number } };
-    }
+    quotation_id;
+    title;
+    start_date;
+    end_date;
 }
 exports.UpdateWorkOrderDto = UpdateWorkOrderDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Current status', example: 'In Progress', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Current status',
+        example: 'In Progress',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateWorkOrderDto.prototype, "status", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Detailed instructions', example: 'Perform full site audit...', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Detailed instructions',
+        example: 'Perform full site audit...',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateWorkOrderDto.prototype, "description", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Internal employee ID responsible', example: 1, required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Internal employee ID responsible',
+        example: 1,
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], UpdateWorkOrderDto.prototype, "employee_id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Internal quotation ID reference',
+        example: 1,
+        required: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateWorkOrderDto.prototype, "quotation_id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Work order title/summary',
+        example: 'SEO Optimization',
+        required: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateWorkOrderDto.prototype, "title", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Start date',
+        example: '2023-10-10',
+        required: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateWorkOrderDto.prototype, "start_date", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Expected end date',
+        example: '2023-10-20',
+        required: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateWorkOrderDto.prototype, "end_date", void 0);
 //# sourceMappingURL=workorder.dto.js.map

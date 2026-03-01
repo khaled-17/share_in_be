@@ -10,4 +10,8 @@ export declare class UpdateWorkOrderDto {
     status?: string;
     description?: string;
     employee_id?: number;
+    quotation_id?: number;
+    title?: string;
+    start_date?: string;
+    end_date?: string;
 }

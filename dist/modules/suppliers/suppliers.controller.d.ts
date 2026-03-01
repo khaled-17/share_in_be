@@ -15,8 +15,8 @@ export declare class SuppliersController {
             secondary_phone: string | null;
             address: string | null;
             created_at: Date;
-            speciality: string | null;
             supplier_id: string;
+            speciality: string | null;
         }[];
         pagination: {
             page: number;
@@ -41,8 +41,8 @@ export declare class SuppliersController {
             secondary_phone: string | null;
             address: string | null;
             created_at: Date;
-            speciality: string | null;
             supplier_id: string;
+            speciality: string | null;
         };
     }>;
     update(id: string, updateSupplierDto: UpdateSupplierDto): Promise<{
@@ -57,8 +57,8 @@ export declare class SuppliersController {
             secondary_phone: string | null;
             address: string | null;
             created_at: Date;
-            speciality: string | null;
             supplier_id: string;
+            speciality: string | null;
         };
     }>;
     remove(id: string): Promise<{

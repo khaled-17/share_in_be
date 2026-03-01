@@ -12,8 +12,8 @@ export declare class EmployeesService {
             name: string;
             id: number;
             phone: string | null;
-            position: string | null;
             emp_code: string;
+            position: string | null;
             salary: number | null;
             start_date: string | null;
         }[];
@@ -23,8 +23,8 @@ export declare class EmployeesService {
         name: string;
         id: number;
         phone: string | null;
-        position: string | null;
         emp_code: string;
+        position: string | null;
         salary: number | null;
         start_date: string | null;
     }>;
@@ -32,8 +32,8 @@ export declare class EmployeesService {
         name: string;
         id: number;
         phone: string | null;
-        position: string | null;
         emp_code: string;
+        position: string | null;
         salary: number | null;
         start_date: string | null;
     } | null>;
@@ -41,8 +41,8 @@ export declare class EmployeesService {
         name: string;
         id: number;
         phone: string | null;
-        position: string | null;
         emp_code: string;
+        position: string | null;
         salary: number | null;
         start_date: string | null;
     }>;
@@ -50,8 +50,8 @@ export declare class EmployeesService {
         name: string;
         id: number;
         phone: string | null;
-        position: string | null;
         emp_code: string;
+        position: string | null;
         salary: number | null;
         start_date: string | null;
     }>;
@@ -59,8 +59,8 @@ export declare class EmployeesService {
         name: string;
         id: number;
         phone: string | null;
-        position: string | null;
         emp_code: string;
+        position: string | null;
         salary: number | null;
         start_date: string | null;
     }>;

@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateCheckDto = exports.CreateCheckDto = exports.CheckStatus = void 0;
-const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 var CheckStatus;
@@ -26,9 +25,6 @@ class CreateCheckDto {
     due_date;
     amount;
     status;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { check_no: { required: true, type: () => String }, bank_name: { required: true, type: () => String }, due_date: { required: true, type: () => String }, amount: { required: true, type: () => Number }, status: { required: false, enum: require("./check.dto").CheckStatus } };
-    }
 }
 exports.CreateCheckDto = CreateCheckDto;
 __decorate([
@@ -56,7 +52,11 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateCheckDto.prototype, "amount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Check status', example: CheckStatus.UNDELIVERED, enum: CheckStatus }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Check status',
+        example: CheckStatus.UNDELIVERED,
+        enum: CheckStatus,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEnum)(CheckStatus),
     __metadata("design:type", String)
@@ -66,13 +66,15 @@ class UpdateCheckDto {
     bank_name;
     due_date;
     amount;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { status: { required: false, enum: require("./check.dto").CheckStatus }, bank_name: { required: false, type: () => String }, due_date: { required: false, type: () => String }, amount: { required: false, type: () => Number } };
-    }
 }
 exports.UpdateCheckDto = UpdateCheckDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Check status', example: CheckStatus.COLLECTED, enum: CheckStatus, required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Check status',
+        example: CheckStatus.COLLECTED,
+        enum: CheckStatus,
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEnum)(CheckStatus),
     __metadata("design:type", String)
@@ -84,7 +86,11 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateCheckDto.prototype, "bank_name", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Due date', example: '2023-12-31', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Due date',
+        example: '2023-12-31',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)

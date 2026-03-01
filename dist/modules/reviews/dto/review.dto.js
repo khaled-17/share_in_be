@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateReviewDto = exports.CreateReviewDto = void 0;
-const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateReviewDto {
@@ -18,9 +17,6 @@ class CreateReviewDto {
     role;
     review;
     rating;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { name: { required: true, type: () => String }, role: { required: false, type: () => String }, review: { required: true, type: () => String }, rating: { required: true, type: () => Number, minimum: 1, maximum: 5 } };
-    }
 }
 exports.CreateReviewDto = CreateReviewDto;
 __decorate([
@@ -30,7 +26,11 @@ __decorate([
     __metadata("design:type", String)
 ], CreateReviewDto.prototype, "name", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Customer role', example: 'CEO', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Customer role',
+        example: 'CEO',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -42,7 +42,12 @@ __decorate([
     __metadata("design:type", String)
 ], CreateReviewDto.prototype, "review", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Rating from 1 to 5', example: 5, minimum: 1, maximum: 5 }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Rating from 1 to 5',
+        example: 5,
+        minimum: 1,
+        maximum: 5,
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.Min)(1),
@@ -52,19 +57,24 @@ __decorate([
 class UpdateReviewDto {
     review;
     rating;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { review: { required: false, type: () => String }, rating: { required: false, type: () => Number, minimum: 1, maximum: 5 } };
-    }
 }
 exports.UpdateReviewDto = UpdateReviewDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Review content', example: 'Great work!', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Review content',
+        example: 'Great work!',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateReviewDto.prototype, "review", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Rating from 1 to 5', example: 5, required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Rating from 1 to 5',
+        example: 5,
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     (0, class_validator_1.Min)(1),

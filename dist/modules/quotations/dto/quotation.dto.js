@@ -10,20 +10,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateQuotationDto = exports.CreateQuotationDto = exports.CreateQuotationItemDto = void 0;
-const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
 class CreateQuotationItemDto {
     description;
     unit_price;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { description: { required: true, type: () => String }, unit_price: { required: true, type: () => Number } };
-    }
 }
 exports.CreateQuotationItemDto = CreateQuotationItemDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Item description', example: 'Web Development Services' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Item description',
+        example: 'Web Development Services',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -40,9 +39,6 @@ class CreateQuotationDto {
     date;
     total_amount;
     items;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { customer_id: { required: true, type: () => Number }, project_type_id: { required: false, type: () => Number }, date: { required: true, type: () => String }, total_amount: { required: true, type: () => Number }, items: { required: true, type: () => [require("./quotation.dto").CreateQuotationItemDto] } };
-    }
 }
 exports.CreateQuotationDto = CreateQuotationDto;
 __decorate([
@@ -70,7 +66,10 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateQuotationDto.prototype, "total_amount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Quotation items', type: [CreateQuotationItemDto] }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Quotation items',
+        type: [CreateQuotationItemDto],
+    }),
     (0, class_validator_1.IsArray)(),
     (0, class_validator_1.ValidateNested)({ each: true }),
     (0, class_transformer_1.Type)(() => CreateQuotationItemDto),
@@ -81,31 +80,44 @@ class UpdateQuotationDto {
     paid_adv;
     adv_date;
     receipt_no;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { status: { required: false, type: () => String }, paid_adv: { required: false, type: () => Number }, adv_date: { required: false, type: () => String }, receipt_no: { required: false, type: () => String } };
-    }
 }
 exports.UpdateQuotationDto = UpdateQuotationDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Status of the quotation', example: 'Accepted', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Status of the quotation',
+        example: 'Accepted',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateQuotationDto.prototype, "status", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Paid advance amount', example: 1000, required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Paid advance amount',
+        example: 1000,
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], UpdateQuotationDto.prototype, "paid_adv", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Advance payment date', example: '2023-10-05', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Advance payment date',
+        example: '2023-10-05',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateQuotationDto.prototype, "adv_date", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Receipt number for advance', example: 'REC-123', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Receipt number for advance',
+        example: 'REC-123',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)

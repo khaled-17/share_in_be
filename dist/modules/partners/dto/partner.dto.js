@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdatePartnerDto = exports.CreatePartnerDto = void 0;
-const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreatePartnerDto {
@@ -20,9 +19,6 @@ class CreatePartnerDto {
     email;
     initial_capital;
     current_capital;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { partner_code: { required: true, type: () => String }, name: { required: true, type: () => String }, phone: { required: false, type: () => String }, email: { required: false, type: () => String, format: "email" }, initial_capital: { required: false, type: () => Number }, current_capital: { required: false, type: () => Number } };
-    }
 }
 exports.CreatePartnerDto = CreatePartnerDto;
 __decorate([
@@ -67,37 +63,54 @@ class UpdatePartnerDto {
     email;
     initial_capital;
     current_capital;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { name: { required: false, type: () => String }, phone: { required: false, type: () => String }, email: { required: false, type: () => String, format: "email" }, initial_capital: { required: false, type: () => Number }, current_capital: { required: false, type: () => Number } };
-    }
 }
 exports.UpdatePartnerDto = UpdatePartnerDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Partner name', example: 'Khaled Mohamed', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Partner name',
+        example: 'Khaled Mohamed',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdatePartnerDto.prototype, "name", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Phone number', example: '01234567890', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Phone number',
+        example: '01234567890',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdatePartnerDto.prototype, "phone", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Email address', example: 'khaled@partner.com', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Email address',
+        example: 'khaled@partner.com',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
 ], UpdatePartnerDto.prototype, "email", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Initial capital contribution', example: 50000, required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Initial capital contribution',
+        example: 50000,
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], UpdatePartnerDto.prototype, "initial_capital", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Current capital value', example: 75000, required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Current capital value',
+        example: 75000,
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)

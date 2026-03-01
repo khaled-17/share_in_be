@@ -9,8 +9,8 @@ export declare class QuotationsService {
         items: {
             id: number;
             description: string;
-            total: number;
             quotation_id: number;
+            total: number;
             unit_price: number;
             quantity: number;
         }[];
@@ -36,11 +36,11 @@ export declare class QuotationsService {
     findOne(id: number): Promise<{
         customer: {
             name: string;
-            contact_person: string;
-            phone: string;
             customer_id: string;
+            contact_person: string;
             company_email: string;
             contact_email: string;
+            phone: string;
             secondary_phone: string;
             address: string;
             created_at: Date;
@@ -48,8 +48,8 @@ export declare class QuotationsService {
         items: {
             id: number;
             description: string;
-            total: number;
             quotation_id: number;
+            total: number;
             unit_price: number;
             quantity: number;
         }[];
@@ -75,11 +75,11 @@ export declare class QuotationsService {
     create(data: any): Promise<{
         customer: {
             name: string;
-            contact_person: string;
-            phone: string;
             customer_id: string;
+            contact_person: string;
             company_email: string;
             contact_email: string;
+            phone: string;
             secondary_phone: string;
             address: string;
             created_at: Date;
@@ -87,8 +87,8 @@ export declare class QuotationsService {
         items: {
             id: number;
             description: string;
-            total: number;
             quotation_id: number;
+            total: number;
             unit_price: number;
             quantity: number;
         }[];
@@ -114,11 +114,11 @@ export declare class QuotationsService {
     update(id: number, data: any): Promise<{
         customer: {
             name: string;
-            contact_person: string;
-            phone: string;
             customer_id: string;
+            contact_person: string;
             company_email: string;
             contact_email: string;
+            phone: string;
             secondary_phone: string;
             address: string;
             created_at: Date;
@@ -126,8 +126,8 @@ export declare class QuotationsService {
         items: {
             id: number;
             description: string;
-            total: number;
             quotation_id: number;
+            total: number;
             unit_price: number;
             quantity: number;
         }[];

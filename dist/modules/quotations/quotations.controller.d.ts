@@ -13,8 +13,8 @@ export declare class QuotationsController {
             items: {
                 id: number;
                 description: string;
-                total: number;
                 quotation_id: number;
+                total: number;
                 unit_price: number;
                 quantity: number;
             }[];
@@ -44,11 +44,11 @@ export declare class QuotationsController {
         data: {
             customer: {
                 name: string;
-                contact_person: string;
-                phone: string;
                 customer_id: string;
+                contact_person: string;
                 company_email: string;
                 contact_email: string;
+                phone: string;
                 secondary_phone: string;
                 address: string;
                 created_at: Date;
@@ -56,8 +56,8 @@ export declare class QuotationsController {
             items: {
                 id: number;
                 description: string;
-                total: number;
                 quotation_id: number;
+                total: number;
                 unit_price: number;
                 quantity: number;
             }[];
@@ -87,11 +87,11 @@ export declare class QuotationsController {
         data: {
             customer: {
                 name: string;
-                contact_person: string;
-                phone: string;
                 customer_id: string;
+                contact_person: string;
                 company_email: string;
                 contact_email: string;
+                phone: string;
                 secondary_phone: string;
                 address: string;
                 created_at: Date;
@@ -99,8 +99,8 @@ export declare class QuotationsController {
             items: {
                 id: number;
                 description: string;
-                total: number;
                 quotation_id: number;
+                total: number;
                 unit_price: number;
                 quantity: number;
             }[];
@@ -130,11 +130,11 @@ export declare class QuotationsController {
         data: {
             customer: {
                 name: string;
-                contact_person: string;
-                phone: string;
                 customer_id: string;
+                contact_person: string;
                 company_email: string;
                 contact_email: string;
+                phone: string;
                 secondary_phone: string;
                 address: string;
                 created_at: Date;
@@ -142,8 +142,8 @@ export declare class QuotationsController {
             items: {
                 id: number;
                 description: string;
-                total: number;
                 quotation_id: number;
+                total: number;
                 unit_price: number;
                 quantity: number;
             }[];

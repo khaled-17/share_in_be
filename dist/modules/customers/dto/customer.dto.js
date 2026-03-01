@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CustomerQueryDto = exports.UpdateCustomerDto = exports.CreateCustomerDto = void 0;
-const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateCustomerDto {
@@ -22,9 +21,6 @@ class CreateCustomerDto {
     phone;
     secondary_phone;
     address;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { customer_id: { required: true, type: () => String }, name: { required: true, type: () => String }, contact_person: { required: true, type: () => String }, company_email: { required: true, type: () => String, format: "email" }, contact_email: { required: true, type: () => String, format: "email" }, phone: { required: true, type: () => String }, secondary_phone: { required: true, type: () => String }, address: { required: true, type: () => String } };
-    }
 }
 exports.CreateCustomerDto = CreateCustomerDto;
 __decorate([
@@ -107,49 +103,74 @@ class UpdateCustomerDto {
     phone;
     secondary_phone;
     address;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { name: { required: false, type: () => String }, contact_person: { required: false, type: () => String }, company_email: { required: false, type: () => String, format: "email" }, contact_email: { required: false, type: () => String, format: "email" }, phone: { required: false, type: () => String }, secondary_phone: { required: false, type: () => String }, address: { required: false, type: () => String } };
-    }
 }
 exports.UpdateCustomerDto = UpdateCustomerDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Full name of the customer', example: 'Middle East Tech', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Full name of the customer',
+        example: 'Middle East Tech',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateCustomerDto.prototype, "name", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Contact person name', example: 'Ahmed Ali', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Contact person name',
+        example: 'Ahmed Ali',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateCustomerDto.prototype, "contact_person", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Primary company email', example: 'info@metech.com', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Primary company email',
+        example: 'info@metech.com',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
 ], UpdateCustomerDto.prototype, "company_email", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Contact person email', example: 'ahmed@metech.com', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Contact person email',
+        example: 'ahmed@metech.com',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
 ], UpdateCustomerDto.prototype, "contact_email", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Primary phone number', example: '01012345678', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Primary phone number',
+        example: '01012345678',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateCustomerDto.prototype, "phone", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Secondary phone number', example: '01112345678', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Secondary phone number',
+        example: '01112345678',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateCustomerDto.prototype, "secondary_phone", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Physical address', example: '123 Business St, Cairo, Egypt', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Physical address',
+        example: '123 Business St, Cairo, Egypt',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -158,9 +179,6 @@ class CustomerQueryDto {
     page;
     limit;
     search;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { page: { required: false, type: () => Number }, limit: { required: false, type: () => Number }, search: { required: false, type: () => String } };
-    }
 }
 exports.CustomerQueryDto = CustomerQueryDto;
 __decorate([

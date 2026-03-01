@@ -10,25 +10,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReportQueryDto = void 0;
-const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class ReportQueryDto {
     start_date;
     end_date;
-    static _OPENAPI_METADATA_FACTORY() {
-        return { start_date: { required: false, type: () => String }, end_date: { required: false, type: () => String } };
-    }
 }
 exports.ReportQueryDto = ReportQueryDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Start date for report data', example: '2023-01-01', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Start date for report data',
+        example: '2023-01-01',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
 ], ReportQueryDto.prototype, "start_date", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'End date for report data', example: '2023-12-31', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'End date for report data',
+        example: '2023-12-31',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)

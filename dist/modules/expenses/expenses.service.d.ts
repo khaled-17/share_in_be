@@ -12,8 +12,8 @@ export declare class ExpensesService {
             secondary_phone: string | null;
             address: string | null;
             created_at: Date;
-            speciality: string | null;
             supplier_id: string;
+            speciality: string | null;
         };
         type: {
             id: number;
@@ -42,8 +42,8 @@ export declare class ExpensesService {
             secondary_phone: string | null;
             address: string | null;
             created_at: Date;
-            speciality: string | null;
             supplier_id: string;
+            speciality: string | null;
         };
         type: {
             id: number;
@@ -72,8 +72,8 @@ export declare class ExpensesService {
             secondary_phone: string | null;
             address: string | null;
             created_at: Date;
-            speciality: string | null;
             supplier_id: string;
+            speciality: string | null;
         };
         type: {
             id: number;
@@ -102,8 +102,8 @@ export declare class ExpensesService {
             secondary_phone: string | null;
             address: string | null;
             created_at: Date;
-            speciality: string | null;
             supplier_id: string;
+            speciality: string | null;
         };
         type: {
             id: number;
