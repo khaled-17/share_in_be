@@ -8,7 +8,7 @@ import { CreateWorkOrderDto, UpdateWorkOrderDto } from './dto/workorder.dto';
 
 @Injectable()
 export class WorkOrdersService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async findAll(query: Record<string, any> = {}) {
     return this.prisma.workOrder.findMany({
@@ -66,7 +66,9 @@ export class WorkOrdersService {
       where: { id },
       data: {
         ...orderData,
-        quotation_id: quotation_id ? parseInt(quotation_id as string) : undefined,
+        quotation_id: quotation_id
+          ? parseInt(quotation_id as string)
+          : undefined,
       },
       include: {
         customer: true,

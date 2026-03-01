@@ -5,7 +5,6 @@ export declare class WorkOrdersService {
     constructor(prisma: PrismaService);
     findAll(query?: Record<string, any>): Promise<({
         quotation: {
-            status: string;
             id: number;
             customer_id: string;
             project_type_id: string | null;
@@ -17,6 +16,7 @@ export declare class WorkOrdersService {
             paid_adv: number | null;
             adv_date: string | null;
             receipt_no: string | null;
+            status: string;
         };
         customer: {
             customer_id: string;
@@ -30,15 +30,14 @@ export declare class WorkOrdersService {
             address: string;
         };
     } & {
-        quotation_id: number;
         id: number;
         order_code: string;
+        quotation_id: number;
         customer_id: string;
         created_at: Date;
     })[]>;
     findOne(id: number): Promise<{
         quotation: {
-            status: string;
             id: number;
             customer_id: string;
             project_type_id: string | null;
@@ -50,6 +49,7 @@ export declare class WorkOrdersService {
             paid_adv: number | null;
             adv_date: string | null;
             receipt_no: string | null;
+            status: string;
         };
         customer: {
             customer_id: string;
@@ -63,22 +63,21 @@ export declare class WorkOrdersService {
             address: string;
         };
     } & {
-        quotation_id: number;
         id: number;
         order_code: string;
+        quotation_id: number;
         customer_id: string;
         created_at: Date;
     }>;
     findByOrderCode(order_code: string): Promise<{
-        quotation_id: number;
         id: number;
         order_code: string;
+        quotation_id: number;
         customer_id: string;
         created_at: Date;
     } | null>;
     create(data: CreateWorkOrderDto): Promise<{
         quotation: {
-            status: string;
             id: number;
             customer_id: string;
             project_type_id: string | null;
@@ -90,6 +89,7 @@ export declare class WorkOrdersService {
             paid_adv: number | null;
             adv_date: string | null;
             receipt_no: string | null;
+            status: string;
         };
         customer: {
             customer_id: string;
@@ -103,15 +103,14 @@ export declare class WorkOrdersService {
             address: string;
         };
     } & {
-        quotation_id: number;
         id: number;
         order_code: string;
+        quotation_id: number;
         customer_id: string;
         created_at: Date;
     }>;
     update(id: number, data: UpdateWorkOrderDto): Promise<{
         quotation: {
-            status: string;
             id: number;
             customer_id: string;
             project_type_id: string | null;
@@ -123,6 +122,7 @@ export declare class WorkOrdersService {
             paid_adv: number | null;
             adv_date: string | null;
             receipt_no: string | null;
+            status: string;
         };
         customer: {
             customer_id: string;
@@ -136,16 +136,16 @@ export declare class WorkOrdersService {
             address: string;
         };
     } & {
-        quotation_id: number;
         id: number;
         order_code: string;
+        quotation_id: number;
         customer_id: string;
         created_at: Date;
     }>;
     remove(id: number): Promise<{
-        quotation_id: number;
         id: number;
         order_code: string;
+        quotation_id: number;
         customer_id: string;
         created_at: Date;
     }>;

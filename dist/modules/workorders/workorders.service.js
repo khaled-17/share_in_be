@@ -69,7 +69,9 @@ let WorkOrdersService = class WorkOrdersService {
             where: { id },
             data: {
                 ...orderData,
-                quotation_id: quotation_id ? parseInt(quotation_id) : undefined,
+                quotation_id: quotation_id
+                    ? parseInt(quotation_id)
+                    : undefined,
             },
             include: {
                 customer: true,

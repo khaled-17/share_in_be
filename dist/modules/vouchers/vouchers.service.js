@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VouchersService = void 0;
-const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../../prisma/prisma.service");
 let VouchersService = class VouchersService {
     prisma;
@@ -51,7 +50,7 @@ let VouchersService = class VouchersService {
             },
         });
         if (!voucher)
-            throw new common_1.NotFoundException('Voucher not found');
+            throw new NotFoundException('Voucher not found');
         return voucher;
     }
     async createReceipt(data) {
@@ -62,7 +61,7 @@ let VouchersService = class VouchersService {
                 const createdCheck = await tx.checkDetail.create({
                     data: {
                         ...check,
-                        amount: parseFloat(voucherData.amount),
+                        amount: voucherData.amount,
                         status: check.status || 'pending',
                     },
                 });
@@ -71,10 +70,8 @@ let VouchersService = class VouchersService {
             const voucher = await tx.receiptVoucher.create({
                 data: {
                     ...voucherData,
-                    amount: parseFloat(voucherData.amount),
-                    partner_id: voucherData.partner_id
-                        ? parseInt(voucherData.partner_id)
-                        : null,
+                    amount: voucherData.amount,
+                    partner_id: voucherData.partner_id,
                     check_id: checkId,
                 },
                 include: {
@@ -98,21 +95,17 @@ let VouchersService = class VouchersService {
         return this.prisma.$transaction(async (tx) => {
             const oldVoucher = await tx.receiptVoucher.findUnique({ where: { id } });
             if (!oldVoucher)
-                throw new common_1.NotFoundException('Voucher not found');
+                throw new NotFoundException('Voucher not found');
             const { check, ...voucherData } = data;
-            const amountDiff = (voucherData.amount
-                ? parseFloat(voucherData.amount)
+            const amountDiff = (voucherData.amount !== undefined
+                ? voucherData.amount
                 : oldVoucher.amount) - oldVoucher.amount;
             const updatedVoucher = await tx.receiptVoucher.update({
                 where: { id },
                 data: {
                     ...voucherData,
-                    amount: voucherData.amount
-                        ? parseFloat(voucherData.amount)
-                        : undefined,
-                    partner_id: voucherData.partner_id
-                        ? parseInt(voucherData.partner_id)
-                        : undefined,
+                    amount: voucherData.amount,
+                    partner_id: voucherData.partner_id,
                 },
                 include: { check: true },
             });
@@ -131,7 +124,7 @@ let VouchersService = class VouchersService {
         return this.prisma.$transaction(async (tx) => {
             const voucher = await tx.receiptVoucher.findUnique({ where: { id } });
             if (!voucher)
-                throw new common_1.NotFoundException('Voucher not found');
+                throw new NotFoundException('Voucher not found');
             if (voucher.source_type === 'partner_capital' && voucher.partner_id) {
                 await tx.partner.update({
                     where: { id: voucher.partner_id },
@@ -184,7 +177,7 @@ let VouchersService = class VouchersService {
             },
         });
         if (!voucher)
-            throw new common_1.NotFoundException('Voucher not found');
+            throw new NotFoundException('Voucher not found');
         return voucher;
     }
     async createPayment(data) {
@@ -195,7 +188,7 @@ let VouchersService = class VouchersService {
                 const createdCheck = await tx.checkDetail.create({
                     data: {
                         ...check,
-                        amount: parseFloat(voucherData.amount),
+                        amount: voucherData.amount,
                         status: check.status || 'pending',
                     },
                 });
@@ -204,10 +197,8 @@ let VouchersService = class VouchersService {
             const voucher = await tx.paymentVoucher.create({
                 data: {
                     ...voucherData,
-                    amount: parseFloat(voucherData.amount),
-                    partner_id: voucherData.partner_id
-                        ? parseInt(voucherData.partner_id)
-                        : null,
+                    amount: voucherData.amount,
+                    partner_id: voucherData.partner_id,
                     check_id: checkId,
                 },
                 include: {
@@ -234,21 +225,17 @@ let VouchersService = class VouchersService {
         return this.prisma.$transaction(async (tx) => {
             const oldVoucher = await tx.paymentVoucher.findUnique({ where: { id } });
             if (!oldVoucher)
-                throw new common_1.NotFoundException('Voucher not found');
+                throw new NotFoundException('Voucher not found');
             const { check, ...voucherData } = data;
-            const amountDiff = (voucherData.amount
-                ? parseFloat(voucherData.amount)
+            const amountDiff = (voucherData.amount !== undefined
+                ? voucherData.amount
                 : oldVoucher.amount) - oldVoucher.amount;
             const updatedVoucher = await tx.paymentVoucher.update({
                 where: { id },
                 data: {
                     ...voucherData,
-                    amount: voucherData.amount
-                        ? parseFloat(voucherData.amount)
-                        : undefined,
-                    partner_id: voucherData.partner_id
-                        ? parseInt(voucherData.partner_id)
-                        : undefined,
+                    amount: voucherData.amount,
+                    partner_id: voucherData.partner_id,
                 },
                 include: { check: true },
             });
@@ -267,7 +254,7 @@ let VouchersService = class VouchersService {
         return this.prisma.$transaction(async (tx) => {
             const voucher = await tx.paymentVoucher.findUnique({ where: { id } });
             if (!voucher)
-                throw new common_1.NotFoundException('Voucher not found');
+                throw new NotFoundException('Voucher not found');
             if (voucher.beneficiary_type === 'partner_withdrawal' &&
                 voucher.partner_id) {
                 await tx.partner.update({
@@ -337,7 +324,7 @@ let VouchersService = class VouchersService {
 };
 exports.VouchersService = VouchersService;
 exports.VouchersService = VouchersService = __decorate([
-    (0, common_1.Injectable)(),
+    Injectable(),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService])
 ], VouchersService);
 //# sourceMappingURL=vouchers.service.js.map

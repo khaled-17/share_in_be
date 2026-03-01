@@ -8,7 +8,6 @@ export declare class WorkOrdersController {
         message: string;
         data: ({
             quotation: {
-                status: string;
                 id: number;
                 customer_id: string;
                 project_type_id: string | null;
@@ -20,6 +19,7 @@ export declare class WorkOrdersController {
                 paid_adv: number | null;
                 adv_date: string | null;
                 receipt_no: string | null;
+                status: string;
             };
             customer: {
                 customer_id: string;
@@ -33,9 +33,9 @@ export declare class WorkOrdersController {
                 address: string;
             };
         } & {
-            quotation_id: number;
             id: number;
             order_code: string;
+            quotation_id: number;
             customer_id: string;
             created_at: Date;
         })[];
@@ -45,7 +45,6 @@ export declare class WorkOrdersController {
         message: string;
         data: {
             quotation: {
-                status: string;
                 id: number;
                 customer_id: string;
                 project_type_id: string | null;
@@ -57,6 +56,7 @@ export declare class WorkOrdersController {
                 paid_adv: number | null;
                 adv_date: string | null;
                 receipt_no: string | null;
+                status: string;
             };
             customer: {
                 customer_id: string;
@@ -70,9 +70,9 @@ export declare class WorkOrdersController {
                 address: string;
             };
         } & {
-            quotation_id: number;
             id: number;
             order_code: string;
+            quotation_id: number;
             customer_id: string;
             created_at: Date;
         };
@@ -82,7 +82,6 @@ export declare class WorkOrdersController {
         message: string;
         data: {
             quotation: {
-                status: string;
                 id: number;
                 customer_id: string;
                 project_type_id: string | null;
@@ -94,6 +93,7 @@ export declare class WorkOrdersController {
                 paid_adv: number | null;
                 adv_date: string | null;
                 receipt_no: string | null;
+                status: string;
             };
             customer: {
                 customer_id: string;
@@ -107,9 +107,9 @@ export declare class WorkOrdersController {
                 address: string;
             };
         } & {
-            quotation_id: number;
             id: number;
             order_code: string;
+            quotation_id: number;
             customer_id: string;
             created_at: Date;
         };
@@ -119,7 +119,6 @@ export declare class WorkOrdersController {
         message: string;
         data: {
             quotation: {
-                status: string;
                 id: number;
                 customer_id: string;
                 project_type_id: string | null;
@@ -131,6 +130,7 @@ export declare class WorkOrdersController {
                 paid_adv: number | null;
                 adv_date: string | null;
                 receipt_no: string | null;
+                status: string;
             };
             customer: {
                 customer_id: string;
@@ -144,9 +144,9 @@ export declare class WorkOrdersController {
                 address: string;
             };
         } & {
-            quotation_id: number;
             id: number;
             order_code: string;
+            quotation_id: number;
             customer_id: string;
             created_at: Date;
         };

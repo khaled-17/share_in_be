@@ -9,14 +9,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreatePaymentVoucherDto = exports.CreateReceiptVoucherDto = exports.VoucherSourceType = void 0;
+exports.CreatePaymentVoucherDto = exports.CreateReceiptVoucherDto = exports.CheckDetailDto = exports.VoucherSourceType = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 var VoucherSourceType;
 (function (VoucherSourceType) {
-    VoucherSourceType["PARTNER"] = "\u0634\u0631\u064A\u0643";
-    VoucherSourceType["OTHERS"] = "\u0623\u062E\u0631\u0649";
+    VoucherSourceType["PARTNER_CAPITAL"] = "partner_capital";
+    VoucherSourceType["OTHERS"] = "others";
 })(VoucherSourceType || (exports.VoucherSourceType = VoucherSourceType = {}));
+class CheckDetailDto {
+    check_number;
+    bank_name;
+    check_date;
+    status;
+}
+exports.CheckDetailDto = CheckDetailDto;
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CheckDetailDto.prototype, "check_number", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CheckDetailDto.prototype, "bank_name", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CheckDetailDto.prototype, "check_date", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CheckDetailDto.prototype, "status", void 0);
 class CreateReceiptVoucherDto {
     voucher_number;
     voucher_date;
@@ -26,6 +53,7 @@ class CreateReceiptVoucherDto {
     name;
     payment_method;
     description;
+    check;
     check_id;
 }
 exports.CreateReceiptVoucherDto = CreateReceiptVoucherDto;
@@ -56,7 +84,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Source type',
-        example: VoucherSourceType.PARTNER,
+        example: VoucherSourceType.PARTNER_CAPITAL,
         enum: VoucherSourceType,
     }),
     (0, class_validator_1.IsNotEmpty)(),
@@ -86,6 +114,14 @@ __decorate([
 ], CreateReceiptVoucherDto.prototype, "description", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
+        description: 'Check detail (if payment method is Check)',
+        type: CheckDetailDto,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", CheckDetailDto)
+], CreateReceiptVoucherDto.prototype, "check", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
         description: 'Check ID (if payment method is Check)',
         example: 1,
     }),
@@ -94,6 +130,34 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateReceiptVoucherDto.prototype, "check_id", void 0);
 class CreatePaymentVoucherDto extends CreateReceiptVoucherDto {
+    beneficiary_type;
+    supplier_id;
+    employee_id;
+    expense_type_id;
 }
 exports.CreatePaymentVoucherDto = CreatePaymentVoucherDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Beneficiary type', example: 'supplier' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreatePaymentVoucherDto.prototype, "beneficiary_type", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Supplier ID', example: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreatePaymentVoucherDto.prototype, "supplier_id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Employee ID', example: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreatePaymentVoucherDto.prototype, "employee_id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Expense type ID', example: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreatePaymentVoucherDto.prototype, "expense_type_id", void 0);
 //# sourceMappingURL=voucher.dto.js.map

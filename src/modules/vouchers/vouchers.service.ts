@@ -1,6 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
-import { CreateReceiptVoucherDto, CreatePaymentVoucherDto } from './dto/voucher.dto';
+import { Prisma } from '@prisma/client';
+import {
+  CreateReceiptVoucherDto,
+  CreatePaymentVoucherDto,
+} from './dto/voucher.dto';
 
 interface ReceiptFilters {
   start_date?: string;
@@ -18,16 +21,16 @@ interface PaymentFilters {
 
 @Injectable()
 export class VouchersService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   // Receipt Vouchers
   async findAllReceipt(filters: ReceiptFilters) {
     const { start_date, end_date, source_type, payment_method } = filters;
-    const where: any = {};
+    const where: Prisma.ReceiptVoucherWhereInput = {};
     if (start_date || end_date) {
       where.voucher_date = {};
-      if (start_date) where.voucher_date.gte = start_date;
-      if (end_date) where.voucher_date.lte = end_date;
+      if (start_date) (where.voucher_date as any).gte = start_date;
+      if (end_date) (where.voucher_date as any).lte = end_date;
     }
     if (source_type) where.source_type = source_type;
     if (payment_method) where.payment_method = payment_method;
@@ -57,7 +60,7 @@ export class VouchersService {
   }
 
   async createReceipt(data: CreateReceiptVoucherDto) {
-    const { check, ...voucherData } = data as any;
+    const { check, ...voucherData } = data;
 
     return this.prisma.$transaction(async (tx) => {
       let checkId: number | null = null;
@@ -65,7 +68,7 @@ export class VouchersService {
         const createdCheck = await tx.checkDetail.create({
           data: {
             ...check,
-            amount: parseFloat(voucherData.amount),
+            amount: voucherData.amount,
             status: check.status || 'pending',
           },
         });
@@ -75,10 +78,8 @@ export class VouchersService {
       const voucher = await tx.receiptVoucher.create({
         data: {
           ...voucherData,
-          amount: parseFloat(voucherData.amount),
-          partner_id: voucherData.partner_id
-            ? parseInt(voucherData.partner_id)
-            : null,
+          amount: voucherData.amount,
+          partner_id: voucherData.partner_id,
           check_id: checkId,
         },
         include: {
@@ -106,22 +107,18 @@ export class VouchersService {
       const oldVoucher = await tx.receiptVoucher.findUnique({ where: { id } });
       if (!oldVoucher) throw new NotFoundException('Voucher not found');
 
-      const { check, ...voucherData } = data as any;
+      const { check, ...voucherData } = data;
       const amountDiff =
-        (voucherData.amount
-          ? parseFloat(voucherData.amount)
+        (voucherData.amount !== undefined
+          ? voucherData.amount
           : oldVoucher.amount) - oldVoucher.amount;
 
       const updatedVoucher = await tx.receiptVoucher.update({
         where: { id },
         data: {
           ...voucherData,
-          amount: voucherData.amount
-            ? parseFloat(voucherData.amount)
-            : undefined,
-          partner_id: voucherData.partner_id
-            ? parseInt(voucherData.partner_id)
-            : undefined,
+          amount: voucherData.amount,
+          partner_id: voucherData.partner_id,
         },
         include: { check: true },
       });
@@ -166,11 +163,11 @@ export class VouchersService {
   // Payment Vouchers
   async findAllPayment(filters: PaymentFilters) {
     const { start_date, end_date, beneficiary_type, payment_method } = filters;
-    const where: any = {};
+    const where: Prisma.PaymentVoucherWhereInput = {};
     if (start_date || end_date) {
       where.voucher_date = {};
-      if (start_date) where.voucher_date.gte = start_date;
-      if (end_date) where.voucher_date.lte = end_date;
+      if (start_date) (where.voucher_date as any).gte = start_date;
+      if (end_date) (where.voucher_date as any).lte = end_date;
     }
     if (beneficiary_type) where.beneficiary_type = beneficiary_type;
     if (payment_method) where.payment_method = payment_method;
@@ -204,7 +201,7 @@ export class VouchersService {
   }
 
   async createPayment(data: CreatePaymentVoucherDto) {
-    const { check, ...voucherData } = data as any;
+    const { check, ...voucherData } = data;
 
     return this.prisma.$transaction(async (tx) => {
       let checkId: number | null = null;
@@ -212,7 +209,7 @@ export class VouchersService {
         const createdCheck = await tx.checkDetail.create({
           data: {
             ...check,
-            amount: parseFloat(voucherData.amount),
+            amount: voucherData.amount,
             status: check.status || 'pending',
           },
         });
@@ -222,10 +219,8 @@ export class VouchersService {
       const voucher = await tx.paymentVoucher.create({
         data: {
           ...voucherData,
-          amount: parseFloat(voucherData.amount),
-          partner_id: voucherData.partner_id
-            ? parseInt(voucherData.partner_id)
-            : null,
+          amount: voucherData.amount,
+          partner_id: voucherData.partner_id,
           check_id: checkId,
         },
         include: {
@@ -258,22 +253,18 @@ export class VouchersService {
       const oldVoucher = await tx.paymentVoucher.findUnique({ where: { id } });
       if (!oldVoucher) throw new NotFoundException('Voucher not found');
 
-      const { check, ...voucherData } = data as any;
+      const { check, ...voucherData } = data;
       const amountDiff =
-        (voucherData.amount
-          ? parseFloat(voucherData.amount)
+        (voucherData.amount !== undefined
+          ? voucherData.amount
           : oldVoucher.amount) - oldVoucher.amount;
 
       const updatedVoucher = await tx.paymentVoucher.update({
         where: { id },
         data: {
           ...voucherData,
-          amount: voucherData.amount
-            ? parseFloat(voucherData.amount)
-            : undefined,
-          partner_id: voucherData.partner_id
-            ? parseInt(voucherData.partner_id)
-            : undefined,
+          amount: voucherData.amount,
+          partner_id: voucherData.partner_id,
         },
         include: { check: true },
       });
@@ -318,13 +309,18 @@ export class VouchersService {
     });
   }
 
-  async getStats(type: 'receipt' | 'payment', filters: ReceiptFilters & PaymentFilters) {
+  async getStats(
+    type: 'receipt' | 'payment',
+    filters: ReceiptFilters & PaymentFilters,
+  ) {
     const { start_date, end_date } = filters;
-    const where: any = {};
+    const where:
+      | Prisma.ReceiptVoucherWhereInput
+      | Prisma.PaymentVoucherWhereInput = {};
     if (start_date || end_date) {
       where.voucher_date = {};
-      if (start_date) where.voucher_date.gte = start_date;
-      if (end_date) where.voucher_date.lte = end_date;
+      if (start_date) (where.voucher_date as any).gte = start_date;
+      if (end_date) (where.voucher_date as any).lte = end_date;
     }
 
     if (type === 'receipt') {
@@ -357,11 +353,14 @@ export class VouchersService {
       return {
         total_amount: vouchers.reduce((sum, v) => sum + v.amount, 0),
         total_count: vouchers.length,
-        by_beneficiary_type: vouchers.reduce((acc: Record<string, number>, v) => {
-          acc[v.beneficiary_type] = (acc[v.beneficiary_type] || 0) + v.amount;
-          return acc;
-        }, {}),
-        by_payment_method: vouchers.reduce((acc: any, v) => {
+        by_beneficiary_type: vouchers.reduce(
+          (acc: Record<string, number>, v) => {
+            acc[v.beneficiary_type] = (acc[v.beneficiary_type] || 0) + v.amount;
+            return acc;
+          },
+          {},
+        ),
+        by_payment_method: vouchers.reduce((acc: Record<string, number>, v) => {
           acc[v.payment_method] = (acc[v.payment_method] || 0) + v.amount;
           return acc;
         }, {}),
