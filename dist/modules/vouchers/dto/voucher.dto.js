@@ -53,6 +53,7 @@ class CreateReceiptVoucherDto {
     name;
     payment_method;
     description;
+    received_from;
     check;
     check_id;
 }
@@ -113,6 +114,12 @@ __decorate([
     __metadata("design:type", String)
 ], CreateReceiptVoucherDto.prototype, "description", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Received from', example: 'John Doe' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateReceiptVoucherDto.prototype, "received_from", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Check detail (if payment method is Check)',
         type: CheckDetailDto,
@@ -134,6 +141,7 @@ class CreatePaymentVoucherDto extends CreateReceiptVoucherDto {
     supplier_id;
     employee_id;
     expense_type_id;
+    paid_to;
 }
 exports.CreatePaymentVoucherDto = CreatePaymentVoucherDto;
 __decorate([
@@ -160,4 +168,10 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreatePaymentVoucherDto.prototype, "expense_type_id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Paid to', example: 'Supplier Name' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreatePaymentVoucherDto.prototype, "paid_to", void 0);
 //# sourceMappingURL=voucher.dto.js.map

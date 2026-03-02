@@ -78,6 +78,11 @@ export class CreateReceiptVoucherDto {
   @IsString()
   description?: string;
 
+  @ApiProperty({ description: 'Received from', example: 'John Doe' })
+  @IsNotEmpty()
+  @IsString()
+  received_from: string;
+
   @ApiProperty({
     description: 'Check detail (if payment method is Check)',
     type: CheckDetailDto,
@@ -114,4 +119,9 @@ export class CreatePaymentVoucherDto extends CreateReceiptVoucherDto {
   @IsOptional()
   @IsString()
   expense_type_id?: string;
+
+  @ApiProperty({ description: 'Paid to', example: 'Supplier Name' })
+  @IsNotEmpty()
+  @IsString()
+  paid_to: string;
 }

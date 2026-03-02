@@ -22,7 +22,7 @@ interface PaymentFilters {
 
 @Injectable()
 export class VouchersService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   // Receipt Vouchers
   async findAllReceipt(filters: ReceiptFilters) {
@@ -79,8 +79,14 @@ export class VouchersService {
 
       const voucher = await tx.receiptVoucher.create({
         data: {
-          ...voucherData,
+          voucher_number: voucherData.voucher_number,
+          voucher_date: voucherData.voucher_date,
           amount: voucherData.amount,
+          source_type: voucherData.source_type,
+          name: voucherData.name,
+          payment_method: voucherData.payment_method,
+          description: voucherData.description,
+          received_from: (voucherData as any).received_from || '',
           partner_id: voucherData.partner_id,
           check_id: checkId,
         },
@@ -118,8 +124,14 @@ export class VouchersService {
       const updatedVoucher = await tx.receiptVoucher.update({
         where: { id },
         data: {
-          ...voucherData,
+          voucher_number: voucherData.voucher_number,
+          voucher_date: voucherData.voucher_date,
           amount: voucherData.amount,
+          source_type: voucherData.source_type,
+          name: voucherData.name,
+          payment_method: voucherData.payment_method,
+          description: voucherData.description,
+          received_from: (voucherData as any).received_from,
           partner_id: voucherData.partner_id,
         },
         include: { check: true },
@@ -221,9 +233,17 @@ export class VouchersService {
 
       const voucher = await tx.paymentVoucher.create({
         data: {
-          ...voucherData,
+          voucher_number: voucherData.voucher_number,
+          voucher_date: voucherData.voucher_date,
           amount: voucherData.amount,
+          beneficiary_type: voucherData.beneficiary_type || 'other',
+          supplier_id: voucherData.supplier_id,
+          employee_id: voucherData.employee_id,
           partner_id: voucherData.partner_id,
+          expense_type_id: voucherData.expense_type_id,
+          payment_method: voucherData.payment_method,
+          description: voucherData.description,
+          paid_to: (voucherData as any).paid_to || '',
           check_id: checkId,
         },
         include: {
@@ -265,9 +285,17 @@ export class VouchersService {
       const updatedVoucher = await tx.paymentVoucher.update({
         where: { id },
         data: {
-          ...voucherData,
+          voucher_number: voucherData.voucher_number,
+          voucher_date: voucherData.voucher_date,
           amount: voucherData.amount,
+          beneficiary_type: voucherData.beneficiary_type,
+          supplier_id: voucherData.supplier_id,
+          employee_id: voucherData.employee_id,
           partner_id: voucherData.partner_id,
+          expense_type_id: voucherData.expense_type_id,
+          payment_method: voucherData.payment_method,
+          description: voucherData.description,
+          paid_to: (voucherData as any).paid_to,
         },
         include: { check: true },
       });

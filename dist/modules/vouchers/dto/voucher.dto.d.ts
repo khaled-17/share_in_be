@@ -17,6 +17,7 @@ export declare class CreateReceiptVoucherDto {
     name?: string;
     payment_method: string;
     description?: string;
+    received_from: string;
     check?: CheckDetailDto;
     check_id?: number;
 }
@@ -25,4 +26,5 @@ export declare class CreatePaymentVoucherDto extends CreateReceiptVoucherDto {
     supplier_id?: string;
     employee_id?: string;
     expense_type_id?: string;
+    paid_to: string;
 }
