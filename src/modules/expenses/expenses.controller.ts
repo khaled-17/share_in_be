@@ -28,12 +28,12 @@ import { CreateExpenseDto, UpdateExpenseDto } from './dto/expense.dto';
 @Controller('expenses')
 @UseGuards(JwtAuthGuard)
 export class ExpensesController {
-  constructor(private expensesService: ExpensesService) {}
+  constructor(private expensesService: ExpensesService) { }
 
   @Get()
   @ApiOperation({ summary: 'Retrieve expense transactions' })
   @ApiResponse({ status: 200, description: 'List of expense transactions' })
-  async findAll(@Query() query: any) {
+  async findAll(@Query() query: Prisma.ExpenseWhereInput) {
     const result = await this.expensesService.findAll(query);
     return {
       success: true,
