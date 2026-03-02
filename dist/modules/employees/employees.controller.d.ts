@@ -3,40 +3,31 @@ import { CreateEmployeeDto, UpdateEmployeeDto } from './dto/employee.dto';
 export declare class EmployeesController {
     private employeesService;
     constructor(employeesService: EmployeesService);
-    findAll(query: any): Promise<{
-        success: boolean;
-        message: string;
-        data: {
-            name: string;
+    findAll(): Promise<{
+        employees: {
             id: number;
-            phone: string | null;
             emp_code: string;
+            name: string;
+            phone: string | null;
             position: string | null;
             salary: number | null;
             start_date: string | null;
         }[];
+        total: number;
     }>;
     findOne(id: number): Promise<{
         success: boolean;
         message: string;
-        data: {
-            name: string;
-            id: number;
-            phone: string | null;
-            emp_code: string;
-            position: string | null;
-            salary: number | null;
-            start_date: string | null;
-        };
+        data: any;
     }>;
     create(createEmployeeDto: CreateEmployeeDto): Promise<{
         success: boolean;
         message: string;
         data: {
-            name: string;
             id: number;
-            phone: string | null;
             emp_code: string;
+            name: string;
+            phone: string | null;
             position: string | null;
             salary: number | null;
             start_date: string | null;
@@ -46,10 +37,10 @@ export declare class EmployeesController {
         success: boolean;
         message: string;
         data: {
-            name: string;
             id: number;
-            phone: string | null;
             emp_code: string;
+            name: string;
+            phone: string | null;
             position: string | null;
             salary: number | null;
             start_date: string | null;

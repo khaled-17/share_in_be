@@ -17,9 +17,9 @@ let QuotationsService = class QuotationsService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async findAll(query = {}) {
+    async findAll(where = {}) {
         return this.prisma.quotation.findMany({
-            where: query,
+            where,
             include: {
                 customer: { select: { name: true } },
                 project_type: true,
@@ -43,17 +43,11 @@ let QuotationsService = class QuotationsService {
     }
     async create(data) {
         const { items, ...quoteData } = data;
-        if (quoteData.totalamount !== undefined)
-            quoteData.totalamount = parseFloat(quoteData.totalamount);
-        if (quoteData.paid_adv !== undefined)
-            quoteData.paid_adv = quoteData.paid_adv
-                ? parseFloat(quoteData.paid_adv)
-                : null;
         const itemsData = (items || []).map((item) => ({
             description: item.description,
-            unit_price: parseFloat(item.unit_price),
-            quantity: parseFloat(item.quantity),
-            total: parseFloat(item.total),
+            unit_price: item.unit_price,
+            quantity: item.quantity,
+            total: item.total,
         }));
         return this.prisma.quotation.create({
             data: {
@@ -72,21 +66,15 @@ let QuotationsService = class QuotationsService {
     async update(id, data) {
         await this.findOne(id);
         const { items, ...quoteData } = data;
-        if (quoteData.totalamount !== undefined)
-            quoteData.totalamount = parseFloat(quoteData.totalamount);
-        if (quoteData.paid_adv !== undefined)
-            quoteData.paid_adv = quoteData.paid_adv
-                ? parseFloat(quoteData.paid_adv)
-                : null;
         if (items) {
             await this.prisma.quotationItem.deleteMany({
                 where: { quotation_id: id },
             });
             const itemsData = items.map((item) => ({
                 description: item.description,
-                unit_price: parseFloat(item.unit_price),
-                quantity: parseFloat(item.quantity),
-                total: parseFloat(item.total),
+                unit_price: item.unit_price,
+                quantity: item.quantity,
+                total: item.total,
             }));
             return this.prisma.quotation.update({
                 where: { id },

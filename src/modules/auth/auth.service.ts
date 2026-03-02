@@ -66,7 +66,7 @@ export class AuthService {
     try {
       const payload = this.jwtService.verify(token, {
         secret: process.env.JWT_REFRESH_SECRET || 'your-refresh-secret-key',
-      });
+      }) as unknown as { userId: number };
       const user = await this.usersService.findOneById(payload.userId);
 
       if (!user) {
@@ -81,7 +81,7 @@ export class AuthService {
           expiresIn: '7d',
         }),
       };
-    } catch (_error) {
+    } catch {
       throw new UnauthorizedException('Invalid refresh token');
     }
   }

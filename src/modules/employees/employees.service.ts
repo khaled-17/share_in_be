@@ -8,19 +8,19 @@ import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class EmployeesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async findAll(params: { skip?: number; take?: number; search?: string }) {
     const { skip, take, search } = params;
     const where: Prisma.EmployeeWhereInput = search
       ? {
-          OR: [
-            { name: { contains: search } },
-            { emp_code: { contains: search } },
-            { phone: { contains: search } },
-            { position: { contains: search } },
-          ],
-        }
+        OR: [
+          { name: { contains: search } },
+          { emp_code: { contains: search } },
+          { phone: { contains: search } },
+          { position: { contains: search } },
+        ],
+      }
       : {};
 
     const [employees, total] = await Promise.all([
@@ -37,7 +37,7 @@ export class EmployeesService {
   }
 
   async findOne(id: number) {
-    const employee = await this.prisma.employee.findUnique({
+    await this.prisma.employee.findUnique({
       where: { id },
     });
     if (!employee) {
@@ -63,7 +63,7 @@ export class EmployeesService {
   }
 
   async update(id: number, data: Prisma.EmployeeUpdateInput) {
-    const employee = await this.findOne(id);
+    await this.findOne(id);
 
     if (data.emp_code && typeof data.emp_code === 'string') {
       const existing = await this.findByEmpCode(data.emp_code);
@@ -79,7 +79,7 @@ export class EmployeesService {
   }
 
   async remove(id: number) {
-    const employee = await this.findOne(id);
+    await this.findOne(id);
     return this.prisma.employee.delete({
       where: { id },
     });

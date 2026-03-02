@@ -23,13 +23,8 @@ let EmployeesController = class EmployeesController {
     constructor(employeesService) {
         this.employeesService = employeesService;
     }
-    async findAll(query) {
-        const { employees } = await this.employeesService.findAll({});
-        return {
-            success: true,
-            message: 'Employees retrieved successfully',
-            data: employees,
-        };
+    async findAll() {
+        return this.employeesService.findAll();
     }
     async findOne(id) {
         const employee = await this.employeesService.findOne(id);
@@ -68,9 +63,8 @@ __decorate([
     (0, common_1.Get)(),
     (0, swagger_1.ApiOperation)({ summary: 'Retrieve all employees' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'List of employees retrieved' }),
-    __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], EmployeesController.prototype, "findAll", null);
 __decorate([

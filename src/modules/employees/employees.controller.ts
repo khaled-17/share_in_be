@@ -28,18 +28,13 @@ import { CreateEmployeeDto, UpdateEmployeeDto } from './dto/employee.dto';
 @Controller('employees')
 @UseGuards(JwtAuthGuard)
 export class EmployeesController {
-  constructor(private employeesService: EmployeesService) {}
+  constructor(private employeesService: EmployeesService) { }
 
   @Get()
   @ApiOperation({ summary: 'Retrieve all employees' })
   @ApiResponse({ status: 200, description: 'List of employees retrieved' })
-  async findAll(@Query() query: any) {
-    const { employees } = await this.employeesService.findAll({});
-    return {
-      success: true,
-      message: 'Employees retrieved successfully',
-      data: employees,
-    };
+  async findAll() {
+    return this.employeesService.findAll();
   }
 
   @Get(':id')

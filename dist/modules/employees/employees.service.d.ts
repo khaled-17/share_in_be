@@ -9,57 +9,49 @@ export declare class EmployeesService {
         search?: string;
     }): Promise<{
         employees: {
-            name: string;
             id: number;
-            phone: string | null;
             emp_code: string;
+            name: string;
+            phone: string | null;
             position: string | null;
             salary: number | null;
             start_date: string | null;
         }[];
         total: number;
     }>;
-    findOne(id: number): Promise<{
-        name: string;
-        id: number;
-        phone: string | null;
-        emp_code: string;
-        position: string | null;
-        salary: number | null;
-        start_date: string | null;
-    }>;
+    findOne(id: number): Promise<any>;
     findByEmpCode(emp_code: string): Promise<{
-        name: string;
         id: number;
-        phone: string | null;
         emp_code: string;
+        name: string;
+        phone: string | null;
         position: string | null;
         salary: number | null;
         start_date: string | null;
     } | null>;
     create(data: Prisma.EmployeeCreateInput): Promise<{
-        name: string;
         id: number;
-        phone: string | null;
         emp_code: string;
+        name: string;
+        phone: string | null;
         position: string | null;
         salary: number | null;
         start_date: string | null;
     }>;
     update(id: number, data: Prisma.EmployeeUpdateInput): Promise<{
-        name: string;
         id: number;
-        phone: string | null;
         emp_code: string;
+        name: string;
+        phone: string | null;
         position: string | null;
         salary: number | null;
         start_date: string | null;
     }>;
     remove(id: number): Promise<{
-        name: string;
         id: number;
-        phone: string | null;
         emp_code: string;
+        name: string;
+        phone: string | null;
         position: string | null;
         salary: number | null;
         start_date: string | null;

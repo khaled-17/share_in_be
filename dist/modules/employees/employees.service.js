@@ -41,7 +41,7 @@ let EmployeesService = class EmployeesService {
         return { employees, total };
     }
     async findOne(id) {
-        const employee = await this.prisma.employee.findUnique({
+        await this.prisma.employee.findUnique({
             where: { id },
         });
         if (!employee) {
@@ -64,7 +64,7 @@ let EmployeesService = class EmployeesService {
         return this.prisma.employee.create({ data });
     }
     async update(id, data) {
-        const employee = await this.findOne(id);
+        await this.findOne(id);
         if (data.emp_code && typeof data.emp_code === 'string') {
             const existing = await this.findByEmpCode(data.emp_code);
             if (existing && existing.id !== id) {
@@ -77,7 +77,7 @@ let EmployeesService = class EmployeesService {
         });
     }
     async remove(id) {
-        const employee = await this.findOne(id);
+        await this.findOne(id);
         return this.prisma.employee.delete({
             where: { id },
         });

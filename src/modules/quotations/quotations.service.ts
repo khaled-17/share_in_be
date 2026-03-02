@@ -1,13 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
+import { CreateQuotationDto, UpdateQuotationDto } from './dto/quotation.dto';
 
 @Injectable()
 export class QuotationsService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll(query: any = {}) {
+  async findAll(where: Prisma.QuotationWhereInput = {}) {
     return this.prisma.quotation.findMany({
-      where: query,
+      where,
       include: {
         customer: { select: { name: true } },
         project_type: true,
@@ -30,22 +32,14 @@ export class QuotationsService {
     return quotation;
   }
 
-  async create(data: any) {
+  async create(data: CreateQuotationDto) {
     const { items, ...quoteData } = data;
 
-    // Parse numeric fields
-    if (quoteData.totalamount !== undefined)
-      quoteData.totalamount = parseFloat(quoteData.totalamount);
-    if (quoteData.paid_adv !== undefined)
-      quoteData.paid_adv = quoteData.paid_adv
-        ? parseFloat(quoteData.paid_adv)
-        : null;
-
-    const itemsData = (items || []).map((item: any) => ({
+    const itemsData = (items || []).map((item) => ({
       description: item.description,
-      unit_price: parseFloat(item.unit_price),
-      quantity: parseFloat(item.quantity),
-      total: parseFloat(item.total),
+      unit_price: item.unit_price,
+      quantity: item.quantity,
+      total: item.total,
     }));
 
     return this.prisma.quotation.create({
@@ -63,17 +57,9 @@ export class QuotationsService {
     });
   }
 
-  async update(id: number, data: any) {
+  async update(id: number, data: UpdateQuotationDto) {
     await this.findOne(id);
     const { items, ...quoteData } = data;
-
-    // Parse numeric fields
-    if (quoteData.totalamount !== undefined)
-      quoteData.totalamount = parseFloat(quoteData.totalamount);
-    if (quoteData.paid_adv !== undefined)
-      quoteData.paid_adv = quoteData.paid_adv
-        ? parseFloat(quoteData.paid_adv)
-        : null;
 
     if (items) {
       // Re-create items (matching legacy logic)
@@ -81,11 +67,11 @@ export class QuotationsService {
         where: { quotation_id: id },
       });
 
-      const itemsData = items.map((item: any) => ({
+      const itemsData = items.map((item) => ({
         description: item.description,
-        unit_price: parseFloat(item.unit_price),
-        quantity: parseFloat(item.quantity),
-        total: parseFloat(item.total),
+        unit_price: item.unit_price,
+        quantity: item.quantity,
+        total: item.total,
       }));
 
       return this.prisma.quotation.update({
@@ -106,7 +92,7 @@ export class QuotationsService {
 
     return this.prisma.quotation.update({
       where: { id },
-      data: quoteData,
+      data: quoteData as Prisma.QuotationUpdateInput,
       include: {
         customer: true,
         project_type: true,
