@@ -8,19 +8,21 @@ import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class EmployeesService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
-  async findAll(params: { skip?: number; take?: number; search?: string }) {
+  async findAll(
+    params: { skip?: number; take?: number; search?: string } = {},
+  ) {
     const { skip, take, search } = params;
     const where: Prisma.EmployeeWhereInput = search
       ? {
-        OR: [
-          { name: { contains: search } },
-          { emp_code: { contains: search } },
-          { phone: { contains: search } },
-          { position: { contains: search } },
-        ],
-      }
+          OR: [
+            { name: { contains: search } },
+            { emp_code: { contains: search } },
+            { phone: { contains: search } },
+            { position: { contains: search } },
+          ],
+        }
       : {};
 
     const [employees, total] = await Promise.all([
@@ -37,7 +39,7 @@ export class EmployeesService {
   }
 
   async findOne(id: number) {
-    await this.prisma.employee.findUnique({
+    const employee = await this.prisma.employee.findUnique({
       where: { id },
     });
     if (!employee) {

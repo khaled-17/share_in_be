@@ -63,7 +63,10 @@ class CreateQuotationDto {
 }
 exports.CreateQuotationDto = CreateQuotationDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Customer ID ref (Internal)', example: 'CUST-001' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Customer ID ref (Internal)',
+        example: 'CUST-001',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -117,7 +120,10 @@ __decorate([
     __metadata("design:type", String)
 ], CreateQuotationDto.prototype, "adv_date", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Receipt number for advance', example: 'REC-123' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Receipt number for advance',
+        example: 'REC-123',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -154,37 +160,61 @@ class UpdateQuotationDto {
 }
 exports.UpdateQuotationDto = UpdateQuotationDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Customer ID ref (Internal)', example: 'CUST-001', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Customer ID ref (Internal)',
+        example: 'CUST-001',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateQuotationDto.prototype, "customer_id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Project type ID', example: 'TYPE-001', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Project type ID',
+        example: 'TYPE-001',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateQuotationDto.prototype, "project_type_id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Project manager', example: 'John Doe', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Project manager',
+        example: 'John Doe',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateQuotationDto.prototype, "project_manager", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Project name', example: 'Web Redesign', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Project name',
+        example: 'Web Redesign',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateQuotationDto.prototype, "project_name", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Quotation date', example: '2023-10-01', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Quotation date',
+        example: '2023-10-01',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateQuotationDto.prototype, "quote_date", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Delivery date', example: '2023-10-31', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Delivery date',
+        example: '2023-10-31',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -196,19 +226,31 @@ __decorate([
     __metadata("design:type", Number)
 ], UpdateQuotationDto.prototype, "totalamount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Paid advance amount', example: 1000, required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Paid advance amount',
+        example: 1000,
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], UpdateQuotationDto.prototype, "paid_adv", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Advance payment date', example: '2023-10-05', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Advance payment date',
+        example: '2023-10-05',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateQuotationDto.prototype, "adv_date", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Receipt number for advance', example: 'REC-123', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Receipt number for advance',
+        example: 'REC-123',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)

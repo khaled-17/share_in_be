@@ -35,7 +35,10 @@ export class CreateQuotationItemDto {
 }
 
 export class CreateQuotationDto {
-  @ApiProperty({ description: 'Customer ID ref (Internal)', example: 'CUST-001' })
+  @ApiProperty({
+    description: 'Customer ID ref (Internal)',
+    example: 'CUST-001',
+  })
   @IsNotEmpty()
   @IsString()
   customer_id: string;
@@ -80,7 +83,10 @@ export class CreateQuotationDto {
   @IsString()
   adv_date?: string;
 
-  @ApiProperty({ description: 'Receipt number for advance', example: 'REC-123' })
+  @ApiProperty({
+    description: 'Receipt number for advance',
+    example: 'REC-123',
+  })
   @IsOptional()
   @IsString()
   receipt_no?: string;
@@ -101,32 +107,56 @@ export class CreateQuotationDto {
 }
 
 export class UpdateQuotationDto {
-  @ApiProperty({ description: 'Customer ID ref (Internal)', example: 'CUST-001', required: false })
+  @ApiProperty({
+    description: 'Customer ID ref (Internal)',
+    example: 'CUST-001',
+    required: false,
+  })
   @IsOptional()
   @IsString()
   customer_id?: string;
 
-  @ApiProperty({ description: 'Project type ID', example: 'TYPE-001', required: false })
+  @ApiProperty({
+    description: 'Project type ID',
+    example: 'TYPE-001',
+    required: false,
+  })
   @IsOptional()
   @IsString()
   project_type_id?: string;
 
-  @ApiProperty({ description: 'Project manager', example: 'John Doe', required: false })
+  @ApiProperty({
+    description: 'Project manager',
+    example: 'John Doe',
+    required: false,
+  })
   @IsOptional()
   @IsString()
   project_manager?: string;
 
-  @ApiProperty({ description: 'Project name', example: 'Web Redesign', required: false })
+  @ApiProperty({
+    description: 'Project name',
+    example: 'Web Redesign',
+    required: false,
+  })
   @IsOptional()
   @IsString()
   project_name?: string;
 
-  @ApiProperty({ description: 'Quotation date', example: '2023-10-01', required: false })
+  @ApiProperty({
+    description: 'Quotation date',
+    example: '2023-10-01',
+    required: false,
+  })
   @IsOptional()
   @IsString()
   quote_date?: string;
 
-  @ApiProperty({ description: 'Delivery date', example: '2023-10-31', required: false })
+  @ApiProperty({
+    description: 'Delivery date',
+    example: '2023-10-31',
+    required: false,
+  })
   @IsOptional()
   @IsString()
   delivery_date?: string;
@@ -136,17 +166,29 @@ export class UpdateQuotationDto {
   @IsNumber()
   totalamount?: number;
 
-  @ApiProperty({ description: 'Paid advance amount', example: 1000, required: false })
+  @ApiProperty({
+    description: 'Paid advance amount',
+    example: 1000,
+    required: false,
+  })
   @IsOptional()
   @IsNumber()
   paid_adv?: number;
 
-  @ApiProperty({ description: 'Advance payment date', example: '2023-10-05', required: false })
+  @ApiProperty({
+    description: 'Advance payment date',
+    example: '2023-10-05',
+    required: false,
+  })
   @IsOptional()
   @IsString()
   adv_date?: string;
 
-  @ApiProperty({ description: 'Receipt number for advance', example: 'REC-123', required: false })
+  @ApiProperty({
+    description: 'Receipt number for advance',
+    example: 'REC-123',
+    required: false,
+  })
   @IsOptional()
   @IsString()
   receipt_no?: string;

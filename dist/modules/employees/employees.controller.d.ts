@@ -18,7 +18,15 @@ export declare class EmployeesController {
     findOne(id: number): Promise<{
         success: boolean;
         message: string;
-        data: any;
+        data: {
+            id: number;
+            emp_code: string;
+            name: string;
+            phone: string | null;
+            position: string | null;
+            salary: number | null;
+            start_date: string | null;
+        };
     }>;
     create(createEmployeeDto: CreateEmployeeDto): Promise<{
         success: boolean;

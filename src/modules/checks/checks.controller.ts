@@ -28,12 +28,12 @@ import { CreateCheckDto, UpdateCheckDto } from './dto/check.dto';
 @Controller('checks')
 @UseGuards(JwtAuthGuard)
 export class ChecksController {
-  constructor(private checksService: ChecksService) {}
+  constructor(private checksService: ChecksService) { }
 
   @Get()
   @ApiOperation({ summary: 'Retrieve all checks' })
   @ApiResponse({ status: 200, description: 'List of checks retrieved' })
-  async findAll(@Query() query: any) {
+  async findAll(@Query() query: CheckFilters) {
     const result = await this.checksService.findAll(query);
     return {
       success: true,

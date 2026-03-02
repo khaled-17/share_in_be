@@ -17,7 +17,7 @@ let EmployeesService = class EmployeesService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async findAll(params) {
+    async findAll(params = {}) {
         const { skip, take, search } = params;
         const where = search
             ? {
@@ -41,7 +41,7 @@ let EmployeesService = class EmployeesService {
         return { employees, total };
     }
     async findOne(id) {
-        await this.prisma.employee.findUnique({
+        const employee = await this.prisma.employee.findUnique({
             where: { id },
         });
         if (!employee) {

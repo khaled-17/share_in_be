@@ -3,7 +3,7 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { CreateCheckDto, UpdateCheckDto } from './dto/check.dto';
 
-interface CheckFilters {
+export interface CheckFilters {
   status?: string;
   start_date?: string;
   end_date?: string;
@@ -11,7 +11,7 @@ interface CheckFilters {
 
 @Injectable()
 export class ChecksService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async findAll(filters: CheckFilters) {
     const { status, start_date, end_date } = filters;

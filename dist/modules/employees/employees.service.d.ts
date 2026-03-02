@@ -3,7 +3,7 @@ import { Prisma } from '@prisma/client';
 export declare class EmployeesService {
     private prisma;
     constructor(prisma: PrismaService);
-    findAll(params: {
+    findAll(params?: {
         skip?: number;
         take?: number;
         search?: string;
@@ -19,7 +19,15 @@ export declare class EmployeesService {
         }[];
         total: number;
     }>;
-    findOne(id: number): Promise<any>;
+    findOne(id: number): Promise<{
+        id: number;
+        emp_code: string;
+        name: string;
+        phone: string | null;
+        position: string | null;
+        salary: number | null;
+        start_date: string | null;
+    }>;
     findByEmpCode(emp_code: string): Promise<{
         id: number;
         emp_code: string;

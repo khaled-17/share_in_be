@@ -3,7 +3,7 @@ import { CreateCheckDto, UpdateCheckDto } from './dto/check.dto';
 export declare class ChecksController {
     private checksService;
     constructor(checksService: ChecksService);
-    findAll(query: any): Promise<{
+    findAll(query: CheckFilters): Promise<{
         success: boolean;
         message: string;
         data: {

@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChecksController = void 0;
 const common_1 = require("@nestjs/common");
@@ -70,7 +71,7 @@ __decorate([
     (0, swagger_1.ApiResponse)({ status: 200, description: 'List of checks retrieved' }),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [typeof (_a = typeof CheckFilters !== "undefined" && CheckFilters) === "function" ? _a : Object]),
     __metadata("design:returntype", Promise)
 ], ChecksController.prototype, "findAll", null);
 __decorate([

@@ -1,6 +1,6 @@
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateCheckDto, UpdateCheckDto } from './dto/check.dto';
-interface CheckFilters {
+export interface CheckFilters {
     status?: string;
     start_date?: string;
     end_date?: string;
@@ -150,4 +150,3 @@ export declare class ChecksService {
         payment_voucher_id: number | null;
     }[]>;
 }
-export {};
