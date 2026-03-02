@@ -8,59 +8,65 @@ import {
 } from 'class-validator';
 
 export class CreateExpenseDto {
-  @ApiProperty({ description: 'Internal employee ID reference', example: 1 })
+  @ApiProperty({ description: 'Expense code', example: 'EXP-001' })
   @IsOptional()
-  @IsNumber()
-  employee_id?: number;
+  @IsString()
+  code?: string;
 
-  @ApiProperty({ description: 'Internal supplier ID reference', example: 1 })
-  @IsOptional()
-  @IsNumber()
-  supplier_id?: number;
-
-  @ApiProperty({ description: 'Internal partner ID reference', example: 1 })
-  @IsOptional()
-  @IsNumber()
-  partner_id?: number;
-
-  @ApiProperty({ description: 'Transaction date', example: '2023-10-01' })
+  @ApiProperty({ description: 'Expense date', example: '2023-10-01' })
   @IsNotEmpty()
-  @IsDateString()
-  date: string;
+  @IsString()
+  exp_date: string;
 
   @ApiProperty({ description: 'Expense amount', example: 250.75 })
   @IsNotEmpty()
   @IsNumber()
   amount: number;
 
-  @ApiProperty({
-    description: 'Expense category or description',
-    example: 'Office Supplies',
-  })
+  @ApiProperty({ description: 'Receipt number', example: 'REC-123' })
+  @IsOptional()
+  @IsString()
+  receipt_no?: string;
+
+  @ApiProperty({ description: 'Quote ID', example: 1 })
+  @IsOptional()
+  @IsNumber()
+  quote_id?: number;
+
+  @ApiProperty({ description: 'Notes', example: 'Office supplies' })
+  @IsOptional()
+  @IsString()
+  notes?: string;
+
+  @ApiProperty({ description: 'Supplier ID', example: 'SUP-001' })
   @IsNotEmpty()
   @IsString()
-  category: string;
+  supplier_id: string;
 
-  @ApiProperty({ description: 'Payment method', example: 'Cash' })
-  @IsOptional()
+  @ApiProperty({ description: 'Expense type ID', example: 'EXT-001' })
+  @IsNotEmpty()
   @IsString()
-  payment_method?: string;
-
-  @ApiProperty({ description: 'Reference number', example: 'INV-101' })
-  @IsOptional()
-  @IsString()
-  reference?: string;
+  exptype_id: string;
 }
 
 export class UpdateExpenseDto {
   @ApiProperty({
-    description: 'Transaction date',
+    description: 'Expense code',
+    example: 'EXP-001',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  code?: string;
+
+  @ApiProperty({
+    description: 'Expense date',
     example: '2023-10-01',
     required: false,
   })
   @IsOptional()
-  @IsDateString()
-  date?: string;
+  @IsString()
+  exp_date?: string;
 
   @ApiProperty({
     description: 'Expense amount',
@@ -72,29 +78,43 @@ export class UpdateExpenseDto {
   amount?: number;
 
   @ApiProperty({
-    description: 'Expense category',
-    example: 'Office Supplies',
+    description: 'Receipt number',
+    example: 'REC-123',
     required: false,
   })
   @IsOptional()
   @IsString()
-  category?: string;
+  receipt_no?: string;
+
+  @ApiProperty({ description: 'Quote ID', example: 1, required: false })
+  @IsOptional()
+  @IsNumber()
+  quote_id?: number;
 
   @ApiProperty({
-    description: 'Payment method',
-    example: 'Cash',
+    description: 'Notes',
+    example: 'Office supplies',
     required: false,
   })
   @IsOptional()
   @IsString()
-  payment_method?: string;
+  notes?: string;
 
   @ApiProperty({
-    description: 'Reference number',
-    example: 'INV-101',
+    description: 'Supplier ID',
+    example: 'SUP-001',
     required: false,
   })
   @IsOptional()
   @IsString()
-  reference?: string;
+  supplier_id?: string;
+
+  @ApiProperty({
+    description: 'Expense type ID',
+    example: 'EXT-001',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  exptype_id?: string;
 }

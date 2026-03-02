@@ -63,6 +63,7 @@ let VouchersService = class VouchersService {
                         ...check,
                         amount: voucherData.amount,
                         status: check.status || 'pending',
+                        beneficiary_name: 'ShareIn',
                     },
                 });
                 checkId = createdCheck.id;
@@ -101,7 +102,7 @@ let VouchersService = class VouchersService {
             const oldVoucher = await tx.receiptVoucher.findUnique({ where: { id } });
             if (!oldVoucher)
                 throw new common_1.NotFoundException('Voucher not found');
-            const { check, ...voucherData } = data;
+            const voucherData = data;
             const amountDiff = (voucherData.amount !== undefined
                 ? voucherData.amount
                 : oldVoucher.amount) - oldVoucher.amount;
@@ -199,6 +200,7 @@ let VouchersService = class VouchersService {
                         ...check,
                         amount: voucherData.amount,
                         status: check.status || 'pending',
+                        beneficiary_name: voucherData.paid_to,
                     },
                 });
                 checkId = createdCheck.id;
@@ -243,7 +245,7 @@ let VouchersService = class VouchersService {
             const oldVoucher = await tx.paymentVoucher.findUnique({ where: { id } });
             if (!oldVoucher)
                 throw new common_1.NotFoundException('Voucher not found');
-            const { check, ...voucherData } = data;
+            const voucherData = data;
             const amountDiff = (voucherData.amount !== undefined
                 ? voucherData.amount
                 : oldVoucher.amount) - oldVoucher.amount;

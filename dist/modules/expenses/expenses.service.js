@@ -17,9 +17,9 @@ let ExpensesService = class ExpensesService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async findAll(query = {}) {
+    async findAll(where = {}) {
         return this.prisma.expense.findMany({
-            where: query,
+            where,
             include: {
                 supplier: true,
                 type: true,
@@ -40,13 +40,8 @@ let ExpensesService = class ExpensesService {
         return expense;
     }
     async create(data) {
-        const { amount, quote_id, ...expenseData } = data;
         return this.prisma.expense.create({
-            data: {
-                ...expenseData,
-                amount: parseFloat(amount),
-                quote_id: quote_id ? parseInt(quote_id) : null,
-            },
+            data,
             include: {
                 supplier: true,
                 type: true,
@@ -55,18 +50,9 @@ let ExpensesService = class ExpensesService {
     }
     async update(id, data) {
         await this.findOne(id);
-        const { amount, quote_id, ...expenseData } = data;
         return this.prisma.expense.update({
             where: { id },
-            data: {
-                ...expenseData,
-                amount: amount !== undefined ? parseFloat(amount) : undefined,
-                quote_id: quote_id !== undefined
-                    ? quote_id
-                        ? parseInt(quote_id)
-                        : null
-                    : undefined,
-            },
+            data,
             include: {
                 supplier: true,
                 type: true,

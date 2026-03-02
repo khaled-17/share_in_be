@@ -13,40 +13,28 @@ exports.UpdateExpenseDto = exports.CreateExpenseDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateExpenseDto {
-    employee_id;
-    supplier_id;
-    partner_id;
-    date;
+    code;
+    exp_date;
     amount;
-    category;
-    payment_method;
-    reference;
+    receipt_no;
+    quote_id;
+    notes;
+    supplier_id;
+    exptype_id;
 }
 exports.CreateExpenseDto = CreateExpenseDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Internal employee ID reference', example: 1 }),
+    (0, swagger_1.ApiProperty)({ description: 'Expense code', example: 'EXP-001' }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], CreateExpenseDto.prototype, "employee_id", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Internal supplier ID reference', example: 1 }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], CreateExpenseDto.prototype, "supplier_id", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Internal partner ID reference', example: 1 }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], CreateExpenseDto.prototype, "partner_id", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Transaction date', example: '2023-10-01' }),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsDateString)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateExpenseDto.prototype, "date", void 0);
+], CreateExpenseDto.prototype, "code", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Expense date', example: '2023-10-01' }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateExpenseDto.prototype, "exp_date", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Expense amount', example: 250.75 }),
     (0, class_validator_1.IsNotEmpty)(),
@@ -54,44 +42,66 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateExpenseDto.prototype, "amount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Expense category or description',
-        example: 'Office Supplies',
-    }),
+    (0, swagger_1.ApiProperty)({ description: 'Receipt number', example: 'REC-123' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateExpenseDto.prototype, "receipt_no", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Quote ID', example: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreateExpenseDto.prototype, "quote_id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Notes', example: 'Office supplies' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateExpenseDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Supplier ID', example: 'SUP-001' }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateExpenseDto.prototype, "category", void 0);
+], CreateExpenseDto.prototype, "supplier_id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Payment method', example: 'Cash' }),
-    (0, class_validator_1.IsOptional)(),
+    (0, swagger_1.ApiProperty)({ description: 'Expense type ID', example: 'EXT-001' }),
+    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateExpenseDto.prototype, "payment_method", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Reference number', example: 'INV-101' }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateExpenseDto.prototype, "reference", void 0);
+], CreateExpenseDto.prototype, "exptype_id", void 0);
 class UpdateExpenseDto {
-    date;
+    code;
+    exp_date;
     amount;
-    category;
-    payment_method;
-    reference;
+    receipt_no;
+    quote_id;
+    notes;
+    supplier_id;
+    exptype_id;
 }
 exports.UpdateExpenseDto = UpdateExpenseDto;
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Transaction date',
+        description: 'Expense code',
+        example: 'EXP-001',
+        required: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateExpenseDto.prototype, "code", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Expense date',
         example: '2023-10-01',
         required: false,
     }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsDateString)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UpdateExpenseDto.prototype, "date", void 0);
+], UpdateExpenseDto.prototype, "exp_date", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Expense amount',
@@ -104,32 +114,48 @@ __decorate([
 ], UpdateExpenseDto.prototype, "amount", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Expense category',
-        example: 'Office Supplies',
+        description: 'Receipt number',
+        example: 'REC-123',
         required: false,
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UpdateExpenseDto.prototype, "category", void 0);
+], UpdateExpenseDto.prototype, "receipt_no", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Quote ID', example: 1, required: false }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateExpenseDto.prototype, "quote_id", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Payment method',
-        example: 'Cash',
+        description: 'Notes',
+        example: 'Office supplies',
         required: false,
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UpdateExpenseDto.prototype, "payment_method", void 0);
+], UpdateExpenseDto.prototype, "notes", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Reference number',
-        example: 'INV-101',
+        description: 'Supplier ID',
+        example: 'SUP-001',
         required: false,
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UpdateExpenseDto.prototype, "reference", void 0);
+], UpdateExpenseDto.prototype, "supplier_id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Expense type ID',
+        example: 'EXT-001',
+        required: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateExpenseDto.prototype, "exptype_id", void 0);
 //# sourceMappingURL=expense.dto.js.map

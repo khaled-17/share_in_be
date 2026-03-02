@@ -7,14 +7,14 @@ export declare class ChecksController {
         success: boolean;
         message: string;
         data: {
+            id: number;
             check_number: string;
             bank_name: string;
             check_date: string;
+            beneficiary_name: string;
             amount: number;
             status: string;
-            beneficiary_name: string;
             notes: string | null;
-            id: number;
             created_at: Date;
             receipt_voucher_id: number | null;
             payment_voucher_id: number | null;
@@ -25,9 +25,8 @@ export declare class ChecksController {
         message: string;
         data: {
             receipt_voucher: {
-                description: string | null;
-                amount: number;
                 id: number;
+                amount: number;
                 created_at: Date;
                 voucher_number: string;
                 voucher_date: string;
@@ -36,19 +35,20 @@ export declare class ChecksController {
                 partner_id: number | null;
                 payment_method: string;
                 check_id: number | null;
+                description: string | null;
                 received_from: string;
                 created_by: string | null;
             } | null;
             payment_voucher: {
-                description: string | null;
-                amount: number;
                 id: number;
+                amount: number;
                 created_at: Date;
                 voucher_number: string;
                 voucher_date: string;
                 partner_id: number | null;
                 payment_method: string;
                 check_id: number | null;
+                description: string | null;
                 created_by: string | null;
                 beneficiary_type: string;
                 supplier_id: string | null;
@@ -57,14 +57,14 @@ export declare class ChecksController {
                 paid_to: string;
             } | null;
         } & {
+            id: number;
             check_number: string;
             bank_name: string;
             check_date: string;
+            beneficiary_name: string;
             amount: number;
             status: string;
-            beneficiary_name: string;
             notes: string | null;
-            id: number;
             created_at: Date;
             receipt_voucher_id: number | null;
             payment_voucher_id: number | null;
@@ -74,14 +74,14 @@ export declare class ChecksController {
         success: boolean;
         message: string;
         data: {
+            id: number;
             check_number: string;
             bank_name: string;
             check_date: string;
+            beneficiary_name: string;
             amount: number;
             status: string;
-            beneficiary_name: string;
             notes: string | null;
-            id: number;
             created_at: Date;
             receipt_voucher_id: number | null;
             payment_voucher_id: number | null;
@@ -91,14 +91,14 @@ export declare class ChecksController {
         success: boolean;
         message: string;
         data: {
+            id: number;
             check_number: string;
             bank_name: string;
             check_date: string;
+            beneficiary_name: string;
             amount: number;
             status: string;
-            beneficiary_name: string;
             notes: string | null;
-            id: number;
             created_at: Date;
             receipt_voucher_id: number | null;
             payment_voucher_id: number | null;

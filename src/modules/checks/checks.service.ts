@@ -11,7 +11,7 @@ interface CheckFilters {
 
 @Injectable()
 export class ChecksService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async findAll(filters: CheckFilters) {
     const { status, start_date, end_date } = filters;

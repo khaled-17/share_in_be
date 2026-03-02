@@ -1,17 +1,20 @@
 export declare class CreateExpenseDto {
-    employee_id?: number;
-    supplier_id?: number;
-    partner_id?: number;
-    date: string;
+    code?: string;
+    exp_date: string;
     amount: number;
-    category: string;
-    payment_method?: string;
-    reference?: string;
+    receipt_no?: string;
+    quote_id?: number;
+    notes?: string;
+    supplier_id: string;
+    exptype_id: string;
 }
 export declare class UpdateExpenseDto {
-    date?: string;
+    code?: string;
+    exp_date?: string;
     amount?: number;
-    category?: string;
-    payment_method?: string;
-    reference?: string;
+    receipt_no?: string;
+    quote_id?: number;
+    notes?: string;
+    supplier_id?: string;
+    exptype_id?: string;
 }
