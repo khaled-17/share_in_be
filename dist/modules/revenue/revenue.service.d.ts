@@ -9,130 +9,130 @@ export declare class RevenueService {
     private prisma;
     constructor(prisma: PrismaService);
     findAll(filters?: RevenueFilters): Promise<({
+        customer: {
+            name: string;
+            contact_person: string;
+            phone: string;
+            customer_id: string;
+            company_email: string;
+            contact_email: string;
+            secondary_phone: string;
+            address: string;
+            created_at: Date;
+        };
         type: {
             id: number;
             revtype_id: string;
             revtype_name: string;
             paymethod: string;
         };
-        customer: {
-            name: string;
-            contact_person: string;
-            phone: string;
-            secondary_phone: string;
-            address: string;
-            created_at: Date;
-            customer_id: string;
-            company_email: string;
-            contact_email: string;
-        };
     } & {
         id: number;
+        customer_id: string;
         code: string | null;
+        rev_date: string;
         amount: number;
         receipt_no: string | null;
         quote_id: number | null;
         notes: string | null;
-        rev_date: string;
-        customer_id: string;
         revtype_id: string;
     })[]>;
     findOne(id: number): Promise<{
+        customer: {
+            name: string;
+            contact_person: string;
+            phone: string;
+            customer_id: string;
+            company_email: string;
+            contact_email: string;
+            secondary_phone: string;
+            address: string;
+            created_at: Date;
+        };
         type: {
             id: number;
             revtype_id: string;
             revtype_name: string;
             paymethod: string;
         };
-        customer: {
-            name: string;
-            contact_person: string;
-            phone: string;
-            secondary_phone: string;
-            address: string;
-            created_at: Date;
-            customer_id: string;
-            company_email: string;
-            contact_email: string;
-        };
     } & {
         id: number;
+        customer_id: string;
         code: string | null;
+        rev_date: string;
         amount: number;
         receipt_no: string | null;
         quote_id: number | null;
         notes: string | null;
-        rev_date: string;
-        customer_id: string;
         revtype_id: string;
     }>;
     create(data: CreateRevenueDto): Promise<{
+        customer: {
+            name: string;
+            contact_person: string;
+            phone: string;
+            customer_id: string;
+            company_email: string;
+            contact_email: string;
+            secondary_phone: string;
+            address: string;
+            created_at: Date;
+        };
         type: {
             id: number;
             revtype_id: string;
             revtype_name: string;
             paymethod: string;
         };
-        customer: {
-            name: string;
-            contact_person: string;
-            phone: string;
-            secondary_phone: string;
-            address: string;
-            created_at: Date;
-            customer_id: string;
-            company_email: string;
-            contact_email: string;
-        };
     } & {
         id: number;
+        customer_id: string;
         code: string | null;
+        rev_date: string;
         amount: number;
         receipt_no: string | null;
         quote_id: number | null;
         notes: string | null;
-        rev_date: string;
-        customer_id: string;
         revtype_id: string;
     }>;
     update(id: number, data: UpdateRevenueDto): Promise<{
+        customer: {
+            name: string;
+            contact_person: string;
+            phone: string;
+            customer_id: string;
+            company_email: string;
+            contact_email: string;
+            secondary_phone: string;
+            address: string;
+            created_at: Date;
+        };
         type: {
             id: number;
             revtype_id: string;
             revtype_name: string;
             paymethod: string;
         };
-        customer: {
-            name: string;
-            contact_person: string;
-            phone: string;
-            secondary_phone: string;
-            address: string;
-            created_at: Date;
-            customer_id: string;
-            company_email: string;
-            contact_email: string;
-        };
     } & {
         id: number;
+        customer_id: string;
         code: string | null;
+        rev_date: string;
         amount: number;
         receipt_no: string | null;
         quote_id: number | null;
         notes: string | null;
-        rev_date: string;
-        customer_id: string;
         revtype_id: string;
     }>;
     remove(id: number): Promise<{
         id: number;
+        customer_id: string;
         code: string | null;
+        rev_date: string;
         amount: number;
         receipt_no: string | null;
         quote_id: number | null;
         notes: string | null;
-        rev_date: string;
-        customer_id: string;
         revtype_id: string;
     }>;
 }

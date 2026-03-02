@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreatePaymentVoucherDto = exports.CreateReceiptVoucherDto = exports.CheckDetailDto = exports.VoucherSourceType = void 0;
+const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 var VoucherSourceType;
@@ -22,6 +23,9 @@ class CheckDetailDto {
     bank_name;
     check_date;
     status;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { check_number: { required: false, type: () => String }, bank_name: { required: false, type: () => String }, check_date: { required: false, type: () => String }, status: { required: false, type: () => String } };
+    }
 }
 exports.CheckDetailDto = CheckDetailDto;
 __decorate([
@@ -55,6 +59,9 @@ class CreateReceiptVoucherDto {
     received_from;
     check;
     check_id;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { voucher_number: { required: true, type: () => String }, voucher_date: { required: true, type: () => String }, amount: { required: true, type: () => Number }, partner_id: { required: false, type: () => Number }, source_type: { required: true, enum: require("./voucher.dto").VoucherSourceType }, payment_method: { required: true, type: () => String }, description: { required: false, type: () => String }, received_from: { required: true, type: () => String }, check: { required: false, type: () => require("./voucher.dto").CheckDetailDto }, check_id: { required: false, type: () => Number } };
+    }
 }
 exports.CreateReceiptVoucherDto = CreateReceiptVoucherDto;
 __decorate([
@@ -132,6 +139,9 @@ class CreatePaymentVoucherDto extends CreateReceiptVoucherDto {
     employee_id;
     expense_type_id;
     paid_to;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { beneficiary_type: { required: false, type: () => String }, supplier_id: { required: false, type: () => String }, employee_id: { required: false, type: () => String }, expense_type_id: { required: false, type: () => String }, paid_to: { required: true, type: () => String } };
+    }
 }
 exports.CreatePaymentVoucherDto = CreatePaymentVoucherDto;
 __decorate([

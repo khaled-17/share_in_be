@@ -64,7 +64,7 @@ export declare class SettingsService {
         type_name: string;
     }>;
     updateProjectType(id: number, data: {
-        type: string;
+        type?: string;
     }): Promise<{
         id: number;
         type_id: string;

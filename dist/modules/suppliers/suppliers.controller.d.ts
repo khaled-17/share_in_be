@@ -7,16 +7,16 @@ export declare class SuppliersController {
         success: boolean;
         message: string;
         data: {
-            id: number;
-            supplier_id: string;
             name: string;
-            contact_person: string | null;
+            id: number;
             email: string | null;
+            contact_person: string | null;
             phone: string | null;
             secondary_phone: string | null;
             address: string | null;
-            speciality: string | null;
             created_at: Date;
+            speciality: string | null;
+            supplier_id: string;
         }[];
         pagination: {
             page: number;
@@ -28,48 +28,48 @@ export declare class SuppliersController {
         success: boolean;
         message: string;
         data: {
-            id: number;
-            supplier_id: string;
             name: string;
-            contact_person: string | null;
+            id: number;
             email: string | null;
+            contact_person: string | null;
             phone: string | null;
             secondary_phone: string | null;
             address: string | null;
-            speciality: string | null;
             created_at: Date;
+            speciality: string | null;
+            supplier_id: string;
         };
     }>;
     create(createSupplierDto: CreateSupplierDto): Promise<{
         success: boolean;
         message: string;
         data: {
-            id: number;
-            supplier_id: string;
             name: string;
-            contact_person: string | null;
+            id: number;
             email: string | null;
+            contact_person: string | null;
             phone: string | null;
             secondary_phone: string | null;
             address: string | null;
-            speciality: string | null;
             created_at: Date;
+            speciality: string | null;
+            supplier_id: string;
         };
     }>;
     update(id: string, updateSupplierDto: UpdateSupplierDto): Promise<{
         success: boolean;
         message: string;
         data: {
-            id: number;
-            supplier_id: string;
             name: string;
-            contact_person: string | null;
+            id: number;
             email: string | null;
+            contact_person: string | null;
             phone: string | null;
             secondary_phone: string | null;
             address: string | null;
-            speciality: string | null;
             created_at: Date;
+            speciality: string | null;
+            supplier_id: string;
         };
     }>;
     remove(id: string): Promise<{

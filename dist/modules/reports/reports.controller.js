@@ -13,6 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReportsController = void 0;
+const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const reports_service_1 = require("./reports.service");
@@ -50,6 +51,7 @@ __decorate([
     (0, common_1.Get)('dashboard'),
     (0, swagger_1.ApiOperation)({ summary: 'Get main dashboard statistics' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Dashboard stats retrieved' }),
+    openapi.ApiResponse({ status: 200 }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
@@ -58,6 +60,7 @@ __decorate([
     (0, common_1.Get)('financial'),
     (0, swagger_1.ApiOperation)({ summary: 'Get financial report' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Financial data retrieved' }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [report_dto_1.ReportQueryDto]),
@@ -67,6 +70,7 @@ __decorate([
     (0, common_1.Get)('operational'),
     (0, swagger_1.ApiOperation)({ summary: 'Get operational report' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Operational data retrieved' }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [report_dto_1.ReportQueryDto]),

@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateReviewDto = exports.CreateReviewDto = void 0;
+const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateReviewDto {
@@ -17,6 +18,9 @@ class CreateReviewDto {
     role;
     review;
     rating;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { name: { required: true, type: () => String }, role: { required: false, type: () => String }, review: { required: true, type: () => String }, rating: { required: true, type: () => Number, minimum: 1, maximum: 5 } };
+    }
 }
 exports.CreateReviewDto = CreateReviewDto;
 __decorate([
@@ -57,6 +61,9 @@ __decorate([
 class UpdateReviewDto {
     review;
     rating;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { review: { required: false, type: () => String }, rating: { required: false, type: () => Number, minimum: 1, maximum: 5 } };
+    }
 }
 exports.UpdateReviewDto = UpdateReviewDto;
 __decorate([

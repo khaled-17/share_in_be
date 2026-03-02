@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateQuotationDto = exports.CreateQuotationDto = exports.CreateQuotationItemDto = void 0;
+const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
@@ -18,6 +19,9 @@ class CreateQuotationItemDto {
     unit_price;
     quantity;
     total;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { description: { required: true, type: () => String }, unit_price: { required: true, type: () => Number }, quantity: { required: true, type: () => Number }, total: { required: true, type: () => Number } };
+    }
 }
 exports.CreateQuotationItemDto = CreateQuotationItemDto;
 __decorate([
@@ -60,6 +64,9 @@ class CreateQuotationDto {
     receipt_no;
     status;
     items;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { customer_id: { required: true, type: () => String }, project_type_id: { required: false, type: () => String }, project_manager: { required: false, type: () => String }, project_name: { required: false, type: () => String }, quote_date: { required: true, type: () => String }, delivery_date: { required: false, type: () => String }, totalamount: { required: true, type: () => Number }, paid_adv: { required: false, type: () => Number }, adv_date: { required: false, type: () => String }, receipt_no: { required: false, type: () => String }, status: { required: false, type: () => String }, items: { required: true, type: () => [require("./quotation.dto").CreateQuotationItemDto] } };
+    }
 }
 exports.CreateQuotationDto = CreateQuotationDto;
 __decorate([
@@ -157,6 +164,9 @@ class UpdateQuotationDto {
     receipt_no;
     status;
     items;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { customer_id: { required: false, type: () => String }, project_type_id: { required: false, type: () => String }, project_manager: { required: false, type: () => String }, project_name: { required: false, type: () => String }, quote_date: { required: false, type: () => String }, delivery_date: { required: false, type: () => String }, totalamount: { required: false, type: () => Number }, paid_adv: { required: false, type: () => Number }, adv_date: { required: false, type: () => String }, receipt_no: { required: false, type: () => String }, status: { required: false, type: () => String }, items: { required: false, type: () => [require("./quotation.dto").CreateQuotationItemDto] } };
+    }
 }
 exports.UpdateQuotationDto = UpdateQuotationDto;
 __decorate([

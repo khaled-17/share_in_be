@@ -5,17 +5,17 @@ export declare class QuotationsService {
     private prisma;
     constructor(prisma: PrismaService);
     findAll(where?: Prisma.QuotationWhereInput): Promise<({
-        items: {
-            id: number;
-            description: string;
-            unit_price: number;
-            quantity: number;
-            total: number;
-            quotation_id: number;
-        }[];
         customer: {
             name: string;
         };
+        items: {
+            id: number;
+            description: string;
+            total: number;
+            quotation_id: number;
+            unit_price: number;
+            quantity: number;
+        }[];
         project_type: {
             id: number;
             type_id: string;
@@ -24,7 +24,7 @@ export declare class QuotationsService {
     } & {
         id: number;
         customer_id: string;
-        project_type_id: string | null;
+        receipt_no: string | null;
         project_manager: string | null;
         project_name: string | null;
         quote_date: string;
@@ -32,29 +32,29 @@ export declare class QuotationsService {
         totalamount: number;
         paid_adv: number | null;
         adv_date: string | null;
-        receipt_no: string | null;
         status: string;
+        project_type_id: string | null;
     })[]>;
     findOne(id: number): Promise<{
-        items: {
-            id: number;
-            description: string;
-            unit_price: number;
-            quantity: number;
-            total: number;
-            quotation_id: number;
-        }[];
         customer: {
             name: string;
-            customer_id: string;
             contact_person: string;
+            phone: string;
+            customer_id: string;
             company_email: string;
             contact_email: string;
-            phone: string;
             secondary_phone: string;
             address: string;
             created_at: Date;
         };
+        items: {
+            id: number;
+            description: string;
+            total: number;
+            quotation_id: number;
+            unit_price: number;
+            quantity: number;
+        }[];
         project_type: {
             id: number;
             type_id: string;
@@ -63,7 +63,7 @@ export declare class QuotationsService {
     } & {
         id: number;
         customer_id: string;
-        project_type_id: string | null;
+        receipt_no: string | null;
         project_manager: string | null;
         project_name: string | null;
         quote_date: string;
@@ -71,29 +71,29 @@ export declare class QuotationsService {
         totalamount: number;
         paid_adv: number | null;
         adv_date: string | null;
-        receipt_no: string | null;
         status: string;
+        project_type_id: string | null;
     }>;
     create(data: CreateQuotationDto): Promise<{
-        items: {
-            id: number;
-            description: string;
-            unit_price: number;
-            quantity: number;
-            total: number;
-            quotation_id: number;
-        }[];
         customer: {
             name: string;
-            customer_id: string;
             contact_person: string;
+            phone: string;
+            customer_id: string;
             company_email: string;
             contact_email: string;
-            phone: string;
             secondary_phone: string;
             address: string;
             created_at: Date;
         };
+        items: {
+            id: number;
+            description: string;
+            total: number;
+            quotation_id: number;
+            unit_price: number;
+            quantity: number;
+        }[];
         project_type: {
             id: number;
             type_id: string;
@@ -102,7 +102,7 @@ export declare class QuotationsService {
     } & {
         id: number;
         customer_id: string;
-        project_type_id: string | null;
+        receipt_no: string | null;
         project_manager: string | null;
         project_name: string | null;
         quote_date: string;
@@ -110,29 +110,29 @@ export declare class QuotationsService {
         totalamount: number;
         paid_adv: number | null;
         adv_date: string | null;
-        receipt_no: string | null;
         status: string;
+        project_type_id: string | null;
     }>;
     update(id: number, data: UpdateQuotationDto): Promise<{
-        items: {
-            id: number;
-            description: string;
-            unit_price: number;
-            quantity: number;
-            total: number;
-            quotation_id: number;
-        }[];
         customer: {
             name: string;
-            customer_id: string;
             contact_person: string;
+            phone: string;
+            customer_id: string;
             company_email: string;
             contact_email: string;
-            phone: string;
             secondary_phone: string;
             address: string;
             created_at: Date;
         };
+        items: {
+            id: number;
+            description: string;
+            total: number;
+            quotation_id: number;
+            unit_price: number;
+            quantity: number;
+        }[];
         project_type: {
             id: number;
             type_id: string;
@@ -141,7 +141,7 @@ export declare class QuotationsService {
     } & {
         id: number;
         customer_id: string;
-        project_type_id: string | null;
+        receipt_no: string | null;
         project_manager: string | null;
         project_name: string | null;
         quote_date: string;
@@ -149,13 +149,13 @@ export declare class QuotationsService {
         totalamount: number;
         paid_adv: number | null;
         adv_date: string | null;
-        receipt_no: string | null;
         status: string;
+        project_type_id: string | null;
     }>;
     remove(id: number): Promise<{
         id: number;
         customer_id: string;
-        project_type_id: string | null;
+        receipt_no: string | null;
         project_manager: string | null;
         project_name: string | null;
         quote_date: string;
@@ -163,7 +163,7 @@ export declare class QuotationsService {
         totalamount: number;
         paid_adv: number | null;
         adv_date: string | null;
-        receipt_no: string | null;
         status: string;
+        project_type_id: string | null;
     }>;
 }

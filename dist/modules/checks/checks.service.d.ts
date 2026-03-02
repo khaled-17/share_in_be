@@ -24,34 +24,34 @@ export declare class ChecksService {
     findOne(id: number): Promise<{
         receipt_voucher: {
             id: number;
+            description: string | null;
+            customer_id: string | null;
             created_at: Date;
             amount: number;
             voucher_number: string;
             voucher_date: string;
+            source_type: string;
             payment_method: string;
             check_id: number | null;
-            description: string | null;
+            received_from: string;
             created_by: string | null;
             partner_id: number | null;
-            customer_id: string | null;
-            source_type: string;
-            received_from: string;
         } | null;
         payment_voucher: {
             id: number;
-            supplier_id: string | null;
+            description: string | null;
             created_at: Date;
             amount: number;
             voucher_number: string;
             voucher_date: string;
-            beneficiary_type: string;
             payment_method: string;
             check_id: number | null;
-            description: string | null;
-            paid_to: string;
             created_by: string | null;
-            employee_id: string | null;
             partner_id: number | null;
+            supplier_id: string | null;
+            beneficiary_type: string;
+            paid_to: string;
+            employee_id: string | null;
             expense_type_id: string | null;
         } | null;
     } & {

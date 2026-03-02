@@ -13,6 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChecksController = void 0;
+const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const checks_service_1 = require("./checks.service");
@@ -68,9 +69,10 @@ __decorate([
     (0, common_1.Get)(),
     (0, swagger_1.ApiOperation)({ summary: 'Retrieve all checks' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'List of checks retrieved' }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [checks_service_1.CheckFilters]),
     __metadata("design:returntype", Promise)
 ], ChecksController.prototype, "findAll", null);
 __decorate([
@@ -78,6 +80,7 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Get a check by ID' }),
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Check ID', example: 1 }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Check found' }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
@@ -88,6 +91,7 @@ __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
     (0, swagger_1.ApiOperation)({ summary: 'Create a new check' }),
     (0, swagger_1.ApiResponse)({ status: 201, description: 'Check created successfully' }),
+    openapi.ApiResponse({ status: common_1.HttpStatus.CREATED }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [check_dto_1.CreateCheckDto]),
@@ -98,6 +102,7 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Update a check' }),
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Check ID', example: 1 }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Check updated successfully' }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -109,6 +114,7 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Delete a check' }),
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Check ID', example: 1 }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Check deleted successfully' }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),

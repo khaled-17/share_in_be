@@ -7,32 +7,32 @@ export declare class RevenueController {
         success: boolean;
         message: string;
         data: ({
+            customer: {
+                name: string;
+                contact_person: string;
+                phone: string;
+                customer_id: string;
+                company_email: string;
+                contact_email: string;
+                secondary_phone: string;
+                address: string;
+                created_at: Date;
+            };
             type: {
                 id: number;
                 revtype_id: string;
                 revtype_name: string;
                 paymethod: string;
             };
-            customer: {
-                name: string;
-                contact_person: string;
-                phone: string;
-                secondary_phone: string;
-                address: string;
-                created_at: Date;
-                customer_id: string;
-                company_email: string;
-                contact_email: string;
-            };
         } & {
             id: number;
+            customer_id: string;
             code: string | null;
+            rev_date: string;
             amount: number;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
-            rev_date: string;
-            customer_id: string;
             revtype_id: string;
         })[];
     }>;
@@ -40,32 +40,32 @@ export declare class RevenueController {
         success: boolean;
         message: string;
         data: {
+            customer: {
+                name: string;
+                contact_person: string;
+                phone: string;
+                customer_id: string;
+                company_email: string;
+                contact_email: string;
+                secondary_phone: string;
+                address: string;
+                created_at: Date;
+            };
             type: {
                 id: number;
                 revtype_id: string;
                 revtype_name: string;
                 paymethod: string;
             };
-            customer: {
-                name: string;
-                contact_person: string;
-                phone: string;
-                secondary_phone: string;
-                address: string;
-                created_at: Date;
-                customer_id: string;
-                company_email: string;
-                contact_email: string;
-            };
         } & {
             id: number;
+            customer_id: string;
             code: string | null;
+            rev_date: string;
             amount: number;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
-            rev_date: string;
-            customer_id: string;
             revtype_id: string;
         };
     }>;
@@ -73,32 +73,32 @@ export declare class RevenueController {
         success: boolean;
         message: string;
         data: {
+            customer: {
+                name: string;
+                contact_person: string;
+                phone: string;
+                customer_id: string;
+                company_email: string;
+                contact_email: string;
+                secondary_phone: string;
+                address: string;
+                created_at: Date;
+            };
             type: {
                 id: number;
                 revtype_id: string;
                 revtype_name: string;
                 paymethod: string;
             };
-            customer: {
-                name: string;
-                contact_person: string;
-                phone: string;
-                secondary_phone: string;
-                address: string;
-                created_at: Date;
-                customer_id: string;
-                company_email: string;
-                contact_email: string;
-            };
         } & {
             id: number;
+            customer_id: string;
             code: string | null;
+            rev_date: string;
             amount: number;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
-            rev_date: string;
-            customer_id: string;
             revtype_id: string;
         };
     }>;
@@ -106,32 +106,32 @@ export declare class RevenueController {
         success: boolean;
         message: string;
         data: {
+            customer: {
+                name: string;
+                contact_person: string;
+                phone: string;
+                customer_id: string;
+                company_email: string;
+                contact_email: string;
+                secondary_phone: string;
+                address: string;
+                created_at: Date;
+            };
             type: {
                 id: number;
                 revtype_id: string;
                 revtype_name: string;
                 paymethod: string;
             };
-            customer: {
-                name: string;
-                contact_person: string;
-                phone: string;
-                secondary_phone: string;
-                address: string;
-                created_at: Date;
-                customer_id: string;
-                company_email: string;
-                contact_email: string;
-            };
         } & {
             id: number;
+            customer_id: string;
             code: string | null;
+            rev_date: string;
             amount: number;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
-            rev_date: string;
-            customer_id: string;
             revtype_id: string;
         };
     }>;

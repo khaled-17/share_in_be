@@ -7,12 +7,12 @@ export declare class CustomersController {
         success: boolean;
         message: string;
         data: {
-            customer_id: string;
             name: string;
             contact_person: string;
+            phone: string;
+            customer_id: string;
             company_email: string;
             contact_email: string;
-            phone: string;
             secondary_phone: string;
             address: string;
             created_at: Date;
@@ -27,12 +27,12 @@ export declare class CustomersController {
         success: boolean;
         message: string;
         data: {
-            customer_id: string;
             name: string;
             contact_person: string;
+            phone: string;
+            customer_id: string;
             company_email: string;
             contact_email: string;
-            phone: string;
             secondary_phone: string;
             address: string;
             created_at: Date;
@@ -42,12 +42,12 @@ export declare class CustomersController {
         success: boolean;
         message: string;
         data: {
-            customer_id: string;
             name: string;
             contact_person: string;
+            phone: string;
+            customer_id: string;
             company_email: string;
             contact_email: string;
-            phone: string;
             secondary_phone: string;
             address: string;
             created_at: Date;
@@ -57,12 +57,12 @@ export declare class CustomersController {
         success: boolean;
         message: string;
         data: {
-            customer_id: string;
             name: string;
             contact_person: string;
+            phone: string;
+            customer_id: string;
             company_email: string;
             contact_email: string;
-            phone: string;
             secondary_phone: string;
             address: string;
             created_at: Date;

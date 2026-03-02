@@ -10,11 +10,6 @@ export declare class QuotationsController {
             customer: {
                 name: string;
             };
-            project_type: {
-                id: number;
-                type_id: string;
-                type_name: string;
-            } | null;
             items: {
                 id: number;
                 description: string;
@@ -23,11 +18,15 @@ export declare class QuotationsController {
                 unit_price: number;
                 quantity: number;
             }[];
+            project_type: {
+                id: number;
+                type_id: string;
+                type_name: string;
+            } | null;
         } & {
             id: number;
-            receipt_no: string | null;
             customer_id: string;
-            project_type_id: string | null;
+            receipt_no: string | null;
             project_manager: string | null;
             project_name: string | null;
             quote_date: string;
@@ -36,6 +35,7 @@ export declare class QuotationsController {
             paid_adv: number | null;
             adv_date: string | null;
             status: string;
+            project_type_id: string | null;
         })[];
     }>;
     findOne(id: number): Promise<{
@@ -46,18 +46,13 @@ export declare class QuotationsController {
                 name: string;
                 contact_person: string;
                 phone: string;
-                secondary_phone: string;
-                address: string;
-                created_at: Date;
                 customer_id: string;
                 company_email: string;
                 contact_email: string;
+                secondary_phone: string;
+                address: string;
+                created_at: Date;
             };
-            project_type: {
-                id: number;
-                type_id: string;
-                type_name: string;
-            } | null;
             items: {
                 id: number;
                 description: string;
@@ -66,11 +61,15 @@ export declare class QuotationsController {
                 unit_price: number;
                 quantity: number;
             }[];
+            project_type: {
+                id: number;
+                type_id: string;
+                type_name: string;
+            } | null;
         } & {
             id: number;
-            receipt_no: string | null;
             customer_id: string;
-            project_type_id: string | null;
+            receipt_no: string | null;
             project_manager: string | null;
             project_name: string | null;
             quote_date: string;
@@ -79,6 +78,7 @@ export declare class QuotationsController {
             paid_adv: number | null;
             adv_date: string | null;
             status: string;
+            project_type_id: string | null;
         };
     }>;
     create(createQuotationDto: CreateQuotationDto): Promise<{
@@ -89,18 +89,13 @@ export declare class QuotationsController {
                 name: string;
                 contact_person: string;
                 phone: string;
-                secondary_phone: string;
-                address: string;
-                created_at: Date;
                 customer_id: string;
                 company_email: string;
                 contact_email: string;
+                secondary_phone: string;
+                address: string;
+                created_at: Date;
             };
-            project_type: {
-                id: number;
-                type_id: string;
-                type_name: string;
-            } | null;
             items: {
                 id: number;
                 description: string;
@@ -109,11 +104,15 @@ export declare class QuotationsController {
                 unit_price: number;
                 quantity: number;
             }[];
+            project_type: {
+                id: number;
+                type_id: string;
+                type_name: string;
+            } | null;
         } & {
             id: number;
-            receipt_no: string | null;
             customer_id: string;
-            project_type_id: string | null;
+            receipt_no: string | null;
             project_manager: string | null;
             project_name: string | null;
             quote_date: string;
@@ -122,6 +121,7 @@ export declare class QuotationsController {
             paid_adv: number | null;
             adv_date: string | null;
             status: string;
+            project_type_id: string | null;
         };
     }>;
     update(id: number, updateQuotationDto: UpdateQuotationDto): Promise<{
@@ -132,18 +132,13 @@ export declare class QuotationsController {
                 name: string;
                 contact_person: string;
                 phone: string;
-                secondary_phone: string;
-                address: string;
-                created_at: Date;
                 customer_id: string;
                 company_email: string;
                 contact_email: string;
+                secondary_phone: string;
+                address: string;
+                created_at: Date;
             };
-            project_type: {
-                id: number;
-                type_id: string;
-                type_name: string;
-            } | null;
             items: {
                 id: number;
                 description: string;
@@ -152,11 +147,15 @@ export declare class QuotationsController {
                 unit_price: number;
                 quantity: number;
             }[];
+            project_type: {
+                id: number;
+                type_id: string;
+                type_name: string;
+            } | null;
         } & {
             id: number;
-            receipt_no: string | null;
             customer_id: string;
-            project_type_id: string | null;
+            receipt_no: string | null;
             project_manager: string | null;
             project_name: string | null;
             quote_date: string;
@@ -165,6 +164,7 @@ export declare class QuotationsController {
             paid_adv: number | null;
             adv_date: string | null;
             status: string;
+            project_type_id: string | null;
         };
     }>;
     remove(id: number): Promise<{

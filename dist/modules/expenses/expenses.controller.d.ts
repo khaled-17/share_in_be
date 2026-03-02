@@ -8,16 +8,16 @@ export declare class ExpensesController {
         message: string;
         data: ({
             supplier: {
-                id: number;
-                supplier_id: string;
                 name: string;
-                contact_person: string | null;
+                id: number;
                 email: string | null;
+                contact_person: string | null;
                 phone: string | null;
                 secondary_phone: string | null;
                 address: string | null;
-                speciality: string | null;
                 created_at: Date;
+                speciality: string | null;
+                supplier_id: string;
             };
             type: {
                 id: number;
@@ -27,13 +27,13 @@ export declare class ExpensesController {
             };
         } & {
             id: number;
-            supplier_id: string;
             code: string | null;
-            exp_date: string;
             amount: number;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
+            supplier_id: string;
+            exp_date: string;
             exptype_id: string;
         })[];
     }>;
@@ -42,16 +42,16 @@ export declare class ExpensesController {
         message: string;
         data: {
             supplier: {
-                id: number;
-                supplier_id: string;
                 name: string;
-                contact_person: string | null;
+                id: number;
                 email: string | null;
+                contact_person: string | null;
                 phone: string | null;
                 secondary_phone: string | null;
                 address: string | null;
-                speciality: string | null;
                 created_at: Date;
+                speciality: string | null;
+                supplier_id: string;
             };
             type: {
                 id: number;
@@ -61,13 +61,13 @@ export declare class ExpensesController {
             };
         } & {
             id: number;
-            supplier_id: string;
             code: string | null;
-            exp_date: string;
             amount: number;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
+            supplier_id: string;
+            exp_date: string;
             exptype_id: string;
         };
     }>;
@@ -76,16 +76,16 @@ export declare class ExpensesController {
         message: string;
         data: {
             supplier: {
-                id: number;
-                supplier_id: string;
                 name: string;
-                contact_person: string | null;
+                id: number;
                 email: string | null;
+                contact_person: string | null;
                 phone: string | null;
                 secondary_phone: string | null;
                 address: string | null;
-                speciality: string | null;
                 created_at: Date;
+                speciality: string | null;
+                supplier_id: string;
             };
             type: {
                 id: number;
@@ -95,13 +95,13 @@ export declare class ExpensesController {
             };
         } & {
             id: number;
-            supplier_id: string;
             code: string | null;
-            exp_date: string;
             amount: number;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
+            supplier_id: string;
+            exp_date: string;
             exptype_id: string;
         };
     }>;
@@ -110,16 +110,16 @@ export declare class ExpensesController {
         message: string;
         data: {
             supplier: {
-                id: number;
-                supplier_id: string;
                 name: string;
-                contact_person: string | null;
+                id: number;
                 email: string | null;
+                contact_person: string | null;
                 phone: string | null;
                 secondary_phone: string | null;
                 address: string | null;
-                speciality: string | null;
                 created_at: Date;
+                speciality: string | null;
+                supplier_id: string;
             };
             type: {
                 id: number;
@@ -129,13 +129,13 @@ export declare class ExpensesController {
             };
         } & {
             id: number;
-            supplier_id: string;
             code: string | null;
-            exp_date: string;
             amount: number;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
+            supplier_id: string;
+            exp_date: string;
             exptype_id: string;
         };
     }>;

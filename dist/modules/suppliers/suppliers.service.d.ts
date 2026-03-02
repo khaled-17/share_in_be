@@ -9,54 +9,54 @@ export declare class SuppliersService {
         search?: string;
     }): Promise<{
         suppliers: {
-            id: number;
-            supplier_id: string;
             name: string;
-            contact_person: string | null;
+            id: number;
             email: string | null;
+            contact_person: string | null;
             phone: string | null;
             secondary_phone: string | null;
             address: string | null;
-            speciality: string | null;
             created_at: Date;
+            speciality: string | null;
+            supplier_id: string;
         }[];
         total: number;
     }>;
     findOne(idOrCode: string | number): Promise<Supplier>;
     create(data: Prisma.SupplierCreateInput): Promise<{
-        id: number;
-        supplier_id: string;
         name: string;
-        contact_person: string | null;
+        id: number;
         email: string | null;
+        contact_person: string | null;
         phone: string | null;
         secondary_phone: string | null;
         address: string | null;
-        speciality: string | null;
         created_at: Date;
+        speciality: string | null;
+        supplier_id: string;
     }>;
     update(idOrCode: string | number, data: Prisma.SupplierUpdateInput): Promise<{
-        id: number;
-        supplier_id: string;
         name: string;
-        contact_person: string | null;
+        id: number;
         email: string | null;
+        contact_person: string | null;
         phone: string | null;
         secondary_phone: string | null;
         address: string | null;
-        speciality: string | null;
         created_at: Date;
+        speciality: string | null;
+        supplier_id: string;
     }>;
     remove(idOrCode: string | number): Promise<{
-        id: number;
-        supplier_id: string;
         name: string;
-        contact_person: string | null;
+        id: number;
         email: string | null;
+        contact_person: string | null;
         phone: string | null;
         secondary_phone: string | null;
         address: string | null;
-        speciality: string | null;
         created_at: Date;
+        speciality: string | null;
+        supplier_id: string;
     }>;
 }

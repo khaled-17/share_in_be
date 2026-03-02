@@ -113,7 +113,7 @@ export class SettingsService {
     });
   }
 
-  async updateProjectType(id: number, data: { type: string }) {
+  async updateProjectType(id: number, data: { type?: string }) {
     const existing = await this.prisma.projectType.findUnique({
       where: { id },
     });

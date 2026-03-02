@@ -4,8 +4,8 @@ export declare class UsersController {
     private readonly usersService;
     constructor(usersService: UsersService);
     create(createUserDto: CreateUserDto): Promise<{
-        id: number;
         name: string | null;
+        id: number;
         email: string;
         password: string;
         role: string;
@@ -13,8 +13,8 @@ export declare class UsersController {
         updatedAt: Date;
     }>;
     findAll(): Promise<{
-        id: number;
         name: string | null;
+        id: number;
         email: string;
         password: string;
         role: string;
@@ -22,8 +22,8 @@ export declare class UsersController {
         updatedAt: Date;
     }[]>;
     findOne(id: number): Promise<{
-        id: number;
         name: string | null;
+        id: number;
         email: string;
         password: string;
         role: string;
@@ -31,8 +31,8 @@ export declare class UsersController {
         updatedAt: Date;
     } | null>;
     remove(id: number): Promise<{
-        id: number;
         name: string | null;
+        id: number;
         email: string;
         password: string;
         role: string;

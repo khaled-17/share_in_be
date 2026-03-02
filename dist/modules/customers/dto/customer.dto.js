@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CustomerQueryDto = exports.UpdateCustomerDto = exports.CreateCustomerDto = void 0;
+const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateCustomerDto {
@@ -21,6 +22,9 @@ class CreateCustomerDto {
     phone;
     secondary_phone;
     address;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { customer_id: { required: true, type: () => String }, name: { required: true, type: () => String }, contact_person: { required: true, type: () => String }, company_email: { required: true, type: () => String, format: "email" }, contact_email: { required: true, type: () => String, format: "email" }, phone: { required: true, type: () => String }, secondary_phone: { required: true, type: () => String }, address: { required: true, type: () => String } };
+    }
 }
 exports.CreateCustomerDto = CreateCustomerDto;
 __decorate([
@@ -103,6 +107,9 @@ class UpdateCustomerDto {
     phone;
     secondary_phone;
     address;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { name: { required: false, type: () => String }, contact_person: { required: false, type: () => String }, company_email: { required: false, type: () => String, format: "email" }, contact_email: { required: false, type: () => String, format: "email" }, phone: { required: false, type: () => String }, secondary_phone: { required: false, type: () => String }, address: { required: false, type: () => String } };
+    }
 }
 exports.UpdateCustomerDto = UpdateCustomerDto;
 __decorate([
@@ -179,6 +186,9 @@ class CustomerQueryDto {
     page;
     limit;
     search;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { page: { required: false, type: () => Number }, limit: { required: false, type: () => Number }, search: { required: false, type: () => String } };
+    }
 }
 exports.CustomerQueryDto = CustomerQueryDto;
 __decorate([

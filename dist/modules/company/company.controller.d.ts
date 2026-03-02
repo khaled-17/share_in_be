@@ -7,12 +7,12 @@ export declare class CompanyController {
         success: boolean;
         data: {
             name: string;
+            id: number;
+            email: string | null;
+            description: string | null;
             phone: string | null;
             address: string | null;
-            id: number;
-            description: string | null;
             about: string | null;
-            email: string | null;
             website: string | null;
             updated_at: Date;
         } | null;
@@ -22,12 +22,12 @@ export declare class CompanyController {
         message: string;
         data: {
             name: string;
+            id: number;
+            email: string | null;
+            description: string | null;
             phone: string | null;
             address: string | null;
-            id: number;
-            description: string | null;
             about: string | null;
-            email: string | null;
             website: string | null;
             updated_at: Date;
         };

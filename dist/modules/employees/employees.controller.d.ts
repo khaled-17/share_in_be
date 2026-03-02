@@ -6,10 +6,10 @@ export declare class EmployeesController {
     findAll(): Promise<{
         employees: {
             name: string;
-            phone: string | null;
             id: number;
-            emp_code: string;
+            phone: string | null;
             position: string | null;
+            emp_code: string;
             salary: number | null;
             start_date: string | null;
         }[];
@@ -20,10 +20,10 @@ export declare class EmployeesController {
         message: string;
         data: {
             name: string;
-            phone: string | null;
             id: number;
-            emp_code: string;
+            phone: string | null;
             position: string | null;
+            emp_code: string;
             salary: number | null;
             start_date: string | null;
         };
@@ -33,10 +33,10 @@ export declare class EmployeesController {
         message: string;
         data: {
             name: string;
-            phone: string | null;
             id: number;
-            emp_code: string;
+            phone: string | null;
             position: string | null;
+            emp_code: string;
             salary: number | null;
             start_date: string | null;
         };
@@ -46,10 +46,10 @@ export declare class EmployeesController {
         message: string;
         data: {
             name: string;
-            phone: string | null;
             id: number;
-            emp_code: string;
+            phone: string | null;
             position: string | null;
+            emp_code: string;
             salary: number | null;
             start_date: string | null;
         };

@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateExpenseDto = exports.CreateExpenseDto = void 0;
+const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateExpenseDto {
@@ -21,6 +22,9 @@ class CreateExpenseDto {
     notes;
     supplier_id;
     exptype_id;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { code: { required: false, type: () => String }, exp_date: { required: true, type: () => String }, amount: { required: true, type: () => Number }, receipt_no: { required: false, type: () => String }, quote_id: { required: false, type: () => Number }, notes: { required: false, type: () => String }, supplier_id: { required: true, type: () => String }, exptype_id: { required: true, type: () => String } };
+    }
 }
 exports.CreateExpenseDto = CreateExpenseDto;
 __decorate([
@@ -80,6 +84,9 @@ class UpdateExpenseDto {
     notes;
     supplier_id;
     exptype_id;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { code: { required: false, type: () => String }, exp_date: { required: false, type: () => String }, amount: { required: false, type: () => Number }, receipt_no: { required: false, type: () => String }, quote_id: { required: false, type: () => Number }, notes: { required: false, type: () => String }, supplier_id: { required: false, type: () => String }, exptype_id: { required: false, type: () => String } };
+    }
 }
 exports.UpdateExpenseDto = UpdateExpenseDto;
 __decorate([

@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateSupplierDto = exports.CreateSupplierDto = void 0;
+const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateSupplierDto {
@@ -21,6 +22,9 @@ class CreateSupplierDto {
     secondary_phone;
     address;
     speciality;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { supplier_id: { required: true, type: () => String }, name: { required: true, type: () => String }, contact_person: { required: false, type: () => String }, email: { required: false, type: () => String, format: "email" }, phone: { required: false, type: () => String }, secondary_phone: { required: false, type: () => String }, address: { required: false, type: () => String }, speciality: { required: false, type: () => String } };
+    }
 }
 exports.CreateSupplierDto = CreateSupplierDto;
 __decorate([
@@ -94,6 +98,9 @@ class UpdateSupplierDto {
     secondary_phone;
     address;
     speciality;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { name: { required: false, type: () => String }, contact_person: { required: false, type: () => String }, email: { required: false, type: () => String, format: "email" }, phone: { required: false, type: () => String }, secondary_phone: { required: false, type: () => String }, address: { required: false, type: () => String }, speciality: { required: false, type: () => String } };
+    }
 }
 exports.UpdateSupplierDto = UpdateSupplierDto;
 __decorate([

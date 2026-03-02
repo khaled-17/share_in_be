@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateWorkOrderDto = exports.CreateWorkOrderDto = void 0;
+const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateWorkOrderDto {
@@ -19,6 +20,9 @@ class CreateWorkOrderDto {
     start_date;
     end_date;
     employee_id;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { quotation_id: { required: true, type: () => Number }, title: { required: true, type: () => String }, description: { required: false, type: () => String }, start_date: { required: true, type: () => String }, end_date: { required: false, type: () => String }, employee_id: { required: false, type: () => Number } };
+    }
 }
 exports.CreateWorkOrderDto = CreateWorkOrderDto;
 __decorate([
@@ -71,6 +75,9 @@ class UpdateWorkOrderDto {
     title;
     start_date;
     end_date;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { status: { required: false, type: () => String }, description: { required: false, type: () => String }, employee_id: { required: false, type: () => Number }, quotation_id: { required: false, type: () => Number }, title: { required: false, type: () => String }, start_date: { required: false, type: () => String }, end_date: { required: false, type: () => String } };
+    }
 }
 exports.UpdateWorkOrderDto = UpdateWorkOrderDto;
 __decorate([

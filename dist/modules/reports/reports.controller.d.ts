@@ -53,9 +53,9 @@ export declare class ReportsController {
             quotations_count: number;
             work_orders_count: number;
             quotations: {
+                id: number;
                 customer_id: string;
                 receipt_no: string | null;
-                id: number;
                 project_manager: string | null;
                 project_name: string | null;
                 quote_date: string;
@@ -67,9 +67,9 @@ export declare class ReportsController {
                 project_type_id: string | null;
             }[];
             workOrders: {
+                id: number;
                 customer_id: string;
                 created_at: Date;
-                id: number;
                 order_code: string;
                 quotation_id: number;
             }[];

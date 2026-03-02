@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateCompanyDto = void 0;
+const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class UpdateCompanyDto {
@@ -19,6 +20,9 @@ class UpdateCompanyDto {
     website;
     address;
     speciality;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { name: { required: false, type: () => String }, email: { required: false, type: () => String, format: "email" }, phone: { required: false, type: () => String }, website: { required: false, type: () => String }, address: { required: false, type: () => String }, speciality: { required: false, type: () => String } };
+    }
 }
 exports.UpdateCompanyDto = UpdateCompanyDto;
 __decorate([

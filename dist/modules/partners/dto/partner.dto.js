@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdatePartnerDto = exports.CreatePartnerDto = void 0;
+const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreatePartnerDto {
@@ -19,6 +20,9 @@ class CreatePartnerDto {
     email;
     initial_capital;
     current_capital;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { partner_code: { required: true, type: () => String }, name: { required: true, type: () => String }, phone: { required: false, type: () => String }, email: { required: false, type: () => String, format: "email" }, initial_capital: { required: false, type: () => Number }, current_capital: { required: false, type: () => Number } };
+    }
 }
 exports.CreatePartnerDto = CreatePartnerDto;
 __decorate([
@@ -63,6 +67,9 @@ class UpdatePartnerDto {
     email;
     initial_capital;
     current_capital;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { name: { required: false, type: () => String }, phone: { required: false, type: () => String }, email: { required: false, type: () => String, format: "email" }, initial_capital: { required: false, type: () => Number }, current_capital: { required: false, type: () => Number } };
+    }
 }
 exports.UpdatePartnerDto = UpdatePartnerDto;
 __decorate([
