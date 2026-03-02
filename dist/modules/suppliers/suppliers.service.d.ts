@@ -1,5 +1,5 @@
 import { PrismaService } from '../../prisma/prisma.service';
-import { Prisma } from '@prisma/client';
+import { Prisma, Supplier } from '@prisma/client';
 export declare class SuppliersService {
     private prisma;
     constructor(prisma: PrismaService);
@@ -9,54 +9,54 @@ export declare class SuppliersService {
         search?: string;
     }): Promise<{
         suppliers: {
-            name: string;
             id: number;
-            email: string | null;
+            supplier_id: string;
+            name: string;
             contact_person: string | null;
+            email: string | null;
             phone: string | null;
             secondary_phone: string | null;
             address: string | null;
-            created_at: Date;
-            supplier_id: string;
             speciality: string | null;
+            created_at: Date;
         }[];
         total: number;
     }>;
-    findOne(idOrCode: string | number): Promise<any>;
+    findOne(idOrCode: string | number): Promise<Supplier>;
     create(data: Prisma.SupplierCreateInput): Promise<{
-        name: string;
         id: number;
-        email: string | null;
+        supplier_id: string;
+        name: string;
         contact_person: string | null;
+        email: string | null;
         phone: string | null;
         secondary_phone: string | null;
         address: string | null;
-        created_at: Date;
-        supplier_id: string;
         speciality: string | null;
+        created_at: Date;
     }>;
     update(idOrCode: string | number, data: Prisma.SupplierUpdateInput): Promise<{
-        name: string;
         id: number;
-        email: string | null;
+        supplier_id: string;
+        name: string;
         contact_person: string | null;
+        email: string | null;
         phone: string | null;
         secondary_phone: string | null;
         address: string | null;
-        created_at: Date;
-        supplier_id: string;
         speciality: string | null;
+        created_at: Date;
     }>;
     remove(idOrCode: string | number): Promise<{
-        name: string;
         id: number;
-        email: string | null;
+        supplier_id: string;
+        name: string;
         contact_person: string | null;
+        email: string | null;
         phone: string | null;
         secondary_phone: string | null;
         address: string | null;
-        created_at: Date;
-        supplier_id: string;
         speciality: string | null;
+        created_at: Date;
     }>;
 }

@@ -4,7 +4,7 @@ import {
   ConflictException,
 } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
-import { Prisma } from '@prisma/client';
+import { Prisma, Supplier } from '@prisma/client';
 
 @Injectable()
 export class SuppliersService {
@@ -37,8 +37,8 @@ export class SuppliersService {
     return { suppliers, total };
   }
 
-  async findOne(idOrCode: string | number) {
-    let supplier;
+  async findOne(idOrCode: string | number): Promise<Supplier> {
+    let supplier: Supplier | null = null;
     if (typeof idOrCode === 'number' || !isNaN(Number(idOrCode))) {
       supplier = await this.prisma.supplier.findUnique({
         where: { id: Number(idOrCode) },

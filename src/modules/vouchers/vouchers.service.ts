@@ -6,14 +6,14 @@ import {
   CreatePaymentVoucherDto,
 } from './dto/voucher.dto';
 
-interface ReceiptFilters {
+export class ReceiptFilters {
   start_date?: string;
   end_date?: string;
   source_type?: string;
   payment_method?: string;
 }
 
-interface PaymentFilters {
+export class PaymentFilters {
   start_date?: string;
   end_date?: string;
   beneficiary_type?: string;
@@ -70,6 +70,9 @@ export class VouchersService {
         const createdCheck = await tx.checkDetail.create({
           data: {
             ...check,
+            check_number: check.check_number || '',
+            bank_name: check.bank_name || '',
+            check_date: check.check_date || new Date().toISOString(),
             amount: voucherData.amount,
             status: check.status || 'pending',
             beneficiary_name: 'ShareIn',
@@ -223,6 +226,9 @@ export class VouchersService {
         const createdCheck = await tx.checkDetail.create({
           data: {
             ...check,
+            check_number: check.check_number || '',
+            bank_name: check.bank_name || '',
+            check_date: check.check_date || new Date().toISOString(),
             amount: voucherData.amount,
             status: check.status || 'pending',
             beneficiary_name: voucherData.paid_to,

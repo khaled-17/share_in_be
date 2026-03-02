@@ -7,56 +7,56 @@ export declare class ReviewsController {
         success: boolean;
         message: string;
         data: {
-            name: string;
             id: string;
+            name: string;
             role: string | null;
-            createdAt: Date;
             review: string;
             rating: number;
             avatar: string | null;
             phoneNumber: string | null;
+            createdAt: Date;
         }[];
     }>;
     findOne(id: string): Promise<{
         success: boolean;
         message: string;
         data: {
-            name: string;
             id: string;
+            name: string;
             role: string | null;
-            createdAt: Date;
             review: string;
             rating: number;
             avatar: string | null;
             phoneNumber: string | null;
+            createdAt: Date;
         } | null;
     }>;
     create(createReviewDto: CreateReviewDto): Promise<{
         success: boolean;
         message: string;
         data: {
-            name: string;
             id: string;
+            name: string;
             role: string | null;
-            createdAt: Date;
             review: string;
             rating: number;
             avatar: string | null;
             phoneNumber: string | null;
+            createdAt: Date;
         };
     }>;
     update(id: string, updateReviewDto: UpdateReviewDto): Promise<{
         success: boolean;
         message: string;
         data: {
-            name: string;
             id: string;
+            name: string;
             role: string | null;
-            createdAt: Date;
             review: string;
             rating: number;
             avatar: string | null;
             phoneNumber: string | null;
+            createdAt: Date;
         };
     }>;
     remove(id: string): Promise<{

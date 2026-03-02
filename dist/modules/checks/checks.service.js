@@ -9,9 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChecksService = void 0;
+exports.ChecksService = exports.CheckFilters = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../../prisma/prisma.service");
+class CheckFilters {
+    status;
+    start_date;
+    end_date;
+}
+exports.CheckFilters = CheckFilters;
 let ChecksService = class ChecksService {
     prisma;
     constructor(prisma) {

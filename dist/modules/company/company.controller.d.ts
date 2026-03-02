@@ -6,12 +6,12 @@ export declare class CompanyController {
     getCompany(): Promise<{
         success: boolean;
         data: {
-            id: number;
             name: string;
+            phone: string | null;
+            address: string | null;
+            id: number;
             description: string | null;
             about: string | null;
-            address: string | null;
-            phone: string | null;
             email: string | null;
             website: string | null;
             updated_at: Date;
@@ -21,12 +21,12 @@ export declare class CompanyController {
         success: boolean;
         message: string;
         data: {
-            id: number;
             name: string;
+            phone: string | null;
+            address: string | null;
+            id: number;
             description: string | null;
             about: string | null;
-            address: string | null;
-            phone: string | null;
             email: string | null;
             website: string | null;
             updated_at: Date;

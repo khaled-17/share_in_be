@@ -1,55 +1,56 @@
 import { PrismaService } from '../../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 export declare class ReviewsService {
     private prisma;
     constructor(prisma: PrismaService);
     findAll(): Promise<{
-        name: string;
         id: string;
+        name: string;
         role: string | null;
-        createdAt: Date;
         review: string;
         rating: number;
         avatar: string | null;
         phoneNumber: string | null;
+        createdAt: Date;
     }[]>;
-    create(data: any): Promise<{
-        name: string;
+    create(data: Prisma.CustomerReviewCreateInput): Promise<{
         id: string;
+        name: string;
         role: string | null;
-        createdAt: Date;
         review: string;
         rating: number;
         avatar: string | null;
         phoneNumber: string | null;
+        createdAt: Date;
     }>;
     findOne(id: string): Promise<{
-        name: string;
         id: string;
+        name: string;
         role: string | null;
-        createdAt: Date;
         review: string;
         rating: number;
         avatar: string | null;
         phoneNumber: string | null;
+        createdAt: Date;
     } | null>;
-    update(id: string, data: any): Promise<{
-        name: string;
+    update(id: string, data: Prisma.CustomerReviewUpdateInput): Promise<{
         id: string;
+        name: string;
         role: string | null;
-        createdAt: Date;
         review: string;
         rating: number;
         avatar: string | null;
         phoneNumber: string | null;
+        createdAt: Date;
     }>;
     remove(id: string): Promise<{
-        name: string;
         id: string;
+        name: string;
         role: string | null;
-        createdAt: Date;
         review: string;
         rating: number;
         avatar: string | null;
         phoneNumber: string | null;
+        createdAt: Date;
     }>;
 }

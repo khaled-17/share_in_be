@@ -16,7 +16,8 @@ import * as winston from 'winston';
         winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
         winston.format.colorize({ all: true }),
         winston.format.printf(
-          (info) => `${String(info.timestamp)} ${String(info.level)}: ${String(info.message)}`,
+          (info) =>
+            `${String(info.timestamp)} ${String(info.level)}: ${String(info.message)}`,
         ),
       ),
       transports: [
@@ -30,4 +31,4 @@ import * as winston from 'winston';
     }),
   ],
 })
-export class LoggerModule { }
+export class LoggerModule {}

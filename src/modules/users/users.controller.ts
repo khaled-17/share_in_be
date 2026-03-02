@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import {
   Controller,
   Get,
@@ -30,7 +31,9 @@ export class UsersController {
   @ApiOperation({ summary: 'Create a new user' })
   @ApiResponse({ status: 201, description: 'User created successfully' })
   create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto as any);
+    return this.usersService.create(
+      createUserDto as unknown as Prisma.UserCreateInput,
+    );
   }
 
   @Get()

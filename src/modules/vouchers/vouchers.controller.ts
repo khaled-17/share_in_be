@@ -2,7 +2,6 @@ import {
   Controller,
   Get,
   Post,
-  Put,
   Delete,
   Body,
   Param,
@@ -19,7 +18,11 @@ import {
   ApiBearerAuth,
   ApiParam,
 } from '@nestjs/swagger';
-import { VouchersService } from './vouchers.service';
+import {
+  VouchersService,
+  ReceiptFilters,
+  PaymentFilters,
+} from './vouchers.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import {
   CreateReceiptVoucherDto,
@@ -36,7 +39,7 @@ export class VouchersController {
   @Get('receipts')
   @ApiOperation({ summary: 'Retrieve all receipt vouchers' })
   @ApiResponse({ status: 200, description: 'List of receipt vouchers' })
-  async findAllReceipt(@Query() query: any) {
+  async findAllReceipt(@Query() query: ReceiptFilters) {
     const result = await this.vouchersService.findAllReceipt(query);
     return {
       success: true,
@@ -48,7 +51,7 @@ export class VouchersController {
   @Get('payments')
   @ApiOperation({ summary: 'Retrieve all payment vouchers' })
   @ApiResponse({ status: 200, description: 'List of payment vouchers' })
-  async findAllPayment(@Query() query: any) {
+  async findAllPayment(@Query() query: PaymentFilters) {
     const result = await this.vouchersService.findAllPayment(query);
     return {
       success: true,

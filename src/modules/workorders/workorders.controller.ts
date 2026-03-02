@@ -33,8 +33,10 @@ export class WorkOrdersController {
   @Get()
   @ApiOperation({ summary: 'Retrieve all work orders' })
   @ApiResponse({ status: 200, description: 'List of work orders retrieved' })
-  async findAll(@Query() query: any) {
-    const result = await this.workOrdersService.findAll(query);
+  async findAll(@Query() query: Record<string, string>) {
+    const result = await this.workOrdersService.findAll(
+      query as unknown as Record<string, any>,
+    );
     return {
       success: true,
       message: 'Work orders retrieved successfully',

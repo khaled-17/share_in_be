@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import {
   Controller,
   Get,
@@ -33,8 +34,10 @@ export class QuotationsController {
   @Get()
   @ApiOperation({ summary: 'Retrieve all quotations' })
   @ApiResponse({ status: 200, description: 'List of quotations retrieved' })
-  async findAll(@Query() query: any) {
-    const result = await this.quotationsService.findAll(query);
+  async findAll(@Query() query: Record<string, string>) {
+    const result = await this.quotationsService.findAll(
+      query as unknown as Prisma.QuotationWhereInput,
+    );
     return {
       success: true,
       message: 'Quotations retrieved successfully',

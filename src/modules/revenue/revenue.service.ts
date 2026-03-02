@@ -1,8 +1,8 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { PrismaService } from "../../prisma/prisma.service";
-import { Prisma } from "@prisma/client";
-import { CreateRevenueDto, UpdateRevenueDto } from "./dto/revenue.dto";
-export interface RevenueFilters {
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
+import { CreateRevenueDto, UpdateRevenueDto } from './dto/revenue.dto';
+export class RevenueFilters {
   start_date?: string;
   end_date?: string;
   quotation_id?: number;
@@ -10,7 +10,7 @@ export interface RevenueFilters {
 
 @Injectable()
 export class RevenueService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async findAll(filters: RevenueFilters = {}) {
     const { start_date, end_date, quotation_id } = filters;

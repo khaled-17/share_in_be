@@ -1,5 +1,5 @@
-import { Injectable, BadRequestException } from "@nestjs/common";
-import { PrismaService } from "../../prisma/prisma.service";
+import { Injectable, BadRequestException } from '@nestjs/common';
+import { PrismaService } from '../../prisma/prisma.service';
 interface LedgerItem {
   date: string | Date;
   description: string;
@@ -14,7 +14,7 @@ interface LedgerItem {
 
 @Injectable()
 export class ReportsService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async getLedgerReport(startDate: string, endDate: string) {
     if (!startDate || !endDate) {

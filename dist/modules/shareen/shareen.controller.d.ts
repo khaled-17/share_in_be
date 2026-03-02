@@ -3,7 +3,7 @@ import { CreateShareenDto } from './dto/shareen.dto';
 export declare class ShareenController {
     private shareenService;
     constructor(shareenService: ShareenService);
-    findAll(query: any): Promise<{
+    findAll(query: Record<string, string>): Promise<{
         success: boolean;
         message: string;
         data: {

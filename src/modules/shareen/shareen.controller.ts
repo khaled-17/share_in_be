@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import {
   Controller,
   Get,
@@ -32,8 +33,10 @@ export class ShareenController {
   @Get()
   @ApiOperation({ summary: 'Retrieve shareen logs' })
   @ApiResponse({ status: 200, description: 'List of shareen entries' })
-  async findAll(@Query() query: any) {
-    const logs = await this.shareenService.findAll(query);
+  async findAll(@Query() query: Record<string, string>) {
+    const logs = await this.shareenService.findAll(
+      query as unknown as Prisma.ShareenWhereInput,
+    );
     return {
       success: true,
       message: 'Shareen logs retrieved successfully',
@@ -46,7 +49,9 @@ export class ShareenController {
   @ApiOperation({ summary: 'Log a new shareen action' })
   @ApiResponse({ status: 201, description: 'Logged successfully' })
   async create(@Body() createShareenDto: CreateShareenDto) {
-    const log = await this.shareenService.create(createShareenDto);
+    const log = await this.shareenService.create(
+      createShareenDto as unknown as Prisma.ShareenCreateInput,
+    );
     return {
       success: true,
       message: 'Log created successfully',

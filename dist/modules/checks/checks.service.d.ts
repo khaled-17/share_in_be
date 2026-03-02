@@ -1,6 +1,6 @@
 import { PrismaService } from '../../prisma/prisma.service';
 import { CreateCheckDto, UpdateCheckDto } from './dto/check.dto';
-export interface CheckFilters {
+export declare class CheckFilters {
     status?: string;
     start_date?: string;
     end_date?: string;
@@ -10,86 +10,86 @@ export declare class ChecksService {
     constructor(prisma: PrismaService);
     findAll(filters: CheckFilters): Promise<{
         id: number;
+        created_at: Date;
         amount: number;
         notes: string | null;
-        created_at: Date;
+        status: string;
         check_number: string;
         bank_name: string;
         check_date: string;
         beneficiary_name: string;
-        status: string;
         receipt_voucher_id: number | null;
         payment_voucher_id: number | null;
     }[]>;
     findOne(id: number): Promise<{
         receipt_voucher: {
             id: number;
-            amount: number;
             created_at: Date;
-            description: string | null;
+            amount: number;
             voucher_number: string;
             voucher_date: string;
-            source_type: string;
-            customer_id: string | null;
-            partner_id: number | null;
             payment_method: string;
             check_id: number | null;
-            received_from: string;
+            description: string | null;
             created_by: string | null;
+            partner_id: number | null;
+            customer_id: string | null;
+            source_type: string;
+            received_from: string;
         } | null;
         payment_voucher: {
             id: number;
-            amount: number;
             supplier_id: string | null;
             created_at: Date;
-            description: string | null;
+            amount: number;
             voucher_number: string;
             voucher_date: string;
-            partner_id: number | null;
+            beneficiary_type: string;
             payment_method: string;
             check_id: number | null;
-            created_by: string | null;
-            beneficiary_type: string;
-            employee_id: string | null;
-            expense_type_id: string | null;
+            description: string | null;
             paid_to: string;
+            created_by: string | null;
+            employee_id: string | null;
+            partner_id: number | null;
+            expense_type_id: string | null;
         } | null;
     } & {
         id: number;
+        created_at: Date;
         amount: number;
         notes: string | null;
-        created_at: Date;
+        status: string;
         check_number: string;
         bank_name: string;
         check_date: string;
         beneficiary_name: string;
-        status: string;
         receipt_voucher_id: number | null;
         payment_voucher_id: number | null;
     }>;
     create(data: CreateCheckDto): Promise<{
         id: number;
+        created_at: Date;
         amount: number;
         notes: string | null;
-        created_at: Date;
+        status: string;
         check_number: string;
         bank_name: string;
         check_date: string;
         beneficiary_name: string;
-        status: string;
         receipt_voucher_id: number | null;
         payment_voucher_id: number | null;
     }>;
     update(id: number, data: UpdateCheckDto): Promise<{
         id: number;
+        created_at: Date;
         amount: number;
         notes: string | null;
-        created_at: Date;
+        status: string;
         check_number: string;
         bank_name: string;
         check_date: string;
         beneficiary_name: string;
-        status: string;
         receipt_voucher_id: number | null;
         payment_voucher_id: number | null;
     }>;
@@ -98,27 +98,27 @@ export declare class ChecksService {
         notes?: string;
     }): Promise<{
         id: number;
+        created_at: Date;
         amount: number;
         notes: string | null;
-        created_at: Date;
+        status: string;
         check_number: string;
         bank_name: string;
         check_date: string;
         beneficiary_name: string;
-        status: string;
         receipt_voucher_id: number | null;
         payment_voucher_id: number | null;
     }>;
     remove(id: number): Promise<{
         id: number;
+        created_at: Date;
         amount: number;
         notes: string | null;
-        created_at: Date;
+        status: string;
         check_number: string;
         bank_name: string;
         check_date: string;
         beneficiary_name: string;
-        status: string;
         receipt_voucher_id: number | null;
         payment_voucher_id: number | null;
     }>;
@@ -138,14 +138,14 @@ export declare class ChecksService {
     }>;
     getDueSoon(): Promise<{
         id: number;
+        created_at: Date;
         amount: number;
         notes: string | null;
-        created_at: Date;
+        status: string;
         check_number: string;
         bank_name: string;
         check_date: string;
         beneficiary_name: string;
-        status: string;
         receipt_voucher_id: number | null;
         payment_voucher_id: number | null;
     }[]>;

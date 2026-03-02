@@ -13,7 +13,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ExpensesController = void 0;
-const client_1 = require("@prisma/client");
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const expenses_service_1 = require("./expenses.service");

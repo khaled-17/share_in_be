@@ -3,23 +3,23 @@ export declare class CompanyService {
     private prisma;
     constructor(prisma: PrismaService);
     getCompany(): Promise<{
-        id: number;
         name: string;
+        phone: string | null;
+        address: string | null;
+        id: number;
         description: string | null;
         about: string | null;
-        address: string | null;
-        phone: string | null;
         email: string | null;
         website: string | null;
         updated_at: Date;
     } | null>;
     update(data: any): Promise<{
-        id: number;
         name: string;
+        phone: string | null;
+        address: string | null;
+        id: number;
         description: string | null;
         about: string | null;
-        address: string | null;
-        phone: string | null;
         email: string | null;
         website: string | null;
         updated_at: Date;

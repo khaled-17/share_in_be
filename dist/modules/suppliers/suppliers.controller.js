@@ -24,8 +24,8 @@ let SuppliersController = class SuppliersController {
         this.suppliersService = suppliersService;
     }
     async findAll(query) {
-        const page = parseInt(query.page) || 1;
-        const limit = parseInt(query.limit) || 10;
+        const page = parseInt(query.page || '1');
+        const limit = parseInt(query.limit || '10');
         const search = query.search;
         const skip = (page - 1) * limit;
         const { suppliers, total } = await this.suppliersService.findAll({

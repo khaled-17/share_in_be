@@ -45,17 +45,14 @@ let WorkOrdersService = class WorkOrdersService {
         });
     }
     async create(data) {
-        const { quotation_id, ...orderData } = data;
-        if (orderData.order_code) {
-            const existing = await this.findByOrderCode(orderData.order_code);
+        const payload = data;
+        if (payload.order_code) {
+            const existing = await this.findByOrderCode(payload.order_code);
             if (existing)
                 throw new common_1.ConflictException('Work order code already exists');
         }
         return this.prisma.workOrder.create({
-            data: {
-                ...orderData,
-                quotation_id: parseInt(quotation_id),
-            },
+            data: payload,
             include: {
                 customer: true,
                 quotation: true,
@@ -64,15 +61,10 @@ let WorkOrdersService = class WorkOrdersService {
     }
     async update(id, data) {
         await this.findOne(id);
-        const { quotation_id, ...orderData } = data;
+        const payload = data;
         return this.prisma.workOrder.update({
             where: { id },
-            data: {
-                ...orderData,
-                quotation_id: quotation_id
-                    ? parseInt(quotation_id)
-                    : undefined,
-            },
+            data: payload,
             include: {
                 customer: true,
                 quotation: true,

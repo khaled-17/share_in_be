@@ -32,9 +32,9 @@ export class SuppliersController {
   @Get()
   @ApiOperation({ summary: 'Retrieve all suppliers' })
   @ApiResponse({ status: 200, description: 'List of suppliers retrieved' })
-  async findAll(@Query() query: any) {
-    const page = parseInt(query.page) || 1;
-    const limit = parseInt(query.limit) || 10;
+  async findAll(@Query() query: Record<string, string>) {
+    const page = parseInt(query.page || '1');
+    const limit = parseInt(query.limit || '10');
     const search = query.search;
     const skip = (page - 1) * limit;
 

@@ -34,8 +34,10 @@ export class ExpensesController {
   @Get()
   @ApiOperation({ summary: 'Retrieve expense transactions' })
   @ApiResponse({ status: 200, description: 'List of expense transactions' })
-  async findAll(@Query() query: Prisma.ExpenseWhereInput) {
-    const result = await this.expensesService.findAll(query);
+  async findAll(@Query() query: Record<string, string>) {
+    const result = await this.expensesService.findAll(
+      query as unknown as Prisma.ExpenseWhereInput,
+    );
     return {
       success: true,
       message: 'Expenses retrieved successfully',

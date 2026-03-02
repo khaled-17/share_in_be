@@ -77,7 +77,7 @@ __decorate([
     (0, swagger_1.ApiResponse)({ status: 200, description: 'List of receipt vouchers' }),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [vouchers_service_1.ReceiptFilters]),
     __metadata("design:returntype", Promise)
 ], VouchersController.prototype, "findAllReceipt", null);
 __decorate([
@@ -86,7 +86,7 @@ __decorate([
     (0, swagger_1.ApiResponse)({ status: 200, description: 'List of payment vouchers' }),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [vouchers_service_1.PaymentFilters]),
     __metadata("design:returntype", Promise)
 ], VouchersController.prototype, "findAllPayment", null);
 __decorate([

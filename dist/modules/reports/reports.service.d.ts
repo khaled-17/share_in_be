@@ -1,4 +1,4 @@
-import { PrismaService } from "../../prisma/prisma.service";
+import { PrismaService } from '../../prisma/prisma.service';
 export declare class ReportsService {
     private prisma;
     constructor(prisma: PrismaService);
@@ -76,11 +76,9 @@ export declare class ReportsService {
         quotations_count: number;
         work_orders_count: number;
         quotations: {
-            id: number;
-            status: string;
             customer_id: string;
             receipt_no: string | null;
-            project_type_id: string | null;
+            id: number;
             project_manager: string | null;
             project_name: string | null;
             quote_date: string;
@@ -88,11 +86,13 @@ export declare class ReportsService {
             totalamount: number;
             paid_adv: number | null;
             adv_date: string | null;
+            status: string;
+            project_type_id: string | null;
         }[];
         workOrders: {
-            id: number;
-            created_at: Date;
             customer_id: string;
+            created_at: Date;
+            id: number;
             order_code: string;
             quotation_id: number;
         }[];

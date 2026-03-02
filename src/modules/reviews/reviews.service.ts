@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class ReviewsService {
@@ -11,7 +12,7 @@ export class ReviewsService {
     });
   }
 
-  async create(data: any) {
+  async create(data: Prisma.CustomerReviewCreateInput) {
     return this.prisma.customerReview.create({
       data,
     });
@@ -23,7 +24,7 @@ export class ReviewsService {
     });
   }
 
-  async update(id: string, data: any) {
+  async update(id: string, data: Prisma.CustomerReviewUpdateInput) {
     return this.prisma.customerReview.update({
       where: { id },
       data,

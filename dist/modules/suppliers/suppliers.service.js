@@ -42,7 +42,7 @@ let SuppliersService = class SuppliersService {
         return { suppliers, total };
     }
     async findOne(idOrCode) {
-        let supplier;
+        let supplier = null;
         if (typeof idOrCode === 'number' || !isNaN(Number(idOrCode))) {
             supplier = await this.prisma.supplier.findUnique({
                 where: { id: Number(idOrCode) },

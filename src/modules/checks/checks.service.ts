@@ -3,7 +3,7 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { CreateCheckDto, UpdateCheckDto } from './dto/check.dto';
 
-export interface CheckFilters {
+export class CheckFilters {
   status?: string;
   start_date?: string;
   end_date?: string;

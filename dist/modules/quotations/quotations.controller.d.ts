@@ -3,18 +3,10 @@ import { CreateQuotationDto, UpdateQuotationDto } from './dto/quotation.dto';
 export declare class QuotationsController {
     private quotationsService;
     constructor(quotationsService: QuotationsService);
-    findAll(query: any): Promise<{
+    findAll(query: Record<string, string>): Promise<{
         success: boolean;
         message: string;
         data: ({
-            items: {
-                id: number;
-                description: string;
-                unit_price: number;
-                quantity: number;
-                total: number;
-                quotation_id: number;
-            }[];
             customer: {
                 name: string;
             };
@@ -23,8 +15,17 @@ export declare class QuotationsController {
                 type_id: string;
                 type_name: string;
             } | null;
+            items: {
+                id: number;
+                description: string;
+                total: number;
+                quotation_id: number;
+                unit_price: number;
+                quantity: number;
+            }[];
         } & {
             id: number;
+            receipt_no: string | null;
             customer_id: string;
             project_type_id: string | null;
             project_manager: string | null;
@@ -34,7 +35,6 @@ export declare class QuotationsController {
             totalamount: number;
             paid_adv: number | null;
             adv_date: string | null;
-            receipt_no: string | null;
             status: string;
         })[];
     }>;
@@ -42,32 +42,33 @@ export declare class QuotationsController {
         success: boolean;
         message: string;
         data: {
-            items: {
-                id: number;
-                description: string;
-                unit_price: number;
-                quantity: number;
-                total: number;
-                quotation_id: number;
-            }[];
             customer: {
                 name: string;
-                customer_id: string;
                 contact_person: string;
-                company_email: string;
-                contact_email: string;
                 phone: string;
                 secondary_phone: string;
                 address: string;
                 created_at: Date;
+                customer_id: string;
+                company_email: string;
+                contact_email: string;
             };
             project_type: {
                 id: number;
                 type_id: string;
                 type_name: string;
             } | null;
+            items: {
+                id: number;
+                description: string;
+                total: number;
+                quotation_id: number;
+                unit_price: number;
+                quantity: number;
+            }[];
         } & {
             id: number;
+            receipt_no: string | null;
             customer_id: string;
             project_type_id: string | null;
             project_manager: string | null;
@@ -77,7 +78,6 @@ export declare class QuotationsController {
             totalamount: number;
             paid_adv: number | null;
             adv_date: string | null;
-            receipt_no: string | null;
             status: string;
         };
     }>;
@@ -85,32 +85,33 @@ export declare class QuotationsController {
         success: boolean;
         message: string;
         data: {
-            items: {
-                id: number;
-                description: string;
-                unit_price: number;
-                quantity: number;
-                total: number;
-                quotation_id: number;
-            }[];
             customer: {
                 name: string;
-                customer_id: string;
                 contact_person: string;
-                company_email: string;
-                contact_email: string;
                 phone: string;
                 secondary_phone: string;
                 address: string;
                 created_at: Date;
+                customer_id: string;
+                company_email: string;
+                contact_email: string;
             };
             project_type: {
                 id: number;
                 type_id: string;
                 type_name: string;
             } | null;
+            items: {
+                id: number;
+                description: string;
+                total: number;
+                quotation_id: number;
+                unit_price: number;
+                quantity: number;
+            }[];
         } & {
             id: number;
+            receipt_no: string | null;
             customer_id: string;
             project_type_id: string | null;
             project_manager: string | null;
@@ -120,7 +121,6 @@ export declare class QuotationsController {
             totalamount: number;
             paid_adv: number | null;
             adv_date: string | null;
-            receipt_no: string | null;
             status: string;
         };
     }>;
@@ -128,32 +128,33 @@ export declare class QuotationsController {
         success: boolean;
         message: string;
         data: {
-            items: {
-                id: number;
-                description: string;
-                unit_price: number;
-                quantity: number;
-                total: number;
-                quotation_id: number;
-            }[];
             customer: {
                 name: string;
-                customer_id: string;
                 contact_person: string;
-                company_email: string;
-                contact_email: string;
                 phone: string;
                 secondary_phone: string;
                 address: string;
                 created_at: Date;
+                customer_id: string;
+                company_email: string;
+                contact_email: string;
             };
             project_type: {
                 id: number;
                 type_id: string;
                 type_name: string;
             } | null;
+            items: {
+                id: number;
+                description: string;
+                total: number;
+                quotation_id: number;
+                unit_price: number;
+                quantity: number;
+            }[];
         } & {
             id: number;
+            receipt_no: string | null;
             customer_id: string;
             project_type_id: string | null;
             project_manager: string | null;
@@ -163,7 +164,6 @@ export declare class QuotationsController {
             totalamount: number;
             paid_adv: number | null;
             adv_date: string | null;
-            receipt_no: string | null;
             status: string;
         };
     }>;

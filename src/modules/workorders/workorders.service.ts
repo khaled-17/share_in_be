@@ -4,6 +4,7 @@ import {
   ConflictException,
 } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
 import { CreateWorkOrderDto, UpdateWorkOrderDto } from './dto/workorder.dto';
 
 @Injectable()
@@ -40,18 +41,15 @@ export class WorkOrdersService {
   }
 
   async create(data: CreateWorkOrderDto) {
-    const { quotation_id, ...orderData } = data as any;
-    if (orderData.order_code) {
-      const existing = await this.findByOrderCode(orderData.order_code);
+    const payload = data as unknown as Prisma.WorkOrderUncheckedCreateInput;
+    if (payload.order_code) {
+      const existing = await this.findByOrderCode(payload.order_code);
       if (existing)
         throw new ConflictException('Work order code already exists');
     }
 
     return this.prisma.workOrder.create({
-      data: {
-        ...orderData,
-        quotation_id: parseInt(quotation_id as string),
-      },
+      data: payload,
       include: {
         customer: true,
         quotation: true,
@@ -61,15 +59,10 @@ export class WorkOrdersService {
 
   async update(id: number, data: UpdateWorkOrderDto) {
     await this.findOne(id);
-    const { quotation_id, ...orderData } = data as any;
+    const payload = data as object;
     return this.prisma.workOrder.update({
       where: { id },
-      data: {
-        ...orderData,
-        quotation_id: quotation_id
-          ? parseInt(quotation_id as string)
-          : undefined,
-      },
+      data: payload,
       include: {
         customer: true,
         quotation: true,

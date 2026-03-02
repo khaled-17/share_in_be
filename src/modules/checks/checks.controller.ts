@@ -19,7 +19,7 @@ import {
   ApiBearerAuth,
   ApiParam,
 } from '@nestjs/swagger';
-import { ChecksService, CheckFilters }  from './checks.service';
+import { ChecksService, CheckFilters } from './checks.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreateCheckDto, UpdateCheckDto } from './dto/check.dto';
 

@@ -24,7 +24,11 @@ class CreateRevenueDto {
 }
 exports.CreateRevenueDto = CreateRevenueDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Revenue transaction code', example: 'REV-001', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Revenue transaction code',
+        example: 'REV-001',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -52,13 +56,21 @@ __decorate([
     __metadata("design:type", String)
 ], CreateRevenueDto.prototype, "receipt_no", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Internal quotation ID reference', example: 1, required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Internal quotation ID reference',
+        example: 1,
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateRevenueDto.prototype, "quote_id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Notes or description', example: 'Installation Service', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Notes or description',
+        example: 'Installation Service',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -87,49 +99,81 @@ class UpdateRevenueDto {
 }
 exports.UpdateRevenueDto = UpdateRevenueDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Revenue transaction code', example: 'REV-001', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Revenue transaction code',
+        example: 'REV-001',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateRevenueDto.prototype, "code", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Transaction date', example: '2023-10-01', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Transaction date',
+        example: '2023-10-01',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateRevenueDto.prototype, "rev_date", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Revenue amount', example: 1500.5, required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Revenue amount',
+        example: 1500.5,
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], UpdateRevenueDto.prototype, "amount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Receipt number', example: 'REC-001', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Receipt number',
+        example: 'REC-001',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateRevenueDto.prototype, "receipt_no", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Internal quotation ID reference', example: 1, required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Internal quotation ID reference',
+        example: 1,
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], UpdateRevenueDto.prototype, "quote_id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Notes or description', example: 'Installation Service', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Notes or description',
+        example: 'Installation Service',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateRevenueDto.prototype, "notes", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Customer ID', example: 'CUST-001', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Customer ID',
+        example: 'CUST-001',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateRevenueDto.prototype, "customer_id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Revenue Type ID', example: 'TYPE-001', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Revenue Type ID',
+        example: 'TYPE-001',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)

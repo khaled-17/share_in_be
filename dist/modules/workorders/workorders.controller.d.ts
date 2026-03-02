@@ -3,7 +3,7 @@ import { CreateWorkOrderDto, UpdateWorkOrderDto } from './dto/workorder.dto';
 export declare class WorkOrdersController {
     private workOrdersService;
     constructor(workOrdersService: WorkOrdersService);
-    findAll(query: any): Promise<{
+    findAll(query: Record<string, string>): Promise<{
         success: boolean;
         message: string;
         data: ({

@@ -95,7 +95,7 @@ export class SettingsService {
     });
   }
 
-  async createProjectType(data: any) {
+  async createProjectType(data: { type: string }) {
     const { type } = data;
     // Generate a simple ID or handle as needed
     const type_id = type.toLowerCase().replace(/\s+/g, '-');
@@ -113,7 +113,7 @@ export class SettingsService {
     });
   }
 
-  async updateProjectType(id: number, data: any) {
+  async updateProjectType(id: number, data: { type: string }) {
     const existing = await this.prisma.projectType.findUnique({
       where: { id },
     });

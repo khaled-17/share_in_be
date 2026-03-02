@@ -9,9 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VouchersService = void 0;
+exports.VouchersService = exports.PaymentFilters = exports.ReceiptFilters = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../../prisma/prisma.service");
+class ReceiptFilters {
+    start_date;
+    end_date;
+    source_type;
+    payment_method;
+}
+exports.ReceiptFilters = ReceiptFilters;
+class PaymentFilters {
+    start_date;
+    end_date;
+    beneficiary_type;
+    payment_method;
+}
+exports.PaymentFilters = PaymentFilters;
 let VouchersService = class VouchersService {
     prisma;
     constructor(prisma) {
@@ -61,6 +75,9 @@ let VouchersService = class VouchersService {
                 const createdCheck = await tx.checkDetail.create({
                     data: {
                         ...check,
+                        check_number: check.check_number || '',
+                        bank_name: check.bank_name || '',
+                        check_date: check.check_date || new Date().toISOString(),
                         amount: voucherData.amount,
                         status: check.status || 'pending',
                         beneficiary_name: 'ShareIn',
@@ -198,6 +215,9 @@ let VouchersService = class VouchersService {
                 const createdCheck = await tx.checkDetail.create({
                     data: {
                         ...check,
+                        check_number: check.check_number || '',
+                        bank_name: check.bank_name || '',
+                        check_date: check.check_date || new Date().toISOString(),
                         amount: voucherData.amount,
                         status: check.status || 'pending',
                         beneficiary_name: voucherData.paid_to,

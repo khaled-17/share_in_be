@@ -19,7 +19,7 @@ import {
   ApiBearerAuth,
   ApiParam,
 } from '@nestjs/swagger';
-import { RevenueService } from './revenue.service';
+import { RevenueService, RevenueFilters } from './revenue.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreateRevenueDto, UpdateRevenueDto } from './dto/revenue.dto';
 
@@ -28,7 +28,7 @@ import { CreateRevenueDto, UpdateRevenueDto } from './dto/revenue.dto';
 @Controller('revenue')
 @UseGuards(JwtAuthGuard)
 export class RevenueController {
-  constructor(private revenueService: RevenueService) { }
+  constructor(private revenueService: RevenueService) {}
 
   @Get()
   @ApiOperation({ summary: 'Retrieve revenue transactions' })

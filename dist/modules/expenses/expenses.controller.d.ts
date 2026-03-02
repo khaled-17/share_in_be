@@ -1,10 +1,9 @@
-import { Prisma } from '@prisma/client';
 import { ExpensesService } from './expenses.service';
 import { CreateExpenseDto, UpdateExpenseDto } from './dto/expense.dto';
 export declare class ExpensesController {
     private expensesService;
     constructor(expensesService: ExpensesService);
-    findAll(query: Prisma.ExpenseWhereInput): Promise<{
+    findAll(query: Record<string, string>): Promise<{
         success: boolean;
         message: string;
         data: ({
@@ -28,13 +27,13 @@ export declare class ExpensesController {
             };
         } & {
             id: number;
+            supplier_id: string;
             code: string | null;
             exp_date: string;
             amount: number;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
-            supplier_id: string;
             exptype_id: string;
         })[];
     }>;
@@ -62,13 +61,13 @@ export declare class ExpensesController {
             };
         } & {
             id: number;
+            supplier_id: string;
             code: string | null;
             exp_date: string;
             amount: number;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
-            supplier_id: string;
             exptype_id: string;
         };
     }>;
@@ -96,13 +95,13 @@ export declare class ExpensesController {
             };
         } & {
             id: number;
+            supplier_id: string;
             code: string | null;
             exp_date: string;
             amount: number;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
-            supplier_id: string;
             exptype_id: string;
         };
     }>;
@@ -130,13 +129,13 @@ export declare class ExpensesController {
             };
         } & {
             id: number;
+            supplier_id: string;
             code: string | null;
             exp_date: string;
             amount: number;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
-            supplier_id: string;
             exptype_id: string;
         };
     }>;
