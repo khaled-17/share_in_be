@@ -12,7 +12,9 @@ async function bootstrap() {
 
   // Read package.json version
   const packageJsonPath = path.join(process.cwd(), 'package.json');
-  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+  const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8')) as {
+    version: string;
+  };
 
   const config = new DocumentBuilder()
     .setTitle('ShareIn API')
@@ -26,4 +28,4 @@ async function bootstrap() {
 
   await app.listen(process.env.PORT ?? 3000);
 }
-bootstrap();
+void bootstrap();

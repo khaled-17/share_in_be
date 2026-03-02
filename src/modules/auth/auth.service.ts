@@ -81,7 +81,7 @@ export class AuthService {
           expiresIn: '7d',
         }),
       };
-    } catch (error) {
+    } catch (_error) {
       throw new UnauthorizedException('Invalid refresh token');
     }
   }

@@ -114,7 +114,7 @@ let AuthService = class AuthService {
                 }),
             };
         }
-        catch (error) {
+        catch (_error) {
             throw new common_1.UnauthorizedException('Invalid refresh token');
         }
     }

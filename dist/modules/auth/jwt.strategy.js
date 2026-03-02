@@ -21,7 +21,7 @@ let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(pas
             secretOrKey: process.env.JWT_SECRET || 'your-secret-key',
         });
     }
-    async validate(payload) {
+    validate(payload) {
         return { userId: payload.userId, email: payload.email };
     }
 };
