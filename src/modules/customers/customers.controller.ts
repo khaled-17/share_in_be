@@ -16,7 +16,6 @@ import {
   ApiOperation,
   ApiResponse,
   ApiBearerAuth,
-  ApiQuery,
   ApiParam,
 } from '@nestjs/swagger';
 import { CustomersService } from './customers.service';
@@ -32,7 +31,7 @@ import {
 @Controller('customers')
 @UseGuards(JwtAuthGuard)
 export class CustomersController {
-  constructor(private customersService: CustomersService) {}
+  constructor(private customersService: CustomersService) { }
 
   @Get()
   @ApiOperation({ summary: 'Retrieve all customers with pagination' })

@@ -1,15 +1,20 @@
 export declare class CreateRevenueDto {
-    quotation_id: number;
-    date: string;
+    code?: string;
+    rev_date: string;
     amount: number;
-    source: string;
-    payment_method?: string;
-    reference?: string;
+    receipt_no?: string;
+    quote_id?: number;
+    notes?: string;
+    customer_id: string;
+    revtype_id: string;
 }
 export declare class UpdateRevenueDto {
-    date?: string;
+    code?: string;
+    rev_date?: string;
     amount?: number;
-    source?: string;
-    payment_method?: string;
-    reference?: string;
+    receipt_no?: string;
+    quote_id?: number;
+    notes?: string;
+    customer_id?: string;
+    revtype_id?: string;
 }

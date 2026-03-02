@@ -6,13 +6,13 @@ export declare class CompanyController {
     getCompany(): Promise<{
         success: boolean;
         data: {
-            name: string;
             id: number;
-            email: string | null;
+            name: string;
             description: string | null;
-            phone: string | null;
-            address: string | null;
             about: string | null;
+            address: string | null;
+            phone: string | null;
+            email: string | null;
             website: string | null;
             updated_at: Date;
         } | null;
@@ -21,13 +21,13 @@ export declare class CompanyController {
         success: boolean;
         message: string;
         data: {
-            name: string;
             id: number;
-            email: string | null;
+            name: string;
             description: string | null;
-            phone: string | null;
-            address: string | null;
             about: string | null;
+            address: string | null;
+            phone: string | null;
+            email: string | null;
             website: string | null;
             updated_at: Date;
         };

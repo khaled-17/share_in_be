@@ -1,9 +1,20 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
+import { Injectable, BadRequestException } from "@nestjs/common";
+import { PrismaService } from "../../prisma/prisma.service";
+interface LedgerItem {
+  date: string | Date;
+  description: string;
+  debit: number;
+  credit: number;
+  type: string;
+  source_type?: string;
+  beneficiary_type?: string;
+  partner_id?: number | null;
+  balance?: number;
+}
 
 @Injectable()
 export class ReportsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async getLedgerReport(startDate: string, endDate: string) {
     if (!startDate || !endDate) {
@@ -62,7 +73,7 @@ export class ReportsService {
       },
     });
 
-    const ledgerItems: any[] = [];
+    const ledgerItems: LedgerItem[] = [];
 
     revenues.forEach((r) => {
       ledgerItems.push({

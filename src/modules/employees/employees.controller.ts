@@ -6,7 +6,6 @@ import {
   Delete,
   Body,
   Param,
-  Query,
   UseGuards,
   HttpCode,
   HttpStatus,
@@ -28,7 +27,7 @@ import { CreateEmployeeDto, UpdateEmployeeDto } from './dto/employee.dto';
 @Controller('employees')
 @UseGuards(JwtAuthGuard)
 export class EmployeesController {
-  constructor(private employeesService: EmployeesService) {}
+  constructor(private employeesService: EmployeesService) { }
 
   @Get()
   @ApiOperation({ summary: 'Retrieve all employees' })

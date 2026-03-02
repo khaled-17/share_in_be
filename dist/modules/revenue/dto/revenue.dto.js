@@ -13,26 +13,28 @@ exports.UpdateRevenueDto = exports.CreateRevenueDto = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateRevenueDto {
-    quotation_id;
-    date;
+    code;
+    rev_date;
     amount;
-    source;
-    payment_method;
-    reference;
+    receipt_no;
+    quote_id;
+    notes;
+    customer_id;
+    revtype_id;
 }
 exports.CreateRevenueDto = CreateRevenueDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Internal quotation ID reference', example: 1 }),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], CreateRevenueDto.prototype, "quotation_id", void 0);
+    (0, swagger_1.ApiProperty)({ description: 'Revenue transaction code', example: 'REV-001', required: false }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateRevenueDto.prototype, "code", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Transaction date', example: '2023-10-01' }),
     (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsDateString)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateRevenueDto.prototype, "date", void 0);
+], CreateRevenueDto.prototype, "rev_date", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Revenue amount', example: 1500.5 }),
     (0, class_validator_1.IsNotEmpty)(),
@@ -41,88 +43,95 @@ __decorate([
 ], CreateRevenueDto.prototype, "amount", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Revenue source or description',
-        example: 'Installation Service',
+        description: 'Receipt number (Receipt #, etc.)',
+        example: 'REC-001',
+        required: false,
     }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateRevenueDto.prototype, "receipt_no", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Internal quotation ID reference', example: 1, required: false }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CreateRevenueDto.prototype, "quote_id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Notes or description', example: 'Installation Service', required: false }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateRevenueDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer ID', example: 'CUST-001' }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateRevenueDto.prototype, "source", void 0);
+], CreateRevenueDto.prototype, "customer_id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Payment method',
-        example: 'Cash',
-        enum: ['Cash', 'Bank Transfer', 'Check'],
-    }),
-    (0, class_validator_1.IsOptional)(),
+    (0, swagger_1.ApiProperty)({ description: 'Revenue Type ID', example: 'TYPE-001' }),
+    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateRevenueDto.prototype, "payment_method", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Reference number (Receipt #, etc.)',
-        example: 'REC-001',
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateRevenueDto.prototype, "reference", void 0);
+], CreateRevenueDto.prototype, "revtype_id", void 0);
 class UpdateRevenueDto {
-    date;
+    code;
+    rev_date;
     amount;
-    source;
-    payment_method;
-    reference;
+    receipt_no;
+    quote_id;
+    notes;
+    customer_id;
+    revtype_id;
 }
 exports.UpdateRevenueDto = UpdateRevenueDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Transaction date',
-        example: '2023-10-01',
-        required: false,
-    }),
+    (0, swagger_1.ApiProperty)({ description: 'Revenue transaction code', example: 'REV-001', required: false }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsDateString)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UpdateRevenueDto.prototype, "date", void 0);
+], UpdateRevenueDto.prototype, "code", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Revenue amount',
-        example: 1500.5,
-        required: false,
-    }),
+    (0, swagger_1.ApiProperty)({ description: 'Transaction date', example: '2023-10-01', required: false }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateRevenueDto.prototype, "rev_date", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Revenue amount', example: 1500.5, required: false }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], UpdateRevenueDto.prototype, "amount", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Revenue source or description',
-        example: 'Installation Service',
-        required: false,
-    }),
+    (0, swagger_1.ApiProperty)({ description: 'Receipt number', example: 'REC-001', required: false }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UpdateRevenueDto.prototype, "source", void 0);
+], UpdateRevenueDto.prototype, "receipt_no", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Payment method',
-        example: 'Cash',
-        required: false,
-    }),
+    (0, swagger_1.ApiProperty)({ description: 'Internal quotation ID reference', example: 1, required: false }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], UpdateRevenueDto.prototype, "payment_method", void 0);
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], UpdateRevenueDto.prototype, "quote_id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Reference number',
-        example: 'REC-001',
-        required: false,
-    }),
+    (0, swagger_1.ApiProperty)({ description: 'Notes or description', example: 'Installation Service', required: false }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UpdateRevenueDto.prototype, "reference", void 0);
+], UpdateRevenueDto.prototype, "notes", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Customer ID', example: 'CUST-001', required: false }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateRevenueDto.prototype, "customer_id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Revenue Type ID', example: 'TYPE-001', required: false }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateRevenueDto.prototype, "revtype_id", void 0);
 //# sourceMappingURL=revenue.dto.js.map

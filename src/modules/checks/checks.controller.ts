@@ -19,7 +19,7 @@ import {
   ApiBearerAuth,
   ApiParam,
 } from '@nestjs/swagger';
-import { ChecksService } from './checks.service';
+import { ChecksService, CheckFilters }  from './checks.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreateCheckDto, UpdateCheckDto } from './dto/check.dto';
 
@@ -28,7 +28,7 @@ import { CreateCheckDto, UpdateCheckDto } from './dto/check.dto';
 @Controller('checks')
 @UseGuards(JwtAuthGuard)
 export class ChecksController {
-  constructor(private checksService: ChecksService) { }
+  constructor(private checksService: ChecksService) {}
 
   @Get()
   @ApiOperation({ summary: 'Retrieve all checks' })

@@ -57,7 +57,7 @@ exports.LoggerModule = LoggerModule = __decorate([
                     http: 3,
                     debug: 4,
                 },
-                format: winston.format.combine(winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), winston.format.colorize({ all: true }), winston.format.printf((info) => `${info.timestamp} ${info.level}: ${info.message}`)),
+                format: winston.format.combine(winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), winston.format.colorize({ all: true }), winston.format.printf((info) => `${String(info.timestamp)} ${String(info.level)}: ${String(info.message)}`)),
                 transports: [
                     new winston.transports.Console(),
                     new winston.transports.File({

@@ -3,7 +3,7 @@ import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class CompanyService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async getCompany() {
     return this.prisma.companySettings.findFirst();
@@ -12,8 +12,8 @@ export class CompanyService {
   async update(data: any) {
     return this.prisma.companySettings.upsert({
       where: { id: 1 },
-      update: data,
-      create: { id: 1, ...data },
+      update: data as Prisma.CompanySettingsUpdateInput,
+      create: { id: 1, ...(data as Prisma.CompanySettingsCreateInput) },
     });
   }
 }

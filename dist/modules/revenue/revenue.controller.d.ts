@@ -3,13 +3,13 @@ import { CreateRevenueDto, UpdateRevenueDto } from './dto/revenue.dto';
 export declare class RevenueController {
     private revenueService;
     constructor(revenueService: RevenueService);
-    findAll(query: any): Promise<{
+    findAll(query: RevenueFilters): Promise<{
         success: boolean;
         message: string;
         data: ({
             customer: {
-                name: string;
                 customer_id: string;
+                name: string;
                 contact_person: string;
                 company_email: string;
                 contact_email: string;
@@ -26,13 +26,13 @@ export declare class RevenueController {
             };
         } & {
             id: number;
-            customer_id: string;
             code: string | null;
             rev_date: string;
             amount: number;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
+            customer_id: string;
             revtype_id: string;
         })[];
     }>;
@@ -41,8 +41,8 @@ export declare class RevenueController {
         message: string;
         data: {
             customer: {
-                name: string;
                 customer_id: string;
+                name: string;
                 contact_person: string;
                 company_email: string;
                 contact_email: string;
@@ -59,13 +59,13 @@ export declare class RevenueController {
             };
         } & {
             id: number;
-            customer_id: string;
             code: string | null;
             rev_date: string;
             amount: number;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
+            customer_id: string;
             revtype_id: string;
         };
     }>;
@@ -74,8 +74,8 @@ export declare class RevenueController {
         message: string;
         data: {
             customer: {
-                name: string;
                 customer_id: string;
+                name: string;
                 contact_person: string;
                 company_email: string;
                 contact_email: string;
@@ -92,13 +92,13 @@ export declare class RevenueController {
             };
         } & {
             id: number;
-            customer_id: string;
             code: string | null;
             rev_date: string;
             amount: number;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
+            customer_id: string;
             revtype_id: string;
         };
     }>;
@@ -107,8 +107,8 @@ export declare class RevenueController {
         message: string;
         data: {
             customer: {
-                name: string;
                 customer_id: string;
+                name: string;
                 contact_person: string;
                 company_email: string;
                 contact_email: string;
@@ -125,13 +125,13 @@ export declare class RevenueController {
             };
         } & {
             id: number;
-            customer_id: string;
             code: string | null;
             rev_date: string;
             amount: number;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
+            customer_id: string;
             revtype_id: string;
         };
     }>;

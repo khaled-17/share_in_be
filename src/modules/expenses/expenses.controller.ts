@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import {
   Controller,
   Get,
@@ -28,7 +29,7 @@ import { CreateExpenseDto, UpdateExpenseDto } from './dto/expense.dto';
 @Controller('expenses')
 @UseGuards(JwtAuthGuard)
 export class ExpensesController {
-  constructor(private expensesService: ExpensesService) { }
+  constructor(private expensesService: ExpensesService) {}
 
   @Get()
   @ApiOperation({ summary: 'Retrieve expense transactions' })

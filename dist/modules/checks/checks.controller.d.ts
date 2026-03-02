@@ -1,4 +1,4 @@
-import { ChecksService } from './checks.service';
+import { ChecksService, CheckFilters } from './checks.service';
 import { CreateCheckDto, UpdateCheckDto } from './dto/check.dto';
 export declare class ChecksController {
     private checksService;

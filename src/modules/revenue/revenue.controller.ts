@@ -28,18 +28,13 @@ import { CreateRevenueDto, UpdateRevenueDto } from './dto/revenue.dto';
 @Controller('revenue')
 @UseGuards(JwtAuthGuard)
 export class RevenueController {
-  constructor(private revenueService: RevenueService) {}
+  constructor(private revenueService: RevenueService) { }
 
   @Get()
   @ApiOperation({ summary: 'Retrieve revenue transactions' })
   @ApiResponse({ status: 200, description: 'List of revenue transactions' })
-  async findAll(@Query() query: any) {
-    const filters = {
-      start_date: query.start_date,
-      end_date: query.end_date,
-      quotation_id: query.quotation_id ? Number(query.quotation_id) : undefined,
-    };
-    const result = await this.revenueService.findAll(filters);
+  async findAll(@Query() query: RevenueFilters) {
+    const result = await this.revenueService.findAll(query);
     return {
       success: true,
       message: 'Revenues retrieved successfully',

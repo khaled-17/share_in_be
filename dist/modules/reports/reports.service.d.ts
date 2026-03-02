@@ -1,13 +1,29 @@
-import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaService } from "../../prisma/prisma.service";
 export declare class ReportsService {
     private prisma;
     constructor(prisma: PrismaService);
     getLedgerReport(startDate: string, endDate: string): Promise<{
         openingBalance: number;
-        ledgerData: any[];
+        ledgerData: ({
+            balance: number;
+            date: string | Date;
+            description: string;
+            debit: number;
+            credit: number;
+            type: string;
+            source_type?: string;
+            beneficiary_type?: string;
+            partner_id?: number | null;
+        } | {
+            date: string;
+            description: string;
+            debit: number;
+            credit: number;
+            balance: number;
+        })[];
         totals: {
-            debit: any;
-            credit: any;
+            debit: number;
+            credit: number;
             balance: number;
         };
         budgetStats: {
@@ -26,10 +42,26 @@ export declare class ReportsService {
     }>;
     getFinancialReport(startDate?: string, endDate?: string): Promise<{
         openingBalance: number;
-        ledgerData: any[];
+        ledgerData: ({
+            balance: number;
+            date: string | Date;
+            description: string;
+            debit: number;
+            credit: number;
+            type: string;
+            source_type?: string;
+            beneficiary_type?: string;
+            partner_id?: number | null;
+        } | {
+            date: string;
+            description: string;
+            debit: number;
+            credit: number;
+            balance: number;
+        })[];
         totals: {
-            debit: any;
-            credit: any;
+            debit: number;
+            credit: number;
             balance: number;
         };
         budgetStats: {
@@ -45,8 +77,10 @@ export declare class ReportsService {
         work_orders_count: number;
         quotations: {
             id: number;
+            status: string;
             customer_id: string;
             receipt_no: string | null;
+            project_type_id: string | null;
             project_manager: string | null;
             project_name: string | null;
             quote_date: string;
@@ -54,13 +88,11 @@ export declare class ReportsService {
             totalamount: number;
             paid_adv: number | null;
             adv_date: string | null;
-            status: string;
-            project_type_id: string | null;
         }[];
         workOrders: {
             id: number;
-            customer_id: string;
             created_at: Date;
+            customer_id: string;
             order_code: string;
             quotation_id: number;
         }[];

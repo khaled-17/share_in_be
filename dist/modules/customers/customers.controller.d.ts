@@ -7,8 +7,8 @@ export declare class CustomersController {
         success: boolean;
         message: string;
         data: {
-            name: string;
             customer_id: string;
+            name: string;
             contact_person: string;
             company_email: string;
             contact_email: string;
@@ -27,8 +27,8 @@ export declare class CustomersController {
         success: boolean;
         message: string;
         data: {
-            name: string;
             customer_id: string;
+            name: string;
             contact_person: string;
             company_email: string;
             contact_email: string;
@@ -42,8 +42,8 @@ export declare class CustomersController {
         success: boolean;
         message: string;
         data: {
-            name: string;
             customer_id: string;
+            name: string;
             contact_person: string;
             company_email: string;
             contact_email: string;
@@ -57,8 +57,8 @@ export declare class CustomersController {
         success: boolean;
         message: string;
         data: {
-            name: string;
             customer_id: string;
+            name: string;
             contact_person: string;
             company_email: string;
             contact_email: string;

@@ -8,15 +8,15 @@ import {
 } from 'class-validator';
 
 export class CreateRevenueDto {
-  @ApiProperty({ description: 'Internal quotation ID reference', example: 1 })
-  @IsNotEmpty()
-  @IsNumber()
-  quotation_id: number;
+  @ApiProperty({ description: 'Revenue transaction code', example: 'REV-001', required: false })
+  @IsOptional()
+  @IsString()
+  code?: string;
 
   @ApiProperty({ description: 'Transaction date', example: '2023-10-01' })
   @IsNotEmpty()
-  @IsDateString()
-  date: string;
+  @IsString()
+  rev_date: string;
 
   @ApiProperty({ description: 'Revenue amount', example: 1500.5 })
   @IsNotEmpty()
@@ -24,74 +24,73 @@ export class CreateRevenueDto {
   amount: number;
 
   @ApiProperty({
-    description: 'Revenue source or description',
-    example: 'Installation Service',
+    description: 'Receipt number (Receipt #, etc.)',
+    example: 'REC-001',
+    required: false,
   })
+  @IsOptional()
+  @IsString()
+  receipt_no?: string;
+
+  @ApiProperty({ description: 'Internal quotation ID reference', example: 1, required: false })
+  @IsOptional()
+  @IsNumber()
+  quote_id?: number;
+
+  @ApiProperty({ description: 'Notes or description', example: 'Installation Service', required: false })
+  @IsOptional()
+  @IsString()
+  notes?: string;
+
+  @ApiProperty({ description: 'Customer ID', example: 'CUST-001' })
   @IsNotEmpty()
   @IsString()
-  source: string;
+  customer_id: string;
 
-  @ApiProperty({
-    description: 'Payment method',
-    example: 'Cash',
-    enum: ['Cash', 'Bank Transfer', 'Check'],
-  })
-  @IsOptional()
+  @ApiProperty({ description: 'Revenue Type ID', example: 'TYPE-001' })
+  @IsNotEmpty()
   @IsString()
-  payment_method?: string;
-
-  @ApiProperty({
-    description: 'Reference number (Receipt #, etc.)',
-    example: 'REC-001',
-  })
-  @IsOptional()
-  @IsString()
-  reference?: string;
+  revtype_id: string;
 }
 
 export class UpdateRevenueDto {
-  @ApiProperty({
-    description: 'Transaction date',
-    example: '2023-10-01',
-    required: false,
-  })
+  @ApiProperty({ description: 'Revenue transaction code', example: 'REV-001', required: false })
   @IsOptional()
-  @IsDateString()
-  date?: string;
+  @IsString()
+  code?: string;
 
-  @ApiProperty({
-    description: 'Revenue amount',
-    example: 1500.5,
-    required: false,
-  })
+  @ApiProperty({ description: 'Transaction date', example: '2023-10-01', required: false })
+  @IsOptional()
+  @IsString()
+  rev_date?: string;
+
+  @ApiProperty({ description: 'Revenue amount', example: 1500.5, required: false })
   @IsOptional()
   @IsNumber()
   amount?: number;
 
-  @ApiProperty({
-    description: 'Revenue source or description',
-    example: 'Installation Service',
-    required: false,
-  })
+  @ApiProperty({ description: 'Receipt number', example: 'REC-001', required: false })
   @IsOptional()
   @IsString()
-  source?: string;
+  receipt_no?: string;
 
-  @ApiProperty({
-    description: 'Payment method',
-    example: 'Cash',
-    required: false,
-  })
+  @ApiProperty({ description: 'Internal quotation ID reference', example: 1, required: false })
   @IsOptional()
-  @IsString()
-  payment_method?: string;
+  @IsNumber()
+  quote_id?: number;
 
-  @ApiProperty({
-    description: 'Reference number',
-    example: 'REC-001',
-    required: false,
-  })
+  @ApiProperty({ description: 'Notes or description', example: 'Installation Service', required: false })
   @IsOptional()
   @IsString()
-  reference?: string;
+  notes?: string;
+
+  @ApiProperty({ description: 'Customer ID', example: 'CUST-001', required: false })
+  @IsOptional()
+  @IsString()
+  customer_id?: string;
+
+  @ApiProperty({ description: 'Revenue Type ID', example: 'TYPE-001', required: false })
+  @IsOptional()
+  @IsString()
+  revtype_id?: string;
 }

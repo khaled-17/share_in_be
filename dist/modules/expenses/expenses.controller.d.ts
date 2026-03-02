@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import { ExpensesService } from './expenses.service';
 import { CreateExpenseDto, UpdateExpenseDto } from './dto/expense.dto';
 export declare class ExpensesController {
