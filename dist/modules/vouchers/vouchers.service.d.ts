@@ -328,6 +328,20 @@ export declare class VouchersService {
         paid_to: string;
     }>;
     updatePayment(id: number, data: Partial<CreatePaymentVoucherDto>): Promise<{
+        check: {
+            id: number;
+            amount: number;
+            created_at: Date;
+            check_number: string;
+            bank_name: string;
+            check_date: string;
+            beneficiary_name: string;
+            status: string;
+            notes: string | null;
+            receipt_voucher_id: number | null;
+            payment_voucher_id: number | null;
+        } | null;
+    } & {
         id: number;
         voucher_number: string;
         voucher_date: string;

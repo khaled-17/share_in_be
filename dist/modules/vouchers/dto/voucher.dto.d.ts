@@ -22,7 +22,7 @@ export declare class CreateReceiptVoucherDto {
 }
 export declare class CreatePaymentVoucherDto extends CreateReceiptVoucherDto {
     beneficiary_type?: string;
-    supplier_id?: number;
-    employee_id?: number;
-    expense_type_id?: number;
+    supplier_id?: string;
+    employee_id?: string;
+    expense_type_id?: string;
 }

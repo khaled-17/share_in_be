@@ -100,18 +100,18 @@ export class CreatePaymentVoucherDto extends CreateReceiptVoucherDto {
   @IsString()
   beneficiary_type?: string;
 
-  @ApiProperty({ description: 'Supplier ID', example: 1 })
+  @ApiProperty({ description: 'Supplier ID', example: 'SUP-001' })
   @IsOptional()
-  @IsNumber()
-  supplier_id?: number;
+  @IsString()
+  supplier_id?: string;
 
-  @ApiProperty({ description: 'Employee ID', example: 1 })
+  @ApiProperty({ description: 'Employee ID', example: 'EMP-001' })
   @IsOptional()
-  @IsNumber()
-  employee_id?: number;
+  @IsString()
+  employee_id?: string;
 
-  @ApiProperty({ description: 'Expense type ID', example: 1 })
+  @ApiProperty({ description: 'Expense type ID', example: 'EXP-001' })
   @IsOptional()
-  @IsNumber()
-  expense_type_id?: number;
+  @IsString()
+  expense_type_id?: string;
 }

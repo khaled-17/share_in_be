@@ -143,21 +143,21 @@ __decorate([
     __metadata("design:type", String)
 ], CreatePaymentVoucherDto.prototype, "beneficiary_type", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Supplier ID', example: 1 }),
+    (0, swagger_1.ApiProperty)({ description: 'Supplier ID', example: 'SUP-001' }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
 ], CreatePaymentVoucherDto.prototype, "supplier_id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Employee ID', example: 1 }),
+    (0, swagger_1.ApiProperty)({ description: 'Employee ID', example: 'EMP-001' }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
 ], CreatePaymentVoucherDto.prototype, "employee_id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Expense type ID', example: 1 }),
+    (0, swagger_1.ApiProperty)({ description: 'Expense type ID', example: 'EXP-001' }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
 ], CreatePaymentVoucherDto.prototype, "expense_type_id", void 0);
 //# sourceMappingURL=voucher.dto.js.map

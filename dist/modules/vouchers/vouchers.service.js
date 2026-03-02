@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VouchersService = void 0;
+const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../../prisma/prisma.service");
 let VouchersService = class VouchersService {
     prisma;
@@ -20,11 +21,10 @@ let VouchersService = class VouchersService {
         const { start_date, end_date, source_type, payment_method } = filters;
         const where = {};
         if (start_date || end_date) {
-            where.voucher_date = {};
-            if (start_date)
-                where.voucher_date.gte = start_date;
-            if (end_date)
-                where.voucher_date.lte = end_date;
+            where.voucher_date = {
+                gte: start_date || undefined,
+                lte: end_date || undefined,
+            };
         }
         if (source_type)
             where.source_type = source_type;
@@ -50,7 +50,7 @@ let VouchersService = class VouchersService {
             },
         });
         if (!voucher)
-            throw new NotFoundException('Voucher not found');
+            throw new common_1.NotFoundException('Voucher not found');
         return voucher;
     }
     async createReceipt(data) {
@@ -95,7 +95,7 @@ let VouchersService = class VouchersService {
         return this.prisma.$transaction(async (tx) => {
             const oldVoucher = await tx.receiptVoucher.findUnique({ where: { id } });
             if (!oldVoucher)
-                throw new NotFoundException('Voucher not found');
+                throw new common_1.NotFoundException('Voucher not found');
             const { check, ...voucherData } = data;
             const amountDiff = (voucherData.amount !== undefined
                 ? voucherData.amount
@@ -124,7 +124,7 @@ let VouchersService = class VouchersService {
         return this.prisma.$transaction(async (tx) => {
             const voucher = await tx.receiptVoucher.findUnique({ where: { id } });
             if (!voucher)
-                throw new NotFoundException('Voucher not found');
+                throw new common_1.NotFoundException('Voucher not found');
             if (voucher.source_type === 'partner_capital' && voucher.partner_id) {
                 await tx.partner.update({
                     where: { id: voucher.partner_id },
@@ -143,11 +143,10 @@ let VouchersService = class VouchersService {
         const { start_date, end_date, beneficiary_type, payment_method } = filters;
         const where = {};
         if (start_date || end_date) {
-            where.voucher_date = {};
-            if (start_date)
-                where.voucher_date.gte = start_date;
-            if (end_date)
-                where.voucher_date.lte = end_date;
+            where.voucher_date = {
+                gte: start_date || undefined,
+                lte: end_date || undefined,
+            };
         }
         if (beneficiary_type)
             where.beneficiary_type = beneficiary_type;
@@ -177,7 +176,7 @@ let VouchersService = class VouchersService {
             },
         });
         if (!voucher)
-            throw new NotFoundException('Voucher not found');
+            throw new common_1.NotFoundException('Voucher not found');
         return voucher;
     }
     async createPayment(data) {
@@ -225,7 +224,7 @@ let VouchersService = class VouchersService {
         return this.prisma.$transaction(async (tx) => {
             const oldVoucher = await tx.paymentVoucher.findUnique({ where: { id } });
             if (!oldVoucher)
-                throw new NotFoundException('Voucher not found');
+                throw new common_1.NotFoundException('Voucher not found');
             const { check, ...voucherData } = data;
             const amountDiff = (voucherData.amount !== undefined
                 ? voucherData.amount
@@ -254,7 +253,7 @@ let VouchersService = class VouchersService {
         return this.prisma.$transaction(async (tx) => {
             const voucher = await tx.paymentVoucher.findUnique({ where: { id } });
             if (!voucher)
-                throw new NotFoundException('Voucher not found');
+                throw new common_1.NotFoundException('Voucher not found');
             if (voucher.beneficiary_type === 'partner_withdrawal' &&
                 voucher.partner_id) {
                 await tx.partner.update({
@@ -274,11 +273,10 @@ let VouchersService = class VouchersService {
         const { start_date, end_date } = filters;
         const where = {};
         if (start_date || end_date) {
-            where.voucher_date = {};
-            if (start_date)
-                where.voucher_date.gte = start_date;
-            if (end_date)
-                where.voucher_date.lte = end_date;
+            where.voucher_date = {
+                gte: start_date || undefined,
+                lte: end_date || undefined,
+            };
         }
         if (type === 'receipt') {
             const vouchers = await this.prisma.receiptVoucher.findMany({ where });
@@ -324,7 +322,7 @@ let VouchersService = class VouchersService {
 };
 exports.VouchersService = VouchersService;
 exports.VouchersService = VouchersService = __decorate([
-    Injectable(),
+    (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService])
 ], VouchersService);
 //# sourceMappingURL=vouchers.service.js.map

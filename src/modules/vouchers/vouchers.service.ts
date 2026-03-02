@@ -1,3 +1,4 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import {
@@ -28,9 +29,10 @@ export class VouchersService {
     const { start_date, end_date, source_type, payment_method } = filters;
     const where: Prisma.ReceiptVoucherWhereInput = {};
     if (start_date || end_date) {
-      where.voucher_date = {};
-      if (start_date) (where.voucher_date as any).gte = start_date;
-      if (end_date) (where.voucher_date as any).lte = end_date;
+      where.voucher_date = {
+        gte: start_date || undefined,
+        lte: end_date || undefined,
+      };
     }
     if (source_type) where.source_type = source_type;
     if (payment_method) where.payment_method = payment_method;
@@ -165,9 +167,10 @@ export class VouchersService {
     const { start_date, end_date, beneficiary_type, payment_method } = filters;
     const where: Prisma.PaymentVoucherWhereInput = {};
     if (start_date || end_date) {
-      where.voucher_date = {};
-      if (start_date) (where.voucher_date as any).gte = start_date;
-      if (end_date) (where.voucher_date as any).lte = end_date;
+      where.voucher_date = {
+        gte: start_date || undefined,
+        lte: end_date || undefined,
+      };
     }
     if (beneficiary_type) where.beneficiary_type = beneficiary_type;
     if (payment_method) where.payment_method = payment_method;
@@ -314,13 +317,13 @@ export class VouchersService {
     filters: ReceiptFilters & PaymentFilters,
   ) {
     const { start_date, end_date } = filters;
-    const where:
-      | Prisma.ReceiptVoucherWhereInput
-      | Prisma.PaymentVoucherWhereInput = {};
+    const where: Prisma.ReceiptVoucherWhereInput &
+      Prisma.PaymentVoucherWhereInput = {};
     if (start_date || end_date) {
-      where.voucher_date = {};
-      if (start_date) (where.voucher_date as any).gte = start_date;
-      if (end_date) (where.voucher_date as any).lte = end_date;
+      where.voucher_date = {
+        gte: start_date || undefined,
+        lte: end_date || undefined,
+      };
     }
 
     if (type === 'receipt') {
