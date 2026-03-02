@@ -50,7 +50,6 @@ class CreateReceiptVoucherDto {
     amount;
     partner_id;
     source_type;
-    name;
     payment_method;
     description;
     received_from;
@@ -92,15 +91,6 @@ __decorate([
     (0, class_validator_1.IsEnum)(VoucherSourceType),
     __metadata("design:type", String)
 ], CreateReceiptVoucherDto.prototype, "source_type", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({
-        description: 'Name (if source is Others)',
-        example: 'John Smith',
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateReceiptVoucherDto.prototype, "name", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Payment method', example: 'Cash' }),
     (0, class_validator_1.IsNotEmpty)(),

@@ -14,7 +14,6 @@ export declare class CreateReceiptVoucherDto {
     amount: number;
     partner_id?: number;
     source_type: VoucherSourceType;
-    name?: string;
     payment_method: string;
     description?: string;
     received_from: string;

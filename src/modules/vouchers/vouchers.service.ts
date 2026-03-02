@@ -22,7 +22,7 @@ interface PaymentFilters {
 
 @Injectable()
 export class VouchersService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   // Receipt Vouchers
   async findAllReceipt(filters: ReceiptFilters) {
@@ -83,11 +83,10 @@ export class VouchersService {
           voucher_date: voucherData.voucher_date,
           amount: voucherData.amount,
           source_type: voucherData.source_type,
-          name: voucherData.name,
           payment_method: voucherData.payment_method,
           description: voucherData.description,
-          received_from: (voucherData as any).received_from || '',
-          partner_id: voucherData.partner_id,
+          received_from: voucherData.received_from,
+          partner_id: voucherData.partner_id ?? null,
           check_id: checkId,
         },
         include: {
@@ -128,10 +127,9 @@ export class VouchersService {
           voucher_date: voucherData.voucher_date,
           amount: voucherData.amount,
           source_type: voucherData.source_type,
-          name: voucherData.name,
           payment_method: voucherData.payment_method,
           description: voucherData.description,
-          received_from: (voucherData as any).received_from,
+          received_from: voucherData.received_from,
           partner_id: voucherData.partner_id,
         },
         include: { check: true },
@@ -239,11 +237,11 @@ export class VouchersService {
           beneficiary_type: voucherData.beneficiary_type || 'other',
           supplier_id: voucherData.supplier_id,
           employee_id: voucherData.employee_id,
-          partner_id: voucherData.partner_id,
+          partner_id: voucherData.partner_id ?? null,
           expense_type_id: voucherData.expense_type_id,
           payment_method: voucherData.payment_method,
           description: voucherData.description,
-          paid_to: (voucherData as any).paid_to || '',
+          paid_to: voucherData.paid_to,
           check_id: checkId,
         },
         include: {
@@ -295,7 +293,7 @@ export class VouchersService {
           expense_type_id: voucherData.expense_type_id,
           payment_method: voucherData.payment_method,
           description: voucherData.description,
-          paid_to: (voucherData as any).paid_to,
+          paid_to: voucherData.paid_to,
         },
         include: { check: true },
       });

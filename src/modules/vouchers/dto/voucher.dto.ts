@@ -60,14 +60,6 @@ export class CreateReceiptVoucherDto {
   @IsEnum(VoucherSourceType)
   source_type: VoucherSourceType;
 
-  @ApiProperty({
-    description: 'Name (if source is Others)',
-    example: 'John Smith',
-  })
-  @IsOptional()
-  @IsString()
-  name?: string;
-
   @ApiProperty({ description: 'Payment method', example: 'Cash' })
   @IsNotEmpty()
   @IsString()

@@ -30,22 +30,22 @@ export declare class VouchersService {
             payment_voucher_id: number | null;
         } | null;
         customer: {
-            name: string;
             customer_id: string;
             created_at: Date;
-            phone: string;
+            name: string;
             contact_person: string;
             company_email: string;
             contact_email: string;
+            phone: string;
             secondary_phone: string;
             address: string;
         } | null;
         partner: {
-            name: string;
             id: number;
             created_at: Date;
-            partner_code: string;
+            name: string;
             phone: string | null;
+            partner_code: string;
             email: string | null;
             initial_capital: number;
             current_capital: number;
@@ -80,22 +80,22 @@ export declare class VouchersService {
             payment_voucher_id: number | null;
         } | null;
         customer: {
-            name: string;
             customer_id: string;
             created_at: Date;
-            phone: string;
+            name: string;
             contact_person: string;
             company_email: string;
             contact_email: string;
+            phone: string;
             secondary_phone: string;
             address: string;
         } | null;
         partner: {
-            name: string;
             id: number;
             created_at: Date;
-            partner_code: string;
+            name: string;
             phone: string | null;
+            partner_code: string;
             email: string | null;
             initial_capital: number;
             current_capital: number;
@@ -116,6 +116,41 @@ export declare class VouchersService {
         created_at: Date;
     }>;
     createReceipt(data: CreateReceiptVoucherDto): Promise<{
+        check: {
+            check_number: string;
+            bank_name: string;
+            check_date: string;
+            status: string;
+            amount: number;
+            id: number;
+            created_at: Date;
+            beneficiary_name: string;
+            notes: string | null;
+            receipt_voucher_id: number | null;
+            payment_voucher_id: number | null;
+        } | null;
+        customer: {
+            customer_id: string;
+            created_at: Date;
+            name: string;
+            contact_person: string;
+            company_email: string;
+            contact_email: string;
+            phone: string;
+            secondary_phone: string;
+            address: string;
+        } | null;
+        partner: {
+            id: number;
+            created_at: Date;
+            name: string;
+            phone: string | null;
+            partner_code: string;
+            email: string | null;
+            initial_capital: number;
+            current_capital: number;
+        } | null;
+    } & {
         description: string | null;
         voucher_number: string;
         voucher_date: string;
@@ -131,6 +166,20 @@ export declare class VouchersService {
         created_at: Date;
     }>;
     updateReceipt(id: number, data: Partial<CreateReceiptVoucherDto>): Promise<{
+        check: {
+            check_number: string;
+            bank_name: string;
+            check_date: string;
+            status: string;
+            amount: number;
+            id: number;
+            created_at: Date;
+            beneficiary_name: string;
+            notes: string | null;
+            receipt_voucher_id: number | null;
+            payment_voucher_id: number | null;
+        } | null;
+    } & {
         description: string | null;
         voucher_number: string;
         voucher_date: string;
@@ -175,35 +224,35 @@ export declare class VouchersService {
             payment_voucher_id: number | null;
         } | null;
         supplier: {
-            name: string;
             supplier_id: string;
             id: number;
             created_at: Date;
-            phone: string | null;
-            email: string | null;
+            name: string;
             contact_person: string | null;
+            phone: string | null;
             secondary_phone: string | null;
             address: string | null;
+            email: string | null;
             speciality: string | null;
         } | null;
         partner: {
-            name: string;
             id: number;
             created_at: Date;
-            partner_code: string;
+            name: string;
             phone: string | null;
+            partner_code: string;
             email: string | null;
             initial_capital: number;
             current_capital: number;
         } | null;
         employee: {
-            name: string;
-            start_date: string | null;
             id: number;
+            name: string;
             phone: string | null;
             emp_code: string;
             position: string | null;
             salary: number | null;
+            start_date: string | null;
         } | null;
         expense_type: {
             id: number;
@@ -243,35 +292,35 @@ export declare class VouchersService {
             payment_voucher_id: number | null;
         } | null;
         supplier: {
-            name: string;
             supplier_id: string;
             id: number;
             created_at: Date;
-            phone: string | null;
-            email: string | null;
+            name: string;
             contact_person: string | null;
+            phone: string | null;
             secondary_phone: string | null;
             address: string | null;
+            email: string | null;
             speciality: string | null;
         } | null;
         partner: {
-            name: string;
             id: number;
             created_at: Date;
-            partner_code: string;
+            name: string;
             phone: string | null;
+            partner_code: string;
             email: string | null;
             initial_capital: number;
             current_capital: number;
         } | null;
         employee: {
-            name: string;
-            start_date: string | null;
             id: number;
+            name: string;
             phone: string | null;
             emp_code: string;
             position: string | null;
             salary: number | null;
+            start_date: string | null;
         } | null;
         expense_type: {
             id: number;
@@ -311,35 +360,35 @@ export declare class VouchersService {
             payment_voucher_id: number | null;
         } | null;
         supplier: {
-            name: string;
             supplier_id: string;
             id: number;
             created_at: Date;
-            phone: string | null;
-            email: string | null;
+            name: string;
             contact_person: string | null;
+            phone: string | null;
             secondary_phone: string | null;
             address: string | null;
+            email: string | null;
             speciality: string | null;
         } | null;
         partner: {
-            name: string;
             id: number;
             created_at: Date;
-            partner_code: string;
+            name: string;
             phone: string | null;
+            partner_code: string;
             email: string | null;
             initial_capital: number;
             current_capital: number;
         } | null;
         employee: {
-            name: string;
-            start_date: string | null;
             id: number;
+            name: string;
             phone: string | null;
             emp_code: string;
             position: string | null;
             salary: number | null;
+            start_date: string | null;
         } | null;
         expense_type: {
             id: number;
