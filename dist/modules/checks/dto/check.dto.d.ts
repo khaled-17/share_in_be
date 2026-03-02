@@ -1,19 +1,23 @@
 export declare enum CheckStatus {
-    UNDELIVERED = "\u063A\u064A\u0631 \u0645\u0633\u062A\u0644\u0645",
-    DELIVERED = "\u0645\u0633\u062A\u0644\u0645",
-    COLLECTED = "\u0645\u062D\u0635\u0644",
-    REJECTED = "\u0645\u0631\u0641\u0648\u0636"
+    PENDING = "pending",
+    CLEARED = "cleared",
+    BOUNCED = "bounced",
+    CANCELLED = "cancelled"
 }
 export declare class CreateCheckDto {
-    check_no: string;
+    check_number: string;
     bank_name: string;
-    due_date: string;
+    check_date: string;
     amount: number;
     status?: CheckStatus;
+    beneficiary_name: string;
+    notes?: string;
 }
 export declare class UpdateCheckDto {
     status?: CheckStatus;
     bank_name?: string;
-    due_date?: string;
+    check_date?: string;
     amount?: number;
+    notes?: string;
+    beneficiary_name?: string;
 }

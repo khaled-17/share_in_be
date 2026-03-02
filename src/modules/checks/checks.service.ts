@@ -1,18 +1,27 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
+import { Prisma } from '@prisma/client';
+import { CreateCheckDto, UpdateCheckDto } from './dto/check.dto';
+
+interface CheckFilters {
+  status?: string;
+  start_date?: string;
+  end_date?: string;
+}
 
 @Injectable()
 export class ChecksService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
-  async findAll(filters: any) {
+  async findAll(filters: CheckFilters) {
     const { status, start_date, end_date } = filters;
-    const where: any = {};
+    const where: Prisma.CheckDetailWhereInput = {};
     if (status) where.status = status;
     if (start_date || end_date) {
-      where.check_date = {};
-      if (start_date) where.check_date.gte = start_date;
-      if (end_date) where.check_date.lte = end_date;
+      where.check_date = {
+        gte: start_date || undefined,
+        lte: end_date || undefined,
+      };
     }
 
     return this.prisma.checkDetail.findMany({
@@ -33,14 +42,18 @@ export class ChecksService {
     return check;
   }
 
-  async create(data: any) {
+  async create(data: CreateCheckDto) {
     return this.prisma.checkDetail.create({
       data,
     });
   }
 
-  async update(id: number, data: any) {
-    return this.updateStatus(id, data);
+  async update(id: number, data: UpdateCheckDto) {
+    await this.findOne(id);
+    return this.prisma.checkDetail.update({
+      where: { id },
+      data,
+    });
   }
 
   async updateStatus(id: number, data: { status: string; notes?: string }) {
@@ -58,13 +71,14 @@ export class ChecksService {
     });
   }
 
-  async getStats(filters: any) {
+  async getStats(filters: CheckFilters) {
     const { start_date, end_date } = filters;
-    const where: any = {};
+    const where: Prisma.CheckDetailWhereInput = {};
     if (start_date || end_date) {
-      where.check_date = {};
-      if (start_date) where.check_date.gte = start_date;
-      if (end_date) where.check_date.lte = end_date;
+      where.check_date = {
+        gte: start_date || undefined,
+        lte: end_date || undefined,
+      };
     }
 
     const checks = await this.prisma.checkDetail.findMany({

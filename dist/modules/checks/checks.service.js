@@ -23,11 +23,10 @@ let ChecksService = class ChecksService {
         if (status)
             where.status = status;
         if (start_date || end_date) {
-            where.check_date = {};
-            if (start_date)
-                where.check_date.gte = start_date;
-            if (end_date)
-                where.check_date.lte = end_date;
+            where.check_date = {
+                gte: start_date || undefined,
+                lte: end_date || undefined,
+            };
         }
         return this.prisma.checkDetail.findMany({
             where,
@@ -52,7 +51,11 @@ let ChecksService = class ChecksService {
         });
     }
     async update(id, data) {
-        return this.updateStatus(id, data);
+        await this.findOne(id);
+        return this.prisma.checkDetail.update({
+            where: { id },
+            data,
+        });
     }
     async updateStatus(id, data) {
         await this.findOne(id);
@@ -71,11 +74,10 @@ let ChecksService = class ChecksService {
         const { start_date, end_date } = filters;
         const where = {};
         if (start_date || end_date) {
-            where.check_date = {};
-            if (start_date)
-                where.check_date.gte = start_date;
-            if (end_date)
-                where.check_date.lte = end_date;
+            where.check_date = {
+                gte: start_date || undefined,
+                lte: end_date || undefined,
+            };
         }
         const checks = await this.prisma.checkDetail.findMany({
             where,
