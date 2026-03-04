@@ -24,7 +24,36 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, documentFactory);
+  SwaggerModule.setup('api', app, documentFactory, {
+    swaggerOptions: {
+      persistAuthorization: true, // حفظ التوكن تلقائياً بعد إدخاله حتى لو تم تحديث الصفحة
+    },
+    //   customJsStr: `
+    //     const originalFetch = window.fetch;
+    //     window.fetch = async function() {
+    //       const response = await originalFetch.apply(this, arguments);
+    //       const url = arguments[0];
+    //       if (typeof url === 'string' && (url.includes('/auth/login') || url.includes('/auth/register'))) {
+    //         response.clone().json().then(data => {
+    //           if (data && data.data && data.data.accessToken) {
+    //             const token = data.data.accessToken;
+    //             if (window.ui) {
+    //               window.ui.authActions.authorize({
+    //                 bearer: {
+    //                   name: 'bearer',
+    //                   schema: { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+    //                   value: token
+    //                 }
+    //               });
+    //               console.log('Token successfully applied to Swagger UI');
+    //             }
+    //           }
+    //         }).catch(() => {});
+    //       }
+    //       return response;
+    //     };
+    //   `,
+  });
 
   await app.listen(process.env.PORT ?? 3000);
 }

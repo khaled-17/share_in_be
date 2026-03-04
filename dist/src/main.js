@@ -52,7 +52,11 @@ async function bootstrap() {
         .addBearerAuth()
         .build();
     const documentFactory = () => swagger_1.SwaggerModule.createDocument(app, config);
-    swagger_1.SwaggerModule.setup('api', app, documentFactory);
+    swagger_1.SwaggerModule.setup('api', app, documentFactory, {
+        swaggerOptions: {
+            persistAuthorization: true,
+        },
+    });
     await app.listen(process.env.PORT ?? 3000);
 }
 void bootstrap();
