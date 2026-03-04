@@ -4,21 +4,21 @@ export declare class PermissionsService {
     private prisma;
     constructor(prisma: PrismaService);
     findAll(): Promise<{
-        description: string | null;
-        action: string;
-        module: string | null;
         id: number;
+        action: string;
+        description: string | null;
+        module: string | null;
     }[]>;
     create(data: CreatePermissionDto): Promise<{
-        description: string | null;
-        action: string;
-        module: string | null;
         id: number;
+        action: string;
+        description: string | null;
+        module: string | null;
     }>;
     remove(id: number): Promise<{
-        description: string | null;
-        action: string;
-        module: string | null;
         id: number;
+        action: string;
+        description: string | null;
+        module: string | null;
     }>;
 }
