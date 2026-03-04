@@ -6,20 +6,20 @@ export declare class PermissionsController {
     findAll(): Promise<{
         success: boolean;
         data: {
-            id: number;
-            action: string;
             description: string | null;
+            action: string;
             module: string | null;
+            id: number;
         }[];
     }>;
     create(createPermissionDto: CreatePermissionDto): Promise<{
         success: boolean;
         message: string;
         data: {
-            id: number;
-            action: string;
             description: string | null;
+            action: string;
             module: string | null;
+            id: number;
         };
     }>;
     remove(id: number): Promise<{

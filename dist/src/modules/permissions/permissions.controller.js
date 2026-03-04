@@ -13,6 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PermissionsController = void 0;
+const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const permissions_service_1 = require("./permissions.service");
@@ -51,6 +52,7 @@ __decorate([
     (0, common_1.Get)(),
     (0, swagger_1.ApiOperation)({ summary: 'Retrieve all permissions' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'List of all system permissions' }),
+    openapi.ApiResponse({ status: 200 }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
@@ -60,6 +62,7 @@ __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
     (0, swagger_1.ApiOperation)({ summary: 'Create a new permission' }),
     (0, swagger_1.ApiResponse)({ status: 201, description: 'Permission successfully created' }),
+    openapi.ApiResponse({ status: common_1.HttpStatus.CREATED }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [permission_dto_1.CreatePermissionDto]),
@@ -70,6 +73,7 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Delete a permission' }),
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Permission ID', example: 1 }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Permission successfully deleted' }),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),

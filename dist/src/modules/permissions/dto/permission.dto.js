@@ -10,28 +10,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreatePermissionDto = void 0;
+const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreatePermissionDto {
     action;
     description;
     module;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { action: { required: true, type: () => String }, description: { required: false, type: () => String }, module: { required: false, type: () => String } };
+    }
 }
 exports.CreatePermissionDto = CreatePermissionDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'The unique action string for the permission', example: 'CREATE_USER' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'The unique action string for the permission',
+        example: 'CREATE_USER',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreatePermissionDto.prototype, "action", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'A description for what this permission allows', example: 'Allows creating a new user', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'A description for what this permission allows',
+        example: 'Allows creating a new user',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreatePermissionDto.prototype, "description", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'The module this permission belongs to', example: 'Users', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'The module this permission belongs to',
+        example: 'Users',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
