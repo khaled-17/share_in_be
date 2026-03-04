@@ -252,6 +252,13 @@ model Supplier {
   address          String?
   speciality       String?
   created_at       DateTime         @default(now())
+
+  tenant_id        Int              @default(1)
+  created_by       Int?
+
+  tenant           Tenant           @relation(fields: [tenant_id], references: [id])
+  creator          User?            @relation("SupplierCreator", fields: [created_by], references: [id])
+
   expenses         Expense[]
   payment_vouchers PaymentVoucher[]
 
@@ -292,6 +299,13 @@ model Customer {
   secondary_phone  String
   address          String
   created_at       DateTime         @default(now())
+
+  tenant_id        Int              @default(1)
+  created_by       Int?
+
+  tenant           Tenant           @relation(fields: [tenant_id], references: [id])
+  creator          User?            @relation("CustomerCreator", fields: [created_by], references: [id])
+
   revenues         Revenue[]
   quotations       Quotation[]
   work_orders      WorkOrder[]
@@ -319,9 +333,71 @@ model User {
   email     String   @unique
   password  String
   name      String?
-  role      String   @default("USER")
+  role      String   @default("USER") // Legacy field, might be removed later
+
+  tenant_id Int?     @default(1)
+  role_id   Int?
+  is_super_admin Boolean @default(false)
+
+  tenant    Tenant?  @relation(fields: [tenant_id], references: [id])
+  rbac_role Role?    @relation(fields: [role_id], references: [id])
+
+  created_customers Customer[] @relation("CustomerCreator")
+  created_suppliers Supplier[] @relation("SupplierCreator")
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("users")
+}
+
+// --- Multi-Tenant & RBAC ---
+
+model Tenant {
+  id         Int        @id @default(autoincrement())
+  name       String
+  created_at DateTime   @default(now())
+  
+  users      User[]
+  roles      Role[]
+  customers  Customer[]
+  suppliers  Supplier[]
+
+  @@map("tenants")
+}
+
+model Role {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  tenant_id   Int?
+
+  tenant      Tenant?   @relation(fields: [tenant_id], references: [id], onDelete: Cascade)
+  users       User[]
+  permissions RolePermission[]
+
+  @@unique([name, tenant_id])
+  @@map("roles")
+}
+
+model Permission {
+  id          Int      @id @default(autoincrement())
+  action      String   @unique // e.g. "CREATE_CUSTOMER", "DELETE_SUPPLIER"
+  description String?
+  module      String?  // Optional grouping, e.g. "Customers", "Suppliers"
+
+  roles       RolePermission[]
+
+  @@map("permissions")
+}
+
+model RolePermission {
+  role_id       Int
+  permission_id Int
+
+  role       Role       @relation(fields: [role_id], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permission_id], references: [id], onDelete: Cascade)
+
+  @@id([role_id, permission_id])
+  @@map("role_permissions")
 }

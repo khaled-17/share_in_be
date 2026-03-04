@@ -20,6 +20,8 @@ import { ShareenModule } from './modules/shareen/shareen.module';
 import { ReviewsModule } from './modules/reviews/reviews.module';
 import { CompanyModule } from './modules/company/company.module';
 import { ReportsModule } from './modules/reports/reports.module';
+import { RolesModule } from './modules/roles/roles.module';
+import { PermissionsModule } from './modules/permissions/permissions.module';
 
 @Module({
   imports: [
@@ -42,6 +44,8 @@ import { ReportsModule } from './modules/reports/reports.module';
     ReviewsModule,
     CompanyModule,
     ReportsModule,
+    RolesModule,
+    PermissionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
