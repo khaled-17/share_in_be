@@ -54,8 +54,36 @@ async function bootstrap() {
     const documentFactory = () => swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('api', app, documentFactory, {
         swaggerOptions: {
+            displayRequestDuration: true,
+            tryItOutEnabled: true,
+            filter: true,
             persistAuthorization: true,
         },
+        customJsStr: `
+        const originalFetch = window.fetch;
+        window.fetch = async function() {
+          const response = await originalFetch.apply(this, arguments);
+          const url = arguments[0];
+          if (typeof url === 'string' && (url.includes('/auth/login') || url.includes('/auth/register'))) {
+            response.clone().json().then(data => {
+              if (data && data.data && data.data.accessToken) {
+                const token = data.data.accessToken;
+                if (window.ui) {
+                  window.ui.authActions.authorize({
+                    bearer: {
+                      name: 'bearer',
+                      schema: { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+                      value: token
+                    }
+                  });
+                  console.log('Token successfully applied to Swagger UI');
+                }
+              }
+            }).catch(() => {});
+          }
+          return response;
+        };
+      `,
     });
     await app.listen(process.env.PORT ?? 3000);
 }
