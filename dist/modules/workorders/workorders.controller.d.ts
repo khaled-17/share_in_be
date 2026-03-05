@@ -10,7 +10,6 @@ export declare class WorkOrdersController {
             quotation: {
                 id: number;
                 customer_id: string;
-                receipt_no: string | null;
                 project_type_id: string | null;
                 project_manager: string | null;
                 project_name: string | null;
@@ -19,27 +18,28 @@ export declare class WorkOrdersController {
                 totalamount: number;
                 paid_adv: number | null;
                 adv_date: string | null;
+                receipt_no: string | null;
                 status: string;
             };
             customer: {
-                name: string;
-                tenant_id: number;
-                contact_person: string;
-                phone: string;
                 customer_id: string;
+                created_at: Date;
+                name: string;
+                contact_person: string;
                 company_email: string;
                 contact_email: string;
+                phone: string;
                 secondary_phone: string;
                 address: string;
-                created_at: Date;
+                tenant_id: number;
                 created_by: number | null;
             };
         } & {
             id: number;
+            order_code: string;
+            quotation_id: number;
             customer_id: string;
             created_at: Date;
-            quotation_id: number;
-            order_code: string;
         })[];
     }>;
     findOne(id: number): Promise<{
@@ -49,7 +49,6 @@ export declare class WorkOrdersController {
             quotation: {
                 id: number;
                 customer_id: string;
-                receipt_no: string | null;
                 project_type_id: string | null;
                 project_manager: string | null;
                 project_name: string | null;
@@ -58,27 +57,28 @@ export declare class WorkOrdersController {
                 totalamount: number;
                 paid_adv: number | null;
                 adv_date: string | null;
+                receipt_no: string | null;
                 status: string;
             };
             customer: {
-                name: string;
-                tenant_id: number;
-                contact_person: string;
-                phone: string;
                 customer_id: string;
+                created_at: Date;
+                name: string;
+                contact_person: string;
                 company_email: string;
                 contact_email: string;
+                phone: string;
                 secondary_phone: string;
                 address: string;
-                created_at: Date;
+                tenant_id: number;
                 created_by: number | null;
             };
         } & {
             id: number;
+            order_code: string;
+            quotation_id: number;
             customer_id: string;
             created_at: Date;
-            quotation_id: number;
-            order_code: string;
         };
     }>;
     create(createWorkOrderDto: CreateWorkOrderDto): Promise<{
@@ -88,7 +88,6 @@ export declare class WorkOrdersController {
             quotation: {
                 id: number;
                 customer_id: string;
-                receipt_no: string | null;
                 project_type_id: string | null;
                 project_manager: string | null;
                 project_name: string | null;
@@ -97,27 +96,28 @@ export declare class WorkOrdersController {
                 totalamount: number;
                 paid_adv: number | null;
                 adv_date: string | null;
+                receipt_no: string | null;
                 status: string;
             };
             customer: {
-                name: string;
-                tenant_id: number;
-                contact_person: string;
-                phone: string;
                 customer_id: string;
+                created_at: Date;
+                name: string;
+                contact_person: string;
                 company_email: string;
                 contact_email: string;
+                phone: string;
                 secondary_phone: string;
                 address: string;
-                created_at: Date;
+                tenant_id: number;
                 created_by: number | null;
             };
         } & {
             id: number;
+            order_code: string;
+            quotation_id: number;
             customer_id: string;
             created_at: Date;
-            quotation_id: number;
-            order_code: string;
         };
     }>;
     update(id: number, updateWorkOrderDto: UpdateWorkOrderDto): Promise<{
@@ -127,7 +127,6 @@ export declare class WorkOrdersController {
             quotation: {
                 id: number;
                 customer_id: string;
-                receipt_no: string | null;
                 project_type_id: string | null;
                 project_manager: string | null;
                 project_name: string | null;
@@ -136,27 +135,28 @@ export declare class WorkOrdersController {
                 totalamount: number;
                 paid_adv: number | null;
                 adv_date: string | null;
+                receipt_no: string | null;
                 status: string;
             };
             customer: {
-                name: string;
-                tenant_id: number;
-                contact_person: string;
-                phone: string;
                 customer_id: string;
+                created_at: Date;
+                name: string;
+                contact_person: string;
                 company_email: string;
                 contact_email: string;
+                phone: string;
                 secondary_phone: string;
                 address: string;
-                created_at: Date;
+                tenant_id: number;
                 created_by: number | null;
             };
         } & {
             id: number;
+            order_code: string;
+            quotation_id: number;
             customer_id: string;
             created_at: Date;
-            quotation_id: number;
-            order_code: string;
         };
     }>;
     remove(id: number): Promise<{
