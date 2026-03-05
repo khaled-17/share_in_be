@@ -1,6 +1,6 @@
 {
   "name": "share_in_be",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "type": "module",
   "description": "Node.js REST API with Prisma ORM and MySQL",
   "main": "src/server.ts",
@@ -15,7 +15,7 @@
     "lint": "eslint \"src/**/*.ts\"",
     "format": "prettier --write .",
     "prepare": "node -e \"if(process.env.NODE_ENV !== 'production') process.exit(1)\" || husky || true",
-    "deploy": "npm run build && git add . && (git commit -m 'chore: pre-deploy-update' || true) && npm version patch && git push origin main && git push --tags"
+    "deploy": "npm run lint && VER=$(npm version patch --no-git-tag-version) && npm run build && (test -f dist/server.js || (echo 'Error: dist/server.js missing!' && exit 1)) && git add . && git commit -m \"$VER --- $(date +'%d-%m-%y')\" && git tag $VER && git push origin main && git push --tags"
   },
   "keywords": [],
   "author": "",

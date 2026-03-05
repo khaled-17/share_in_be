@@ -18,7 +18,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "deploy": "npm run build && test -f dist/main.js || (echo 'Error: dist/main.js missing!' && exit 1) && VER=$(npm version patch --no-git-tag-version) && git add . && git commit -m \"$VER --- $(date +'%d-%m-%y')\" && git tag $VER && git push origin main && git push --tags",
+    "deploy": "npm run lint && VER=$(npm version patch --no-git-tag-version) && npm run build && (test -f dist/main.js || (echo 'Error: dist/main.js missing!' && exit 1)) && git add . && git commit -m \"$VER --- $(date +'%d-%m-%y')\" && git tag $VER && git push origin main && git push --tags",
     "prepare": "node -e \"if (process.env.NODE_ENV !== 'production') { require('child_process').exec('husky install'); }\" || true"
   },
   "dependencies": {
