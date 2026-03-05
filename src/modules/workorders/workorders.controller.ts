@@ -25,14 +25,17 @@ import { CreateWorkOrderDto, UpdateWorkOrderDto } from './dto/workorder.dto';
 
 @ApiTags('WorkOrders')
 @ApiBearerAuth()
-@Controller('workorders')
+@Controller('work-orders')
 @UseGuards(JwtAuthGuard)
 export class WorkOrdersController {
   constructor(private workOrdersService: WorkOrdersService) {}
 
   @Get()
   @ApiOperation({ summary: 'Retrieve all work orders' })
-  @ApiResponse({ status: 200, description: 'List of work orders retrieved' })
+  @ApiResponse({
+    status: 200,
+    description: 'List of work orders retrieved successfully',
+  })
   async findAll(@Query() query: Record<string, string>) {
     const result = await this.workOrdersService.findAll(
       query as unknown as Record<string, any>,
@@ -48,6 +51,7 @@ export class WorkOrdersController {
   @ApiOperation({ summary: 'Get a work order by ID' })
   @ApiParam({ name: 'id', description: 'Work Order ID', example: 1 })
   @ApiResponse({ status: 200, description: 'Work Order found' })
+  @ApiResponse({ status: 404, description: 'Work Order not found' })
   async findOne(@Param('id', ParseIntPipe) id: number) {
     const result = await this.workOrdersService.findOne(id);
     return {
@@ -61,6 +65,8 @@ export class WorkOrdersController {
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'Create a new work order' })
   @ApiResponse({ status: 201, description: 'Work Order created successfully' })
+  @ApiResponse({ status: 400, description: 'Invalid input' })
+  @ApiResponse({ status: 409, description: 'Work order code already exists' })
   async create(@Body() createWorkOrderDto: CreateWorkOrderDto) {
     const result = await this.workOrdersService.create(createWorkOrderDto);
     return {
@@ -74,6 +80,7 @@ export class WorkOrdersController {
   @ApiOperation({ summary: 'Update a work order' })
   @ApiParam({ name: 'id', description: 'Work Order ID', example: 1 })
   @ApiResponse({ status: 200, description: 'Work Order updated successfully' })
+  @ApiResponse({ status: 404, description: 'Work Order not found' })
   async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateWorkOrderDto: UpdateWorkOrderDto,
@@ -90,6 +97,7 @@ export class WorkOrdersController {
   @ApiOperation({ summary: 'Delete a work order' })
   @ApiParam({ name: 'id', description: 'Work Order ID', example: 1 })
   @ApiResponse({ status: 200, description: 'Work Order deleted successfully' })
+  @ApiResponse({ status: 404, description: 'Work Order not found' })
   async remove(@Param('id', ParseIntPipe) id: number) {
     await this.workOrdersService.remove(id);
     return {

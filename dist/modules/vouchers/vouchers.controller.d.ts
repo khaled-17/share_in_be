@@ -1,9 +1,9 @@
 import { VouchersService, ReceiptFilters, PaymentFilters } from './vouchers.service';
 import { CreateReceiptVoucherDto, CreatePaymentVoucherDto } from './dto/voucher.dto';
-export declare class VouchersController {
+export declare class ReceiptVouchersController {
     private vouchersService;
     constructor(vouchersService: VouchersService);
-    findAllReceipt(query: ReceiptFilters): Promise<{
+    findAll(query: ReceiptFilters): Promise<{
         success: boolean;
         message: string;
         data: ({
@@ -59,7 +59,178 @@ export declare class VouchersController {
             received_from: string;
         })[];
     }>;
-    findAllPayment(query: PaymentFilters): Promise<{
+    getStats(query: ReceiptFilters): Promise<{
+        success: boolean;
+        data: {
+            total_amount: number;
+            total_count: number;
+            by_source_type: Record<string, number>;
+            by_payment_method: Record<string, number>;
+            pending_checks: number;
+            by_beneficiary_type?: undefined;
+        } | {
+            total_amount: number;
+            total_count: number;
+            by_beneficiary_type: Record<string, number>;
+            by_payment_method: Record<string, number>;
+            pending_checks: number;
+            by_source_type?: undefined;
+        };
+    }>;
+    findOne(id: number): Promise<{
+        success: boolean;
+        message: string;
+        data: {
+            partner: {
+                name: string;
+                id: number;
+                email: string | null;
+                phone: string | null;
+                created_at: Date;
+                partner_code: string;
+                initial_capital: number;
+                current_capital: number;
+            } | null;
+            customer: {
+                name: string;
+                tenant_id: number;
+                contact_person: string;
+                phone: string;
+                customer_id: string;
+                company_email: string;
+                contact_email: string;
+                secondary_phone: string;
+                address: string;
+                created_at: Date;
+                created_by: number | null;
+            } | null;
+            check: {
+                id: number;
+                created_at: Date;
+                amount: number;
+                notes: string | null;
+                status: string;
+                check_number: string;
+                bank_name: string;
+                check_date: string;
+                beneficiary_name: string;
+                receipt_voucher_id: number | null;
+                payment_voucher_id: number | null;
+            } | null;
+        } & {
+            id: number;
+            description: string | null;
+            customer_id: string | null;
+            created_at: Date;
+            created_by: string | null;
+            voucher_number: string;
+            voucher_date: string;
+            amount: number;
+            payment_method: string;
+            check_id: number | null;
+            partner_id: number | null;
+            source_type: string;
+            received_from: string;
+        };
+    }>;
+    create(data: CreateReceiptVoucherDto): Promise<{
+        success: boolean;
+        message: string;
+        data: {
+            partner: {
+                name: string;
+                id: number;
+                email: string | null;
+                phone: string | null;
+                created_at: Date;
+                partner_code: string;
+                initial_capital: number;
+                current_capital: number;
+            } | null;
+            customer: {
+                name: string;
+                tenant_id: number;
+                contact_person: string;
+                phone: string;
+                customer_id: string;
+                company_email: string;
+                contact_email: string;
+                secondary_phone: string;
+                address: string;
+                created_at: Date;
+                created_by: number | null;
+            } | null;
+            check: {
+                id: number;
+                created_at: Date;
+                amount: number;
+                notes: string | null;
+                status: string;
+                check_number: string;
+                bank_name: string;
+                check_date: string;
+                beneficiary_name: string;
+                receipt_voucher_id: number | null;
+                payment_voucher_id: number | null;
+            } | null;
+        } & {
+            id: number;
+            description: string | null;
+            customer_id: string | null;
+            created_at: Date;
+            created_by: string | null;
+            voucher_number: string;
+            voucher_date: string;
+            amount: number;
+            payment_method: string;
+            check_id: number | null;
+            partner_id: number | null;
+            source_type: string;
+            received_from: string;
+        };
+    }>;
+    update(id: number, data: Partial<CreateReceiptVoucherDto>): Promise<{
+        success: boolean;
+        message: string;
+        data: {
+            check: {
+                id: number;
+                created_at: Date;
+                amount: number;
+                notes: string | null;
+                status: string;
+                check_number: string;
+                bank_name: string;
+                check_date: string;
+                beneficiary_name: string;
+                receipt_voucher_id: number | null;
+                payment_voucher_id: number | null;
+            } | null;
+        } & {
+            id: number;
+            description: string | null;
+            customer_id: string | null;
+            created_at: Date;
+            created_by: string | null;
+            voucher_number: string;
+            voucher_date: string;
+            amount: number;
+            payment_method: string;
+            check_id: number | null;
+            partner_id: number | null;
+            source_type: string;
+            received_from: string;
+        };
+    }>;
+    remove(id: number): Promise<{
+        success: boolean;
+        message: string;
+    }>;
+}
+export declare class PaymentVouchersController {
+    private vouchersService;
+    constructor(vouchersService: VouchersService);
+    findAll(query: PaymentFilters): Promise<{
         success: boolean;
         message: string;
         data: ({
@@ -133,63 +304,25 @@ export declare class VouchersController {
             employee_id: string | null;
         })[];
     }>;
-    createReceipt(data: CreateReceiptVoucherDto): Promise<{
+    getStats(query: PaymentFilters): Promise<{
         success: boolean;
-        message: string;
         data: {
-            partner: {
-                name: string;
-                id: number;
-                email: string | null;
-                phone: string | null;
-                created_at: Date;
-                partner_code: string;
-                initial_capital: number;
-                current_capital: number;
-            } | null;
-            customer: {
-                name: string;
-                tenant_id: number;
-                contact_person: string;
-                phone: string;
-                customer_id: string;
-                company_email: string;
-                contact_email: string;
-                secondary_phone: string;
-                address: string;
-                created_at: Date;
-                created_by: number | null;
-            } | null;
-            check: {
-                id: number;
-                created_at: Date;
-                amount: number;
-                notes: string | null;
-                status: string;
-                check_number: string;
-                bank_name: string;
-                check_date: string;
-                beneficiary_name: string;
-                receipt_voucher_id: number | null;
-                payment_voucher_id: number | null;
-            } | null;
-        } & {
-            id: number;
-            description: string | null;
-            customer_id: string | null;
-            created_at: Date;
-            created_by: string | null;
-            voucher_number: string;
-            voucher_date: string;
-            amount: number;
-            payment_method: string;
-            check_id: number | null;
-            partner_id: number | null;
-            source_type: string;
-            received_from: string;
+            total_amount: number;
+            total_count: number;
+            by_source_type: Record<string, number>;
+            by_payment_method: Record<string, number>;
+            pending_checks: number;
+            by_beneficiary_type?: undefined;
+        } | {
+            total_amount: number;
+            total_count: number;
+            by_beneficiary_type: Record<string, number>;
+            by_payment_method: Record<string, number>;
+            pending_checks: number;
+            by_source_type?: undefined;
         };
     }>;
-    createPayment(data: CreatePaymentVoucherDto): Promise<{
+    findOne(id: number): Promise<{
         success: boolean;
         message: string;
         data: {
@@ -263,11 +396,116 @@ export declare class VouchersController {
             employee_id: string | null;
         };
     }>;
-    removeReceipt(id: number): Promise<{
+    create(data: CreatePaymentVoucherDto): Promise<{
         success: boolean;
         message: string;
+        data: {
+            partner: {
+                name: string;
+                id: number;
+                email: string | null;
+                phone: string | null;
+                created_at: Date;
+                partner_code: string;
+                initial_capital: number;
+                current_capital: number;
+            } | null;
+            supplier: {
+                name: string;
+                id: number;
+                email: string | null;
+                tenant_id: number;
+                contact_person: string | null;
+                phone: string | null;
+                secondary_phone: string | null;
+                address: string | null;
+                created_at: Date;
+                created_by: number | null;
+                speciality: string | null;
+                supplier_id: string;
+            } | null;
+            employee: {
+                name: string;
+                id: number;
+                phone: string | null;
+                position: string | null;
+                emp_code: string;
+                salary: number | null;
+                start_date: string | null;
+            } | null;
+            expense_type: {
+                id: number;
+                exptype_id: string;
+                exptype_name: string;
+                category: string | null;
+            } | null;
+            check: {
+                id: number;
+                created_at: Date;
+                amount: number;
+                notes: string | null;
+                status: string;
+                check_number: string;
+                bank_name: string;
+                check_date: string;
+                beneficiary_name: string;
+                receipt_voucher_id: number | null;
+                payment_voucher_id: number | null;
+            } | null;
+        } & {
+            id: number;
+            description: string | null;
+            created_at: Date;
+            created_by: string | null;
+            supplier_id: string | null;
+            voucher_number: string;
+            voucher_date: string;
+            amount: number;
+            beneficiary_type: string;
+            payment_method: string;
+            check_id: number | null;
+            paid_to: string;
+            partner_id: number | null;
+            expense_type_id: string | null;
+            employee_id: string | null;
+        };
     }>;
-    removePayment(id: number): Promise<{
+    update(id: number, data: Partial<CreatePaymentVoucherDto>): Promise<{
+        success: boolean;
+        message: string;
+        data: {
+            check: {
+                id: number;
+                created_at: Date;
+                amount: number;
+                notes: string | null;
+                status: string;
+                check_number: string;
+                bank_name: string;
+                check_date: string;
+                beneficiary_name: string;
+                receipt_voucher_id: number | null;
+                payment_voucher_id: number | null;
+            } | null;
+        } & {
+            id: number;
+            description: string | null;
+            created_at: Date;
+            created_by: string | null;
+            supplier_id: string | null;
+            voucher_number: string;
+            voucher_date: string;
+            amount: number;
+            beneficiary_type: string;
+            payment_method: string;
+            check_id: number | null;
+            paid_to: string;
+            partner_id: number | null;
+            expense_type_id: string | null;
+            employee_id: string | null;
+        };
+    }>;
+    remove(id: number): Promise<{
         success: boolean;
         message: string;
     }>;

@@ -8,8 +8,10 @@ import {
 } from 'class-validator';
 
 export enum VoucherSourceType {
+  CUSTOMER = 'customer',
   PARTNER_CAPITAL = 'partner_capital',
-  OTHERS = 'others',
+  ADVANCE_PAYMENT = 'advance_payment',
+  OTHER = 'other',
 }
 
 export class CheckDetailDto {
@@ -28,6 +30,14 @@ export class CheckDetailDto {
   @IsOptional()
   @IsString()
   status?: string;
+
+  @IsOptional()
+  @IsString()
+  beneficiary_name?: string;
+
+  @IsOptional()
+  @IsNumber()
+  amount?: number;
 }
 
 export class CreateReceiptVoucherDto {
@@ -46,6 +56,11 @@ export class CreateReceiptVoucherDto {
   @IsNumber()
   amount: number;
 
+  @ApiProperty({ description: 'Internal customer ID', example: 'CUST-001' })
+  @IsOptional()
+  @IsString()
+  customer_id?: string;
+
   @ApiProperty({ description: 'Internal partner ID', example: 1 })
   @IsOptional()
   @IsNumber()
@@ -53,14 +68,14 @@ export class CreateReceiptVoucherDto {
 
   @ApiProperty({
     description: 'Source type',
-    example: VoucherSourceType.PARTNER_CAPITAL,
+    example: VoucherSourceType.CUSTOMER,
     enum: VoucherSourceType,
   })
   @IsNotEmpty()
   @IsEnum(VoucherSourceType)
   source_type: VoucherSourceType;
 
-  @ApiProperty({ description: 'Payment method', example: 'Cash' })
+  @ApiProperty({ description: 'Payment method', example: 'cash' })
   @IsNotEmpty()
   @IsString()
   payment_method: string;
@@ -78,6 +93,7 @@ export class CreateReceiptVoucherDto {
   @ApiProperty({
     description: 'Check detail (if payment method is Check)',
     type: CheckDetailDto,
+    required: false,
   })
   @IsOptional()
   check?: CheckDetailDto;
@@ -85,6 +101,7 @@ export class CreateReceiptVoucherDto {
   @ApiProperty({
     description: 'Check ID (if payment method is Check)',
     example: 1,
+    required: false,
   })
   @IsOptional()
   @IsNumber()

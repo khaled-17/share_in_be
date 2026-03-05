@@ -15,16 +15,20 @@ const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 var VoucherSourceType;
 (function (VoucherSourceType) {
+    VoucherSourceType["CUSTOMER"] = "customer";
     VoucherSourceType["PARTNER_CAPITAL"] = "partner_capital";
-    VoucherSourceType["OTHERS"] = "others";
+    VoucherSourceType["ADVANCE_PAYMENT"] = "advance_payment";
+    VoucherSourceType["OTHER"] = "other";
 })(VoucherSourceType || (exports.VoucherSourceType = VoucherSourceType = {}));
 class CheckDetailDto {
     check_number;
     bank_name;
     check_date;
     status;
+    beneficiary_name;
+    amount;
     static _OPENAPI_METADATA_FACTORY() {
-        return { check_number: { required: false, type: () => String }, bank_name: { required: false, type: () => String }, check_date: { required: false, type: () => String }, status: { required: false, type: () => String } };
+        return { check_number: { required: false, type: () => String }, bank_name: { required: false, type: () => String }, check_date: { required: false, type: () => String }, status: { required: false, type: () => String }, beneficiary_name: { required: false, type: () => String }, amount: { required: false, type: () => Number } };
     }
 }
 exports.CheckDetailDto = CheckDetailDto;
@@ -48,10 +52,21 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CheckDetailDto.prototype, "status", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CheckDetailDto.prototype, "beneficiary_name", void 0);
+__decorate([
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], CheckDetailDto.prototype, "amount", void 0);
 class CreateReceiptVoucherDto {
     voucher_number;
     voucher_date;
     amount;
+    customer_id;
     partner_id;
     source_type;
     payment_method;
@@ -60,7 +75,7 @@ class CreateReceiptVoucherDto {
     check;
     check_id;
     static _OPENAPI_METADATA_FACTORY() {
-        return { voucher_number: { required: true, type: () => String }, voucher_date: { required: true, type: () => String }, amount: { required: true, type: () => Number }, partner_id: { required: false, type: () => Number }, source_type: { required: true, enum: require("./voucher.dto").VoucherSourceType }, payment_method: { required: true, type: () => String }, description: { required: false, type: () => String }, received_from: { required: true, type: () => String }, check: { required: false, type: () => require("./voucher.dto").CheckDetailDto }, check_id: { required: false, type: () => Number } };
+        return { voucher_number: { required: true, type: () => String }, voucher_date: { required: true, type: () => String }, amount: { required: true, type: () => Number }, customer_id: { required: false, type: () => String }, partner_id: { required: false, type: () => Number }, source_type: { required: true, enum: require("./voucher.dto").VoucherSourceType }, payment_method: { required: true, type: () => String }, description: { required: false, type: () => String }, received_from: { required: true, type: () => String }, check: { required: false, type: () => require("./voucher.dto").CheckDetailDto }, check_id: { required: false, type: () => Number } };
     }
 }
 exports.CreateReceiptVoucherDto = CreateReceiptVoucherDto;
@@ -83,6 +98,12 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateReceiptVoucherDto.prototype, "amount", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ description: 'Internal customer ID', example: 'CUST-001' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateReceiptVoucherDto.prototype, "customer_id", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)({ description: 'Internal partner ID', example: 1 }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
@@ -91,7 +112,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Source type',
-        example: VoucherSourceType.PARTNER_CAPITAL,
+        example: VoucherSourceType.CUSTOMER,
         enum: VoucherSourceType,
     }),
     (0, class_validator_1.IsNotEmpty)(),
@@ -99,7 +120,7 @@ __decorate([
     __metadata("design:type", String)
 ], CreateReceiptVoucherDto.prototype, "source_type", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Payment method', example: 'Cash' }),
+    (0, swagger_1.ApiProperty)({ description: 'Payment method', example: 'cash' }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -120,6 +141,7 @@ __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Check detail (if payment method is Check)',
         type: CheckDetailDto,
+        required: false,
     }),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", CheckDetailDto)
@@ -128,6 +150,7 @@ __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Check ID (if payment method is Check)',
         example: 1,
+        required: false,
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),

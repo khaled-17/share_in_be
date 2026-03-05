@@ -1,17 +1,10 @@
 export declare class CreateWorkOrderDto {
+    order_code: string;
     quotation_id: number;
-    title: string;
-    description?: string;
-    start_date: string;
-    end_date?: string;
-    employee_id?: number;
+    customer_id: string;
 }
 export declare class UpdateWorkOrderDto {
-    status?: string;
-    description?: string;
-    employee_id?: number;
+    order_code?: string;
     quotation_id?: number;
-    title?: string;
-    start_date?: string;
-    end_date?: string;
+    customer_id?: string;
 }

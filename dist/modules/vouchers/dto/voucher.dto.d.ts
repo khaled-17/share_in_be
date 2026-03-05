@@ -1,17 +1,22 @@
 export declare enum VoucherSourceType {
+    CUSTOMER = "customer",
     PARTNER_CAPITAL = "partner_capital",
-    OTHERS = "others"
+    ADVANCE_PAYMENT = "advance_payment",
+    OTHER = "other"
 }
 export declare class CheckDetailDto {
     check_number?: string;
     bank_name?: string;
     check_date?: string;
     status?: string;
+    beneficiary_name?: string;
+    amount?: number;
 }
 export declare class CreateReceiptVoucherDto {
     voucher_number: string;
     voucher_date: string;
     amount: number;
+    customer_id?: string;
     partner_id?: number;
     source_type: VoucherSourceType;
     payment_method: string;

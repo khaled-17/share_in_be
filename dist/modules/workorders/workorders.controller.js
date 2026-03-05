@@ -68,7 +68,10 @@ exports.WorkOrdersController = WorkOrdersController;
 __decorate([
     (0, common_1.Get)(),
     (0, swagger_1.ApiOperation)({ summary: 'Retrieve all work orders' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of work orders retrieved' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'List of work orders retrieved successfully',
+    }),
     openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
@@ -80,6 +83,7 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Get a work order by ID' }),
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Work Order ID', example: 1 }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Work Order found' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Work Order not found' }),
     openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
@@ -91,6 +95,8 @@ __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
     (0, swagger_1.ApiOperation)({ summary: 'Create a new work order' }),
     (0, swagger_1.ApiResponse)({ status: 201, description: 'Work Order created successfully' }),
+    (0, swagger_1.ApiResponse)({ status: 400, description: 'Invalid input' }),
+    (0, swagger_1.ApiResponse)({ status: 409, description: 'Work order code already exists' }),
     openapi.ApiResponse({ status: common_1.HttpStatus.CREATED }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -102,6 +108,7 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Update a work order' }),
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Work Order ID', example: 1 }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Work Order updated successfully' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Work Order not found' }),
     openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
@@ -114,6 +121,7 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Delete a work order' }),
     (0, swagger_1.ApiParam)({ name: 'id', description: 'Work Order ID', example: 1 }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Work Order deleted successfully' }),
+    (0, swagger_1.ApiResponse)({ status: 404, description: 'Work Order not found' }),
     openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
@@ -123,7 +131,7 @@ __decorate([
 exports.WorkOrdersController = WorkOrdersController = __decorate([
     (0, swagger_1.ApiTags)('WorkOrders'),
     (0, swagger_1.ApiBearerAuth)(),
-    (0, common_1.Controller)('workorders'),
+    (0, common_1.Controller)('work-orders'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     __metadata("design:paramtypes", [workorders_service_1.WorkOrdersService])
 ], WorkOrdersController);

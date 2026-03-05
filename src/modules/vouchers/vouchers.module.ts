@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
 import { VouchersService } from './vouchers.service';
-import { VouchersController } from './vouchers.controller';
+import {
+  ReceiptVouchersController,
+  PaymentVouchersController,
+} from './vouchers.controller';
 
 @Module({
   providers: [VouchersService],
-  controllers: [VouchersController],
+  controllers: [ReceiptVouchersController, PaymentVouchersController],
 })
 export class VouchersModule {}
