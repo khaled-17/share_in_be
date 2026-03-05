@@ -54,6 +54,54 @@ let SettingsController = class SettingsController {
             message: 'Project type deleted successfully',
         };
     }
+    async getAllCountries() {
+        const countries = await this.settingsService.getAllCountries();
+        return { success: true, data: countries };
+    }
+    async createCountry(data) {
+        const country = await this.settingsService.createCountry(data);
+        return { success: true, message: 'Country created successfully', data: country };
+    }
+    async updateCountry(id, data) {
+        const country = await this.settingsService.updateCountry(id, data);
+        return { success: true, message: 'Country updated successfully', data: country };
+    }
+    async deleteCountry(id) {
+        await this.settingsService.deleteCountry(id);
+        return { success: true, message: 'Country deleted successfully' };
+    }
+    async getAllExpenseTypes() {
+        const types = await this.settingsService.getAllExpenseTypes();
+        return { success: true, data: types };
+    }
+    async createExpenseType(data) {
+        const type = await this.settingsService.createExpenseType(data);
+        return { success: true, message: 'Expense type created successfully', data: type };
+    }
+    async updateExpenseType(id, data) {
+        const type = await this.settingsService.updateExpenseType(id, data);
+        return { success: true, message: 'Expense type updated successfully', data: type };
+    }
+    async deleteExpenseType(id) {
+        await this.settingsService.deleteExpenseType(id);
+        return { success: true, message: 'Expense type deleted successfully' };
+    }
+    async getAllRevenueTypes() {
+        const types = await this.settingsService.getAllRevenueTypes();
+        return { success: true, data: types };
+    }
+    async createRevenueType(data) {
+        const type = await this.settingsService.createRevenueType(data);
+        return { success: true, message: 'Revenue type created successfully', data: type };
+    }
+    async updateRevenueType(id, data) {
+        const type = await this.settingsService.updateRevenueType(id, data);
+        return { success: true, message: 'Revenue type updated successfully', data: type };
+    }
+    async deleteRevenueType(id) {
+        await this.settingsService.deleteRevenueType(id);
+        return { success: true, message: 'Revenue type deleted successfully' };
+    }
 };
 exports.SettingsController = SettingsController;
 __decorate([
@@ -97,6 +145,129 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], SettingsController.prototype, "removeProjectType", null);
+__decorate([
+    (0, common_1.Get)('countries'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get all countries' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of countries' }),
+    openapi.ApiResponse({ status: 200 }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], SettingsController.prototype, "getAllCountries", null);
+__decorate([
+    (0, common_1.Post)('countries'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
+    (0, swagger_1.ApiOperation)({ summary: 'Create a new country' }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Country created successfully' }),
+    openapi.ApiResponse({ status: common_1.HttpStatus.CREATED }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [settings_dto_1.CreateCountryDto]),
+    __metadata("design:returntype", Promise)
+], SettingsController.prototype, "createCountry", null);
+__decorate([
+    (0, common_1.Put)('countries/:id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Update a country' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Country ID', example: 1 }),
+    openapi.ApiResponse({ status: 200 }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, settings_dto_1.UpdateCountryDto]),
+    __metadata("design:returntype", Promise)
+], SettingsController.prototype, "updateCountry", null);
+__decorate([
+    (0, common_1.Delete)('countries/:id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Delete a country' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Country ID', example: 1 }),
+    openapi.ApiResponse({ status: 200 }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], SettingsController.prototype, "deleteCountry", null);
+__decorate([
+    (0, common_1.Get)('expense-types'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get all expense types' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of expense types' }),
+    openapi.ApiResponse({ status: 200 }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], SettingsController.prototype, "getAllExpenseTypes", null);
+__decorate([
+    (0, common_1.Post)('expense-types'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
+    (0, swagger_1.ApiOperation)({ summary: 'Create a new expense type' }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Expense type created successfully' }),
+    openapi.ApiResponse({ status: common_1.HttpStatus.CREATED }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [settings_dto_1.CreateExpenseTypeDto]),
+    __metadata("design:returntype", Promise)
+], SettingsController.prototype, "createExpenseType", null);
+__decorate([
+    (0, common_1.Put)('expense-types/:id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Update an expense type' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Expense Type ID', example: 1 }),
+    openapi.ApiResponse({ status: 200 }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, settings_dto_1.UpdateExpenseTypeDto]),
+    __metadata("design:returntype", Promise)
+], SettingsController.prototype, "updateExpenseType", null);
+__decorate([
+    (0, common_1.Delete)('expense-types/:id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Delete an expense type' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Expense Type ID', example: 1 }),
+    openapi.ApiResponse({ status: 200 }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], SettingsController.prototype, "deleteExpenseType", null);
+__decorate([
+    (0, common_1.Get)('revenue-types'),
+    (0, swagger_1.ApiOperation)({ summary: 'Get all revenue types' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'List of revenue types' }),
+    openapi.ApiResponse({ status: 200 }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], SettingsController.prototype, "getAllRevenueTypes", null);
+__decorate([
+    (0, common_1.Post)('revenue-types'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
+    (0, swagger_1.ApiOperation)({ summary: 'Create a new revenue type' }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Revenue type created successfully' }),
+    openapi.ApiResponse({ status: common_1.HttpStatus.CREATED }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [settings_dto_1.CreateRevenueTypeDto]),
+    __metadata("design:returntype", Promise)
+], SettingsController.prototype, "createRevenueType", null);
+__decorate([
+    (0, common_1.Put)('revenue-types/:id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Update a revenue type' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Revenue Type ID', example: 1 }),
+    openapi.ApiResponse({ status: 200 }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, settings_dto_1.UpdateRevenueTypeDto]),
+    __metadata("design:returntype", Promise)
+], SettingsController.prototype, "updateRevenueType", null);
+__decorate([
+    (0, common_1.Delete)('revenue-types/:id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Delete a revenue type' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'Revenue Type ID', example: 1 }),
+    openapi.ApiResponse({ status: 200 }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], SettingsController.prototype, "deleteRevenueType", null);
 exports.SettingsController = SettingsController = __decorate([
     (0, swagger_1.ApiTags)('Settings'),
     (0, swagger_1.ApiBearerAuth)(),

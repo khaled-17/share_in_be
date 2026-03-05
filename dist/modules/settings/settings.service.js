@@ -129,6 +129,31 @@ let SettingsService = class SettingsService {
             where: { id },
         });
     }
+    async getAllCountries() {
+        return this.prisma.country.findMany({
+            orderBy: { country_name: 'asc' },
+        });
+    }
+    async createCountry(data) {
+        const existing = await this.prisma.country.findUnique({
+            where: { country_code: data.country_code },
+        });
+        if (existing)
+            throw new common_1.ConflictException('Country code already exists');
+        return this.prisma.country.create({ data });
+    }
+    async updateCountry(id, data) {
+        const existing = await this.prisma.country.findUnique({ where: { id } });
+        if (!existing)
+            throw new common_1.NotFoundException('Country not found');
+        return this.prisma.country.update({ where: { id }, data });
+    }
+    async deleteCountry(id) {
+        const existing = await this.prisma.country.findUnique({ where: { id } });
+        if (!existing)
+            throw new common_1.NotFoundException('Country not found');
+        return this.prisma.country.delete({ where: { id } });
+    }
 };
 exports.SettingsService = SettingsService;
 exports.SettingsService = SettingsService = __decorate([

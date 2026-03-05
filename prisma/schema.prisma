@@ -314,6 +314,15 @@ model Customer {
   @@map("customers")
 }
 
+model Country {
+  id           Int      @id @default(autoincrement())
+  country_code String   @unique
+  country_name String
+  created_at   DateTime @default(now())
+
+  @@map("countries")
+}
+
 model CompanySettings {
   id          Int      @id @default(autoincrement())
   name        String

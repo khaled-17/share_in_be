@@ -75,4 +75,34 @@ export declare class SettingsService {
         type_id: string;
         type_name: string;
     }>;
+    getAllCountries(): Promise<{
+        id: number;
+        created_at: Date;
+        country_code: string;
+        country_name: string;
+    }[]>;
+    createCountry(data: {
+        country_code: string;
+        country_name: string;
+    }): Promise<{
+        id: number;
+        created_at: Date;
+        country_code: string;
+        country_name: string;
+    }>;
+    updateCountry(id: number, data: {
+        country_code?: string;
+        country_name?: string;
+    }): Promise<{
+        id: number;
+        created_at: Date;
+        country_code: string;
+        country_name: string;
+    }>;
+    deleteCountry(id: number): Promise<{
+        id: number;
+        created_at: Date;
+        country_code: string;
+        country_name: string;
+    }>;
 }

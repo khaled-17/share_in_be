@@ -138,4 +138,40 @@ export class SettingsService {
       where: { id },
     });
   }
+
+  // ==================
+  // Countries
+  // ==================
+
+  async getAllCountries() {
+    return this.prisma.country.findMany({
+      orderBy: { country_name: 'asc' },
+    });
+  }
+
+  async createCountry(data: { country_code: string; country_name: string }) {
+    const existing = await this.prisma.country.findUnique({
+      where: { country_code: data.country_code },
+    });
+    if (existing) throw new ConflictException('Country code already exists');
+
+    return this.prisma.country.create({ data });
+  }
+
+  async updateCountry(
+    id: number,
+    data: { country_code?: string; country_name?: string },
+  ) {
+    const existing = await this.prisma.country.findUnique({ where: { id } });
+    if (!existing) throw new NotFoundException('Country not found');
+
+    return this.prisma.country.update({ where: { id }, data });
+  }
+
+  async deleteCountry(id: number) {
+    const existing = await this.prisma.country.findUnique({ where: { id } });
+    if (!existing) throw new NotFoundException('Country not found');
+
+    return this.prisma.country.delete({ where: { id } });
+  }
 }
