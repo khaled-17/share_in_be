@@ -60,11 +60,19 @@ let SettingsController = class SettingsController {
     }
     async createCountry(data) {
         const country = await this.settingsService.createCountry(data);
-        return { success: true, message: 'Country created successfully', data: country };
+        return {
+            success: true,
+            message: 'Country created successfully',
+            data: country,
+        };
     }
     async updateCountry(id, data) {
         const country = await this.settingsService.updateCountry(id, data);
-        return { success: true, message: 'Country updated successfully', data: country };
+        return {
+            success: true,
+            message: 'Country updated successfully',
+            data: country,
+        };
     }
     async deleteCountry(id) {
         await this.settingsService.deleteCountry(id);
@@ -76,11 +84,19 @@ let SettingsController = class SettingsController {
     }
     async createExpenseType(data) {
         const type = await this.settingsService.createExpenseType(data);
-        return { success: true, message: 'Expense type created successfully', data: type };
+        return {
+            success: true,
+            message: 'Expense type created successfully',
+            data: type,
+        };
     }
     async updateExpenseType(id, data) {
         const type = await this.settingsService.updateExpenseType(id, data);
-        return { success: true, message: 'Expense type updated successfully', data: type };
+        return {
+            success: true,
+            message: 'Expense type updated successfully',
+            data: type,
+        };
     }
     async deleteExpenseType(id) {
         await this.settingsService.deleteExpenseType(id);
@@ -92,11 +108,19 @@ let SettingsController = class SettingsController {
     }
     async createRevenueType(data) {
         const type = await this.settingsService.createRevenueType(data);
-        return { success: true, message: 'Revenue type created successfully', data: type };
+        return {
+            success: true,
+            message: 'Revenue type created successfully',
+            data: type,
+        };
     }
     async updateRevenueType(id, data) {
         const type = await this.settingsService.updateRevenueType(id, data);
-        return { success: true, message: 'Revenue type updated successfully', data: type };
+        return {
+            success: true,
+            message: 'Revenue type updated successfully',
+            data: type,
+        };
     }
     async deleteRevenueType(id) {
         await this.settingsService.deleteRevenueType(id);
@@ -199,7 +223,10 @@ __decorate([
     (0, common_1.Post)('expense-types'),
     (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
     (0, swagger_1.ApiOperation)({ summary: 'Create a new expense type' }),
-    (0, swagger_1.ApiResponse)({ status: 201, description: 'Expense type created successfully' }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'Expense type created successfully',
+    }),
     openapi.ApiResponse({ status: common_1.HttpStatus.CREATED }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -240,7 +267,10 @@ __decorate([
     (0, common_1.Post)('revenue-types'),
     (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
     (0, swagger_1.ApiOperation)({ summary: 'Create a new revenue type' }),
-    (0, swagger_1.ApiResponse)({ status: 201, description: 'Revenue type created successfully' }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'Revenue type created successfully',
+    }),
     openapi.ApiResponse({ status: common_1.HttpStatus.CREATED }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),

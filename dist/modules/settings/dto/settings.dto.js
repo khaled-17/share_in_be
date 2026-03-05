@@ -87,7 +87,11 @@ __decorate([
     __metadata("design:type", String)
 ], UpdateCountryDto.prototype, "country_code", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Country name', example: 'Egypt', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Country name',
+        example: 'Egypt',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -128,7 +132,11 @@ class UpdateExpenseTypeDto {
 }
 exports.UpdateExpenseTypeDto = UpdateExpenseTypeDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Expense type name', example: 'Office Supplies', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Expense type name',
+        example: 'Office Supplies',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -161,7 +169,11 @@ __decorate([
     __metadata("design:type", String)
 ], CreateRevenueTypeDto.prototype, "revtype_name", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Payment method', example: 'Visa', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Payment method',
+        example: 'Visa',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -175,13 +187,21 @@ class UpdateRevenueTypeDto {
 }
 exports.UpdateRevenueTypeDto = UpdateRevenueTypeDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Revenue type name', example: 'Consulting', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Revenue type name',
+        example: 'Consulting',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateRevenueTypeDto.prototype, "revtype_name", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Payment method', example: 'Visa', required: false }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Payment method',
+        example: 'Visa',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
