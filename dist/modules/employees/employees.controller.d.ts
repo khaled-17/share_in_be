@@ -4,7 +4,8 @@ export declare class EmployeesController {
     private employeesService;
     constructor(employeesService: EmployeesService);
     findAll(): Promise<{
-        employees: {
+        success: boolean;
+        data: {
             name: string;
             id: number;
             phone: string | null;

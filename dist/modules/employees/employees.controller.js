@@ -25,7 +25,12 @@ let EmployeesController = class EmployeesController {
         this.employeesService = employeesService;
     }
     async findAll() {
-        return this.employeesService.findAll();
+        const data = await this.employeesService.findAll();
+        return {
+            success: true,
+            data: data.employees,
+            total: data.total,
+        };
     }
     async findOne(id) {
         const employee = await this.employeesService.findOne(id);

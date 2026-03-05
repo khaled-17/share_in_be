@@ -33,7 +33,12 @@ export class EmployeesController {
   @ApiOperation({ summary: 'Retrieve all employees' })
   @ApiResponse({ status: 200, description: 'List of employees retrieved' })
   async findAll() {
-    return this.employeesService.findAll();
+    const data = await this.employeesService.findAll();
+    return {
+      success: true,
+      data: data.employees,
+      total: data.total,
+    };
   }
 
   @Get(':id')
