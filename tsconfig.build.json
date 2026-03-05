@@ -5,6 +5,7 @@
     "test",
     "dist",
     "**/*spec.ts",
-    "legacy_v1"
+    "legacy_v1",
+    "prisma"
   ]
 }
