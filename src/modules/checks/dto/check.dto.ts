@@ -111,3 +111,23 @@ export class UpdateCheckDto {
   @IsString()
   beneficiary_name?: string;
 }
+
+export class UpdateCheckStatusDto {
+  @ApiProperty({
+    description: 'Check status',
+    example: CheckStatus.CLEARED,
+    enum: CheckStatus,
+  })
+  @IsNotEmpty()
+  @IsEnum(CheckStatus)
+  status: CheckStatus;
+
+  @ApiProperty({
+    description: 'Notes',
+    example: 'Check was cleared successfully',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  notes?: string;
+}

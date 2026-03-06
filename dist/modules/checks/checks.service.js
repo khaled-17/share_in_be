@@ -36,15 +36,41 @@ let ChecksService = class ChecksService {
         }
         return this.prisma.checkDetail.findMany({
             where,
-            orderBy: { check_date: 'asc' },
+            include: {
+                receipt_voucher: {
+                    include: {
+                        customer: true,
+                        partner: true,
+                    },
+                },
+                payment_voucher: {
+                    include: {
+                        supplier: true,
+                        employee: true,
+                        partner: true,
+                    },
+                },
+            },
+            orderBy: { check_date: 'desc' },
         });
     }
     async findOne(id) {
         const check = await this.prisma.checkDetail.findUnique({
             where: { id },
             include: {
-                receipt_voucher: true,
-                payment_voucher: true,
+                receipt_voucher: {
+                    include: {
+                        customer: true,
+                        partner: true,
+                    },
+                },
+                payment_voucher: {
+                    include: {
+                        supplier: true,
+                        employee: true,
+                        partner: true,
+                    },
+                },
             },
         });
         if (!check)
@@ -68,6 +94,10 @@ let ChecksService = class ChecksService {
         return this.prisma.checkDetail.update({
             where: { id },
             data,
+            include: {
+                receipt_voucher: true,
+                payment_voucher: true,
+            },
         });
     }
     async remove(id) {
@@ -106,13 +136,33 @@ let ChecksService = class ChecksService {
     }
     async getDueSoon() {
         const today = new Date().toISOString().split('T')[0];
+        const futureDate = new Date();
+        futureDate.setDate(futureDate.getDate() + 7);
+        const weekLater = futureDate.toISOString().split('T')[0];
         return this.prisma.checkDetail.findMany({
             where: {
                 status: 'pending',
-                check_date: { gte: today },
+                check_date: {
+                    gte: today,
+                    lte: weekLater,
+                },
+            },
+            include: {
+                receipt_voucher: {
+                    include: {
+                        customer: true,
+                        partner: true,
+                    },
+                },
+                payment_voucher: {
+                    include: {
+                        supplier: true,
+                        employee: true,
+                        partner: true,
+                    },
+                },
             },
             orderBy: { check_date: 'asc' },
-            take: 5,
         });
     }
 };

@@ -21,3 +21,7 @@ export declare class UpdateCheckDto {
     notes?: string;
     beneficiary_name?: string;
 }
+export declare class UpdateCheckStatusDto {
+    status: CheckStatus;
+    notes?: string;
+}

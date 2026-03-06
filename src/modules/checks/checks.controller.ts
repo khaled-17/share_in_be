@@ -21,7 +21,11 @@ import {
 } from '@nestjs/swagger';
 import { ChecksService, CheckFilters } from './checks.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { CreateCheckDto, UpdateCheckDto } from './dto/check.dto';
+import {
+  CreateCheckDto,
+  UpdateCheckDto,
+  UpdateCheckStatusDto,
+} from './dto/check.dto';
 
 @ApiTags('Checks')
 @ApiBearerAuth()
@@ -38,6 +42,52 @@ export class ChecksController {
     return {
       success: true,
       message: 'Checks retrieved successfully',
+      data: result,
+    };
+  }
+
+  @Get('stats/summary')
+  @ApiOperation({ summary: 'Get checks statistics summary' })
+  @ApiResponse({ status: 200, description: 'Summary statistics retrieved' })
+  async getStats(@Query() query: CheckFilters) {
+    const result = await this.checksService.getStats(query);
+    return {
+      success: true,
+      message: 'Summary statistics retrieved successfully',
+      data: result,
+    };
+  }
+
+  @Get('pending/due-soon')
+  @ApiOperation({ summary: 'Get pending checks due soon' })
+  @ApiResponse({ status: 200, description: 'Checks retrieved successfully' })
+  async getDueSoon() {
+    const result = await this.checksService.getDueSoon();
+    return {
+      success: true,
+      message: 'Pending checks retrieved successfully',
+      data: result,
+    };
+  }
+
+  @Put(':id/status')
+  @ApiOperation({ summary: 'Update a check status' })
+  @ApiParam({ name: 'id', description: 'Check ID', example: 1 })
+  @ApiResponse({
+    status: 200,
+    description: 'Check status updated successfully',
+  })
+  async updateStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateCheckStatusDto: UpdateCheckStatusDto,
+  ) {
+    const result = await this.checksService.updateStatus(
+      id,
+      updateCheckStatusDto,
+    );
+    return {
+      success: true,
+      message: 'Check status updated successfully',
       data: result,
     };
   }

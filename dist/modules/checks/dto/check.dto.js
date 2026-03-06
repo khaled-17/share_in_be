@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UpdateCheckDto = exports.CreateCheckDto = exports.CheckStatus = void 0;
+exports.UpdateCheckStatusDto = exports.UpdateCheckDto = exports.CreateCheckDto = exports.CheckStatus = void 0;
 const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
@@ -152,4 +152,32 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UpdateCheckDto.prototype, "beneficiary_name", void 0);
+class UpdateCheckStatusDto {
+    status;
+    notes;
+    static _OPENAPI_METADATA_FACTORY() {
+        return { status: { required: true, enum: require("./check.dto").CheckStatus }, notes: { required: false, type: () => String } };
+    }
+}
+exports.UpdateCheckStatusDto = UpdateCheckStatusDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Check status',
+        example: CheckStatus.CLEARED,
+        enum: CheckStatus,
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsEnum)(CheckStatus),
+    __metadata("design:type", String)
+], UpdateCheckStatusDto.prototype, "status", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Notes',
+        example: 'Check was cleared successfully',
+        required: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UpdateCheckStatusDto.prototype, "notes", void 0);
 //# sourceMappingURL=check.dto.js.map
