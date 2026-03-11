@@ -57,14 +57,15 @@ export declare class SettingsService {
         type_name: string;
     }[]>;
     createProjectType(data: {
-        type: string;
+        type_id: string;
+        type_name: string;
     }): Promise<{
         id: number;
         type_id: string;
         type_name: string;
     }>;
     updateProjectType(id: number, data: {
-        type?: string;
+        type_name?: string;
     }): Promise<{
         id: number;
         type_id: string;

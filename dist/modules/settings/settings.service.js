@@ -91,8 +91,7 @@ let SettingsService = class SettingsService {
         });
     }
     async createProjectType(data) {
-        const { type } = data;
-        const type_id = type.toLowerCase().replace(/\s+/g, '-');
+        const { type_id, type_name } = data;
         const existing = await this.prisma.projectType.findUnique({
             where: { type_id },
         });
@@ -101,7 +100,7 @@ let SettingsService = class SettingsService {
         return this.prisma.projectType.create({
             data: {
                 type_id,
-                type_name: type,
+                type_name,
             },
         });
     }
@@ -111,11 +110,11 @@ let SettingsService = class SettingsService {
         });
         if (!existing)
             throw new common_1.NotFoundException('Project Type not found');
-        const { type } = data;
+        const { type_name } = data;
         return this.prisma.projectType.update({
             where: { id },
             data: {
-                type_name: type,
+                type_name,
             },
         });
     }

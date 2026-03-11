@@ -1,8 +1,9 @@
 export declare class CreateProjectTypeDto {
-    type: string;
+    type_id: string;
+    type_name: string;
 }
 export declare class UpdateProjectTypeDto {
-    type?: string;
+    type_name?: string;
 }
 export declare class CreateCountryDto {
     country_code: string;

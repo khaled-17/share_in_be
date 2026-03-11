@@ -95,10 +95,8 @@ export class SettingsService {
     });
   }
 
-  async createProjectType(data: { type: string }) {
-    const { type } = data;
-    // Generate a simple ID or handle as needed
-    const type_id = type.toLowerCase().replace(/\s+/g, '-');
+  async createProjectType(data: { type_id: string; type_name: string }) {
+    const { type_id, type_name } = data;
 
     const existing = await this.prisma.projectType.findUnique({
       where: { type_id },
@@ -108,22 +106,22 @@ export class SettingsService {
     return this.prisma.projectType.create({
       data: {
         type_id,
-        type_name: type,
+        type_name,
       },
     });
   }
 
-  async updateProjectType(id: number, data: { type?: string }) {
+  async updateProjectType(id: number, data: { type_name?: string }) {
     const existing = await this.prisma.projectType.findUnique({
       where: { id },
     });
     if (!existing) throw new NotFoundException('Project Type not found');
 
-    const { type } = data;
+    const { type_name } = data;
     return this.prisma.projectType.update({
       where: { id },
       data: {
-        type_name: type,
+        type_name,
       },
     });
   }

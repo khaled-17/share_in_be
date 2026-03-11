@@ -14,38 +14,48 @@ const openapi = require("@nestjs/swagger");
 const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateProjectTypeDto {
-    type;
+    type_id;
+    type_name;
     static _OPENAPI_METADATA_FACTORY() {
-        return { type: { required: true, type: () => String } };
+        return { type_id: { required: true, type: () => String }, type_name: { required: true, type: () => String } };
     }
 }
 exports.CreateProjectTypeDto = CreateProjectTypeDto;
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'The type of the project',
+        description: 'Project Type ID',
+        example: 'P001',
+    }),
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateProjectTypeDto.prototype, "type_id", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'The name of the project type',
         example: 'Social Media',
     }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateProjectTypeDto.prototype, "type", void 0);
+], CreateProjectTypeDto.prototype, "type_name", void 0);
 class UpdateProjectTypeDto {
-    type;
+    type_name;
     static _OPENAPI_METADATA_FACTORY() {
-        return { type: { required: false, type: () => String } };
+        return { type_name: { required: false, type: () => String } };
     }
 }
 exports.UpdateProjectTypeDto = UpdateProjectTypeDto;
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'The type of the project',
+        description: 'The name of the project type',
         example: 'Social Media Management',
         required: false,
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UpdateProjectTypeDto.prototype, "type", void 0);
+], UpdateProjectTypeDto.prototype, "type_name", void 0);
 class CreateCountryDto {
     country_code;
     country_name;

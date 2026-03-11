@@ -3,23 +3,31 @@ import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateProjectTypeDto {
   @ApiProperty({
-    description: 'The type of the project',
+    description: 'Project Type ID',
+    example: 'P001',
+  })
+  @IsNotEmpty()
+  @IsString()
+  type_id: string;
+
+  @ApiProperty({
+    description: 'The name of the project type',
     example: 'Social Media',
   })
   @IsNotEmpty()
   @IsString()
-  type: string;
+  type_name: string;
 }
 
 export class UpdateProjectTypeDto {
   @ApiProperty({
-    description: 'The type of the project',
+    description: 'The name of the project type',
     example: 'Social Media Management',
     required: false,
   })
   @IsOptional()
   @IsString()
-  type?: string;
+  type_name?: string;
 }
 
 export class CreateCountryDto {
