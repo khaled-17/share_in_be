@@ -12,10 +12,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CustomersService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../../prisma/prisma.service");
+const code_generator_1 = require("../../common/utils/code-generator");
 let CustomersService = class CustomersService {
     prisma;
     constructor(prisma) {
         this.prisma = prisma;
+    }
+    async generateCustomerId() {
+        const latestCustomer = await this.prisma.customer.findFirst({
+            where: { customer_id: { startsWith: code_generator_1.CODE_PREFIX.customer } },
+            orderBy: { created_at: 'desc' },
+            select: { customer_id: true },
+        });
+        return (0, code_generator_1.getNextCode)(code_generator_1.CODE_PREFIX.customer, latestCustomer?.customer_id);
     }
     async findAll(params) {
         const { skip, take, search } = params;
@@ -50,13 +59,16 @@ let CustomersService = class CustomersService {
         return customer;
     }
     async create(data) {
-        const existing = await this.prisma.customer.findUnique({
-            where: { customer_id: data.customer_id },
+        const rest = { ...data };
+        delete rest.customer_id;
+        return (0, code_generator_1.createWithGeneratedCode)({
+            generateCode: () => this.generateCustomerId(),
+            createRecord: (customer_id) => this.prisma.customer.create({
+                data: { ...rest, customer_id },
+            }),
+            uniqueField: 'customer_id',
+            entityLabel: 'customer',
         });
-        if (existing) {
-            throw new common_1.ConflictException('Customer ID already exists');
-        }
-        return this.prisma.customer.create({ data });
     }
     async update(id, data) {
         await this.findOne(id);

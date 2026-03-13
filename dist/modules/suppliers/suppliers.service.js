@@ -12,10 +12,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SuppliersService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../../prisma/prisma.service");
+const code_generator_1 = require("../../common/utils/code-generator");
 let SuppliersService = class SuppliersService {
     prisma;
     constructor(prisma) {
         this.prisma = prisma;
+    }
+    async generateSupplierId() {
+        const latestSupplier = await this.prisma.supplier.findFirst({
+            where: { supplier_id: { startsWith: code_generator_1.CODE_PREFIX.supplier } },
+            orderBy: { created_at: 'desc' },
+            select: { supplier_id: true },
+        });
+        return (0, code_generator_1.getNextCode)(code_generator_1.CODE_PREFIX.supplier, latestSupplier?.supplier_id);
     }
     async findAll(params) {
         const { skip, take, search } = params;
@@ -59,15 +68,16 @@ let SuppliersService = class SuppliersService {
         return supplier;
     }
     async create(data) {
-        if (data.supplier_id) {
-            const existing = await this.prisma.supplier.findUnique({
-                where: { supplier_id: data.supplier_id },
-            });
-            if (existing) {
-                throw new common_1.ConflictException('Supplier ID already exists');
-            }
-        }
-        return this.prisma.supplier.create({ data });
+        const rest = { ...data };
+        delete rest.supplier_id;
+        return (0, code_generator_1.createWithGeneratedCode)({
+            generateCode: () => this.generateSupplierId(),
+            createRecord: (supplier_id) => this.prisma.supplier.create({
+                data: { ...rest, supplier_id },
+            }),
+            uniqueField: 'supplier_id',
+            entityLabel: 'supplier',
+        });
     }
     async update(idOrCode, data) {
         const supplier = await this.findOne(idOrCode);

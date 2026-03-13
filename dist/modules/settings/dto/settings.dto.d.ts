@@ -1,12 +1,12 @@
 export declare class CreateProjectTypeDto {
-    type_id: string;
+    type_id?: string;
     type_name: string;
 }
 export declare class UpdateProjectTypeDto {
     type_name?: string;
 }
 export declare class CreateCountryDto {
-    country_code: string;
+    country_code?: string;
     country_name: string;
 }
 export declare class UpdateCountryDto {
@@ -14,7 +14,7 @@ export declare class UpdateCountryDto {
     country_name?: string;
 }
 export declare class CreateExpenseTypeDto {
-    exptype_id: string;
+    exptype_id?: string;
     exptype_name: string;
     category?: string;
 }
@@ -23,7 +23,7 @@ export declare class UpdateExpenseTypeDto {
     category?: string;
 }
 export declare class CreateRevenueTypeDto {
-    revtype_id: string;
+    revtype_id?: string;
     revtype_name: string;
     paymethod?: string;
 }

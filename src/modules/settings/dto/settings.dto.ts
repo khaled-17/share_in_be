@@ -3,12 +3,13 @@ import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateProjectTypeDto {
   @ApiProperty({
-    description: 'Project Type ID',
-    example: 'P001',
+    description: 'Auto-generated project type code',
+    example: 'PT001',
+    required: false,
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  type_id: string;
+  type_id?: string;
 
   @ApiProperty({
     description: 'The name of the project type',
@@ -32,12 +33,13 @@ export class UpdateProjectTypeDto {
 
 export class CreateCountryDto {
   @ApiProperty({
-    description: 'Unique country code (e.g. EG, SA, US)',
-    example: 'EG',
+    description: 'Auto-generated country code',
+    example: 'CO001',
+    required: false,
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  country_code: string;
+  country_code?: string;
 
   @ApiProperty({
     description: 'Country name',
@@ -65,10 +67,14 @@ export class UpdateCountryDto {
 }
 
 export class CreateExpenseTypeDto {
-  @ApiProperty({ description: 'Expense type ID', example: 'EXP001' })
-  @IsNotEmpty()
+  @ApiProperty({
+    description: 'Auto-generated expense type code',
+    example: 'ET001',
+    required: false,
+  })
+  @IsOptional()
   @IsString()
-  exptype_id: string;
+  exptype_id?: string;
 
   @ApiProperty({ description: 'Expense type name', example: 'Office Supplies' })
   @IsNotEmpty()
@@ -98,10 +104,14 @@ export class UpdateExpenseTypeDto {
 }
 
 export class CreateRevenueTypeDto {
-  @ApiProperty({ description: 'Revenue type ID', example: 'REV001' })
-  @IsNotEmpty()
+  @ApiProperty({
+    description: 'Auto-generated revenue type code',
+    example: 'RT001',
+    required: false,
+  })
+  @IsOptional()
   @IsString()
-  revtype_id: string;
+  revtype_id?: string;
 
   @ApiProperty({ description: 'Revenue type name', example: 'Consulting' })
   @IsNotEmpty()

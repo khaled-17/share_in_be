@@ -1,14 +1,26 @@
-import {
-  Injectable,
-  NotFoundException,
-  ConflictException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Prisma, Supplier } from '@prisma/client';
+import {
+  CODE_PREFIX,
+  createWithGeneratedCode,
+  getNextCode,
+} from '../../common/utils/code-generator';
+import { CreateSupplierDto, UpdateSupplierDto } from './dto/supplier.dto';
 
 @Injectable()
 export class SuppliersService {
   constructor(private prisma: PrismaService) {}
+
+  private async generateSupplierId() {
+    const latestSupplier = await this.prisma.supplier.findFirst({
+      where: { supplier_id: { startsWith: CODE_PREFIX.supplier } },
+      orderBy: { created_at: 'desc' },
+      select: { supplier_id: true },
+    });
+
+    return getNextCode(CODE_PREFIX.supplier, latestSupplier?.supplier_id);
+  }
 
   async findAll(params: { skip?: number; take?: number; search?: string }) {
     const { skip, take, search } = params;
@@ -57,19 +69,22 @@ export class SuppliersService {
     return supplier;
   }
 
-  async create(data: Prisma.SupplierCreateInput) {
-    if (data.supplier_id) {
-      const existing = await this.prisma.supplier.findUnique({
-        where: { supplier_id: data.supplier_id },
-      });
-      if (existing) {
-        throw new ConflictException('Supplier ID already exists');
-      }
-    }
-    return this.prisma.supplier.create({ data });
+  async create(data: CreateSupplierDto) {
+    const rest = { ...data };
+    delete rest.supplier_id;
+
+    return createWithGeneratedCode({
+      generateCode: () => this.generateSupplierId(),
+      createRecord: (supplier_id) =>
+        this.prisma.supplier.create({
+          data: { ...rest, supplier_id },
+        }),
+      uniqueField: 'supplier_id',
+      entityLabel: 'supplier',
+    });
   }
 
-  async update(idOrCode: string | number, data: Prisma.SupplierUpdateInput) {
+  async update(idOrCode: string | number, data: UpdateSupplierDto) {
     const supplier = await this.findOne(idOrCode);
     return this.prisma.supplier.update({
       where: { id: supplier.id },

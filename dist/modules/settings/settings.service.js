@@ -12,10 +12,43 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SettingsService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../../prisma/prisma.service");
+const code_generator_1 = require("../../common/utils/code-generator");
 let SettingsService = class SettingsService {
     prisma;
     constructor(prisma) {
         this.prisma = prisma;
+    }
+    async generateRevenueTypeCode() {
+        const latest = await this.prisma.revenueType.findFirst({
+            where: { revtype_id: { startsWith: code_generator_1.CODE_PREFIX.revenueType } },
+            orderBy: { id: 'desc' },
+            select: { revtype_id: true },
+        });
+        return (0, code_generator_1.getNextCode)(code_generator_1.CODE_PREFIX.revenueType, latest?.revtype_id);
+    }
+    async generateExpenseTypeCode() {
+        const latest = await this.prisma.expenseType.findFirst({
+            where: { exptype_id: { startsWith: code_generator_1.CODE_PREFIX.expenseType } },
+            orderBy: { id: 'desc' },
+            select: { exptype_id: true },
+        });
+        return (0, code_generator_1.getNextCode)(code_generator_1.CODE_PREFIX.expenseType, latest?.exptype_id);
+    }
+    async generateProjectTypeCode() {
+        const latest = await this.prisma.projectType.findFirst({
+            where: { type_id: { startsWith: code_generator_1.CODE_PREFIX.projectType } },
+            orderBy: { id: 'desc' },
+            select: { type_id: true },
+        });
+        return (0, code_generator_1.getNextCode)(code_generator_1.CODE_PREFIX.projectType, latest?.type_id);
+    }
+    async generateCountryCode() {
+        const latest = await this.prisma.country.findFirst({
+            where: { country_code: { startsWith: code_generator_1.CODE_PREFIX.country } },
+            orderBy: { id: 'desc' },
+            select: { country_code: true },
+        });
+        return (0, code_generator_1.getNextCode)(code_generator_1.CODE_PREFIX.country, latest?.country_code);
     }
     async getAllRevenueTypes() {
         return this.prisma.revenueType.findMany({
@@ -23,12 +56,16 @@ let SettingsService = class SettingsService {
         });
     }
     async createRevenueType(data) {
-        const existing = await this.prisma.revenueType.findUnique({
-            where: { revtype_id: data.revtype_id },
+        const rest = { ...data };
+        delete rest.revtype_id;
+        return (0, code_generator_1.createWithGeneratedCode)({
+            generateCode: () => this.generateRevenueTypeCode(),
+            createRecord: (revtype_id) => this.prisma.revenueType.create({
+                data: { ...rest, revtype_id },
+            }),
+            uniqueField: 'revtype_id',
+            entityLabel: 'revenue type',
         });
-        if (existing)
-            throw new common_1.ConflictException('Revenue Type ID already exists');
-        return this.prisma.revenueType.create({ data });
     }
     async updateRevenueType(id, data) {
         const existing = await this.prisma.revenueType.findUnique({
@@ -57,12 +94,16 @@ let SettingsService = class SettingsService {
         });
     }
     async createExpenseType(data) {
-        const existing = await this.prisma.expenseType.findUnique({
-            where: { exptype_id: data.exptype_id },
+        const rest = { ...data };
+        delete rest.exptype_id;
+        return (0, code_generator_1.createWithGeneratedCode)({
+            generateCode: () => this.generateExpenseTypeCode(),
+            createRecord: (exptype_id) => this.prisma.expenseType.create({
+                data: { ...rest, exptype_id },
+            }),
+            uniqueField: 'exptype_id',
+            entityLabel: 'expense type',
         });
-        if (existing)
-            throw new common_1.ConflictException('Expense Type ID already exists');
-        return this.prisma.expenseType.create({ data });
     }
     async updateExpenseType(id, data) {
         const existing = await this.prisma.expenseType.findUnique({
@@ -91,17 +132,18 @@ let SettingsService = class SettingsService {
         });
     }
     async createProjectType(data) {
-        const { type_id, type_name } = data;
-        const existing = await this.prisma.projectType.findUnique({
-            where: { type_id },
-        });
-        if (existing)
-            throw new common_1.ConflictException('Project Type already exists');
-        return this.prisma.projectType.create({
-            data: {
-                type_id,
-                type_name,
-            },
+        const rest = { ...data };
+        delete rest.type_id;
+        return (0, code_generator_1.createWithGeneratedCode)({
+            generateCode: () => this.generateProjectTypeCode(),
+            createRecord: (type_id) => this.prisma.projectType.create({
+                data: {
+                    ...rest,
+                    type_id,
+                },
+            }),
+            uniqueField: 'type_id',
+            entityLabel: 'project type',
         });
     }
     async updateProjectType(id, data) {
@@ -134,18 +176,24 @@ let SettingsService = class SettingsService {
         });
     }
     async createCountry(data) {
-        const existing = await this.prisma.country.findUnique({
-            where: { country_code: data.country_code },
+        const rest = { ...data };
+        delete rest.country_code;
+        return (0, code_generator_1.createWithGeneratedCode)({
+            generateCode: () => this.generateCountryCode(),
+            createRecord: (country_code) => this.prisma.country.create({
+                data: { ...rest, country_code },
+            }),
+            uniqueField: 'country_code',
+            entityLabel: 'country',
         });
-        if (existing)
-            throw new common_1.ConflictException('Country code already exists');
-        return this.prisma.country.create({ data });
     }
     async updateCountry(id, data) {
         const existing = await this.prisma.country.findUnique({ where: { id } });
         if (!existing)
             throw new common_1.NotFoundException('Country not found');
-        return this.prisma.country.update({ where: { id }, data });
+        const rest = { ...data };
+        delete rest.country_code;
+        return this.prisma.country.update({ where: { id }, data: rest });
     }
     async deleteCountry(id) {
         const existing = await this.prisma.country.findUnique({ where: { id } });

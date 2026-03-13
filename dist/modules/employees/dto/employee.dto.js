@@ -21,13 +21,17 @@ class CreateEmployeeDto {
     salary;
     start_date;
     static _OPENAPI_METADATA_FACTORY() {
-        return { emp_code: { required: true, type: () => String }, name: { required: true, type: () => String }, phone: { required: false, type: () => String }, position: { required: false, type: () => String }, salary: { required: false, type: () => Number }, start_date: { required: false, type: () => String } };
+        return { emp_code: { required: false, type: () => String }, name: { required: true, type: () => String }, phone: { required: false, type: () => String }, position: { required: false, type: () => String }, salary: { required: false, type: () => Number }, start_date: { required: false, type: () => String } };
     }
 }
 exports.CreateEmployeeDto = CreateEmployeeDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Unique employee code', example: 'EMP-001' }),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, swagger_1.ApiProperty)({
+        description: 'Auto-generated unique employee code',
+        example: 'EM001',
+        required: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateEmployeeDto.prototype, "emp_code", void 0);

@@ -12,10 +12,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EmployeesService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../../prisma/prisma.service");
+const code_generator_1 = require("../../common/utils/code-generator");
 let EmployeesService = class EmployeesService {
     prisma;
     constructor(prisma) {
         this.prisma = prisma;
+    }
+    async generateEmployeeCode() {
+        const latestEmployee = await this.prisma.employee.findFirst({
+            where: { emp_code: { startsWith: code_generator_1.CODE_PREFIX.employee } },
+            orderBy: { id: 'desc' },
+            select: { emp_code: true },
+        });
+        return (0, code_generator_1.getNextCode)(code_generator_1.CODE_PREFIX.employee, latestEmployee?.emp_code);
     }
     async findAll(params = {}) {
         const { skip, take, search } = params;
@@ -55,22 +64,19 @@ let EmployeesService = class EmployeesService {
         });
     }
     async create(data) {
-        if (data.emp_code) {
-            const existing = await this.findByEmpCode(data.emp_code);
-            if (existing) {
-                throw new common_1.ConflictException('Employee Code already exists');
-            }
-        }
-        return this.prisma.employee.create({ data });
+        const rest = { ...data };
+        delete rest.emp_code;
+        return (0, code_generator_1.createWithGeneratedCode)({
+            generateCode: () => this.generateEmployeeCode(),
+            createRecord: (emp_code) => this.prisma.employee.create({
+                data: { ...rest, emp_code },
+            }),
+            uniqueField: 'emp_code',
+            entityLabel: 'employee',
+        });
     }
     async update(id, data) {
         await this.findOne(id);
-        if (data.emp_code && typeof data.emp_code === 'string') {
-            const existing = await this.findByEmpCode(data.emp_code);
-            if (existing && existing.id !== id) {
-                throw new common_1.ConflictException('Employee Code already exists');
-            }
-        }
         return this.prisma.employee.update({
             where: { id },
             data,

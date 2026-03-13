@@ -1,5 +1,5 @@
 export declare class CreatePartnerDto {
-    partner_code: string;
+    partner_code?: string;
     name: string;
     phone?: string;
     email?: string;

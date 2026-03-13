@@ -3,12 +3,13 @@ import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateCustomerDto {
   @ApiProperty({
-    description: 'Unique customer identifier',
-    example: 'CUST-001',
+    description: 'Auto-generated unique customer identifier',
+    example: 'CU001',
+    required: false,
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  customer_id: string;
+  customer_id?: string;
 
   @ApiProperty({
     description: 'Full name of the customer',

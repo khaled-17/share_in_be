@@ -1,5 +1,5 @@
 export declare class CreateEmployeeDto {
-    emp_code: string;
+    emp_code?: string;
     name: string;
     phone?: string;
     position?: string;

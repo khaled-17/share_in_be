@@ -18,16 +18,17 @@ class CreateWorkOrderDto {
     quotation_id;
     customer_id;
     static _OPENAPI_METADATA_FACTORY() {
-        return { order_code: { required: true, type: () => String }, quotation_id: { required: true, type: () => Number }, customer_id: { required: true, type: () => String } };
+        return { order_code: { required: false, type: () => String }, quotation_id: { required: true, type: () => Number }, customer_id: { required: true, type: () => String } };
     }
 }
 exports.CreateWorkOrderDto = CreateWorkOrderDto;
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Unique work order code',
-        example: 'WO-2023-001',
+        description: 'Auto-generated unique work order code',
+        example: 'WO001',
+        required: false,
     }),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateWorkOrderDto.prototype, "order_code", void 0);

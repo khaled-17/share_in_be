@@ -20,11 +20,11 @@ export declare class ReceiptVouchersController {
             customer: {
                 name: string;
                 tenant_id: number;
-                contact_person: string;
-                phone: string;
                 customer_id: string;
+                contact_person: string;
                 company_email: string;
                 contact_email: string;
+                phone: string;
                 secondary_phone: string;
                 address: string;
                 created_at: Date;
@@ -49,13 +49,13 @@ export declare class ReceiptVouchersController {
             customer_id: string | null;
             created_at: Date;
             created_by: string | null;
+            source_type: string;
             voucher_number: string;
             voucher_date: string;
             amount: number;
+            partner_id: number | null;
             payment_method: string;
             check_id: number | null;
-            partner_id: number | null;
-            source_type: string;
             received_from: string;
         })[];
     }>;
@@ -94,11 +94,11 @@ export declare class ReceiptVouchersController {
             customer: {
                 name: string;
                 tenant_id: number;
-                contact_person: string;
-                phone: string;
                 customer_id: string;
+                contact_person: string;
                 company_email: string;
                 contact_email: string;
+                phone: string;
                 secondary_phone: string;
                 address: string;
                 created_at: Date;
@@ -123,13 +123,13 @@ export declare class ReceiptVouchersController {
             customer_id: string | null;
             created_at: Date;
             created_by: string | null;
+            source_type: string;
             voucher_number: string;
             voucher_date: string;
             amount: number;
+            partner_id: number | null;
             payment_method: string;
             check_id: number | null;
-            partner_id: number | null;
-            source_type: string;
             received_from: string;
         };
     }>;
@@ -150,11 +150,11 @@ export declare class ReceiptVouchersController {
             customer: {
                 name: string;
                 tenant_id: number;
-                contact_person: string;
-                phone: string;
                 customer_id: string;
+                contact_person: string;
                 company_email: string;
                 contact_email: string;
+                phone: string;
                 secondary_phone: string;
                 address: string;
                 created_at: Date;
@@ -179,13 +179,13 @@ export declare class ReceiptVouchersController {
             customer_id: string | null;
             created_at: Date;
             created_by: string | null;
+            source_type: string;
             voucher_number: string;
             voucher_date: string;
             amount: number;
+            partner_id: number | null;
             payment_method: string;
             check_id: number | null;
-            partner_id: number | null;
-            source_type: string;
             received_from: string;
         };
     }>;
@@ -212,13 +212,13 @@ export declare class ReceiptVouchersController {
             customer_id: string | null;
             created_at: Date;
             created_by: string | null;
+            source_type: string;
             voucher_number: string;
             voucher_date: string;
             amount: number;
+            partner_id: number | null;
             payment_method: string;
             check_id: number | null;
-            partner_id: number | null;
-            source_type: string;
             received_from: string;
         };
     }>;
@@ -255,23 +255,17 @@ export declare class PaymentVouchersController {
                 address: string | null;
                 created_at: Date;
                 created_by: number | null;
-                speciality: string | null;
                 supplier_id: string;
+                speciality: string | null;
             } | null;
             employee: {
                 name: string;
                 id: number;
                 phone: string | null;
-                position: string | null;
                 emp_code: string;
+                position: string | null;
                 salary: number | null;
                 start_date: string | null;
-            } | null;
-            expense_type: {
-                id: number;
-                exptype_id: string;
-                exptype_name: string;
-                category: string | null;
             } | null;
             check: {
                 id: number;
@@ -286,6 +280,12 @@ export declare class PaymentVouchersController {
                 receipt_voucher_id: number | null;
                 payment_voucher_id: number | null;
             } | null;
+            expense_type: {
+                id: number;
+                exptype_id: string;
+                exptype_name: string;
+                category: string | null;
+            } | null;
         } & {
             id: number;
             description: string | null;
@@ -295,13 +295,13 @@ export declare class PaymentVouchersController {
             voucher_number: string;
             voucher_date: string;
             amount: number;
-            beneficiary_type: string;
+            partner_id: number | null;
             payment_method: string;
             check_id: number | null;
-            paid_to: string;
-            partner_id: number | null;
-            expense_type_id: string | null;
+            beneficiary_type: string;
             employee_id: string | null;
+            expense_type_id: string | null;
+            paid_to: string;
         })[];
     }>;
     getStats(query: PaymentFilters): Promise<{
@@ -347,23 +347,17 @@ export declare class PaymentVouchersController {
                 address: string | null;
                 created_at: Date;
                 created_by: number | null;
-                speciality: string | null;
                 supplier_id: string;
+                speciality: string | null;
             } | null;
             employee: {
                 name: string;
                 id: number;
                 phone: string | null;
-                position: string | null;
                 emp_code: string;
+                position: string | null;
                 salary: number | null;
                 start_date: string | null;
-            } | null;
-            expense_type: {
-                id: number;
-                exptype_id: string;
-                exptype_name: string;
-                category: string | null;
             } | null;
             check: {
                 id: number;
@@ -378,6 +372,12 @@ export declare class PaymentVouchersController {
                 receipt_voucher_id: number | null;
                 payment_voucher_id: number | null;
             } | null;
+            expense_type: {
+                id: number;
+                exptype_id: string;
+                exptype_name: string;
+                category: string | null;
+            } | null;
         } & {
             id: number;
             description: string | null;
@@ -387,13 +387,13 @@ export declare class PaymentVouchersController {
             voucher_number: string;
             voucher_date: string;
             amount: number;
-            beneficiary_type: string;
+            partner_id: number | null;
             payment_method: string;
             check_id: number | null;
-            paid_to: string;
-            partner_id: number | null;
-            expense_type_id: string | null;
+            beneficiary_type: string;
             employee_id: string | null;
+            expense_type_id: string | null;
+            paid_to: string;
         };
     }>;
     create(data: CreatePaymentVoucherDto): Promise<{
@@ -421,23 +421,17 @@ export declare class PaymentVouchersController {
                 address: string | null;
                 created_at: Date;
                 created_by: number | null;
-                speciality: string | null;
                 supplier_id: string;
+                speciality: string | null;
             } | null;
             employee: {
                 name: string;
                 id: number;
                 phone: string | null;
-                position: string | null;
                 emp_code: string;
+                position: string | null;
                 salary: number | null;
                 start_date: string | null;
-            } | null;
-            expense_type: {
-                id: number;
-                exptype_id: string;
-                exptype_name: string;
-                category: string | null;
             } | null;
             check: {
                 id: number;
@@ -452,6 +446,12 @@ export declare class PaymentVouchersController {
                 receipt_voucher_id: number | null;
                 payment_voucher_id: number | null;
             } | null;
+            expense_type: {
+                id: number;
+                exptype_id: string;
+                exptype_name: string;
+                category: string | null;
+            } | null;
         } & {
             id: number;
             description: string | null;
@@ -461,13 +461,13 @@ export declare class PaymentVouchersController {
             voucher_number: string;
             voucher_date: string;
             amount: number;
-            beneficiary_type: string;
+            partner_id: number | null;
             payment_method: string;
             check_id: number | null;
-            paid_to: string;
-            partner_id: number | null;
-            expense_type_id: string | null;
+            beneficiary_type: string;
             employee_id: string | null;
+            expense_type_id: string | null;
+            paid_to: string;
         };
     }>;
     update(id: number, data: Partial<CreatePaymentVoucherDto>): Promise<{
@@ -496,13 +496,13 @@ export declare class PaymentVouchersController {
             voucher_number: string;
             voucher_date: string;
             amount: number;
-            beneficiary_type: string;
+            partner_id: number | null;
             payment_method: string;
             check_id: number | null;
-            paid_to: string;
-            partner_id: number | null;
-            expense_type_id: string | null;
+            beneficiary_type: string;
             employee_id: string | null;
+            expense_type_id: string | null;
+            paid_to: string;
         };
     }>;
     remove(id: number): Promise<{

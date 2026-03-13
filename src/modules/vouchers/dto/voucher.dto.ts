@@ -41,10 +41,14 @@ export class CheckDetailDto {
 }
 
 export class CreateReceiptVoucherDto {
-  @ApiProperty({ description: 'Voucher number', example: 'REC-001' })
-  @IsNotEmpty()
+  @ApiProperty({
+    description: 'Auto-generated voucher number',
+    example: 'RV001',
+    required: false,
+  })
+  @IsOptional()
   @IsString()
-  voucher_number: string;
+  voucher_number?: string;
 
   @ApiProperty({ description: 'Voucher date', example: '2023-10-01' })
   @IsNotEmpty()

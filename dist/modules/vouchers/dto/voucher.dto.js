@@ -75,13 +75,17 @@ class CreateReceiptVoucherDto {
     check;
     check_id;
     static _OPENAPI_METADATA_FACTORY() {
-        return { voucher_number: { required: true, type: () => String }, voucher_date: { required: true, type: () => String }, amount: { required: true, type: () => Number }, customer_id: { required: false, type: () => String }, partner_id: { required: false, type: () => Number }, source_type: { required: true, enum: require("./voucher.dto").VoucherSourceType }, payment_method: { required: true, type: () => String }, description: { required: false, type: () => String }, received_from: { required: true, type: () => String }, check: { required: false, type: () => require("./voucher.dto").CheckDetailDto }, check_id: { required: false, type: () => Number } };
+        return { voucher_number: { required: false, type: () => String }, voucher_date: { required: true, type: () => String }, amount: { required: true, type: () => Number }, customer_id: { required: false, type: () => String }, partner_id: { required: false, type: () => Number }, source_type: { required: true, enum: require("./voucher.dto").VoucherSourceType }, payment_method: { required: true, type: () => String }, description: { required: false, type: () => String }, received_from: { required: true, type: () => String }, check: { required: false, type: () => require("./voucher.dto").CheckDetailDto }, check_id: { required: false, type: () => Number } };
     }
 }
 exports.CreateReceiptVoucherDto = CreateReceiptVoucherDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Voucher number', example: 'REC-001' }),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, swagger_1.ApiProperty)({
+        description: 'Auto-generated voucher number',
+        example: 'RV001',
+        required: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateReceiptVoucherDto.prototype, "voucher_number", void 0);

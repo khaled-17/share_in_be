@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RevenueService = exports.RevenueFilters = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../../prisma/prisma.service");
+const code_generator_1 = require("../../common/utils/code-generator");
 class RevenueFilters {
     start_date;
     end_date;
@@ -22,6 +23,14 @@ let RevenueService = class RevenueService {
     prisma;
     constructor(prisma) {
         this.prisma = prisma;
+    }
+    async generateRevenueCode() {
+        const latestRevenue = await this.prisma.revenue.findFirst({
+            where: { code: { startsWith: code_generator_1.CODE_PREFIX.revenue } },
+            orderBy: { id: 'desc' },
+            select: { code: true },
+        });
+        return (0, code_generator_1.getNextCode)(code_generator_1.CODE_PREFIX.revenue, latestRevenue?.code);
     }
     async findAll(filters = {}) {
         const { start_date, end_date, quotation_id } = filters;
@@ -57,19 +66,28 @@ let RevenueService = class RevenueService {
         return revenue;
     }
     async create(data) {
-        return this.prisma.revenue.create({
-            data,
-            include: {
-                customer: true,
-                type: true,
-            },
+        const rest = { ...data };
+        delete rest.code;
+        return (0, code_generator_1.createWithGeneratedCode)({
+            generateCode: () => this.generateRevenueCode(),
+            createRecord: (code) => this.prisma.revenue.create({
+                data: { ...rest, code },
+                include: {
+                    customer: true,
+                    type: true,
+                },
+            }),
+            uniqueField: 'code',
+            entityLabel: 'revenue',
         });
     }
     async update(id, data) {
         await this.findOne(id);
+        const rest = { ...data };
+        delete rest.code;
         return this.prisma.revenue.update({
             where: { id },
-            data: data,
+            data: rest,
             include: {
                 customer: true,
                 type: true,

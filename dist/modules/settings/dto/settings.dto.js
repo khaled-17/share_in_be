@@ -17,16 +17,17 @@ class CreateProjectTypeDto {
     type_id;
     type_name;
     static _OPENAPI_METADATA_FACTORY() {
-        return { type_id: { required: true, type: () => String }, type_name: { required: true, type: () => String } };
+        return { type_id: { required: false, type: () => String }, type_name: { required: true, type: () => String } };
     }
 }
 exports.CreateProjectTypeDto = CreateProjectTypeDto;
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Project Type ID',
-        example: 'P001',
+        description: 'Auto-generated project type code',
+        example: 'PT001',
+        required: false,
     }),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateProjectTypeDto.prototype, "type_id", void 0);
@@ -60,16 +61,17 @@ class CreateCountryDto {
     country_code;
     country_name;
     static _OPENAPI_METADATA_FACTORY() {
-        return { country_code: { required: true, type: () => String }, country_name: { required: true, type: () => String } };
+        return { country_code: { required: false, type: () => String }, country_name: { required: true, type: () => String } };
     }
 }
 exports.CreateCountryDto = CreateCountryDto;
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Unique country code (e.g. EG, SA, US)',
-        example: 'EG',
+        description: 'Auto-generated country code',
+        example: 'CO001',
+        required: false,
     }),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateCountryDto.prototype, "country_code", void 0);
@@ -111,13 +113,17 @@ class CreateExpenseTypeDto {
     exptype_name;
     category;
     static _OPENAPI_METADATA_FACTORY() {
-        return { exptype_id: { required: true, type: () => String }, exptype_name: { required: true, type: () => String }, category: { required: false, type: () => String } };
+        return { exptype_id: { required: false, type: () => String }, exptype_name: { required: true, type: () => String }, category: { required: false, type: () => String } };
     }
 }
 exports.CreateExpenseTypeDto = CreateExpenseTypeDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Expense type ID', example: 'EXP001' }),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, swagger_1.ApiProperty)({
+        description: 'Auto-generated expense type code',
+        example: 'ET001',
+        required: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateExpenseTypeDto.prototype, "exptype_id", void 0);
@@ -162,13 +168,17 @@ class CreateRevenueTypeDto {
     revtype_name;
     paymethod;
     static _OPENAPI_METADATA_FACTORY() {
-        return { revtype_id: { required: true, type: () => String }, revtype_name: { required: true, type: () => String }, paymethod: { required: false, type: () => String } };
+        return { revtype_id: { required: false, type: () => String }, revtype_name: { required: true, type: () => String }, paymethod: { required: false, type: () => String } };
     }
 }
 exports.CreateRevenueTypeDto = CreateRevenueTypeDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Revenue type ID', example: 'REV001' }),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, swagger_1.ApiProperty)({
+        description: 'Auto-generated revenue type code',
+        example: 'RT001',
+        required: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateRevenueTypeDto.prototype, "revtype_id", void 0);

@@ -1,5 +1,5 @@
 export declare class CreateSupplierDto {
-    supplier_id: string;
+    supplier_id?: string;
     name: string;
     contact_person?: string;
     email?: string;

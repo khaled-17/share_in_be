@@ -1,14 +1,26 @@
-import {
-  Injectable,
-  NotFoundException,
-  ConflictException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
+import {
+  CODE_PREFIX,
+  createWithGeneratedCode,
+  getNextCode,
+} from '../../common/utils/code-generator';
+import { CreateCustomerDto, UpdateCustomerDto } from './dto/customer.dto';
 
 @Injectable()
 export class CustomersService {
   constructor(private prisma: PrismaService) {}
+
+  private async generateCustomerId() {
+    const latestCustomer = await this.prisma.customer.findFirst({
+      where: { customer_id: { startsWith: CODE_PREFIX.customer } },
+      orderBy: { created_at: 'desc' },
+      select: { customer_id: true },
+    });
+
+    return getNextCode(CODE_PREFIX.customer, latestCustomer?.customer_id);
+  }
 
   async findAll(params: { skip?: number; take?: number; search?: string }) {
     const { skip, take, search } = params;
@@ -46,17 +58,22 @@ export class CustomersService {
     return customer;
   }
 
-  async create(data: Prisma.CustomerCreateInput) {
-    const existing = await this.prisma.customer.findUnique({
-      where: { customer_id: data.customer_id },
+  async create(data: CreateCustomerDto) {
+    const rest = { ...data };
+    delete rest.customer_id;
+
+    return createWithGeneratedCode({
+      generateCode: () => this.generateCustomerId(),
+      createRecord: (customer_id) =>
+        this.prisma.customer.create({
+          data: { ...rest, customer_id },
+        }),
+      uniqueField: 'customer_id',
+      entityLabel: 'customer',
     });
-    if (existing) {
-      throw new ConflictException('Customer ID already exists');
-    }
-    return this.prisma.customer.create({ data });
   }
 
-  async update(id: string, data: Prisma.CustomerUpdateInput) {
+  async update(id: string, data: UpdateCustomerDto) {
     await this.findOne(id);
     return this.prisma.customer.update({
       where: { customer_id: id },

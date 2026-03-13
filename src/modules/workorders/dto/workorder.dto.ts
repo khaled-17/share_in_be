@@ -3,12 +3,13 @@ import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateWorkOrderDto {
   @ApiProperty({
-    description: 'Unique work order code',
-    example: 'WO-2023-001',
+    description: 'Auto-generated unique work order code',
+    example: 'WO001',
+    required: false,
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  order_code: string;
+  order_code?: string;
 
   @ApiProperty({ description: 'Internal quotation ID reference', example: 1 })
   @IsNotEmpty()

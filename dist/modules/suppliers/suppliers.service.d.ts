@@ -1,8 +1,10 @@
 import { PrismaService } from '../../prisma/prisma.service';
-import { Prisma, Supplier } from '@prisma/client';
+import { Supplier } from '@prisma/client';
+import { CreateSupplierDto, UpdateSupplierDto } from './dto/supplier.dto';
 export declare class SuppliersService {
     private prisma;
     constructor(prisma: PrismaService);
+    private generateSupplierId;
     findAll(params: {
         skip?: number;
         take?: number;
@@ -19,13 +21,13 @@ export declare class SuppliersService {
             address: string | null;
             created_at: Date;
             created_by: number | null;
-            speciality: string | null;
             supplier_id: string;
+            speciality: string | null;
         }[];
         total: number;
     }>;
     findOne(idOrCode: string | number): Promise<Supplier>;
-    create(data: Prisma.SupplierCreateInput): Promise<{
+    create(data: CreateSupplierDto): Promise<{
         name: string;
         id: number;
         email: string | null;
@@ -36,10 +38,10 @@ export declare class SuppliersService {
         address: string | null;
         created_at: Date;
         created_by: number | null;
-        speciality: string | null;
         supplier_id: string;
+        speciality: string | null;
     }>;
-    update(idOrCode: string | number, data: Prisma.SupplierUpdateInput): Promise<{
+    update(idOrCode: string | number, data: UpdateSupplierDto): Promise<{
         name: string;
         id: number;
         email: string | null;
@@ -50,8 +52,8 @@ export declare class SuppliersService {
         address: string | null;
         created_at: Date;
         created_by: number | null;
-        speciality: string | null;
         supplier_id: string;
+        speciality: string | null;
     }>;
     remove(idOrCode: string | number): Promise<{
         name: string;
@@ -64,7 +66,7 @@ export declare class SuppliersService {
         address: string | null;
         created_at: Date;
         created_by: number | null;
-        speciality: string | null;
         supplier_id: string;
+        speciality: string | null;
     }>;
 }

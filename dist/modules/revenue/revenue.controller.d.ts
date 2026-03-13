@@ -10,11 +10,11 @@ export declare class RevenueController {
             customer: {
                 name: string;
                 tenant_id: number;
-                contact_person: string;
-                phone: string;
                 customer_id: string;
+                contact_person: string;
                 company_email: string;
                 contact_email: string;
+                phone: string;
                 secondary_phone: string;
                 address: string;
                 created_at: Date;
@@ -45,11 +45,11 @@ export declare class RevenueController {
             customer: {
                 name: string;
                 tenant_id: number;
-                contact_person: string;
-                phone: string;
                 customer_id: string;
+                contact_person: string;
                 company_email: string;
                 contact_email: string;
+                phone: string;
                 secondary_phone: string;
                 address: string;
                 created_at: Date;
@@ -80,11 +80,11 @@ export declare class RevenueController {
             customer: {
                 name: string;
                 tenant_id: number;
-                contact_person: string;
-                phone: string;
                 customer_id: string;
+                contact_person: string;
                 company_email: string;
                 contact_email: string;
+                phone: string;
                 secondary_phone: string;
                 address: string;
                 created_at: Date;
@@ -115,11 +115,11 @@ export declare class RevenueController {
             customer: {
                 name: string;
                 tenant_id: number;
-                contact_person: string;
-                phone: string;
                 customer_id: string;
+                contact_person: string;
                 company_email: string;
                 contact_email: string;
+                phone: string;
                 secondary_phone: string;
                 address: string;
                 created_at: Date;

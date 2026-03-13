@@ -18,8 +18,8 @@ export declare class ExpensesController {
                 address: string | null;
                 created_at: Date;
                 created_by: number | null;
-                speciality: string | null;
                 supplier_id: string;
+                speciality: string | null;
             };
             type: {
                 id: number;
@@ -31,11 +31,11 @@ export declare class ExpensesController {
             id: number;
             supplier_id: string;
             amount: number;
+            exptype_id: string;
             code: string | null;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
-            exptype_id: string;
             exp_date: string;
         })[];
     }>;
@@ -54,8 +54,8 @@ export declare class ExpensesController {
                 address: string | null;
                 created_at: Date;
                 created_by: number | null;
-                speciality: string | null;
                 supplier_id: string;
+                speciality: string | null;
             };
             type: {
                 id: number;
@@ -67,11 +67,11 @@ export declare class ExpensesController {
             id: number;
             supplier_id: string;
             amount: number;
+            exptype_id: string;
             code: string | null;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
-            exptype_id: string;
             exp_date: string;
         };
     }>;
@@ -90,8 +90,8 @@ export declare class ExpensesController {
                 address: string | null;
                 created_at: Date;
                 created_by: number | null;
-                speciality: string | null;
                 supplier_id: string;
+                speciality: string | null;
             };
             type: {
                 id: number;
@@ -103,11 +103,11 @@ export declare class ExpensesController {
             id: number;
             supplier_id: string;
             amount: number;
+            exptype_id: string;
             code: string | null;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
-            exptype_id: string;
             exp_date: string;
         };
     }>;
@@ -126,8 +126,8 @@ export declare class ExpensesController {
                 address: string | null;
                 created_at: Date;
                 created_by: number | null;
-                speciality: string | null;
                 supplier_id: string;
+                speciality: string | null;
             };
             type: {
                 id: number;
@@ -139,11 +139,11 @@ export declare class ExpensesController {
             id: number;
             supplier_id: string;
             amount: number;
+            exptype_id: string;
             code: string | null;
             receipt_no: string | null;
             quote_id: number | null;
             notes: string | null;
-            exptype_id: string;
             exp_date: string;
         };
     }>;

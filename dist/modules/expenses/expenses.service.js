@@ -12,10 +12,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ExpensesService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../../prisma/prisma.service");
+const code_generator_1 = require("../../common/utils/code-generator");
 let ExpensesService = class ExpensesService {
     prisma;
     constructor(prisma) {
         this.prisma = prisma;
+    }
+    async generateExpenseCode() {
+        const latestExpense = await this.prisma.expense.findFirst({
+            where: { code: { startsWith: code_generator_1.CODE_PREFIX.expense } },
+            orderBy: { id: 'desc' },
+            select: { code: true },
+        });
+        return (0, code_generator_1.getNextCode)(code_generator_1.CODE_PREFIX.expense, latestExpense?.code);
     }
     async findAll(where = {}) {
         return this.prisma.expense.findMany({
@@ -40,19 +49,28 @@ let ExpensesService = class ExpensesService {
         return expense;
     }
     async create(data) {
-        return this.prisma.expense.create({
-            data,
-            include: {
-                supplier: true,
-                type: true,
-            },
+        const rest = { ...data };
+        delete rest.code;
+        return (0, code_generator_1.createWithGeneratedCode)({
+            generateCode: () => this.generateExpenseCode(),
+            createRecord: (code) => this.prisma.expense.create({
+                data: { ...rest, code },
+                include: {
+                    supplier: true,
+                    type: true,
+                },
+            }),
+            uniqueField: 'code',
+            entityLabel: 'expense',
         });
     }
     async update(id, data) {
         await this.findOne(id);
+        const rest = { ...data };
+        delete rest.code;
         return this.prisma.expense.update({
             where: { id },
-            data,
+            data: rest,
             include: {
                 supplier: true,
                 type: true,

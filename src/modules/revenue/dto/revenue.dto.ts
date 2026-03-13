@@ -3,8 +3,8 @@ import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateRevenueDto {
   @ApiProperty({
-    description: 'Revenue transaction code',
-    example: 'REV-001',
+    description: 'Auto-generated revenue transaction code',
+    example: 'RE001',
     required: false,
   })
   @IsOptional()

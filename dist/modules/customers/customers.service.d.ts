@@ -1,8 +1,9 @@
 import { PrismaService } from '../../prisma/prisma.service';
-import { Prisma } from '@prisma/client';
+import { CreateCustomerDto, UpdateCustomerDto } from './dto/customer.dto';
 export declare class CustomersService {
     private prisma;
     constructor(prisma: PrismaService);
+    private generateCustomerId;
     findAll(params: {
         skip?: number;
         take?: number;
@@ -11,11 +12,11 @@ export declare class CustomersService {
         customers: {
             name: string;
             tenant_id: number;
-            contact_person: string;
-            phone: string;
             customer_id: string;
+            contact_person: string;
             company_email: string;
             contact_email: string;
+            phone: string;
             secondary_phone: string;
             address: string;
             created_at: Date;
@@ -26,37 +27,37 @@ export declare class CustomersService {
     findOne(id: string): Promise<{
         name: string;
         tenant_id: number;
-        contact_person: string;
-        phone: string;
         customer_id: string;
+        contact_person: string;
         company_email: string;
         contact_email: string;
+        phone: string;
         secondary_phone: string;
         address: string;
         created_at: Date;
         created_by: number | null;
     }>;
-    create(data: Prisma.CustomerCreateInput): Promise<{
+    create(data: CreateCustomerDto): Promise<{
         name: string;
         tenant_id: number;
-        contact_person: string;
-        phone: string;
         customer_id: string;
+        contact_person: string;
         company_email: string;
         contact_email: string;
+        phone: string;
         secondary_phone: string;
         address: string;
         created_at: Date;
         created_by: number | null;
     }>;
-    update(id: string, data: Prisma.CustomerUpdateInput): Promise<{
+    update(id: string, data: UpdateCustomerDto): Promise<{
         name: string;
         tenant_id: number;
-        contact_person: string;
-        phone: string;
         customer_id: string;
+        contact_person: string;
         company_email: string;
         contact_email: string;
+        phone: string;
         secondary_phone: string;
         address: string;
         created_at: Date;
@@ -65,11 +66,11 @@ export declare class CustomersService {
     remove(id: string): Promise<{
         name: string;
         tenant_id: number;
-        contact_person: string;
-        phone: string;
         customer_id: string;
+        contact_person: string;
         company_email: string;
         contact_email: string;
+        phone: string;
         secondary_phone: string;
         address: string;
         created_at: Date;

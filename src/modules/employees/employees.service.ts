@@ -1,14 +1,26 @@
-import {
-  Injectable,
-  NotFoundException,
-  ConflictException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
+import {
+  CODE_PREFIX,
+  createWithGeneratedCode,
+  getNextCode,
+} from '../../common/utils/code-generator';
+import { CreateEmployeeDto, UpdateEmployeeDto } from './dto/employee.dto';
 
 @Injectable()
 export class EmployeesService {
   constructor(private prisma: PrismaService) {}
+
+  private async generateEmployeeCode() {
+    const latestEmployee = await this.prisma.employee.findFirst({
+      where: { emp_code: { startsWith: CODE_PREFIX.employee } },
+      orderBy: { id: 'desc' },
+      select: { emp_code: true },
+    });
+
+    return getNextCode(CODE_PREFIX.employee, latestEmployee?.emp_code);
+  }
 
   async findAll(
     params: { skip?: number; take?: number; search?: string } = {},
@@ -54,25 +66,23 @@ export class EmployeesService {
     });
   }
 
-  async create(data: Prisma.EmployeeCreateInput) {
-    if (data.emp_code) {
-      const existing = await this.findByEmpCode(data.emp_code);
-      if (existing) {
-        throw new ConflictException('Employee Code already exists');
-      }
-    }
-    return this.prisma.employee.create({ data });
+  async create(data: CreateEmployeeDto) {
+    const rest = { ...data };
+    delete rest.emp_code;
+
+    return createWithGeneratedCode({
+      generateCode: () => this.generateEmployeeCode(),
+      createRecord: (emp_code) =>
+        this.prisma.employee.create({
+          data: { ...rest, emp_code },
+        }),
+      uniqueField: 'emp_code',
+      entityLabel: 'employee',
+    });
   }
 
-  async update(id: number, data: Prisma.EmployeeUpdateInput) {
+  async update(id: number, data: UpdateEmployeeDto) {
     await this.findOne(id);
-
-    if (data.emp_code && typeof data.emp_code === 'string') {
-      const existing = await this.findByEmpCode(data.emp_code);
-      if (existing && existing.id !== id) {
-        throw new ConflictException('Employee Code already exists');
-      }
-    }
 
     return this.prisma.employee.update({
       where: { id },

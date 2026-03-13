@@ -12,10 +12,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PartnersService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../../prisma/prisma.service");
+const code_generator_1 = require("../../common/utils/code-generator");
 let PartnersService = class PartnersService {
     prisma;
     constructor(prisma) {
         this.prisma = prisma;
+    }
+    async generatePartnerCode() {
+        const latestPartner = await this.prisma.partner.findFirst({
+            where: { partner_code: { startsWith: code_generator_1.CODE_PREFIX.partner } },
+            orderBy: { id: 'desc' },
+            select: { partner_code: true },
+        });
+        return (0, code_generator_1.getNextCode)(code_generator_1.CODE_PREFIX.partner, latestPartner?.partner_code);
     }
     async findAll() {
         return this.prisma.partner.findMany({
@@ -70,26 +79,23 @@ let PartnersService = class PartnersService {
         };
     }
     async create(data) {
-        if (data.partner_code) {
-            const existing = await this.findByPartnerCode(data.partner_code);
-            if (existing) {
-                throw new common_1.ConflictException('Partner Code already exists');
-            }
+        const rest = { ...data };
+        delete rest.partner_code;
+        if (rest.initial_capital !== undefined &&
+            rest.current_capital === undefined) {
+            rest.current_capital = rest.initial_capital;
         }
-        if (data.initial_capital !== undefined &&
-            data.current_capital === undefined) {
-            data.current_capital = data.initial_capital;
-        }
-        return this.prisma.partner.create({ data });
+        return (0, code_generator_1.createWithGeneratedCode)({
+            generateCode: () => this.generatePartnerCode(),
+            createRecord: (partner_code) => this.prisma.partner.create({
+                data: { ...rest, partner_code },
+            }),
+            uniqueField: 'partner_code',
+            entityLabel: 'partner',
+        });
     }
     async update(id, data) {
         await this.findOne(id);
-        if (data.partner_code && typeof data.partner_code === 'string') {
-            const existing = await this.findByPartnerCode(data.partner_code);
-            if (existing && existing.id !== id) {
-                throw new common_1.ConflictException('Partner Code already exists');
-            }
-        }
         return this.prisma.partner.update({
             where: { id },
             data,

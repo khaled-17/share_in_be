@@ -1,21 +1,25 @@
 import { PrismaService } from '../../prisma/prisma.service';
-import { Prisma } from '@prisma/client';
+import { CreateCountryDto, CreateExpenseTypeDto, CreateProjectTypeDto, CreateRevenueTypeDto, UpdateCountryDto, UpdateExpenseTypeDto, UpdateRevenueTypeDto } from './dto/settings.dto';
 export declare class SettingsService {
     private prisma;
     constructor(prisma: PrismaService);
+    private generateRevenueTypeCode;
+    private generateExpenseTypeCode;
+    private generateProjectTypeCode;
+    private generateCountryCode;
     getAllRevenueTypes(): Promise<{
         id: number;
         revtype_id: string;
         revtype_name: string;
         paymethod: string;
     }[]>;
-    createRevenueType(data: Prisma.RevenueTypeCreateInput): Promise<{
+    createRevenueType(data: CreateRevenueTypeDto): Promise<{
         id: number;
         revtype_id: string;
         revtype_name: string;
         paymethod: string;
     }>;
-    updateRevenueType(id: number, data: Prisma.RevenueTypeUpdateInput): Promise<{
+    updateRevenueType(id: number, data: UpdateRevenueTypeDto): Promise<{
         id: number;
         revtype_id: string;
         revtype_name: string;
@@ -33,13 +37,13 @@ export declare class SettingsService {
         exptype_name: string;
         category: string | null;
     }[]>;
-    createExpenseType(data: Prisma.ExpenseTypeCreateInput): Promise<{
+    createExpenseType(data: CreateExpenseTypeDto): Promise<{
         id: number;
         exptype_id: string;
         exptype_name: string;
         category: string | null;
     }>;
-    updateExpenseType(id: number, data: Prisma.ExpenseTypeUpdateInput): Promise<{
+    updateExpenseType(id: number, data: UpdateExpenseTypeDto): Promise<{
         id: number;
         exptype_id: string;
         exptype_name: string;
@@ -56,10 +60,7 @@ export declare class SettingsService {
         type_id: string;
         type_name: string;
     }[]>;
-    createProjectType(data: {
-        type_id: string;
-        type_name: string;
-    }): Promise<{
+    createProjectType(data: CreateProjectTypeDto): Promise<{
         id: number;
         type_id: string;
         type_name: string;
@@ -82,19 +83,13 @@ export declare class SettingsService {
         country_code: string;
         country_name: string;
     }[]>;
-    createCountry(data: {
-        country_code: string;
-        country_name: string;
-    }): Promise<{
+    createCountry(data: CreateCountryDto): Promise<{
         id: number;
         created_at: Date;
         country_code: string;
         country_name: string;
     }>;
-    updateCountry(id: number, data: {
-        country_code?: string;
-        country_name?: string;
-    }): Promise<{
+    updateCountry(id: number, data: UpdateCountryDto): Promise<{
         id: number;
         created_at: Date;
         country_code: string;

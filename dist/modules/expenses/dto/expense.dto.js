@@ -28,7 +28,11 @@ class CreateExpenseDto {
 }
 exports.CreateExpenseDto = CreateExpenseDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Expense code', example: 'EXP-001' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Auto-generated expense code',
+        example: 'EX001',
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -92,7 +96,7 @@ exports.UpdateExpenseDto = UpdateExpenseDto;
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Expense code',
-        example: 'EXP-001',
+        example: 'EX001',
         required: false,
     }),
     (0, class_validator_1.IsOptional)(),

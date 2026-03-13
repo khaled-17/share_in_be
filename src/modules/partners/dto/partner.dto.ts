@@ -8,10 +8,14 @@ import {
 } from 'class-validator';
 
 export class CreatePartnerDto {
-  @ApiProperty({ description: 'Unique partner code', example: 'PART-001' })
-  @IsNotEmpty()
+  @ApiProperty({
+    description: 'Auto-generated unique partner code',
+    example: 'PA001',
+    required: false,
+  })
+  @IsOptional()
   @IsString()
-  partner_code: string;
+  partner_code?: string;
 
   @ApiProperty({ description: 'Partner name', example: 'Khaled Mohamed' })
   @IsNotEmpty()

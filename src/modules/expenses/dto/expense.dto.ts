@@ -2,7 +2,11 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateExpenseDto {
-  @ApiProperty({ description: 'Expense code', example: 'EXP-001' })
+  @ApiProperty({
+    description: 'Auto-generated expense code',
+    example: 'EX001',
+    required: false,
+  })
   @IsOptional()
   @IsString()
   code?: string;
@@ -46,7 +50,7 @@ export class CreateExpenseDto {
 export class UpdateExpenseDto {
   @ApiProperty({
     description: 'Expense code',
-    example: 'EXP-001',
+    example: 'EX001',
     required: false,
   })
   @IsOptional()

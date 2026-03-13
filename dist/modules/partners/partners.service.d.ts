@@ -1,8 +1,9 @@
 import { PrismaService } from '../../prisma/prisma.service';
-import { Prisma } from '@prisma/client';
+import { CreatePartnerDto, UpdatePartnerDto } from './dto/partner.dto';
 export declare class PartnersService {
     private prisma;
     constructor(prisma: PrismaService);
+    private generatePartnerCode;
     findAll(): Promise<{
         name: string;
         id: number;
@@ -20,13 +21,13 @@ export declare class PartnersService {
             customer_id: string | null;
             created_at: Date;
             created_by: string | null;
+            source_type: string;
             voucher_number: string;
             voucher_date: string;
             amount: number;
+            partner_id: number | null;
             payment_method: string;
             check_id: number | null;
-            partner_id: number | null;
-            source_type: string;
             received_from: string;
         }[];
         payment_vouchers: {
@@ -38,13 +39,13 @@ export declare class PartnersService {
             voucher_number: string;
             voucher_date: string;
             amount: number;
-            beneficiary_type: string;
+            partner_id: number | null;
             payment_method: string;
             check_id: number | null;
-            paid_to: string;
-            partner_id: number | null;
-            expense_type_id: string | null;
+            beneficiary_type: string;
             employee_id: string | null;
+            expense_type_id: string | null;
+            paid_to: string;
         }[];
     } & {
         name: string;
@@ -75,7 +76,7 @@ export declare class PartnersService {
         total_withdrawals: number;
         net_capital: number;
     }>;
-    create(data: Prisma.PartnerCreateInput): Promise<{
+    create(data: CreatePartnerDto): Promise<{
         name: string;
         id: number;
         email: string | null;
@@ -85,7 +86,7 @@ export declare class PartnersService {
         initial_capital: number;
         current_capital: number;
     }>;
-    update(id: number, data: Prisma.PartnerUpdateInput): Promise<{
+    update(id: number, data: UpdatePartnerDto): Promise<{
         name: string;
         id: number;
         email: string | null;

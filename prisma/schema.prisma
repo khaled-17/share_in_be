@@ -40,7 +40,7 @@ model RevenueType {
 
 model Revenue {
   id          Int     @id @default(autoincrement())
-  code        String?
+  code        String? @unique
   rev_date    String
   amount      Float
   receipt_no  String?
@@ -57,7 +57,7 @@ model Revenue {
 
 model Expense {
   id          Int     @id @default(autoincrement())
-  code        String?
+  code        String? @unique
   exp_date    String
   amount      Float
   receipt_no  String?

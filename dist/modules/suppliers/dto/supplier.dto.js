@@ -23,16 +23,17 @@ class CreateSupplierDto {
     address;
     speciality;
     static _OPENAPI_METADATA_FACTORY() {
-        return { supplier_id: { required: true, type: () => String }, name: { required: true, type: () => String }, contact_person: { required: false, type: () => String }, email: { required: false, type: () => String, format: "email" }, phone: { required: false, type: () => String }, secondary_phone: { required: false, type: () => String }, address: { required: false, type: () => String }, speciality: { required: false, type: () => String } };
+        return { supplier_id: { required: false, type: () => String }, name: { required: true, type: () => String }, contact_person: { required: false, type: () => String }, email: { required: false, type: () => String, format: "email" }, phone: { required: false, type: () => String }, secondary_phone: { required: false, type: () => String }, address: { required: false, type: () => String }, speciality: { required: false, type: () => String } };
     }
 }
 exports.CreateSupplierDto = CreateSupplierDto;
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Unique supplier identifier',
-        example: 'SUP-001',
+        description: 'Auto-generated unique supplier identifier',
+        example: 'SU001',
+        required: false,
     }),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateSupplierDto.prototype, "supplier_id", void 0);

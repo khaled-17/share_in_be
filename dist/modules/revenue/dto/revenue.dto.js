@@ -29,8 +29,8 @@ class CreateRevenueDto {
 exports.CreateRevenueDto = CreateRevenueDto;
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Revenue transaction code',
-        example: 'REV-001',
+        description: 'Auto-generated revenue transaction code',
+        example: 'RE001',
         required: false,
     }),
     (0, class_validator_1.IsOptional)(),

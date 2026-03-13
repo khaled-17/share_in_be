@@ -27,13 +27,13 @@ export declare class PartnersController {
                 customer_id: string | null;
                 created_at: Date;
                 created_by: string | null;
+                source_type: string;
                 voucher_number: string;
                 voucher_date: string;
                 amount: number;
+                partner_id: number | null;
                 payment_method: string;
                 check_id: number | null;
-                partner_id: number | null;
-                source_type: string;
                 received_from: string;
             }[];
             payment_vouchers: {
@@ -45,13 +45,13 @@ export declare class PartnersController {
                 voucher_number: string;
                 voucher_date: string;
                 amount: number;
-                beneficiary_type: string;
+                partner_id: number | null;
                 payment_method: string;
                 check_id: number | null;
-                paid_to: string;
-                partner_id: number | null;
-                expense_type_id: string | null;
+                beneficiary_type: string;
                 employee_id: string | null;
+                expense_type_id: string | null;
+                paid_to: string;
             }[];
         } & {
             name: string;

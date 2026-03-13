@@ -13,7 +13,7 @@ export declare class CheckDetailDto {
     amount?: number;
 }
 export declare class CreateReceiptVoucherDto {
-    voucher_number: string;
+    voucher_number?: string;
     voucher_date: string;
     amount: number;
     customer_id?: string;

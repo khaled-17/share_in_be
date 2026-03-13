@@ -21,13 +21,17 @@ class CreatePartnerDto {
     initial_capital;
     current_capital;
     static _OPENAPI_METADATA_FACTORY() {
-        return { partner_code: { required: true, type: () => String }, name: { required: true, type: () => String }, phone: { required: false, type: () => String }, email: { required: false, type: () => String, format: "email" }, initial_capital: { required: false, type: () => Number }, current_capital: { required: false, type: () => Number } };
+        return { partner_code: { required: false, type: () => String }, name: { required: true, type: () => String }, phone: { required: false, type: () => String }, email: { required: false, type: () => String, format: "email" }, initial_capital: { required: false, type: () => Number }, current_capital: { required: false, type: () => Number } };
     }
 }
 exports.CreatePartnerDto = CreatePartnerDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Unique partner code', example: 'PART-001' }),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, swagger_1.ApiProperty)({
+        description: 'Auto-generated unique partner code',
+        example: 'PA001',
+        required: false,
+    }),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreatePartnerDto.prototype, "partner_code", void 0);

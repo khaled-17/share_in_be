@@ -5,6 +5,11 @@ import {
   CreateReceiptVoucherDto,
   CreatePaymentVoucherDto,
 } from './dto/voucher.dto';
+import {
+  CODE_PREFIX,
+  createWithGeneratedCode,
+  getNextCode,
+} from '../../common/utils/code-generator';
 
 export class ReceiptFilters {
   start_date?: string;
@@ -23,6 +28,27 @@ export class PaymentFilters {
 @Injectable()
 export class VouchersService {
   constructor(private prisma: PrismaService) {}
+
+  private async generateVoucherNumber(type: 'receipt' | 'payment') {
+    const prefix =
+      type === 'receipt'
+        ? CODE_PREFIX.receiptVoucher
+        : CODE_PREFIX.paymentVoucher;
+    const latestVoucher =
+      type === 'receipt'
+        ? await this.prisma.receiptVoucher.findFirst({
+            where: { voucher_number: { startsWith: prefix } },
+            orderBy: { id: 'desc' },
+            select: { voucher_number: true },
+          })
+        : await this.prisma.paymentVoucher.findFirst({
+            where: { voucher_number: { startsWith: prefix } },
+            orderBy: { id: 'desc' },
+            select: { voucher_number: true },
+          });
+
+    return getNextCode(prefix, latestVoucher?.voucher_number);
+  }
 
   // Receipt Vouchers
   async findAllReceipt(filters: ReceiptFilters) {
@@ -64,52 +90,59 @@ export class VouchersService {
   async createReceipt(data: CreateReceiptVoucherDto) {
     const { check, ...voucherData } = data;
 
-    return this.prisma.$transaction(async (tx) => {
-      let checkId: number | null = null;
-      if (voucherData.payment_method === 'check' && check) {
-        const createdCheck = await tx.checkDetail.create({
-          data: {
-            ...check,
-            check_number: check.check_number || '',
-            bank_name: check.bank_name || '',
-            check_date: check.check_date || new Date().toISOString(),
-            amount: voucherData.amount,
-            status: check.status || 'pending',
-            beneficiary_name: 'ShareIn',
-          },
-        });
-        checkId = createdCheck.id;
-      }
+    return createWithGeneratedCode({
+      generateCode: () => this.generateVoucherNumber('receipt'),
+      createRecord: (voucher_number) =>
+        this.prisma.$transaction(async (tx) => {
+          let checkId: number | null = null;
+          if (voucherData.payment_method === 'check' && check) {
+            const createdCheck = await tx.checkDetail.create({
+              data: {
+                ...check,
+                check_number: check.check_number || '',
+                bank_name: check.bank_name || '',
+                check_date: check.check_date || new Date().toISOString(),
+                amount: voucherData.amount,
+                status: check.status || 'pending',
+                beneficiary_name: 'ShareIn',
+              },
+            });
+            checkId = createdCheck.id;
+          }
 
-      const voucher = await tx.receiptVoucher.create({
-        data: {
-          voucher_number: voucherData.voucher_number,
-          voucher_date: voucherData.voucher_date,
-          amount: voucherData.amount,
-          source_type: voucherData.source_type,
-          payment_method: voucherData.payment_method,
-          description: voucherData.description,
-          received_from: voucherData.received_from,
-          partner_id: voucherData.partner_id ?? null,
-          check_id: checkId,
-        },
-        include: {
-          customer: true,
-          partner: true,
-          check: true,
-        },
-      });
+          const voucher = await tx.receiptVoucher.create({
+            data: {
+              voucher_number,
+              voucher_date: voucherData.voucher_date,
+              amount: voucherData.amount,
+              source_type: voucherData.source_type,
+              customer_id: voucherData.customer_id,
+              payment_method: voucherData.payment_method,
+              description: voucherData.description,
+              received_from: voucherData.received_from,
+              partner_id: voucherData.partner_id ?? null,
+              check_id: checkId,
+            },
+            include: {
+              customer: true,
+              partner: true,
+              check: true,
+            },
+          });
 
-      if (voucher.source_type === 'partner_capital' && voucher.partner_id) {
-        await tx.partner.update({
-          where: { id: voucher.partner_id },
-          data: {
-            current_capital: { increment: voucher.amount },
-          },
-        });
-      }
+          if (voucher.source_type === 'partner_capital' && voucher.partner_id) {
+            await tx.partner.update({
+              where: { id: voucher.partner_id },
+              data: {
+                current_capital: { increment: voucher.amount },
+              },
+            });
+          }
 
-      return voucher;
+          return voucher;
+        }),
+      uniqueField: 'voucher_number',
+      entityLabel: 'receipt voucher',
     });
   }
 
@@ -118,7 +151,8 @@ export class VouchersService {
       const oldVoucher = await tx.receiptVoucher.findUnique({ where: { id } });
       if (!oldVoucher) throw new NotFoundException('Voucher not found');
 
-      const voucherData = data;
+      const voucherData = { ...data };
+      delete voucherData.voucher_number;
       const amountDiff =
         (voucherData.amount !== undefined
           ? voucherData.amount
@@ -127,10 +161,10 @@ export class VouchersService {
       const updatedVoucher = await tx.receiptVoucher.update({
         where: { id },
         data: {
-          voucher_number: voucherData.voucher_number,
           voucher_date: voucherData.voucher_date,
           amount: voucherData.amount,
           source_type: voucherData.source_type,
+          customer_id: voucherData.customer_id,
           payment_method: voucherData.payment_method,
           description: voucherData.description,
           received_from: voucherData.received_from,
@@ -220,60 +254,66 @@ export class VouchersService {
   async createPayment(data: CreatePaymentVoucherDto) {
     const { check, ...voucherData } = data;
 
-    return this.prisma.$transaction(async (tx) => {
-      let checkId: number | null = null;
-      if (voucherData.payment_method === 'check' && check) {
-        const createdCheck = await tx.checkDetail.create({
-          data: {
-            ...check,
-            check_number: check.check_number || '',
-            bank_name: check.bank_name || '',
-            check_date: check.check_date || new Date().toISOString(),
-            amount: voucherData.amount,
-            status: check.status || 'pending',
-            beneficiary_name: voucherData.paid_to,
-          },
-        });
-        checkId = createdCheck.id;
-      }
+    return createWithGeneratedCode({
+      generateCode: () => this.generateVoucherNumber('payment'),
+      createRecord: (voucher_number) =>
+        this.prisma.$transaction(async (tx) => {
+          let checkId: number | null = null;
+          if (voucherData.payment_method === 'check' && check) {
+            const createdCheck = await tx.checkDetail.create({
+              data: {
+                ...check,
+                check_number: check.check_number || '',
+                bank_name: check.bank_name || '',
+                check_date: check.check_date || new Date().toISOString(),
+                amount: voucherData.amount,
+                status: check.status || 'pending',
+                beneficiary_name: voucherData.paid_to,
+              },
+            });
+            checkId = createdCheck.id;
+          }
 
-      const voucher = await tx.paymentVoucher.create({
-        data: {
-          voucher_number: voucherData.voucher_number,
-          voucher_date: voucherData.voucher_date,
-          amount: voucherData.amount,
-          beneficiary_type: voucherData.beneficiary_type || 'other',
-          supplier_id: voucherData.supplier_id,
-          employee_id: voucherData.employee_id,
-          partner_id: voucherData.partner_id ?? null,
-          expense_type_id: voucherData.expense_type_id,
-          payment_method: voucherData.payment_method,
-          description: voucherData.description,
-          paid_to: voucherData.paid_to,
-          check_id: checkId,
-        },
-        include: {
-          supplier: true,
-          employee: true,
-          partner: true,
-          expense_type: true,
-          check: true,
-        },
-      });
+          const voucher = await tx.paymentVoucher.create({
+            data: {
+              voucher_number,
+              voucher_date: voucherData.voucher_date,
+              amount: voucherData.amount,
+              beneficiary_type: voucherData.beneficiary_type || 'other',
+              supplier_id: voucherData.supplier_id,
+              employee_id: voucherData.employee_id,
+              partner_id: voucherData.partner_id ?? null,
+              expense_type_id: voucherData.expense_type_id,
+              payment_method: voucherData.payment_method,
+              description: voucherData.description,
+              paid_to: voucherData.paid_to,
+              check_id: checkId,
+            },
+            include: {
+              supplier: true,
+              employee: true,
+              partner: true,
+              expense_type: true,
+              check: true,
+            },
+          });
 
-      if (
-        voucher.beneficiary_type === 'partner_withdrawal' &&
-        voucher.partner_id
-      ) {
-        await tx.partner.update({
-          where: { id: voucher.partner_id },
-          data: {
-            current_capital: { decrement: voucher.amount },
-          },
-        });
-      }
+          if (
+            voucher.beneficiary_type === 'partner_withdrawal' &&
+            voucher.partner_id
+          ) {
+            await tx.partner.update({
+              where: { id: voucher.partner_id },
+              data: {
+                current_capital: { decrement: voucher.amount },
+              },
+            });
+          }
 
-      return voucher;
+          return voucher;
+        }),
+      uniqueField: 'voucher_number',
+      entityLabel: 'payment voucher',
     });
   }
 
@@ -282,7 +322,8 @@ export class VouchersService {
       const oldVoucher = await tx.paymentVoucher.findUnique({ where: { id } });
       if (!oldVoucher) throw new NotFoundException('Voucher not found');
 
-      const voucherData = data;
+      const voucherData = { ...data };
+      delete voucherData.voucher_number;
       const amountDiff =
         (voucherData.amount !== undefined
           ? voucherData.amount
@@ -291,7 +332,6 @@ export class VouchersService {
       const updatedVoucher = await tx.paymentVoucher.update({
         where: { id },
         data: {
-          voucher_number: voucherData.voucher_number,
           voucher_date: voucherData.voucher_date,
           amount: voucherData.amount,
           beneficiary_type: voucherData.beneficiary_type,

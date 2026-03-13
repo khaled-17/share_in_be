@@ -23,16 +23,17 @@ class CreateCustomerDto {
     secondary_phone;
     address;
     static _OPENAPI_METADATA_FACTORY() {
-        return { customer_id: { required: true, type: () => String }, name: { required: true, type: () => String }, contact_person: { required: true, type: () => String }, company_email: { required: true, type: () => String, format: "email" }, contact_email: { required: true, type: () => String, format: "email" }, phone: { required: true, type: () => String }, secondary_phone: { required: true, type: () => String }, address: { required: true, type: () => String } };
+        return { customer_id: { required: false, type: () => String }, name: { required: true, type: () => String }, contact_person: { required: true, type: () => String }, company_email: { required: true, type: () => String, format: "email" }, contact_email: { required: true, type: () => String, format: "email" }, phone: { required: true, type: () => String }, secondary_phone: { required: true, type: () => String }, address: { required: true, type: () => String } };
     }
 }
 exports.CreateCustomerDto = CreateCustomerDto;
 __decorate([
     (0, swagger_1.ApiProperty)({
-        description: 'Unique customer identifier',
-        example: 'CUST-001',
+        description: 'Auto-generated unique customer identifier',
+        example: 'CU001',
+        required: false,
     }),
-    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateCustomerDto.prototype, "customer_id", void 0);

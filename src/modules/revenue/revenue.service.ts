@@ -2,6 +2,11 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Prisma } from '@prisma/client';
 import { CreateRevenueDto, UpdateRevenueDto } from './dto/revenue.dto';
+import {
+  CODE_PREFIX,
+  createWithGeneratedCode,
+  getNextCode,
+} from '../../common/utils/code-generator';
 export class RevenueFilters {
   start_date?: string;
   end_date?: string;
@@ -11,6 +16,16 @@ export class RevenueFilters {
 @Injectable()
 export class RevenueService {
   constructor(private prisma: PrismaService) {}
+
+  private async generateRevenueCode() {
+    const latestRevenue = await this.prisma.revenue.findFirst({
+      where: { code: { startsWith: CODE_PREFIX.revenue } },
+      orderBy: { id: 'desc' },
+      select: { code: true },
+    });
+
+    return getNextCode(CODE_PREFIX.revenue, latestRevenue?.code);
+  }
 
   async findAll(filters: RevenueFilters = {}) {
     const { start_date, end_date, quotation_id } = filters;
@@ -50,21 +65,32 @@ export class RevenueService {
   }
 
   async create(data: CreateRevenueDto) {
-    return this.prisma.revenue.create({
-      data,
-      include: {
-        customer: true,
-        type: true,
-      },
+    const rest = { ...data };
+    delete rest.code;
+
+    return createWithGeneratedCode({
+      generateCode: () => this.generateRevenueCode(),
+      createRecord: (code) =>
+        this.prisma.revenue.create({
+          data: { ...rest, code },
+          include: {
+            customer: true,
+            type: true,
+          },
+        }),
+      uniqueField: 'code',
+      entityLabel: 'revenue',
     });
   }
 
   async update(id: number, data: UpdateRevenueDto) {
     await this.findOne(id);
+    const rest = { ...data };
+    delete rest.code;
 
     return this.prisma.revenue.update({
       where: { id },
-      data: data as Prisma.RevenueUpdateInput,
+      data: rest as Prisma.RevenueUpdateInput,
       include: {
         customer: true,
         type: true,

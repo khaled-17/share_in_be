@@ -12,10 +12,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WorkOrdersService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../../prisma/prisma.service");
+const code_generator_1 = require("../../common/utils/code-generator");
 let WorkOrdersService = class WorkOrdersService {
     prisma;
     constructor(prisma) {
         this.prisma = prisma;
+    }
+    async generateOrderCode() {
+        const latestWorkOrder = await this.prisma.workOrder.findFirst({
+            where: { order_code: { startsWith: code_generator_1.CODE_PREFIX.workOrder } },
+            orderBy: { id: 'desc' },
+            select: { order_code: true },
+        });
+        return (0, code_generator_1.getNextCode)(code_generator_1.CODE_PREFIX.workOrder, latestWorkOrder?.order_code);
     }
     async findAll(query = {}) {
         return this.prisma.workOrder.findMany({
@@ -46,22 +55,28 @@ let WorkOrdersService = class WorkOrdersService {
     }
     async create(data) {
         const payload = data;
-        if (payload.order_code) {
-            const existing = await this.findByOrderCode(payload.order_code);
-            if (existing)
-                throw new common_1.ConflictException('Work order code already exists');
-        }
-        return this.prisma.workOrder.create({
-            data: payload,
-            include: {
-                customer: true,
-                quotation: true,
-            },
+        const rest = {
+            ...payload,
+            order_code: undefined,
+        };
+        return (0, code_generator_1.createWithGeneratedCode)({
+            generateCode: () => this.generateOrderCode(),
+            createRecord: (order_code) => this.prisma.workOrder.create({
+                data: { ...rest, order_code },
+                include: {
+                    customer: true,
+                    quotation: true,
+                },
+            }),
+            uniqueField: 'order_code',
+            entityLabel: 'work order',
         });
     }
     async update(id, data) {
         await this.findOne(id);
-        const payload = data;
+        const rest = { ...data };
+        delete rest.order_code;
+        const payload = rest;
         return this.prisma.workOrder.update({
             where: { id },
             data: payload,

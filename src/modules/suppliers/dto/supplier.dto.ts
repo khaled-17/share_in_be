@@ -3,12 +3,13 @@ import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateSupplierDto {
   @ApiProperty({
-    description: 'Unique supplier identifier',
-    example: 'SUP-001',
+    description: 'Auto-generated unique supplier identifier',
+    example: 'SU001',
+    required: false,
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  supplier_id: string;
+  supplier_id?: string;
 
   @ApiProperty({ description: 'Company name', example: 'Global Logistics' })
   @IsNotEmpty()

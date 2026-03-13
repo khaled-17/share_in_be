@@ -1,5 +1,5 @@
 export declare class CreateWorkOrderDto {
-    order_code: string;
+    order_code?: string;
     quotation_id: number;
     customer_id: string;
 }
